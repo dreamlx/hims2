@@ -1,0 +1,14 @@
+<tr>
+  <td><%= fund.id %></td>
+  <td><%= fund.name %></td>
+  <td><%= fund.desc %></td>
+  <td><%= fund.title1 %></td>
+  <td><%= fund.content1 %></td>
+  <td><%= fund.title2 %></td>
+  <td><%= fund.content2 %></td>
+  <td><%= fund.title3 %></td>
+  <td><%= fund.content3 %></td>
+  <td><%= fund.progress %></td>
+  <td><%= link_to 'edit', edit_fund_path(fund) %></td>
+  <td><%= link_to 'destroy', fund, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+</tr>

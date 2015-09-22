@@ -12,6 +12,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
 gem 'faker'
 gem 'rails-i18n'
+gem 'bootstrap-sass'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug'

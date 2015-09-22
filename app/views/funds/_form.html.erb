@@ -1,0 +1,17 @@
+<div class="col-md-6">
+  <%= simple_form_for @fund do |f| %>
+    <%= f.input :name %>
+    <%= f.input :desc, as: :text %>
+    <%= f.input :title1 %>
+    <%= f.input :content1, as: :text %>
+    <%= f.input :title2 %>
+    <%= f.input :content2, as: :text %>
+    <%= f.input :title3 %>
+    <%= f.input :content3, as: :text %>
+    <%= f.input :progress, hint: "From 0 to 100" %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+<div class="col-md-12">
+  <%= link_to 'Back', :back %>
+</div>
