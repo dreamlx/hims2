@@ -67,3 +67,27 @@ response:
           }
         }
 ```
+### fund list
+```
+curl  -X GET http://localhost:3000/api/funds
+```
+```
+url:    http://localhost:3000/api/funds
+params: no
+response:
+        [
+          {
+            "id"=>26, 
+            "name"=>"MyString", 
+            "desc"=>"MyString", 
+            "title1"=>"MyString", 
+            "content1"=>"MyString", 
+            "title2"=>"MyString", 
+            "content2"=>"MyString", 
+            "title3"=>"MyString", 
+            "content3"=>"MyString", 
+            "progress"=>1
+          },
+          ......
+        ]
+```
