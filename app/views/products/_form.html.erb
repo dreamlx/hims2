@@ -1,0 +1,48 @@
+<%= simple_form_for @product do |f| %>
+  <div class="col-md-6">
+    <%= f.input :fund_id, collection: Fund.all %>
+    <%= f.input :name %>
+    <%= f.input :desc, as: :text %>
+    <%= f.input :title1 %>
+    <%= f.input :content1, as: :text %>
+    <%= f.input :title2 %>
+    <%= f.input :content2, as: :text %>
+    <%= f.input :title3 %>
+    <%= f.input :content3, as: :text %>
+    <%= f.input :progress_bar, hint: "From 0 to 100" %>
+  </div>
+  <div class="col-md-3">
+    <%= f.input :abbr %>
+    <%= f.input :currency %>
+    <%= f.input :amount %>
+    <%= f.input :period %>
+    <%= f.input :paid %>
+    <%= f.input :sales_period %>
+    <%= f.input :block_period %>
+    <%= f.input :redeem %>
+    <%= f.input :entity %>
+    <%= f.input :adviser %>
+    <%= f.input :trustee %>
+  </div>
+  <div class="col-md-3">
+    <%= f.input :reg_organ %>
+    <%= f.input :agency %>
+    <%= f.input :regulatory_filing %>
+    <%= f.input :legal_consultant %>
+    <%= f.input :audit %>
+    <%= f.input :starting_point %>
+    <%= f.input :account %>
+    <%= f.input :progress %>
+    <%= f.input :direction %>
+    <%= f.input :risk_control %>
+    <%= f.input :instruction %>
+    <%= f.input :agreement %>
+  </div>
+  <div class="col-md-12">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<div class="col-md-12">
+  <%= link_to 'Back', :back %>
+</div>

@@ -18,7 +18,7 @@ RSpec.describe "funds" do
       expect(json["content2"]).to eq fund.content2
       expect(json["title3"]).to eq fund.title3
       expect(json["content3"]).to eq fund.content3
-      expect(json["progress"]).to eq fund.progress
+      expect(json["progress_bar"]).to eq fund.progress_bar
     end
   end
 end

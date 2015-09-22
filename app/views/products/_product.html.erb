@@ -1,0 +1,16 @@
+<tr>
+  <td><%= product.id %></td>
+  <td><%= link_to product.fund.name, product.fund if product.fund %></td>
+  <td><%= product.name %></td>
+  <td><%= product.desc %></td>
+  <td><%= product.title1 %></td>
+  <td><%= product.content1 %></td>
+  <td><%= product.title2 %></td>
+  <td><%= product.content2 %></td>
+  <td><%= product.title3 %></td>
+  <td><%= product.content3 %></td>
+  <td><%= product.progress_bar %></td>
+  <td><%= link_to 'show', product %></td>
+  <td><%= link_to 'edit', edit_product_path(product) %></td>
+  <td><%= link_to 'destroy', product, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+</tr>

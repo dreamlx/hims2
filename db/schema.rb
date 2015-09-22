@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922072425) do
+ActiveRecord::Schema.define(version: 20150922135527) do
 
   create_table "cell_codes", force: :cascade do |t|
     t.string   "cell",       limit: 255
@@ -21,18 +21,59 @@ ActiveRecord::Schema.define(version: 20150922072425) do
   end
 
   create_table "funds", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "desc",       limit: 255
-    t.string   "title1",     limit: 255
-    t.string   "content1",   limit: 255
-    t.string   "title2",     limit: 255
-    t.string   "content2",   limit: 255
-    t.string   "title3",     limit: 255
-    t.string   "content3",   limit: 255
-    t.integer  "progress",   limit: 4,   default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "name",         limit: 255
+    t.string   "desc",         limit: 255
+    t.string   "title1",       limit: 255
+    t.string   "content1",     limit: 255
+    t.string   "title2",       limit: 255
+    t.string   "content2",     limit: 255
+    t.string   "title3",       limit: 255
+    t.string   "content3",     limit: 255
+    t.integer  "progress_bar", limit: 4,   default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
+
+  create_table "products", force: :cascade do |t|
+    t.integer  "fund_id",           limit: 4
+    t.string   "name",              limit: 255
+    t.string   "desc",              limit: 255
+    t.string   "title1",            limit: 255
+    t.string   "content1",          limit: 255
+    t.string   "title2",            limit: 255
+    t.string   "content2",          limit: 255
+    t.string   "title3",            limit: 255
+    t.string   "content3",          limit: 255
+    t.integer  "progress_bar",      limit: 4,   default: 0
+    t.string   "abbr",              limit: 255
+    t.string   "currency",          limit: 255
+    t.string   "amount",            limit: 255
+    t.string   "period",            limit: 255
+    t.string   "paid",              limit: 255
+    t.string   "sales_period",      limit: 255
+    t.string   "block_period",      limit: 255
+    t.string   "redeem",            limit: 255
+    t.string   "entity",            limit: 255
+    t.string   "adviser",           limit: 255
+    t.string   "trustee",           limit: 255
+    t.string   "reg_organ",         limit: 255
+    t.string   "website",           limit: 255
+    t.string   "agency",            limit: 255
+    t.string   "regulatory_filing", limit: 255
+    t.string   "legal_consultant",  limit: 255
+    t.string   "audit",             limit: 255
+    t.string   "starting_point",    limit: 255
+    t.string   "account",           limit: 255
+    t.string   "progress",          limit: 255
+    t.string   "direction",         limit: 255
+    t.string   "risk_control",      limit: 255
+    t.string   "instruction",       limit: 255
+    t.string   "agreement",         limit: 255
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "products", ["fund_id"], name: "index_products_on_fund_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "open_id",    limit: 255
@@ -43,4 +84,5 @@ ActiveRecord::Schema.define(version: 20150922072425) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "products", "funds"
 end

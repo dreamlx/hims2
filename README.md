@@ -86,8 +86,69 @@ response:
             "content2"=>"MyString", 
             "title3"=>"MyString", 
             "content3"=>"MyString", 
-            "progress"=>1
+            "progress_bar"=>1
           },
           ......
         ]
+```
+### product list
+```
+curl  -X GET http://localhost:3000/api/funds/{fund.id}/products
+```
+```
+url:    http://localhost:3000/api/funds/{fund.id}/products
+params: no
+response:
+        [
+          {
+            "id"=>26, 
+            "name"=>"MyString", 
+            "desc"=>"MyString", 
+            "title1"=>"MyString", 
+            "content1"=>"MyString", 
+            "title2"=>"MyString", 
+            "content2"=>"MyString", 
+            "title3"=>"MyString", 
+            "content3"=>"MyString", 
+            "progress_bar"=>1
+          },
+          ......
+        ]
+```
+### product show
+```
+curl  -X GET http://localhost:3000/api/products/{product.id}
+```
+```
+url:    http://localhost:3000/api/products/{product.id}
+params: no
+response:
+        {
+          "id"=>3, 
+          "name"=>"MyString",             #产品名称
+          "abbr"=>"MyString",             #产品简称
+          "currency"=>"MyString",         #产品币种
+          "amount"=>"MyString",           #目标规模
+          "period"=>"MyString",           #存续期
+          "paid"=>"MyString",             #收益支付
+          "sales_period"=>"MyString",     #销售期
+          "block_period"=>"MyString",     #封闭期
+          "redeem"=>"MyString",           #申购/赎回
+          "entity"=>"MyString",           #基金实体
+          "adviser"=>"MyString",          #投资顾问
+          "trustee"=>"MyString",          #托管人
+          "reg_organ"=>"MyString",        #登记机构
+          "website"=>"www.example.com",   #净值网站
+          "agency"=>"MyString",           #代销机构
+          "regulatory_filing"=>"MyString",#监管备案
+          "legal_consultant"=>"MyString", #法律顾问
+          "audit"=>"MyString",            #审计师
+          "starting_point"=>"MyString",   #认购起点
+          "account"=>"MyString",          #募集账户
+          "progress"=>"MyString",         #募集进度
+          "direction"=>"MyString",        #投资方向
+          "risk_control"=>"MyString",     #风控措施 
+          "instruction"=>"MyString",      #说明文档 
+          "agreement"=>"MyString"         #认购协议
+        }
 ```

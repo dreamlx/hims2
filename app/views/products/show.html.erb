@@ -1,0 +1,116 @@
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t('product_detail') %></h3>
+    </div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt><%= Product.human_attribute_name('fund_id') %></dt>
+        <dd><%= @product.fund.name if @product.fund %></dd>
+
+        <dt><%= Product.human_attribute_name('name') %></dt>
+        <dd><%= @product.name %></dd>
+
+        <dt><%= Product.human_attribute_name('desc') %></dt>
+        <dd><%= @product.desc %></dd>
+
+        <dt><%= @product.title1 %></dt>
+        <dd><%= @product.content1 %></dd>
+
+        <dt><%= @product.title2 %></dt>
+        <dd><%= @product.content2 %></dd>
+
+        <dt><%= @product.title3 %></dt>
+        <dd><%= @product.content3 %></dd>
+
+        <dt><%= Product.human_attribute_name('progress_bar') %></dt>
+        <dd><%= @product.progress_bar %></dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t('product_detail') %></h3>
+    </div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt><%= Product.human_attribute_name('abbr') %></dt>
+        <dd><%= @product.abbr %></dd>
+
+        <dt><%= Product.human_attribute_name('currency') %></dt>
+        <dd><%= @product.currency %></dd>
+
+        <dt><%= Product.human_attribute_name('amount') %></dt>
+        <dd><%= @product.amount %></dd>
+
+        <dt><%= Product.human_attribute_name('period') %></dt>
+        <dd><%= @product.period %></dd>
+
+        <dt><%= Product.human_attribute_name('paid') %></dt>
+        <dd><%= @product.paid %></dd>
+
+        <dt><%= Product.human_attribute_name('sales_period') %></dt>
+        <dd><%= @product.sales_period %></dd>
+
+        <dt><%= Product.human_attribute_name('block_period') %></dt>
+        <dd><%= @product.block_period %></dd>
+
+        <dt><%= Product.human_attribute_name('redeem') %></dt>
+        <dd><%= @product.redeem %></dd>
+
+        <dt><%= Product.human_attribute_name('entity') %></dt>
+        <dd><%= @product.entity %></dd>
+
+        <dt><%= Product.human_attribute_name('adviser') %></dt>
+        <dd><%= @product.adviser %></dd>
+
+        <dt><%= Product.human_attribute_name('trustee') %></dt>
+        <dd><%= @product.trustee %></dd>
+
+        <dt><%= Product.human_attribute_name('reg_organ') %></dt>
+        <dd><%= @product.reg_organ %></dd>
+
+        <dt><%= Product.human_attribute_name('website') %></dt>
+        <dd><%= @product.website %></dd>
+
+        <dt><%= Product.human_attribute_name('agency') %></dt>
+        <dd><%= @product.agency %></dd>
+
+        <dt><%= Product.human_attribute_name('regulatory_filing') %></dt>
+        <dd><%= @product.regulatory_filing %></dd>
+
+        <dt><%= Product.human_attribute_name('legal_consultant') %></dt>
+        <dd><%= @product.legal_consultant %></dd>
+
+        <dt><%= Product.human_attribute_name('audit') %></dt>
+        <dd><%= @product.audit %></dd>
+
+        <dt><%= Product.human_attribute_name('starting_point') %></dt>
+        <dd><%= @product.starting_point %></dd>
+
+        <dt><%= Product.human_attribute_name('account') %></dt>
+        <dd><%= @product.account %></dd>
+
+        <dt><%= Product.human_attribute_name('progress') %></dt>
+        <dd><%= @product.progress %></dd>
+
+        <dt><%= Product.human_attribute_name('direction') %></dt>
+        <dd><%= @product.direction %></dd>
+
+        <dt><%= Product.human_attribute_name('risk_control') %></dt>
+        <dd><%= @product.risk_control %></dd>
+
+        <dt><%= Product.human_attribute_name('instruction') %></dt>
+        <dd><%= @product.instruction %></dd>
+
+        <dt><%= Product.human_attribute_name('agreement') %></dt>
+        <dd><%= @product.agreement %></dd>
+      </dl>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <%= link_to 'Back', :back %>
+</div>

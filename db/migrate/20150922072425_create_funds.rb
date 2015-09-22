@@ -9,7 +9,7 @@ class CreateFunds < ActiveRecord::Migration
       t.string :content2
       t.string :title3
       t.string :content3
-      t.integer :progress, default: 0
+      t.integer :progress_bar, default: 0
 
       t.timestamps null: false
     end

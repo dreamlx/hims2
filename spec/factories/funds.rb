@@ -8,6 +8,6 @@ FactoryGirl.define do
     content2  "MyString"
     title3    "MyString"
     content3  "MyString"
-    progress  1
+    progress_bar  1
   end
 end

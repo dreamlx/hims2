@@ -19,17 +19,17 @@ RSpec.describe Fund, type: :model do
     expect(fund.errors[:desc].first).to eq I18n.t("errors.messages.blank")
   end
 
-  it "is invalid if progress more than 100" do
-    fund = build(:fund, progress: 101)
+  it "is invalid if progress_bar more than 100" do
+    fund = build(:fund, progress_bar: 101)
     fund.valid?
     expect(fund).to be_invalid
-    expect(fund.errors[:progress].first).to eq I18n.t("errors.messages.less_than_or_equal_to", count: 100)
+    expect(fund.errors[:progress_bar].first).to eq I18n.t("errors.messages.less_than_or_equal_to", count: 100)
   end
 
-  it "is invalid if progress less than 0" do
-    fund = build(:fund, progress: -1)
+  it "is invalid if progress_bar less than 0" do
+    fund = build(:fund, progress_bar: -1)
     fund.valid?
     expect(fund).to be_invalid
-    expect(fund.errors[:progress].first).to eq I18n.t("errors.messages.greater_than_or_equal_to", count: 0)
+    expect(fund.errors[:progress_bar].first).to eq I18n.t("errors.messages.greater_than_or_equal_to", count: 0)
   end
 end
