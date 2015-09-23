@@ -1,3 +1,4 @@
+require 'rest_client'
 class Api::ProductsController < Api::BaseController
   def index
     fund = Fund.find(params[:fund_id])
@@ -6,5 +7,25 @@ class Api::ProductsController < Api::BaseController
 
   def show
     @product = Product.find(params[:id])
+  end
+
+  def send_mail
+    email = params[:email]
+    instruction_url = Product.find(params[:id]).instruction.url
+    if email && instruction_url
+      vars = JSON.dump({"to" => [email], "sub" => { "%url%" => ["<a href=#{instruction_url}>链接</a>"]} })
+      response = RestClient.post "http://sendcloud.sohu.com/webapi/mail.send_template.json",
+        :api_user => Rails.application.secrets.send_mail_user, # 使用api_user和api_key进行验证
+        :api_key => Rails.application.secrets.send_mail_password,
+        :from => Rails.application.secrets.from_email,
+        :fromname => "hehui",
+        :substitution_vars => vars,
+        :template_invoke_name => 'pro_ins',
+        :subject => "来自禾晖的理财产品说明",
+        :resp_email_id => 'true'
+      render json: response
+    else
+      render json: {message: "failed"}, status: 422
+    end
   end
 end

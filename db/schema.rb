@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922135527) do
+ActiveRecord::Schema.define(version: 20150923021613) do
 
   create_table "cell_codes", force: :cascade do |t|
     t.string   "cell",       limit: 255
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(version: 20150922135527) do
 
   add_index "products", ["fund_id"], name: "index_products_on_fund_id", using: :btree
 
+  create_table "rois", force: :cascade do |t|
+    t.integer  "product_id", limit: 4
+    t.string   "range",      limit: 255
+    t.string   "profit",     limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "rois", ["product_id"], name: "index_rois_on_product_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "open_id",    limit: 255
     t.string   "cell",       limit: 255
@@ -85,4 +95,5 @@ ActiveRecord::Schema.define(version: 20150922135527) do
   end
 
   add_foreign_key "products", "funds"
+  add_foreign_key "rois", "products"
 end

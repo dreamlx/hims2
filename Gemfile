@@ -14,6 +14,12 @@ gem 'faker'
 gem 'rails-i18n'
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem "best_in_place"
+gem "jquery-ui-rails"
+gem 'carrierwave'
+gem 'qiniu-rs'
+gem 'carrierwave-qiniu'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug'

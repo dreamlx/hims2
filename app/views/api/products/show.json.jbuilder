@@ -25,4 +25,9 @@ json.product do
   json.risk_control @product.risk_control if @product.risk_control
   json.instruction @product.instruction if @product.instruction
   json.agreement @product.agreement if @product.agreement
+  json.rois do
+    json.array!(@product.rois) do |roi|
+      json.(roi, :id, :range, :profit)
+    end
+  end
 end

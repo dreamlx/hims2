@@ -54,7 +54,7 @@ RSpec.describe "products" do
       expect(json["progress"]).to eq product.progress
       expect(json["direction"]).to eq product.direction
       expect(json["risk_control"]).to eq product.risk_control
-      expect(json["instruction"]).to eq product.instruction
+      expect(json["instruction"]["instruction"]["url"]).to eq product.instruction.url
       expect(json["agreement"]).to eq product.agreement
     end
 
@@ -67,6 +67,42 @@ RSpec.describe "products" do
       json = JSON.parse(response.body)["product"]
       expect(json["id"]).to eq product.id
       expect(json["agency"]).to be_nil
+    end
+
+    it "get the requested product with rois" do
+      product = create(:product)
+      roi = create(:roi, product_id: product.id)
+      get "/api/products/#{product.id}"
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)["product"]["rois"].first
+      expect(json["range"]).to eq roi.range
+      expect(json["profit"]).to eq roi.profit
+    end
+  end
+
+  describe "GET send_mail" do
+    it "send a email" do
+      # product = create(:product)
+      # expect(product.instruction.url).not_to be_nil
+      # email = Rails.application.secrets.to_email
+      # get "/api/products/#{product.id}/send_mail", {email: email}
+      # expect(response).to                     be_success
+      # expect(response).to                     have_http_status(200)
+      # json                                    = JSON.parse(response.body)
+      # expect(json["message"]).to              eq "success"
+      # expect(json["email_id_list"].empty?).to eq false
+    end
+
+    it "would not send the email without email address" do
+      product = create(:product)
+      expect(product.instruction.url).not_to be_nil
+      email = Rails.application.secrets.to_email
+      get "/api/products/#{product.id}/send_mail"
+      expect(response).not_to     be_success
+      expect(response).to         have_http_status(422)
+      json                        = JSON.parse(response.body)
+      expect(json["message"]).to  eq "failed"
     end
   end
 end

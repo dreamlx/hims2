@@ -4,4 +4,7 @@ class Product < ActiveRecord::Base
   validates :desc, presence: true
   validates :progress_bar, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}
   belongs_to :fund
+  has_many :rois
+
+  mount_uploader :instruction, FileUploader
 end

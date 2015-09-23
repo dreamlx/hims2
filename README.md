@@ -150,5 +150,26 @@ response:
           "risk_control"=>"MyString",     #风控措施 
           "instruction"=>"MyString",      #说明文档 
           "agreement"=>"MyString"         #认购协议
+          "rois"=>[
+            {
+              "id"=>7, 
+              "range"=>"MyString",        #认购金额 
+              "profit"=>"MyString"        #预期收益
+            },
+            ....
+          ]
         }
+```
+### 发送产品说明
+```
+curl -X GET -d "email=foobar@example.com" http://localhost:3000/api/product/#{product.id}/send_mail
+```
+```
+url:    http://localhost:3000/api/product/#{product.id}/send_mail
+action: get
+params: {email: "foobar@example.com"}
+response: {
+            message: "success" or "failed"
+          }
+          200 or 422
 ```

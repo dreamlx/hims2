@@ -32,7 +32,7 @@ FactoryGirl.define do
     progress "MyString"
     direction "MyString"
     risk_control "MyString"
-    instruction "MyString"
+    instruction File.open(File.join(Rails.root, 'spec/fixtures/rails.png'))
     agreement "MyString"
   end
 end
