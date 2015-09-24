@@ -1,4 +1,5 @@
 class Api::UsersController < Api::BaseController
+  before_action :authenticate_user!, only: [:all_investors]
   def create
     return api_error(status: 422) if params[:user].nil?
 
@@ -37,6 +38,12 @@ class Api::UsersController < Api::BaseController
     else
       return api_error(status: 422)
     end
+  end
+
+  def all_investors
+    @investors = current_user.individuals.map {|e| Hash[e.id => ("[个人]" + e.name)]}
+    current_user.institutions.map {|e| @investors << Hash[e.id => ("[机构]" + e.name)]}
+    render json: @investors
   end
 
   private

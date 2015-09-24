@@ -294,3 +294,17 @@ response:
           }
         ]
 ```
+### 获取投资者的名字（包括个人投资者和机构投资者），用于下预约单
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/users/all_investors
+```
+```
+url:    http://localhost:3000/api/users/all_investors
+params: no
+response:
+        [
+          {"273"=>"[个人]MyString"}, 
+          {"241"=>"[机构]MyString"},
+          {"id"=>"名字"}
+        ]
+```

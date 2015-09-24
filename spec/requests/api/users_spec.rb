@@ -63,4 +63,21 @@ RSpec.describe "users" do
       # expect(response).to     have_http_status(422)
     end
   end
+
+  describe "GET all_investors" do
+    it "get all investors name" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      institution = create(:institution, user_id: user.id)
+      get "/api/users/all_investors",{}, valid_header
+      expect(response).to     be_success
+      expect(response).to     have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.first["#{individual.id}"]).to eq "[个人]" + individual.name
+      expect(json.last["#{institution.id}"]).to eq "[机构]" + institution.name
+    end
+  end
 end
