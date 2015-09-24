@@ -173,3 +173,124 @@ response: {
           }
           200 or 422
 ```
+### 创建个人投资者
+```
+curl -X POST -d "individual[name]=mysting" --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/individuals
+```
+```
+url:    http://localhost:3000/api/individuals
+action: post
+params: { 
+          "individual": {
+            "name": "MyString",
+            "cell": "MyString",
+            "remark_name", "MyString",
+            "id_type": "身份证",
+            "id_no": "MyString",
+            "id_front": "data:image/png;base64,xxxxxxx",
+            "id_back": "data:image/png;base64,xxxxxxx",
+            "remark": "MyString"
+          }
+        }
+response: 
+        { 
+          "individual"=>
+          {
+            "id"=>23, 
+            "name"=>"MyString", 
+            "cell"=>"MyString", 
+            "remark_name"=>"MyString", 
+            "id_type"=>"身份证", 
+            "id_no"=>"MyString", 
+            "id_front"=>{
+              "id_front"=>{
+                "url"=>"/uploads/individual/id_front/23/20150924202928.png", 
+                "thumb"=>{
+                  "url"=>"/uploads/individual/id_front/23/thumb_20150924202928.png"
+                }
+              }
+            }, 
+            "id_back"=>{
+              "id_back"=>{
+                "url"=>"/uploads/individual/id_back/23/20150924202928.png", 
+                "thumb"=>{
+                  "url"=>"/uploads/individual/id_back/23/thumb_20150924202928.png"
+                }
+              }
+            }, 
+            "remark"=>"MyString"
+          }
+        }
+```
+### 创建机构投资者
+```
+curl -X POST -d "institution[name]=mysting" --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/institutions
+```
+```
+url:    http://localhost:3000/api/institutions
+action: post
+params: { 
+          "institution": {
+            "name": "MyString",
+            "cell": "MyString",
+            "remark_name", "MyString",
+            "organ_reg": "MyString",
+            "business_licenses": "data:image/png;base64,xxxxxxx",
+            "remark": "MyString"
+          }
+        }
+response: 
+        { 
+          "institution"=>
+          {
+            "id"=>56, 
+            "name"=>"MyString", 
+            "cell"=>"MyString", 
+            "remark_name"=>"MyString", 
+            "organ_reg"=>"MyString", 
+            "business_licenses"=>{
+              "business_licenses"=>{
+                "url"=>"/uploads/institution/business_licenses/56/20150924212802.png", 
+                "thumb"=>{
+                  "url"=>"/uploads/institution/business_licenses/56/thumb_20150924212802.png"
+                }
+              }
+            }, 
+            "remark"=>"MyString"
+          }
+        }
+```
+### 个人投资者列表
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/individuals
+```
+```
+url:    http://localhost:3000/api/individuals
+action: get
+params: no
+        }
+response: 
+        [
+          {
+            "id"=>23, 
+            "name"=>"MyString"
+          }
+        ]
+```
+### 机构投资者列表
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/institutions
+```
+```
+url:    http://localhost:3000/api/institutions
+action: get
+params: no
+        }
+response: 
+        [
+          {
+            "id"=>23, 
+            "name"=>"MyString"
+          }
+        ]
+```

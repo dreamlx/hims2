@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   validates :open_id, presence: true
   validates :cell, presence: true
 
+  has_many :individuals
+  has_many :institutions
+
   def User.send_code(cell, code)
     # the cell must exist and more than 11 digits
     return false unless cell && cell.to_s.length >= 11

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923021613) do
+ActiveRecord::Schema.define(version: 20150924111204) do
 
   create_table "cell_codes", force: :cascade do |t|
     t.string   "cell",       limit: 255
@@ -33,6 +33,36 @@ ActiveRecord::Schema.define(version: 20150923021613) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
+
+  create_table "individuals", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.string   "name",        limit: 255
+    t.string   "cell",        limit: 255
+    t.string   "remark_name", limit: 255
+    t.string   "id_type",     limit: 255
+    t.string   "id_no",       limit: 255
+    t.string   "id_front",    limit: 255
+    t.string   "id_back",     limit: 255
+    t.string   "remark",      limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "individuals", ["user_id"], name: "index_individuals_on_user_id", using: :btree
+
+  create_table "institutions", force: :cascade do |t|
+    t.integer  "user_id",           limit: 4
+    t.string   "name",              limit: 255
+    t.string   "cell",              limit: 255
+    t.string   "remark_name",       limit: 255
+    t.string   "organ_reg",         limit: 255
+    t.string   "business_licenses", limit: 255
+    t.string   "remark",            limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "institutions", ["user_id"], name: "index_institutions_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "fund_id",           limit: 4
@@ -94,6 +124,8 @@ ActiveRecord::Schema.define(version: 20150923021613) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "individuals", "users"
+  add_foreign_key "institutions", "users"
   add_foreign_key "products", "funds"
   add_foreign_key "rois", "products"
 end
