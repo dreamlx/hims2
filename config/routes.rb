@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     resources :rois, only: [:create, :update, :destroy]
   end
   resources :rois, only: :update
+  resources :individuals
+  resources :institutions
+  resources :users
   namespace :api do
     resources :users, only: [:create, :update], defaults: {format: :json} do
       get :send_code, on: :collection, defaults: {format: :json}

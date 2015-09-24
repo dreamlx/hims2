@@ -14,8 +14,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to 'Users', users_path %></li>
         <li class="<%= 'active' if params[:controller] == 'funds' %>"><%= link_to 'Funds', funds_path %></li>
         <li class="<%= 'active' if params[:controller] == 'products' %>"><%= link_to 'Products', products_path %></li>
+        <li class="<%= 'active' if params[:controller] == 'individuals' %>"><%= link_to 'Individuals', individuals_path %></li>
+        <li class="<%= 'active' if params[:controller] == 'institutions' %>"><%= link_to 'Institutions', institutions_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       </ul>
