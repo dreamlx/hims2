@@ -1,0 +1,13 @@
+<tr>
+  <% Order.column_names.each do |column| %>
+    <% if column == "user_id" %>
+      <td><%= order.user_id %></td>
+    <% elsif column == "other" %>
+      <td><%= image_tag(order.send(column).thumb) %></td>
+    <% else %>
+      <td><%= order.send(column) %></td>
+    <% end %>
+  <% end %>
+  <td><%= link_to 'edit', edit_order_path(order) %></td>
+  <td><%= link_to 'destroy', order, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+</tr>

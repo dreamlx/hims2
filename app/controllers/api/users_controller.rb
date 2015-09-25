@@ -41,8 +41,8 @@ class Api::UsersController < Api::BaseController
   end
 
   def all_investors
-    @investors = current_user.individuals.map {|e| Hash[e.id => ("[个人]" + e.name)]}
-    current_user.institutions.map {|e| @investors << Hash[e.id => ("[机构]" + e.name)]}
+    @investors = current_user.individuals.map {|e| Hash["individual:#{e.id}" => ("[个人]" + e.name)]}
+    current_user.institutions.map {|e| @investors << Hash["institution:#{e.id}" => ("[机构]" + e.name)]}
     render json: @investors
   end
 

@@ -76,8 +76,8 @@ RSpec.describe "users" do
       expect(response).to     be_success
       expect(response).to     have_http_status(200)
       json = JSON.parse(response.body)
-      expect(json.first["#{individual.id}"]).to eq "[个人]" + individual.name
-      expect(json.last["#{institution.id}"]).to eq "[机构]" + institution.name
+      expect(json.first["individual:#{individual.id}"]).to eq "[个人]" + individual.name
+      expect(json.last["institution:#{institution.id}"]).to eq "[机构]" + institution.name
     end
   end
 end

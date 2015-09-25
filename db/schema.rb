@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924111204) do
+ActiveRecord::Schema.define(version: 20150925034231) do
 
   create_table "cell_codes", force: :cascade do |t|
     t.string   "cell",       limit: 255
@@ -63,6 +63,26 @@ ActiveRecord::Schema.define(version: 20150924111204) do
   end
 
   add_index "institutions", ["user_id"], name: "index_institutions_on_user_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "investable_id",   limit: 4
+    t.string   "investable_type", limit: 255
+    t.integer  "product_id",      limit: 4
+    t.integer  "user_id",         limit: 4
+    t.decimal  "amount",                      precision: 12, scale: 2, default: 0.0
+    t.date     "due_date"
+    t.string   "mail_address",    limit: 255
+    t.string   "other",           limit: 255
+    t.string   "remark",          limit: 255
+    t.string   "state",           limit: 255
+    t.datetime "booking_date"
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
+  end
+
+  add_index "orders", ["investable_type", "investable_id"], name: "index_orders_on_investable_type_and_investable_id", using: :btree
+  add_index "orders", ["product_id"], name: "index_orders_on_product_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "fund_id",           limit: 4
@@ -126,6 +146,8 @@ ActiveRecord::Schema.define(version: 20150924111204) do
 
   add_foreign_key "individuals", "users"
   add_foreign_key "institutions", "users"
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "funds"
   add_foreign_key "rois", "products"
 end

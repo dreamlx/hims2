@@ -303,8 +303,45 @@ url:    http://localhost:3000/api/users/all_investors
 params: no
 response:
         [
-          {"273"=>"[个人]MyString"}, 
-          {"241"=>"[机构]MyString"},
-          {"id"=>"名字"}
+          {"individual:273"=>"[个人]MyString"}, 
+          {"institution:241"=>"[机构]MyString"},
+          {"type:id"=>"名字"}
         ]
+```
+### 创建预约单
+```
+curl -X POST --header "Authorization: Token token=#{open_id}" -d "product_id=1...." http://localhost:3000/api/orders
+```
+```
+url:    http://localhost:3000/api/orders
+params: {
+          investable_id: "individual:#{individual.id}",
+          product_id: product.id,
+          amount: "9.99",
+          due_date "2015-09-25",
+          mail_address "MyString",
+          other: 'data:image/png;base64, xxxxxx',
+          remark: "MyString",
+        }
+response:
+        {
+          "id"=>21, 
+          "investable_id"=>213, 
+          "investable_type"=>"Individual", 
+          "product_id"=>245, 
+          "user_id"=>496, 
+          "amount"=>"9.99", 
+          "due_date"=>"2015-09-25", 
+          "mail_address"=>"MyString", 
+          "other"=>{
+            "other"=>{
+              "url"=>"/uploads/order/other/21/20150925175940.png", 
+              "thumb"=>{
+                "url"=>"/uploads/order/other/21/thumb_20150925175940.png"
+              }
+            }
+          }, 
+          "remark"=>"MyString", 
+          "state"=>nil
+        }
 ```

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   has_many :individuals
   has_many :institutions
+  has_many :orders
 
   def User.send_code(cell, code)
     # the cell must exist and more than 11 digits

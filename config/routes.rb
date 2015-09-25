@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :individuals
   resources :institutions
   resources :users
+  resources :orders
   namespace :api do
     resources :users, only: [:create, :update], defaults: {format: :json} do
       get :send_code, on: :collection, defaults: {format: :json}
@@ -20,5 +21,6 @@ Rails.application.routes.draw do
     end
     resources :individuals, only: [:create, :index] ,defaults: {format: :json}
     resources :institutions, only: [:create, :index] ,defaults: {format: :json}
+    resources :orders, only: [:create, :index] ,defaults: {format: :json}
   end
 end

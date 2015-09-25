@@ -1,0 +1,16 @@
+<div class="col-md-6">
+  <%= simple_form_for(@order) do |f| %>
+    <%= f.input :investable_id, collection: Individual.all.map {|e| ["个人:#{e.name}", "个人:#{e.id}"]} + Institution.all.map {|e| ["机构:#{e.name}", "机构:#{e.id}"]} %>
+    <%= f.input :product_id, collection: Product.all %>
+    <%= f.input :amount %>
+    <%= f.input :due_date, as: :date, html5: true %>
+    <%= f.input :mail_address %>
+    <%= f.input :other %>
+    <%= f.input :remark %>
+    <%= f.input :state %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+<div class="col-md-12">
+  <%= link_to 'Back', :back %>
+</div>
