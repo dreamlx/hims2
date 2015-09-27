@@ -1,5 +1,5 @@
 class Api::OrdersController < Api::BaseController
-  before_action :authenticate_user!, only: [:create, :index]
+  before_action :authenticate_user!
   def create
     return api_error(status: 422) if params[:order].nil?
     @order = current_user.orders.build(order_params)
@@ -23,6 +23,11 @@ class Api::OrdersController < Api::BaseController
     else
       return api_error(status: 422)
     end
+  end
+
+  def show
+    @order = current_user.orders.find_by(id: params[:id])
+    return api_error(status: 422) if @order.nil?
   end
 
   private

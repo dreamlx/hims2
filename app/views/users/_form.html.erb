@@ -9,7 +9,15 @@
     <%= f.input :open_id %>
     <%= f.input :cell %>
     <%= f.input :name %>
-    <%= f.input :email %>
+    <%= f.input :id_type, collection: User::ID_TYPES %>
+    <%= f.input :nickname %>
+    <%= f.input :gender, collection: User::GENDER_TYPES %>
+    <%= f.input :address %>
+    <%= f.input :card_type, collection: Individual::ID_TYPES %>
+    <%= f.input :card_no %>
+    <%= f.input :card_front %>
+    <%= f.input :card_back %>
+    <%= f.input :remark %>
     <%= f.button :submit %>
   <% end %>
 </div>

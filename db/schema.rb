@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927070150) do
+ActiveRecord::Schema.define(version: 20150927084600) do
 
   create_table "cell_codes", force: :cascade do |t|
     t.string   "cell",       limit: 255
@@ -63,6 +63,19 @@ ActiveRecord::Schema.define(version: 20150927070150) do
   end
 
   add_index "institutions", ["user_id"], name: "index_institutions_on_user_id", using: :btree
+
+  create_table "money_receipts", force: :cascade do |t|
+    t.integer  "order_id",    limit: 4
+    t.decimal  "amount",                  precision: 12, scale: 2, default: 0.0
+    t.decimal  "bank_charge",             precision: 12, scale: 2, default: 0.0
+    t.date     "date"
+    t.string   "attach",      limit: 255
+    t.string   "state",       limit: 255
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+  end
+
+  add_index "money_receipts", ["order_id"], name: "index_money_receipts_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "investable_id",   limit: 4
@@ -155,6 +168,7 @@ ActiveRecord::Schema.define(version: 20150927070150) do
 
   add_foreign_key "individuals", "users"
   add_foreign_key "institutions", "users"
+  add_foreign_key "money_receipts", "orders"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "funds"

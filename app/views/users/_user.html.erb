@@ -1,6 +1,10 @@
 <tr>
   <% User.column_names.each do |column| %>
-    <td><%= user.send(column) %></td>
+    <% if column == 'card_front' || column == 'card_back' %>
+      <td><%= link_to image_tag(user.send(column).thumb.url), user.send(column).url %></td>
+    <% else %>
+      <td><%= user.send(column) %></td>
+    <% end %>
   <% end %>
   <td><%= link_to 'edit', edit_user_path(user) %></td>
   <td><%= link_to 'destroy', user, method: :delete, data: {confirm: 'Are you sure?'} %></td>

@@ -1,7 +1,7 @@
 <tr>
   <% Order.column_names.each do |column| %>
-    <% if column == "user_id" %>
-      <td><%= order.user_id %></td>
+    <% if column == "id" %>
+      <td><%= link_to order.id, order %></td>
     <% elsif column == "other" %>
       <td><%= image_tag(order.send(column).thumb) %></td>
     <% else %>

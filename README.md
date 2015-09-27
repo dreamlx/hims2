@@ -446,3 +446,51 @@ response:
           "state"=>nil
         }
 ```
+### 获取预约单
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/{order.id}
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}
+params: no
+action: get
+response:
+        {
+          "order"=>
+          {
+            "id"=>179, 
+            "investable_id"=>1166, 
+            "investable_type"=>"Individual", 
+            "product_id"=>830, 
+            "user_id"=>2349, 
+            "amount"=>"9.99", 
+            "due_date"=>"2015-09-25", 
+            "mail_address"=>"MyString", 
+            "other"=>{
+              "other"=>{
+                "url"=>"/uploads/order/other/179/rails.png", 
+                "thumb"=>{"url"=>"/uploads/order/other/179/thumb_rails.png"
+              }
+            }
+          }, 
+          "remark"=>"MyString", 
+          "state"=>"已经预约，等待完成报单"
+        }, 
+        "money_receipts"=>
+        [
+          {
+            "id"=>83, 
+            "amount"=>"9.99", 
+            "bank_charge"=>"9.99", 
+            "date"=>"2015-09-27", 
+            "attach"=>{
+              "attach"=>{
+                "url"=>"/uploads/money_receipt/attach/83/rails.png"
+              }
+            }, 
+            "state"=>"未确认"
+          },
+          ......
+        ]
+      }
+```

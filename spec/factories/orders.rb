@@ -7,7 +7,7 @@ FactoryGirl.define do
     mail_address "MyString"
     other File.open(File.join(Rails.root, 'spec/fixtures/rails.png'))
     remark "MyString"
-    state "MyString"
+    state "已经预约，等待完成报单"
     booking_date "2015-09-25 11:42:31"
   end
 end

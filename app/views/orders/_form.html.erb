@@ -7,7 +7,7 @@
     <%= f.input :mail_address %>
     <%= f.input :other %>
     <%= f.input :remark %>
-    <%= f.input :state %>
+    <%= f.input :state, collection: Order::ORDER_STATES %>
     <%= f.button :submit %>
   <% end %>
 </div>

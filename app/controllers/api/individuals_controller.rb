@@ -18,10 +18,7 @@ class Api::IndividualsController < Api::BaseController
 
   def show
     @individual = current_user.individuals.find_by(id: params[:id])
-    if @individual
-    else
-      return api_error(status: 422)
-    end
+    return api_error(status: 422) if @individual.nil?
   end
 
   def update

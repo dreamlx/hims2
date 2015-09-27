@@ -1,0 +1,63 @@
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t('order_detail') %></h3>
+    </div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <dt><%= Order.human_attribute_name('investable_id') %></dt>
+        <dd><%= @order.investable_id %></dd>
+
+        <dt><%= Order.human_attribute_name('product_id') %></dt>
+        <dd><%= @order.product_id %></dd>
+
+        <dt><%= Order.human_attribute_name('user_id') %></dt>
+        <dd><%= @order.user_id %></dd>
+
+        <dt><%= Order.human_attribute_name('amount') %></dt>
+        <dd><%= @order.amount %></dd>
+
+        <dt><%= Order.human_attribute_name('due_date') %></dt>
+        <dd><%= @order.due_date %></dd>
+
+        <dt><%= Order.human_attribute_name('mail_address') %></dt>
+        <dd><%= @order.mail_address %></dd>
+
+        <dt><%= Order.human_attribute_name('other') %></dt>
+        <dd><%= image_tag(@order.other.thumb.url) %></dd>
+
+        <dt><%= Order.human_attribute_name('remark') %></dt>
+        <dd><%= @order.remark %></dd>
+
+        <dt><%= Order.human_attribute_name('state') %></dt>
+        <dd><%= @order.state %></dd>
+
+        <dt><%= Order.human_attribute_name('booking_date') %></dt>
+        <dd><%= @order.booking_date %></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t('money_receipts') %></h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <tbody>
+          <%= render @order.money_receipts %>
+        </tbody>
+      </table>
+      <%= simple_form_for([@order, @order.money_receipts.build]) do |f| %>
+        <%= f.input :amount %>
+        <%= f.input :bank_charge %>
+        <%= f.input :date, as: :date, html5: true %>
+        <%= f.input :attach %>
+        <%= f.input :state, collection: MoneyReceipt::RECEIPT_STATES  %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <%= link_to 'Back', :back %>
+</div>

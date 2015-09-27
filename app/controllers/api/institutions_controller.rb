@@ -19,10 +19,7 @@ class Api::InstitutionsController < Api::BaseController
 
   def show
     @institution = current_user.institutions.find_by(id: params[:id])
-    if @institution
-    else
-      return api_error(status: 422)
-    end
+    return api_error(status: 422) if @institution.nil?
   end
 
   def update
