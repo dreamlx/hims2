@@ -222,6 +222,37 @@ response:
           }
         }
 ```
+### 获取个人投资者资料
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/individuals/{individual.id}
+```
+```
+url:    http://localhost:3000/api/individuals/{individual.id}
+action: get
+params: no
+response: same as above
+```
+### 更新个人投资者
+```
+curl -X PATCH -d "individual[new_name]=mysting" --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/individuals/{individual.id}
+```
+```
+url:    http://localhost:3000/api/individuals/{individual.id}
+action: patch
+params: { 
+          "individual": {
+            "name": "MyString",
+            "cell": "MyString",
+            "remark_name", "MyString",
+            "id_type": "身份证",
+            "id_no": "MyString",
+            "id_front": "data:image/png;base64,xxxxxxx",
+            "id_back": "data:image/png;base64,xxxxxxx",
+            "remark": "MyString"
+          }
+        }
+response: same as above
+```
 ### 创建机构投资者
 ```
 curl -X POST -d "institution[name]=mysting" --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/institutions
@@ -259,6 +290,35 @@ response:
             "remark"=>"MyString"
           }
         }
+```
+### 获取机构投资者资料
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/institutions/{individual.id}
+```
+```
+url:    http://localhost:3000/api/institutions/{institution.id}
+action: get
+params: no
+response: same as above
+```
+### 更新机构投资者
+```
+curl -X PATCH -d "institution[name]=mysting" --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/institutions/{institution.id}
+```
+```
+url:    http://localhost:3000/api/institutions/{institution.id}
+action: patch
+params: { 
+          "institution": {
+            "name": "MyString",
+            "cell": "MyString",
+            "remark_name", "MyString",
+            "organ_reg": "MyString",
+            "business_licenses": "data:image/png;base64,xxxxxxx",
+            "remark": "MyString"
+          }
+        }
+response: same as above
 ```
 ### 个人投资者列表
 ```
