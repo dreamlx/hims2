@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users
   resources :orders
   namespace :api do
-    resources :users, only: [:create, :update], defaults: {format: :json} do
+    resources :users, only: [:create, :update, :show], defaults: {format: :json} do
       get :send_code, on: :collection, defaults: {format: :json}
       get :all_investors, on: :collection, defaults: {format: :json}
     end

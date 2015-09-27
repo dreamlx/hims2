@@ -1,5 +1,5 @@
 class Api::UsersController < Api::BaseController
-  before_action :authenticate_user!, only: [:all_investors]
+  before_action :authenticate_user!, only: [:all_investors, :update, :show]
   def create
     return api_error(status: 422) if params[:user].nil?
 
@@ -9,7 +9,7 @@ class Api::UsersController < Api::BaseController
       return api_error(status: 422)
     end
 
-    @user = User.new(user_params)
+    @user = User.new(open_id: params[:user][:open_id], cell: params[:user][:cell])
     if @user.save
       render 'show', status: 201
     else
@@ -17,9 +17,19 @@ class Api::UsersController < Api::BaseController
     end
   end
 
+  def show
+    @user = current_user
+  end
+
   def update
-    @user = User.find(params[:id])
-    if @user.update(name: params[:user][:name], email: params[:user][:email])
+    return api_error(status: 422) if params[:user].nil?
+    @user = User.find_by(id: params[:id])
+    return api_error(status: 422) if @user.nil?
+
+    @user.card_front = parse_image_data(params[:user][:card_front]) if params[:user][:card_front]
+    @user.card_back = parse_image_data(params[:user][:card_back]) if params[:user][:card_back]
+
+    if @user.update(user_params)
       render 'show'
     else
       return api_error(status: 422)
@@ -48,6 +58,8 @@ class Api::UsersController < Api::BaseController
 
   private
     def user_params
-      params.require(:user).permit(:open_id, :cell)
+      params.require(:user).permit(
+        :name, :email, :id_type, :nickname, 
+        :gender, :address, :card_type, :card_no, :remark)
     end
 end

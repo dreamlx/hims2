@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925034231) do
+ActiveRecord::Schema.define(version: 20150927070150) do
 
   create_table "cell_codes", force: :cascade do |t|
     t.string   "cell",       limit: 255
@@ -142,6 +142,15 @@ ActiveRecord::Schema.define(version: 20150925034231) do
     t.string   "email",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "id_type",    limit: 255
+    t.string   "nickname",   limit: 255
+    t.string   "gender",     limit: 255
+    t.string   "address",    limit: 255
+    t.string   "card_type",  limit: 255
+    t.string   "card_no",    limit: 255
+    t.string   "card_front", limit: 255
+    t.string   "card_back",  limit: 255
+    t.string   "remark",     limit: 255
   end
 
   add_foreign_key "individuals", "users"

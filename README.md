@@ -43,7 +43,7 @@ response:
 ```
 ### user update
 ```
-curl  -X PATCH -d "user[email]=foobar@example.com&name=xxxxxx" http://localhost:3000/api/users/{#user.id}
+curl  -X PATCH --header "Authorization: Token token=#{open_id}" -d "user[email]=foobar@example.com&name=xxxxxx" http://localhost:3000/api/users/{#user.id}
 ```
 ```
 url:    http://localhost:3000/api/users/{user.id}
@@ -53,6 +53,15 @@ params:
           {
             name: "xxxxxx",
             email: "foobar@example.com",
+            id_type: "个人",            #只有【个人】或者【机构】
+            nickname: "nick name",
+            gender: "男",               #只有【男】或者【女】
+            address: "address",
+            card_type: "身份证",         #选项有["身份证","营业执照","护照","香港永久性居住身份证","台胞证","港澳同胞回乡证","驾照"]
+            card_no: "xxxxxxx",
+            card_front: "data:image/png;base64,xxxxxxx",
+            card_back: "data:image/png;base64,xxxxxxx",
+            remark: "remark"
           }
         }
 response:
@@ -63,9 +72,41 @@ response:
             cell: "11111111111",
             open_id: "xfsgdgf",
             name: nil,
-            email: nil
+            email: nil,
+            "id_type"=>"个人", 
+            "nickname"=>"new_nickname", 
+            "gender"=>"男", 
+            "address"=>"new_address", 
+            "card_type"=>"身份证", 
+            "card_no"=>"new_card_no", 
+            "card_front"=>{
+              "card_front"=>{
+                "url"=>"/uploads/user/card_front/1174/20150927155530.png",
+                "thumb"=>{
+                  "url"=>"/uploads/user/card_front/1174/thumb_20150927155530.png"
+                }
+              }
+            }, 
+            "card_back"=>{
+              "card_back"=>{
+                "url"=>"/uploads/user/card_back/1174/20150927155530.png", 
+                "thumb"=>{
+                  "url"=>"/uploads/user/card_back/1174/thumb_20150927155530.png"
+                }
+              }
+            }, 
+            "remark"=>"new_remark"
           }
         }
+```
+### 获取user信息
+```
+curl  -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/users/{#user.id}
+```
+```
+url:    http://localhost:3000/api/users/{user.id}
+params: no
+response: same as above
 ```
 ### fund list
 ```

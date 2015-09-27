@@ -1,10 +1,18 @@
 class User < ActiveRecord::Base
+  ID_TYPES = ["个人", "机构"]
+  GENDER_TYPES = ["男", "女"]
   validates :open_id, presence: true
   validates :cell, presence: true
+  validates :id_type, inclusion: ID_TYPES, allow_blank: true 
+  validates :gender, inclusion: GENDER_TYPES, allow_blank: true
+  validates :card_type, inclusion: Individual::ID_TYPES, allow_blank: true
 
   has_many :individuals
   has_many :institutions
   has_many :orders
+
+  mount_uploader :card_front, ImageUploader
+  mount_uploader :card_back, ImageUploader
 
   def User.send_code(cell, code)
     # the cell must exist and more than 11 digits

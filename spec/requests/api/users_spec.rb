@@ -37,7 +37,10 @@ RSpec.describe "users" do
   describe "Patch update" do
     it "update name and email" do
       user = create(:user)
-      patch "/api/users/#{user.id}", {user: {name: "new_name", email: "foobar@example.com"}}
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      patch "/api/users/#{user.id}", {user: {name: "new_name", email: "foobar@example.com"}}, valid_header
       expect(response).to     be_success
       expect(response).to     have_http_status(200)
       json = JSON.parse(response.body)["user"]
@@ -46,6 +49,65 @@ RSpec.describe "users" do
       expect(user.email).to eq "foobar@example.com"
       expect(json["name"]).to eq "new_name"
       expect(json["email"]).to eq "foobar@example.com"
+    end
+
+    it "failed to update name and email without authentication" do
+      user = create(:user)
+      patch "/api/users/#{user.id}", {user: {name: "new_name", email: "foobar@example.com"}}
+      expect(response).not_to     be_success
+      expect(response).to     have_http_status(401)
+    end
+
+    it "failed to update name and email without parameter of user" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      patch "/api/users/#{user.id}", {name: "new_name", email: "foobar@example.com"}, valid_header
+      expect(response).not_to be_success
+      expect(response).to     have_http_status(422)
+    end
+
+    it "failed to update name and email with invalid id" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      patch "/api/users/invalid", {user: {name: "new_name", email: "foobar@example.com"}}, valid_header
+      expect(response).not_to be_success
+      expect(response).to     have_http_status(422)
+    end
+
+    it "update many attributes" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      new_attributes = {
+        id_type: "个人",
+        nickname: "new_nickname",
+        gender: "男",
+        address: "new_address",
+        card_type: "身份证",
+        card_no: "new_card_no",
+        card_front: 'data:image/png;base64,' + Base64.strict_encode64(File.open(File.join(Rails.root, 'spec/fixtures/rails.png')).read),
+        card_back: 'data:image/png;base64,' + Base64.strict_encode64(File.open(File.join(Rails.root, 'spec/fixtures/rails.png')).read),
+        remark: "new_remark"
+      }
+      patch "/api/users/#{user.id}", {user: new_attributes}, valid_header
+      expect(response).to     be_success
+      expect(response).to     have_http_status(200)
+      json = JSON.parse(response.body)["user"]
+      expect(json["id"]).to eq user.id
+      expect(json["id_type"]).to eq new_attributes[:id_type]
+      expect(json["nickname"]).to eq new_attributes[:nickname]
+      expect(json["gender"]).to eq new_attributes[:gender]
+      expect(json["address"]).to eq new_attributes[:address]
+      expect(json["card_type"]).to eq new_attributes[:card_type]
+      expect(json["card_no"]).to eq new_attributes[:card_no]
+      expect(json["card_front"]["card_front"]["thumb"]["url"]).not_to be_nil
+      expect(json["card_back"]["card_back"]["thumb"]["url"]).not_to be_nil
+      expect(json["remark"]).to eq new_attributes[:remark]
     end
   end
 
@@ -78,6 +140,23 @@ RSpec.describe "users" do
       json = JSON.parse(response.body)
       expect(json.first["individual:#{individual.id}"]).to eq "[个人]" + individual.name
       expect(json.last["institution:#{institution.id}"]).to eq "[机构]" + institution.name
+    end
+  end
+
+  describe "GET show" do
+    it "get the requested user" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      get "/api/users/#{user.id}",{}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)["user"]
+      user.reload
+      expect(json["id"]).to eq user.id
+      expect(json["cell"]).to eq user.cell
+      expect(json["open_id"]).to eq user.open_id
     end
   end
 end
