@@ -1,0 +1,7 @@
+<tr>
+  <td><%= attach.id %></td>
+  <td><%= attach.category %></td>
+  <td><%= best_in_place attach, :title %></td>
+  <td><%= link_to attach.attach_identifier, attach.attach.url %></td>
+  <td><%= link_to t('destroy'), [attach.attachable, attach], method: :delete, data: {confirm: 'Are you sure?'} %></td>
+</tr>

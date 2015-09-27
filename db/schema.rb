@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927084600) do
+ActiveRecord::Schema.define(version: 20150927130926) do
+
+  create_table "attaches", force: :cascade do |t|
+    t.string   "title",           limit: 255
+    t.string   "attach",          limit: 255
+    t.integer  "attachable_id",   limit: 4
+    t.string   "attachable_type", limit: 255
+    t.string   "category",        limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "attaches", ["attachable_type", "attachable_id"], name: "index_attaches_on_attachable_type_and_attachable_id", using: :btree
 
   create_table "cell_codes", force: :cascade do |t|
     t.string   "cell",       limit: 255

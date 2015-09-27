@@ -1,5 +1,6 @@
 require 'rest_client'
 class Api::ProductsController < Api::BaseController
+  before_action :authenticate_user!, only: [:my, :orderd]
   def index
     fund = Fund.find(params[:fund_id])
     @products = fund.products.order(created_at: :desc)
@@ -7,6 +8,19 @@ class Api::ProductsController < Api::BaseController
 
   def show
     @product = Product.find(params[:id])
+  end
+
+  def my
+    orders = current_user.orders
+    @products = Product.joins(:orders).where(orders: {id: orders.ids})
+  end
+
+  def orderd
+    orders = current_user.orders
+    products = Product.joins(:orders).where(orders: {id: orders.ids})
+    @product = products.find_by(id: params[:id])
+    @notices = @product.attachs.where(category: "基金公告")
+    @reports = @product.attachs.where(category: "投资报告")
   end
 
   def send_mail

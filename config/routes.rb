@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   resources :funds, except: [:show]
   resources :products do
     resources :rois, only: [:create, :destroy]
+    resources :attaches, only: [:create, :destroy]
   end
   resources :rois, only: :update
+  resources :attaches, only: :update
   resources :individuals
   resources :institutions
   resources :users
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
     end
     resources :products, only: [:show], defaults: {format: :json} do
       get :send_mail, on: :member, defaults: {format: :json}
+      get :my, on: :collection, defaults: {format: :json}
+      get :orderd, on: :member, defaults: {format: :json}
     end
     resources :individuals, only: [:create, :index, :show, :update] ,defaults: {format: :json}
     resources :institutions, only: [:create, :index, :show, :update] ,defaults: {format: :json}

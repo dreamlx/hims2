@@ -105,4 +105,65 @@ RSpec.describe "products" do
       expect(json["message"]).to  eq "failed"
     end
   end
+
+  describe "GET my" do
+    it "find my products with orders" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      product = create(:product)
+      order = create(:order, investable: individual, product_id: product.id)
+      get "/api/products/my", {}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body).first
+      expect(json["id"]).to eq product.id
+      expect(json["name"]).to eq product.name
+      expect(json["desc"]).to eq product.desc
+      expect(json["title1"]).to eq product.title1
+      expect(json["content1"]).to eq product.content1
+      expect(json["title2"]).to eq product.title2
+      expect(json["content2"]).to eq product.content2
+      expect(json["title3"]).to eq product.title3
+      expect(json["content3"]).to eq product.content3
+      expect(json["progress_bar"]).to eq product.progress_bar
+      order_json = json["orders"].first
+      expect(order_json["id"]).to eq order.id
+      expect(order_json["investor_name"]).to eq individual.name
+      expect(order_json["amount"]).to eq order.amount.to_s
+    end
+  end
+
+  describe "GET orderd" do
+    it "get the orderd product" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      product = create(:product)
+      order = create(:order, investable: individual, product_id: product.id)
+      notice = create(:attach, attachable: product, category: "基金公告")
+      report = create(:attach, attachable: product, category: "投资报告")
+      get "/api/products/#{product.id}/orderd", {}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)["product"]
+      expect(json["id"]).to eq product.id
+      expect(json["name"]).to eq product.name
+      expect(json["sales_period"]).to eq product.sales_period
+      expect(json["block_period"]).to eq product.block_period
+      expect(json["paid"]).to eq product.paid
+      expect(json["notices"].first["id"]).to eq notice.id
+      expect(json["notices"].first["title"]).to eq notice.title
+      expect(json["notices"].first["attach"]["attach"]["url"]).to eq notice.attach.url
+      expect(json["notices"].first["date"].to_date).to eq notice.updated_at.to_date
+      expect(json["reports"].first["id"]).to eq report.id
+      expect(json["reports"].first["title"]).to eq report.title
+      expect(json["reports"].first["attach"]["attach"]["url"]).to eq report.attach.url
+      expect(json["reports"].first["date"].to_date).to eq report.updated_at.to_date
+    end
+  end
 end

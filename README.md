@@ -494,3 +494,38 @@ response:
         ]
       }
 ```
+### 我的投资
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/my
+```
+```
+url:    http://localhost:3000/api/orders/my
+params: no
+action: get
+response:
+        [
+          {
+            "id"=>1374, 
+            "name"=>"MyString", 
+            "desc"=>"MyString", 
+            "title1"=>"MyString", 
+            "content1"=>"MyString", 
+            "title2"=>"MyString", 
+            "content2"=>"MyString", 
+            "title3"=>"MyString", 
+            "content3"=>"MyString", 
+            "progress_bar"=>1, 
+            "orders"=>
+            [
+              {
+                "id"=>336, 
+                "investor_name"=>"MyString", 
+                "currency"=>"MyString", 
+                "amount"=>"9.99"
+              },
+              ......
+            ]
+          },
+          ......
+        ]
+```
