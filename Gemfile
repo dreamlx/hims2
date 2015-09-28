@@ -21,6 +21,7 @@ gem 'qiniu-rs'
 gem 'carrierwave-qiniu'
 gem 'mini_magick'
 gem 'state_machines-activerecord'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug'

@@ -132,6 +132,7 @@ GEM
       mime-types
       rest-client
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -253,6 +254,7 @@ DEPENDENCIES
   mini_magick
   mysql2 (= 0.3.19)
   qiniu-rs
+  rack-cors
   rails (= 4.2.4)
   rails-i18n
   rspec-rails
