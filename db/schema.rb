@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150927130926) do
+ActiveRecord::Schema.define(version: 20150928045550) do
 
   create_table "attaches", force: :cascade do |t|
     t.string   "title",           limit: 255
@@ -61,6 +61,32 @@ ActiveRecord::Schema.define(version: 20150927130926) do
   end
 
   add_index "individuals", ["user_id"], name: "index_individuals_on_user_id", using: :btree
+
+  create_table "info_fields", force: :cascade do |t|
+    t.integer  "product_id", limit: 4
+    t.string   "category",   limit: 255
+    t.string   "field_name", limit: 255
+    t.string   "field_type", limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "info_fields", ["product_id"], name: "index_info_fields_on_product_id", using: :btree
+
+  create_table "infos", force: :cascade do |t|
+    t.integer  "order_id",   limit: 4
+    t.string   "category",   limit: 255
+    t.string   "field_name", limit: 255
+    t.string   "field_type", limit: 255
+    t.string   "string",     limit: 255
+    t.text     "text",       limit: 65535
+    t.string   "photo",      limit: 255
+    t.string   "state",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "infos", ["order_id"], name: "index_infos_on_order_id", using: :btree
 
   create_table "institutions", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
@@ -179,6 +205,8 @@ ActiveRecord::Schema.define(version: 20150927130926) do
   end
 
   add_foreign_key "individuals", "users"
+  add_foreign_key "info_fields", "products"
+  add_foreign_key "infos", "orders"
   add_foreign_key "institutions", "users"
   add_foreign_key "money_receipts", "orders"
   add_foreign_key "orders", "products"

@@ -491,8 +491,44 @@ response:
             "state"=>"未确认"
           },
           ......
+        ],
+        "infos"=>
+        [
+          {
+            "id"=>56, 
+            "category"=>"MyString", 
+            "field_name"=>"MyString", 
+            "field_type"=>"string",   # 只有三个类型：string, text, photo，与类型对应的字段才是有效字段
+            "string"=>"MyString", 
+            "text"=>"MyText", 
+            "photo"=>{
+              "photo"=>{
+                "url"=>"/uploads/info/photo/56/rails.png"
+              }
+            }, 
+            "state"=>"未确认"
+          },
+          ......
         ]
       }
+```
+### 提交报单信息
+```
+curl -X PATCH --header "Authorization: Token token=#{open_id}" -d "infos[1][string]=new_string&xxx" http://localhost:3000/api/orders/{order.id}/update_infos
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}/update_infos
+params: {
+          infos:
+          {
+            1: {string: "new_string"},
+            2: {text: "new_text"},
+            3: {photo: 'data:image/png;base64,'},
+            id: {field_type: "new_info"}
+          }
+        }
+action: patch
+response: same as above
 ```
 ### 我的投资
 ```

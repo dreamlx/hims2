@@ -44,6 +44,26 @@ class OrdersController < ApplicationController
     redirect_to orders_url
   end
 
+  def update_infos
+    @order = Order.find(params[:id])
+    if @order.investable_type == "Individual"
+      @order.product.individual_fields.each do |field|
+        @order.infos.find_or_create_by(
+          category: field.category,
+          field_name: field.field_name,
+          field_type: field.field_type)
+      end
+    elsif @order.investable_type == "Institution"
+      @order.product.institution_fields.each do |field|
+        @order.infos.find_or_create_by(
+          category: field.category,
+          field_name: field.field_name,
+          field_type: field.field_type)
+      end
+    end
+    redirect_to @order
+  end
+
   private
     def order_params
       params.require(:order).permit(:product_id, :amount, :due_date, :mail_address, :other, :remark, :state)

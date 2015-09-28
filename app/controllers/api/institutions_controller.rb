@@ -15,6 +15,8 @@ class Api::InstitutionsController < Api::BaseController
     else
       return api_error(status: 422)
     end
+  ensure 
+    clean_tempfile
   end
 
   def show
@@ -37,6 +39,8 @@ class Api::InstitutionsController < Api::BaseController
     else
       return api_error(status: 422)
     end
+  ensure 
+    clean_tempfile
   end
 
   private

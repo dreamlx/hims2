@@ -27,6 +27,13 @@ class MoneyReceiptsController < ApplicationController
     redirect_to order
   end
 
+  def deny
+    order = Order.find(params[:order_id])
+    @money_receipt = order.money_receipts.find(params[:id])
+    @money_receipt.deny
+    redirect_to order
+  end
+
   private
     def money_receipt_params
       params.require(:money_receipt).permit(:amount, :bank_charge, :date, :attach)

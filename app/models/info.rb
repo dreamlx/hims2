@@ -1,10 +1,8 @@
-class MoneyReceipt < ActiveRecord::Base
-  RECEIPT_STATES = ["未确认", "已确认", "已否决"]
-  validates :state, inclusion: RECEIPT_STATES
-  validates :order_id, presence: true
+class Info < ActiveRecord::Base
+  validates :field_type, inclusion: InfoField::FIELD_TYPES
   belongs_to :order
 
-  mount_uploader :attach, FileUploader
+  mount_uploader :photo, FileUploader
 
   state_machine :state, :initial => :'未确认' do
     event :confirm do

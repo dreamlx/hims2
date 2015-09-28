@@ -9,6 +9,7 @@ class Order < ActiveRecord::Base
   belongs_to :product
   belongs_to :user
   has_many :money_receipts
+  has_many :infos
 
   mount_uploader :other, ImageUploader
 
@@ -31,5 +32,20 @@ class Order < ActiveRecord::Base
 
   def after_create
     update(user_id: self.investable.user_id, booking_date: self.created_at)
+    if investable_type == "Individual"
+      product.individual_fields.each do |field|
+        infos.create(
+          category: field.category,
+          field_name: field.field_name,
+          field_type: field.field_type)
+      end
+    elsif investable_type == "Institution"
+      product.institution_fields.each do |field|
+        infos.create(
+          category: field.category,
+          field_name: field.field_name,
+          field_type: field.field_type)
+      end
+    end
   end
 end

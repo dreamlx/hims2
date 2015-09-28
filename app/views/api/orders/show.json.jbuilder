@@ -6,3 +6,8 @@ json.money_receipts do
     json.(receipt, :id, :amount, :bank_charge, :date, :attach, :state)
   end
 end
+json.infos do
+  json.array!(@order.infos) do |info|
+    json.(info, :id, :category, :field_name, :field_type, :string, :text, :photo, :state)
+  end
+end

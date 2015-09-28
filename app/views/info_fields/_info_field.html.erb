@@ -1,0 +1,7 @@
+<tr>
+  <td><%= info_field.id %></td>
+  <td><%= best_in_place info_field, :category %></td>
+  <td><%= best_in_place info_field, :field_name %></td>
+  <td><%= best_in_place info_field, :field_type %></td>
+  <td><%= link_to t('destroy'), [info_field.product, info_field], method: :delete, data: {confirm: 'Are you sure?'} %></td>
+</tr>
