@@ -64,6 +64,8 @@ RSpec.describe "institutions" do
       json = JSON.parse(response.body).first
       expect(json["id"]).to eq institution.id
       expect(json["name"]).to eq institution.name
+      expect(json["booking_count"]).to eq 0
+      expect(json["holding_count"]).to eq 0
     end
 
     it "failed to get all institutions without authentication" do
@@ -103,6 +105,9 @@ RSpec.describe "institutions" do
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)["institution"]
       expect(json["id"]).to eq institution.id
+      expect(json["created_at"].to_date).to eq institution.created_at.to_date
+      expect(json["booking_count"]).to eq 0
+      expect(json["holding_count"]).to eq 0
     end
 
     it "failed to get the requested institution without authentication" do

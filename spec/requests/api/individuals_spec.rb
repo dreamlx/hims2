@@ -70,6 +70,8 @@ RSpec.describe "individuals" do
       json = JSON.parse(response.body).first
       expect(json["id"]).to eq individual.id
       expect(json["name"]).to eq individual.name
+      expect(json["booking_count"]).to eq 0
+      expect(json["holding_count"]).to eq 0
     end
 
     it "failed to get all individuals without authentication" do
@@ -110,6 +112,9 @@ RSpec.describe "individuals" do
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)["individual"]
       expect(json["id"]).to eq individual.id
+      expect(json["created_at"].to_date).to eq individual.created_at.to_date
+      expect(json["booking_count"]).to eq 0
+      expect(json["holding_count"]).to eq 0
     end
 
     it "failed to get the requested individual without authentication" do

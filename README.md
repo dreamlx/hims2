@@ -259,7 +259,10 @@ response:
                 }
               }
             }, 
-            "remark"=>"MyString"
+            "remark"=>"MyString",
+            "created_at"=>"2015-09-25",
+            "booking_count"=>0,
+            "holding_count"=>0
           }
         }
 ```
@@ -328,7 +331,10 @@ response:
                 }
               }
             }, 
-            "remark"=>"MyString"
+            "remark"=>"MyString",
+            "created_at"=>"2015-09-25",
+            "booking_count"=>0,
+            "holding_count"=>0
           }
         }
 ```
@@ -374,7 +380,9 @@ response:
         [
           {
             "id"=>23, 
-            "name"=>"MyString"
+            "name"=>"MyString",
+            "booking_count"=>0,
+            "holding_count"=>0
           }
         ]
 ```
@@ -391,7 +399,9 @@ response:
         [
           {
             "id"=>23, 
-            "name"=>"MyString"
+            "name"=>"MyString",
+            "booking_count"=>0,
+            "holding_count"=>0
           }
         ]
 ```
