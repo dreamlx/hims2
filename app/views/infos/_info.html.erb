@@ -5,5 +5,7 @@
   <td><%= info.field_type %></td>
   <td><%= info.send(info.field_type) %></td>
   <td><%= info.state %></td>
+  <td><%= link_to_if (info.state != "已确认"), t('confirm'), confirm_order_info_path(order_id: info.order, id: info), data: {confirm: 'Are you sure?'} %></td>
+  <td><%= link_to_if (info.state == "未确认"), t('deny'), deny_order_info_path(order_id: info.order, id: info), data: {confirm: 'Are you sure?'} %></td>
   <td><%= link_to t('destroy'), [info.order, info], method: :delete, data: {confirm: 'Are you sure?'} %></td>
 </tr>

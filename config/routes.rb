@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   resources :institutions
   resources :users
   resources :orders do
-    resources :infos, only: [:destroy]
+    resources :infos, only: [:destroy] do
+      get :confirm, on: :member
+      get :deny, on: :member
+    end
     resources :money_receipts, only: [:create, :destroy] do
       get :confirm, on: :member
       get :deny, on: :member
