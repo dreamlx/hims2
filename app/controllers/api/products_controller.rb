@@ -19,8 +19,8 @@ class Api::ProductsController < Api::BaseController
     orders = current_user.orders
     products = Product.joins(:orders).where(orders: {id: orders.ids})
     @product = products.find_by(id: params[:id])
-    @notices = @product.attachs.where(category: "基金公告")
-    @reports = @product.attachs.where(category: "投资报告")
+    @notices = @product.attaches.where(category: "基金公告")
+    @reports = @product.attaches.where(category: "投资报告")
   end
 
   def send_mail
