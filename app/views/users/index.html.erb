@@ -6,12 +6,16 @@
 </div>
 <div class="col-md-12">
   <table class="table">
-    <tr>
-      <% User.column_names.each do |column| %>
-        <th><%= User.human_attribute_name(column) %></th>
-      <% end %>
-      <th colspan="2"><%= t(:operations) %></th>
-    </tr>
-    <%= render @users %>
+    <thead>
+      <tr>
+        <% User.column_names.each do |column| %>
+          <th><%= User.human_attribute_name(column) %></th>
+        <% end %>
+        <th colspan="2"><%= t(:operations) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @users %>
+    </tbody>
   </table>
 </div>

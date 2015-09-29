@@ -6,18 +6,22 @@
 </div>
 <div class="col-md-12">
   <table class="table">
-    <tr>
-      <th>id</th>
-      <th><%= Admin.human_attribute_name("name") %></th>
-      <th colspan="2"><%= t(:operations) %></th>
-    </tr>
-    <tr>
-      <% @admins.each do |admin| %>
-        <td><%= admin.id %></td>
-        <td><%= admin.name %></td>
-        <td><%= link_to t(:reset_password), edit_admin_path(admin) %></td>
-        <td><%= link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
-      <% end %>
-    </tr>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th><%= Admin.human_attribute_name("name") %></th>
+        <th colspan="2"><%= t(:operations) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @admins.each do |admin| %>
+          <td><%= admin.id %></td>
+          <td><%= admin.name %></td>
+          <td><%= link_to t(:reset_password), edit_admin_path(admin) %></td>
+          <td><%= link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
+        <% end %>
+      </tr>  
+    </tbody>
   </table>
 </div>

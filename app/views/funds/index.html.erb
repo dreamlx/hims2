@@ -6,12 +6,16 @@
 </div>
 <div class="col-md-12">
   <table class="table">
-    <tr>
-      <% Fund.column_names.each do |column| %>
-        <th><%= Fund.human_attribute_name(column) %></th>
-      <% end %>
-      <th colspan="2"><%= t(:operations) %></th>
-    </tr>
-    <%= render @funds %>
+    <thead>
+      <tr>
+        <% Fund.column_names.each do |column| %>
+          <th><%= Fund.human_attribute_name(column) %></th>
+        <% end %>
+        <th colspan="2"><%= t(:operations) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @funds %>
+    </tbody>
   </table>
 </div>

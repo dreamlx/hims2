@@ -6,12 +6,16 @@
 </div>
 <div class="col-md-12">
   <table class="table">
-    <tr>
-      <% Order.column_names.each do |column| %>
-      <th><%= Order.human_attribute_name(column) %></th>
-      <% end %>
-      <th colspan="2"><%= t(:operations) %></th>
-    </tr>
-    <%= render @orders %>
+    <thead>
+      <tr>
+        <% Order.column_names.each do |column| %>
+        <th><%= Order.human_attribute_name(column) %></th>
+        <% end %>
+        <th colspan="2"><%= t(:operations) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @orders %>
+    </tbody>
   </table>
 </div>
