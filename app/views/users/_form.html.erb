@@ -9,6 +9,7 @@
     <%= f.input :open_id %>
     <%= f.input :cell %>
     <%= f.input :name %>
+    <%= f.input :email, as: :email %>
     <%= f.input :id_type, collection: User::ID_TYPES %>
     <%= f.input :nickname %>
     <%= f.input :gender, collection: User::GENDER_TYPES %>
@@ -22,5 +23,5 @@
   <% end %>
 </div>
 <div class="col-md-12">
-  <%= link_to 'Back', :back %>
+  <%= link_to t(:back), :back %>
 </div>

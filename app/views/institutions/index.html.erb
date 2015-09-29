@@ -1,16 +1,16 @@
 <div class="col-md-10">
-  <h3>Institution List</h3>
+  <h3><%= t(:institution_list) %></h3>
 </div>
 <div class="col-md-2">
-  <%= link_to 'New Institution', new_institution_path, class: "btn btn-danger" %>
+  <%= link_to t(:new_institution), new_institution_path, class: "btn btn-danger" %>
 </div>
 <div class="col-md-12">
   <table class="table">
     <tr>
       <% Institution.column_names.each do |column| %>
-      <th><%= column %></th>
+      <th><%= Institution.human_attribute_name(column) %></th>
       <% end %>
-      <th colspan="2">Operations</th>
+      <th colspan="2"><%= t(:operations) %></th>
     </tr>
     <%= render @institutions %>
   </table>

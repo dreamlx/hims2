@@ -20,4 +20,5 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  invalid_name_or_password: 'Invalid name/password combination'
+  please_log_in: 'Please log in.'

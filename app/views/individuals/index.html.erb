@@ -1,16 +1,16 @@
 <div class="col-md-10">
-  <h3>Individual List</h3>
+  <h3><%= t(:individual_list) %></h3>
 </div>
 <div class="col-md-2">
-  <%= link_to 'New Individual', new_individual_path, class: "btn btn-danger" %>
+  <%= link_to t(:new_individual), new_individual_path, class: "btn btn-danger" %>
 </div>
 <div class="col-md-12">
   <table class="table">
     <tr>
       <% Individual.column_names.each do |column| %>
-      <th><%= column %></th>
+      <th><%= Individual.human_attribute_name(column) %></th>
       <% end %>
-      <th colspan="2">Operations</th>
+      <th colspan="2"><%= t(:operations) %></th>
     </tr>
     <%= render @individuals %>
   </table>

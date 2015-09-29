@@ -10,7 +10,7 @@
   <td><%= product.title3 %></td>
   <td><%= product.content3 %></td>
   <td><%= product.progress_bar %></td>
-  <td><%= link_to 'show', product %></td>
-  <td><%= link_to 'edit', edit_product_path(product) %></td>
-  <td><%= link_to 'destroy', product, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+  <td><%= link_to t(:show), product %></td>
+  <td><%= link_to t(:edit), edit_product_path(product) %></td>
+  <td><%= link_to t(:destroy), product, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
 </tr>

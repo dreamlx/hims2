@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   GENDER_TYPES = ["男", "女"]
   validates :open_id, presence: true
   validates :cell, presence: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
   validates :id_type, inclusion: ID_TYPES, allow_blank: true 
   validates :gender, inclusion: GENDER_TYPES, allow_blank: true
   validates :card_type, inclusion: Individual::ID_TYPES, allow_blank: true

@@ -8,6 +8,6 @@
       <td><%= order.send(column) %></td>
     <% end %>
   <% end %>
-  <td><%= link_to 'edit', edit_order_path(order) %></td>
-  <td><%= link_to 'destroy', order, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+  <td><%= link_to t(:edit), edit_order_path(order) %></td>
+  <td><%= link_to t(:destroy), order, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
 </tr>

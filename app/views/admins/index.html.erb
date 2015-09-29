@@ -1,22 +1,22 @@
 <div class="col-md-10">
-  <h3>Admin List</h3>
+  <h3><%= t(:admin_list) %></h3>
 </div>
 <div class="col-md-2">
-  <%= link_to 'New Admin', new_admin_path, class: "btn btn-danger" %>
+  <%= link_to t(:new_admin), new_admin_path, class: "btn btn-danger" %>
 </div>
 <div class="col-md-12">
   <table class="table">
     <tr>
       <th>id</th>
-      <th>name</th>
-      <th colspan="2">Operations</th>
+      <th><%= Admin.human_attribute_name("name") %></th>
+      <th colspan="2"><%= t(:operations) %></th>
     </tr>
     <tr>
       <% @admins.each do |admin| %>
         <td><%= admin.id %></td>
         <td><%= admin.name %></td>
-        <td><%= link_to 'reset_password', edit_admin_path(admin) %></td>
-        <td><%= link_to 'destroy', admin, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td><%= link_to t(:reset_password), edit_admin_path(admin) %></td>
+        <td><%= link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
       <% end %>
     </tr>
   </table>

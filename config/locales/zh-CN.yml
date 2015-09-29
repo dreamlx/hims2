@@ -1,0 +1,186 @@
+zh-CN:
+  activerecord:
+    models:
+      admin: 管理员
+      attach: 附件
+      cell_code: 手机验证码
+      fund: 基金
+      individual: 个人投资者
+      info_field: 信息字段
+      info: 信息
+      institution: 机构投资者
+      money_receipt: 汇款
+      order: 订单
+      product: 产品
+      roi: 投资回报
+      user: 理财师
+    attributes:
+      admin:
+        name: 用户名
+        password: 密码
+        password_confirmation: 确认密码
+      attach:
+        title: 标题
+        attach: 附件
+        attachable_id:
+        attachable_type:
+        category: 类别
+      cell_code:
+        cell: 手机号码
+        code: 验证码
+      fund:
+        name: 基金名称
+        desc: 描述
+        title1: 标题1
+        content1: 内容1
+        title2: 标题2
+        content2: 内容2
+        title3: 标题3
+        content3: 内容3
+        progress_bar: 进度条
+        created_at: 创建
+        updated_at: 更新
+      individual:
+        user_id: 理财师
+        name: 真实姓名
+        cell: 联系电话
+        remark_name: 备注名
+        id_type: 证件类型
+        id_no: 证件号码
+        id_front: 证件正面
+        id_back: 证件反面
+        remark: 备注
+        created_at: 创建
+        updated_at: 更新
+      info_field:
+        product_id: 产品
+        category: 类别
+        field_name: 字段名称
+        field_type: 字段类型
+      info:
+        order_id: 订单
+        category: 类别
+        field_name: 字段名称
+        field_type: 字段类型
+        string: 字符串
+        text: 文本
+        photo: 照片
+        state: 状态
+      institution:
+        user_id: 理财师
+        name: 机构名称
+        cell: 联系电话
+        remark_name: 备注名
+        organ_reg: 机构注册号
+        business_licenses: 营业执照
+        remark: 备注
+        created_at: 创建
+        updated_at: 更新
+      money_receipt:
+        order_id: 订单
+        amount: 金额
+        bank_charge: 银行手续费
+        date: 日期
+        attach: 凭条
+        state: 状态
+      order:
+        investable_id: 投资者
+        investable_type: 投资者类型
+        product_id: 产品
+        user_id: 理财师
+        amount: 预约金额
+        due_date: 预计资金到位时间
+        mail_address: 合同邮寄地址
+        other: 其他
+        remark: 备注
+        state: 状态
+        booking_date: 预约日期
+        created_at: 创建
+        updated_at: 更新
+      product:
+        fund_id: 基金
+        name: 产品名称
+        desc: 描述
+        title1: 标题1
+        content1: 内容1
+        title2: 标题2
+        content2: 内容2
+        title3: 标题3
+        content3: 内容3
+        progress_bar: 进度条
+        abbr: 产品简称
+        currency: 产品币种
+        amount: 目标规模
+        period: 存续期
+        paid: 收益支付
+        sales_period: 销售期
+        block_period: 封闭期
+        redeem: 申购/赎回
+        entity: 基金实体
+        adviser: 投资顾问
+        trustee: 托管人
+        reg_organ: 登记机构
+        website: 净值网站
+        agency: 代销机构
+        regulatory_filing: 监管备案
+        legal_consultant: 法律顾问
+        audit: 审计师
+        starting_point: 认购起点
+        account: 募集账户
+        progress: 募集进度
+        direction: 投资方向
+        risk_control: 风控措施
+        instruction: 说明文档
+        agreement: 认购协议
+        created_at: 创建
+        updated_at: 更新
+      roi:
+        product_id: 产品
+        range: 认购金额
+        profit: 预期收益
+      user:
+        open_id: open_id
+        cell: 手机号码
+        name: 姓名
+        email: 电子邮箱
+        id_type: 身份类型
+        nickname: 昵称
+        gender: 性别
+        address: 联系地址
+        card_type: 证件类型
+        card_no: 证件号码
+        card_front: 证件正面
+        card_back: 证件反面
+        remark: 备注
+        created_at: 创建
+        updated_at: 更新
+  new_user: 新建理财师
+  user_list: 理财师列表
+  operations: 操作
+  login: 登录
+  logout: 登出
+  HIMS: 禾晖基金管理系统
+  show: 显示
+  edit: 编辑
+  destroy: 删除
+  are_you_sure: 请确认操作
+  fund_list: 基金列表
+  new_fund: 新建基金
+  back: 返回
+  product_detail: 产品详情
+  rois: 投资回报
+  attaches: 附件
+  info_fields: 信息字段
+  new_product: 新建产品
+  product_list: 产品列表
+  new_individual: 新建个人投资者
+  individual_list: 个人投资者列表
+  new_institution: 新建机构投资者
+  institution_list: 机构投资者列表
+  new_order: 新建订单
+  order_list: 订单列表
+  new_admin: 新建管理员
+  admin_list: 管理员列表
+  reset_password: 重设密码
+  invalid_name_or_password: 无效的用户名或密码
+  please_log_in: 请登录

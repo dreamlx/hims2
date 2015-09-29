@@ -1,14 +1,7 @@
 <tr>
-  <td><%= fund.id %></td>
-  <td><%= fund.name %></td>
-  <td><%= fund.desc %></td>
-  <td><%= fund.title1 %></td>
-  <td><%= fund.content1 %></td>
-  <td><%= fund.title2 %></td>
-  <td><%= fund.content2 %></td>
-  <td><%= fund.title3 %></td>
-  <td><%= fund.content3 %></td>
-  <td><%= fund.progress_bar %></td>
-  <td><%= link_to 'edit', edit_fund_path(fund) %></td>
-  <td><%= link_to 'destroy', fund, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+  <% Fund.column_names.each do |column| %>
+    <td><%= fund.send(column) %></td>
+  <% end %>
+  <td><%= link_to t(:edit), edit_fund_path(fund) %></td>
+  <td><%= link_to t(:destroy), fund, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
 </tr>
