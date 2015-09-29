@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
   resources :funds, except: [:show]
   resources :products do
     resources :rois, only: [:create, :destroy]
@@ -23,6 +24,10 @@ Rails.application.routes.draw do
     get :update_infos, on: :member
   end
   resources :money_receipts, only: :update
+  resources :admins
+  get     'login'   => 'sessions#new'
+  post    'login'   => 'sessions#create'
+  delete  'logout'  => 'sessions#destroy'
   namespace :api do
     resources :users, only: [:create, :update, :show], defaults: {format: :json} do
       get :send_code, on: :collection, defaults: {format: :json}

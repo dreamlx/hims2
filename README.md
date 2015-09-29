@@ -203,10 +203,10 @@ response:
 ```
 ### 发送产品说明
 ```
-curl -X GET -d "email=foobar@example.com" http://localhost:3000/api/product/#{product.id}/send_mail
+curl -X GET -d "email=foobar@example.com" http://localhost:3000/api/products/#{product.id}/send_mail
 ```
 ```
-url:    http://localhost:3000/api/product/#{product.id}/send_mail
+url:    http://localhost:3000/api/products/#{product.id}/send_mail
 action: get
 params: {email: "foobar@example.com"}
 response: {

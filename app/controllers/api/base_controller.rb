@@ -4,6 +4,7 @@ class Api::BaseController < ApplicationController
 
   # disable cookies (no set-cookies header in response)
   before_action :destroy_session
+  skip_before_action :logged_in_admin
   
   def api_error(opts = {})
     render nothing: true, status: opts[:status]
