@@ -533,6 +533,18 @@ response:
           ]
         }
 ```
+### 删除订单
+```
+curl -X DELETE http://localhost:3000/api/orders/{order.id}
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}
+action: delete
+params: no
+response:
+        200 if ok
+        422 if failed
+```
 ### 提交报单信息
 ```
 curl -X PATCH --header "Authorization: Token token=#{open_id}" -d "infos[1][string]=new_string&xxx" http://localhost:3000/api/orders/{order.id}/update_infos

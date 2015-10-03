@@ -32,6 +32,16 @@ class Api::OrdersController < Api::BaseController
     return api_error(status: 422) if @order.nil?
   end
 
+  def destroy
+    order = current_user.orders.find_by(id: params[:id])
+    if order
+      order.destroy
+      render json: {}, status: 200
+    else
+      return api_error(status: 422)
+    end
+  end
+
   def update_infos
     @order = current_user.orders.find(params[:id])
     infos_params = params[:infos]

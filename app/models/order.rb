@@ -8,8 +8,8 @@ class Order < ActiveRecord::Base
   belongs_to :investable, polymorphic: true
   belongs_to :product
   belongs_to :user
-  has_many :money_receipts
-  has_many :infos
+  has_many :money_receipts, dependent: :destroy
+  has_many :infos, dependent: :destroy
 
   mount_uploader :other, ImageUploader
 
