@@ -550,6 +550,40 @@ params: {
 action: patch
 response: same as above
 ```
+### 提交汇款信息
+```
+curl -X POST --header "Authorization: Token token=#{open_id}" -d "money_receipt[order_id]=1&xxxxxxxx" http://localhost:3000/api/orders/{order.id}/money_receipts
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}/money_receipts
+action: post
+params: {
+          money_receipt:
+          {
+            order_id: 1,
+            attach: 'data:image/png;base64,xxxxx',
+            amount: "9.99",
+            date: "2015-09-27",
+          }
+        }
+response:
+        {
+          "money_receipt"=>
+          {
+            "id"=>38, 
+            "order_id"=>136, 
+            "amount"=>"9.99", 
+            "bank_charge"=>"0.0", 
+            "date"=>"2015-09-27", 
+            "attach"=>{
+              "attach"=>{
+                "url"=>"/uploads/money_receipt/attach/38/20151003141836.png"
+              }
+            }, 
+            "state"=>"未确认"
+          }
+        }
+```
 ### 我的投资
 ```
 curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/my
