@@ -3,6 +3,6 @@ FactoryGirl.define do
     open_id {Faker::Lorem.characters}
     cell    {Faker::PhoneNumber.phone_number}
     name    {Faker::Name.name}
-    email   {Faker::Internet.email}
+    email   "foobar@example.com"
   end
 end

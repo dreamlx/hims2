@@ -1,5 +1,13 @@
 json.order do
-  json.(@order, :id, :investable_id, :investable_type, :product_id, :user_id, :amount, :due_date, :mail_address, :other, :remark, :state)
+  json.(@order, :id, :investable_id, :investable_type, :product_id, :user_id, :amount, :due_date, :mail_address, :other, :remark, :state, :booking_date)
+  json.investor_name @order.investable.name
+  json.product_name @order.product.name
+  json.currency @order.product.currency
+  if @order.investable_type == "Individual"
+    json.number @order.investable.id_no
+  elsif @order.investable_type == "Institution"
+    json.number @order.investable.organ_reg
+  end
 end
 json.money_receipts do
   json.array!(@order.money_receipts) do |receipt|

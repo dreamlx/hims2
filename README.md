@@ -438,24 +438,26 @@ params: {
         }
 response:
         {
-          "id"=>21, 
-          "investable_id"=>213, 
-          "investable_type"=>"Individual", 
-          "product_id"=>245, 
-          "user_id"=>496, 
-          "amount"=>"9.99", 
-          "due_date"=>"2015-09-25", 
-          "mail_address"=>"MyString", 
-          "other"=>{
+          "order"=>{
+            "id"=>21, 
+            "investable_id"=>213, 
+            "investable_type"=>"Individual", 
+            "product_id"=>245, 
+            "user_id"=>496, 
+            "amount"=>"9.99", 
+            "due_date"=>"2015-09-25", 
+            "mail_address"=>"MyString", 
             "other"=>{
-              "url"=>"/uploads/order/other/21/20150925175940.png", 
-              "thumb"=>{
-                "url"=>"/uploads/order/other/21/thumb_20150925175940.png"
+              "other"=>{
+                "url"=>"/uploads/order/other/21/20150925175940.png", 
+                "thumb"=>{
+                  "url"=>"/uploads/order/other/21/thumb_20150925175940.png"
+                }
               }
-            }
-          }, 
-          "remark"=>"MyString", 
-          "state"=>nil
+            }, 
+            "remark"=>"MyString", 
+            "state"=>nil
+          }
         }
 ```
 ### 获取预约单
@@ -481,48 +483,54 @@ response:
             "other"=>{
               "other"=>{
                 "url"=>"/uploads/order/other/179/rails.png", 
-                "thumb"=>{"url"=>"/uploads/order/other/179/thumb_rails.png"
+                "thumb"=>{
+                  "url"=>"/uploads/order/other/179/thumb_rails.png"
+                }
               }
-            }
+            }, 
+            "remark"=>"MyString", 
+            "state"=>"已经预约，等待完成报单",
+            "booking_date"=> "2015-09-25",    #预约日期
+            "investor_name"=> "MyString",     #投资者名称
+            "product_name"=> "product name",  #预约产品
+            "currency"=>"人民币",              #币种
+            "number"=>"xxxxxxxxxxxxxx"        #证件号码
           }, 
-          "remark"=>"MyString", 
-          "state"=>"已经预约，等待完成报单"
-        }, 
-        "money_receipts"=>
-        [
-          {
-            "id"=>83, 
-            "amount"=>"9.99", 
-            "bank_charge"=>"9.99", 
-            "date"=>"2015-09-27", 
-            "attach"=>{
+          "money_receipts"=>
+          [
+            {
+              "id"=>83, 
+              "amount"=>"9.99", 
+              "bank_charge"=>"9.99", 
+              "date"=>"2015-09-27", 
               "attach"=>{
-                "url"=>"/uploads/money_receipt/attach/83/rails.png"
-              }
-            }, 
-            "state"=>"未确认"
-          },
-          ......
-        ],
-        "infos"=>
-        [
-          {
-            "id"=>56, 
-            "category"=>"MyString", 
-            "field_name"=>"MyString", 
-            "field_type"=>"string",   # 只有三个类型：string, text, photo，与类型对应的字段才是有效字段
-            "string"=>"MyString", 
-            "text"=>"MyText", 
-            "photo"=>{
+                "attach"=>{
+                  "url"=>"/uploads/money_receipt/attach/83/rails.png"
+                }
+              }, 
+              "state"=>"未确认"
+            },
+            ......
+          ],
+          "infos"=>
+          [
+            {
+              "id"=>56, 
+              "category"=>"MyString", 
+              "field_name"=>"MyString", 
+              "field_type"=>"string",   # 只有三个类型：string, text, photo，与类型对应的字段才是有效字段
+              "string"=>"MyString", 
+              "text"=>"MyText", 
               "photo"=>{
-                "url"=>"/uploads/info/photo/56/rails.png"
-              }
-            }, 
-            "state"=>"未确认"
-          },
-          ......
-        ]
-      }
+                "photo"=>{
+                  "url"=>"/uploads/info/photo/56/rails.png"
+                }
+              }, 
+              "state"=>"未确认"
+            },
+            ......
+          ]
+        }
 ```
 ### 提交报单信息
 ```

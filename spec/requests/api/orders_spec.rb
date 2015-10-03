@@ -138,6 +138,11 @@ RSpec.describe "orders" do
       expect(json["other"]["other"]["thumb"]["url"]).to eq order.other.thumb.url
       expect(json["remark"]).to eq order.remark
       expect(json["state"]).to eq '已经预约，等待完成报单'
+      expect(json["booking_date"].to_date).to eq order.booking_date.to_date
+      expect(json["investor_name"]).to eq order.investable.name
+      expect(json["product_name"]).to eq order.product.name
+      expect(json["currency"]).to eq order.product.currency
+      expect(json["number"]).to eq order.investable.id_no
     end
 
     it "show the requested order with money_receipts" do
