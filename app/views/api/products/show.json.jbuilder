@@ -1,6 +1,7 @@
 json.product do
   json.id @product.id
   json.name @product.name
+  json.desc @product.desc
   json.abbr @product.abbr
   json.currency @product.currency if @product.currency
   json.amount @product.amount if @product.amount

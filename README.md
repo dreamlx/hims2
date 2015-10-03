@@ -167,6 +167,7 @@ response:
         {
           "id"=>3, 
           "name"=>"MyString",             #产品名称
+          "desc"=>"MyString",             #说明
           "abbr"=>"MyString",             #产品简称
           "currency"=>"MyString",         #产品币种
           "amount"=>"MyString",           #目标规模
@@ -618,4 +619,49 @@ response:
           },
           ......
         ]
+```
+### 已预约产品
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/products/{product.id}/ordered
+```
+```
+url:    http://localhost:3000/api/products/{product.id}/ordered
+action: get
+params: no
+response:
+        { "product"=>
+          {
+            "id"=>505, 
+            "name"=>"MyString", 
+            "sales_period"=>"MyString", 
+            "block_period"=>"MyString", 
+            "paid"=>"MyString", 
+            "notices"=>
+            [
+              {
+                "id"=>51, 
+                "title"=>"MyString", 
+                "attach"=>{
+                  "attach"=>{
+                    "url"=>"/uploads/attach/attach/51/rails.png"
+                  }
+                }, 
+                "date"=>"2015-10-03"
+              }
+            ], 
+            "reports"=>
+            [
+              {
+                "id"=>52, 
+                "title"=>"MyString", 
+                "attach"=>{
+                  "attach"=>{
+                    "url"=>"/uploads/attach/attach/52/rails.png"
+                  }
+                }, 
+                "date"=>"2015-10-03"
+              }
+            ]
+          }
+        }
 ```
