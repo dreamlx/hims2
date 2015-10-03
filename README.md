@@ -426,13 +426,15 @@ curl -X POST --header "Authorization: Token token=#{open_id}" -d "product_id=1..
 ```
 url:    http://localhost:3000/api/orders
 params: {
-          investable_id: "individual:#{individual.id}",
-          product_id: product.id,
-          amount: "9.99",
-          due_date "2015-09-25",
-          mail_address "MyString",
-          other: 'data:image/png;base64, xxxxxx',
-          remark: "MyString",
+          order:{
+            investable_id: "individual:#{individual.id}",
+            product_id: product.id,
+            amount: "9.99",
+            due_date "2015-09-25",
+            mail_address "MyString",
+            other: 'data:image/png;base64, xxxxxx',
+            remark: "MyString"
+          }
         }
 response:
         {
