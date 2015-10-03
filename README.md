@@ -437,29 +437,7 @@ params: {
             remark: "MyString"
           }
         }
-response:
-        {
-          "order"=>{
-            "id"=>21, 
-            "investable_id"=>213, 
-            "investable_type"=>"Individual", 
-            "product_id"=>245, 
-            "user_id"=>496, 
-            "amount"=>"9.99", 
-            "due_date"=>"2015-09-25", 
-            "mail_address"=>"MyString", 
-            "other"=>{
-              "other"=>{
-                "url"=>"/uploads/order/other/21/20150925175940.png", 
-                "thumb"=>{
-                  "url"=>"/uploads/order/other/21/thumb_20150925175940.png"
-                }
-              }
-            }, 
-            "remark"=>"MyString", 
-            "state"=>nil
-          }
-        }
+response: same as below
 ```
 ### 获取预约单
 ```
@@ -495,7 +473,8 @@ response:
             "investor_name"=> "MyString",     #投资者名称
             "product_name"=> "product name",  #预约产品
             "currency"=>"人民币",              #币种
-            "number"=>"xxxxxxxxxxxxxx"        #证件号码
+            "number"=>"xxxxxxxxxxxxxx",       #证件号码
+            "deliver"=>"未快递"                #合同快递至管理人,只有【未快递】和【已快递】两个选项
           }, 
           "money_receipts"=>
           [
@@ -532,6 +511,21 @@ response:
             ......
           ]
         }
+```
+### 更新订单（只有【合同快递】和【备注】可更新）
+```
+curl -X PATCH --header "Authorization: Token token=#{open_id}" -d "order[deliver]=已快递&order[remark]=new_remark" http://localhost:3000/api/orders/{order.id}
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}
+action: patch
+params: {order:
+          {
+            deliver: "已快递",
+            remark: "new_remark"
+          }
+        }
+response: same as above
 ```
 ### 删除订单
 ```

@@ -255,4 +255,21 @@ RSpec.describe "orders" do
       expect(response).to have_http_status(422)
     end
   end
+
+  describe "PATCH update" do
+    it "update deliver status of order" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      order = create(:order, investable: individual, deliver: "未快递")
+      patch "/api/orders/#{order.id}",{order: {deliver: "已快递", remark: "new remark"}}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)["order"]
+      expect(json["deliver"]).to eq "已快递"
+      expect(json["remark"]).to eq "new remark"
+    end
+  end
 end

@@ -1,5 +1,5 @@
 json.order do
-  json.(@order, :id, :investable_id, :investable_type, :product_id, :user_id, :amount, :due_date, :mail_address, :other, :remark, :state, :booking_date)
+  json.(@order, :id, :investable_id, :investable_type, :product_id, :user_id, :amount, :due_date, :mail_address, :other, :remark, :state, :booking_date, :deliver)
   json.investor_name @order.investable.name
   json.product_name @order.product.name
   json.currency @order.product.currency

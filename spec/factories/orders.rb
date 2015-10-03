@@ -9,5 +9,6 @@ FactoryGirl.define do
     remark "MyString"
     state "已经预约，等待完成报单"
     booking_date "2015-09-25 11:42:31"
+    deliver "未快递"
   end
 end

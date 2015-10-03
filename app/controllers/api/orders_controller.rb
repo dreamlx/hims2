@@ -32,6 +32,16 @@ class Api::OrdersController < Api::BaseController
     return api_error(status: 422) if @order.nil?
   end
 
+  def update
+    @order = current_user.orders.find_by(id: params[:id])
+    
+    if params[:order] && @order.update(deliver: params[:order][:deliver], remark: params[:order][:remark])
+      render 'show'
+    else
+     return api_error(status: 422) 
+    end
+  end
+
   def destroy
     order = current_user.orders.find_by(id: params[:id])
     if order

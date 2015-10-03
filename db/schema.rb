@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929110044) do
+ActiveRecord::Schema.define(version: 20151003082311) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -134,8 +134,9 @@ ActiveRecord::Schema.define(version: 20150929110044) do
     t.string   "remark",          limit: 255
     t.string   "state",           limit: 255
     t.datetime "booking_date"
-    t.datetime "created_at",                                                         null: false
-    t.datetime "updated_at",                                                         null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
+    t.string   "deliver",         limit: 255,                          default: "未快递"
   end
 
   add_index "orders", ["investable_type", "investable_id"], name: "index_orders_on_investable_type_and_investable_id", using: :btree
