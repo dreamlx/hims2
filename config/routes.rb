@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:create, :index, :show, :destroy, :update] ,defaults: {format: :json} do
       resources :money_receipts, only: [:create], defaults: {format: :json}
       patch :update_infos, on: :member, defaults: {format: :json}
+      get :by_state, on: :collection, defaults: {format: :json}
+      get :by_product, on: :collection, defaults: {format: :json}
     end
   end
 end

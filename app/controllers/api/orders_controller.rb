@@ -68,6 +68,18 @@ class Api::OrdersController < Api::BaseController
     clean_tempfile
   end
 
+  def by_state
+    @booked = current_user.orders.where(state: "已经预约，等待完成报单")
+    @completed = current_user.orders.where(state: "已经完成报单，等待起息")
+    @valued = current_user.orders.where(state: "已起息，但合同文本基金管理人未收讫")
+  end
+
+  def by_product
+    orders = current_user.orders
+    @products = Product.joins(:orders).where(orders: {id: orders.ids})
+    @user_id = current_user.id
+    render 'api/products/my'
+  end
 
   private
     def order_params

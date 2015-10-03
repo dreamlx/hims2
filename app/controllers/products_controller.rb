@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
       params.require(:product).permit(
         :fund_id, :name, :desc, :title1, :content1,
         :title2, :content2, :title3, 
-        :content3, :progress_bar, :abbr,
+        :content3, :progress_bar, :label, :abbr,
         :currency, :amount, :period, :paid,
         :sales_period, :block_period, :redeem,
         :entity, :adviser, :trustee, :reg_organ,

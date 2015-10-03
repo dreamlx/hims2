@@ -13,6 +13,7 @@ class Api::ProductsController < Api::BaseController
   def my
     orders = current_user.orders
     @products = Product.joins(:orders).where(orders: {id: orders.ids})
+    @user_id = current_user.id
   end
 
   def orderd

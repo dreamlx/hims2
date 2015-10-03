@@ -9,5 +9,6 @@ FactoryGirl.define do
     title3    "MyString"
     content3  "MyString"
     progress_bar  1
+    label     "MyString"
   end
 end

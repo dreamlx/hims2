@@ -8,6 +8,7 @@
     <%= f.input :other %>
     <%= f.input :remark %>
     <%= f.input :state, collection: Order::ORDER_STATES %>
+    <%= f.input :deliver, collection: Order::DELIVER_STATES %>
     <%= f.button :submit %>
   <% end %>
 </div>

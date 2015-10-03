@@ -127,7 +127,8 @@ response:
             "content2"=>"MyString", 
             "title3"=>"MyString", 
             "content3"=>"MyString", 
-            "progress_bar"=>1
+            "progress_bar"=>1,
+            "label"=>"每周起息"
           },
           ......
         ]
@@ -151,7 +152,8 @@ response:
             "content2"=>"MyString", 
             "title3"=>"MyString", 
             "content3"=>"MyString", 
-            "progress_bar"=>1
+            "progress_bar"=>1,
+            "label"=>"每周起息"
           },
           ......
         ]
@@ -590,6 +592,58 @@ response:
             "state"=>"未确认"
           }
         }
+```
+### 我的预约(by_state)
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/by_state
+```
+```
+url:    http://localhost:3000/api/orders/by_state
+params: no
+action: get
+response:
+        {
+          "booked"=>                            #已经预约，等待完成报单
+          [
+            {
+              "id"=>360, 
+              "amount"=>"9.99", 
+              "investor_name"=>"MyString", 
+              "product_name"=>"MyString"
+            },
+            ...
+          ], 
+          "completed"=>                         #已经完成报单，等待起息
+          [
+            {
+              "id"=>361, 
+              "amount"=>"9.99", 
+              "investor_name"=>"MyString", 
+              "product_name"=>"MyString"
+            },
+            ...
+          ], 
+          "valued"=>                            #已起息，但合同文本基金管理人未收讫
+          [
+            {
+              "id"=>362, 
+              "amount"=>"9.99", 
+              "investor_name"=>"MyString", 
+              "product_name"=>"MyString"
+            },
+            ...
+          ]
+        }
+```
+### 我的预约(by_product)
+```
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/by_product
+```
+```
+url:    http://localhost:3000/api/orders/by_product
+params: no
+action: get
+response: same as below
 ```
 ### 我的投资
 ```

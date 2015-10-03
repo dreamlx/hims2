@@ -38,6 +38,7 @@ zh-CN:
         title3: 标题3
         content3: 内容3
         progress_bar: 进度条
+        label: 标签
         created_at: 创建
         updated_at: 更新
       individual:
@@ -95,6 +96,7 @@ zh-CN:
         remark: 备注
         state: 状态
         booking_date: 预约日期
+        deliver: 合同快递至管理人
         created_at: 创建
         updated_at: 更新
       product:
@@ -132,6 +134,7 @@ zh-CN:
         risk_control: 风控措施
         instruction: 说明文档
         agreement: 认购协议
+        label: 标签
         created_at: 创建
         updated_at: 更新
       roi:

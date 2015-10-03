@@ -34,5 +34,6 @@ FactoryGirl.define do
     risk_control "MyString"
     instruction File.open(File.join(Rails.root, 'spec/fixtures/rails.png'))
     agreement "MyString"
+    label "MyString"
   end
 end

@@ -20,6 +20,7 @@ RSpec.describe "products" do
       expect(json["title3"]).to eq product.title3
       expect(json["content3"]).to eq product.content3
       expect(json["progress_bar"]).to eq product.progress_bar
+      expect(json["label"]).to eq product.label
     end
   end
 

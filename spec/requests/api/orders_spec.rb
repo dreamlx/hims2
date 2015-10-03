@@ -272,4 +272,41 @@ RSpec.describe "orders" do
       expect(json["remark"]).to eq "new remark"
     end
   end
+
+  describe "GET by_state" do
+    it "get all order's by state" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      booked_order = create(:order, investable: individual, state: "已经预约，等待完成报单")
+      completed_order = create(:order, investable: individual, state: "已经完成报单，等待起息")
+      valued_order = create(:order, investable: individual, state: "已起息，但合同文本基金管理人未收讫")
+      get "/api/orders/by_state",{}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json["booked"].first["id"]).to eq booked_order.id
+      expect(json["completed"].first["id"]).to eq completed_order.id
+      expect(json["valued"].first["id"]).to eq valued_order.id
+    end
+  end
+
+  describe "GET by_product" do
+    it "get all order's by state" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      product = create(:product)
+      order = create(:order, investable: individual, product_id: product.id)
+      get "/api/orders/by_product", {}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.first["orders"].first["id"]).to eq order.id
+    end
+  end
 end

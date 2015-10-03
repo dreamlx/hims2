@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003082311) do
+ActiveRecord::Schema.define(version: 20151003112326) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20151003082311) do
     t.integer  "progress_bar", limit: 4,   default: 0
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.string   "label",        limit: 255
   end
 
   create_table "individuals", force: :cascade do |t|
@@ -180,6 +181,7 @@ ActiveRecord::Schema.define(version: 20151003082311) do
     t.string   "agreement",         limit: 255
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.string   "label",             limit: 255
   end
 
   add_index "products", ["fund_id"], name: "index_products_on_fund_id", using: :btree
