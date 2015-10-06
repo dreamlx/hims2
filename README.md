@@ -609,7 +609,9 @@ response:
               "id"=>360, 
               "amount"=>"9.99", 
               "investor_name"=>"MyString", 
-              "product_name"=>"MyString"
+              "product_name"=>"MyString",
+              "product_abbr"=>"MyString",
+              "product_desc"=>"MyString"
             },
             ...
           ], 
@@ -619,7 +621,9 @@ response:
               "id"=>361, 
               "amount"=>"9.99", 
               "investor_name"=>"MyString", 
-              "product_name"=>"MyString"
+              "product_name"=>"MyString",
+              "product_abbr"=>"MyString",
+              "product_desc"=>"MyString"
             },
             ...
           ], 
@@ -629,7 +633,9 @@ response:
               "id"=>362, 
               "amount"=>"9.99", 
               "investor_name"=>"MyString", 
-              "product_name"=>"MyString"
+              "product_name"=>"MyString",
+              "product_abbr"=>"MyString",
+              "product_desc"=>"MyString"
             },
             ...
           ]
