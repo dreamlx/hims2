@@ -647,10 +647,10 @@ response: same as below
 ```
 ### 我的投资
 ```
-curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/my
+curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/products/my
 ```
 ```
-url:    http://localhost:3000/api/orders/my
+url:    http://localhost:3000/api/products/my
 params: no
 action: get
 response:
@@ -673,6 +673,7 @@ response:
                 "investor_name"=>"MyString", 
                 "currency"=>"MyString", 
                 "amount"=>"9.99"
+                "state"=>"已经预约，等待完成报单"
               },
               ......
             ]

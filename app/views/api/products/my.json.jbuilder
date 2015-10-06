@@ -6,6 +6,7 @@ json.array!(@products) do |product|
       json.investor_name order.investable.name
       json.currency product.currency
       json.amount order.amount
+      json.state order.state
     end
   end
 end
