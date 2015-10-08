@@ -144,6 +144,7 @@ params: no
 response:
         [
           {
+            "fund_name"=>"MyString",
             "id"=>26, 
             "name"=>"MyString", 
             "desc"=>"MyString", 
