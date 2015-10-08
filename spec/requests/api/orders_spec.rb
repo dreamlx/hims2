@@ -309,4 +309,61 @@ RSpec.describe "orders" do
       expect(json.first["orders"].first["id"]).to eq order.id
     end
   end
+
+  describe "GET by_number" do
+    it "get all orders by number" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual)
+      product = create(:product)
+      order = create(:order, investable: individual, product_id: product.id)
+      get "/api/orders/by_number",{number: individual.id_no}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body).first
+      expect(json["id"]).to eq order.id
+      expect(json["product_name"]).to eq product.name
+      expect(json["product_desc"]).to eq product.desc
+      expect(json["title1"]).to eq product.title1
+      expect(json["amount"]).to eq order.amount.to_s
+    end
+
+    it "get all orders by number" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      institution = create(:institution)
+      product = create(:product)
+      order = create(:order, investable: institution, product_id: product.id)
+      get "/api/orders/by_number",{number: institution.organ_reg}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body).first
+      expect(json["id"]).to eq order.id
+      expect(json["product_name"]).to eq product.name
+      expect(json["product_desc"]).to eq product.desc
+      expect(json["title1"]).to eq product.title1
+      expect(json["amount"]).to eq order.amount.to_s
+    end
+
+    it "get all orders by number" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual)
+      institution = create(:institution, organ_reg: individual.id_no)
+      product = create(:product)
+      individual_order = create(:order, investable: individual, product_id: product.id)
+      institution_order = create(:order, investable: institution, product_id: product.id)
+      get "/api/orders/by_number",{number: individual.id_no}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.count).to eq 2
+    end
+  end
 end

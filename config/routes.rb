@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       patch :update_infos, on: :member, defaults: {format: :json}
       get :by_state, on: :collection, defaults: {format: :json}
       get :by_product, on: :collection, defaults: {format: :json}
+      get :by_number, on: :collection, defaults: {format: :json}
     end
   end
 end

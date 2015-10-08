@@ -33,7 +33,7 @@ FactoryGirl.define do
     direction "MyString"
     risk_control "MyString"
     instruction File.open(File.join(Rails.root, 'spec/fixtures/rails.png'))
-    agreement "MyString"
+    agreement File.open(File.join(Rails.root, 'spec/fixtures/rails.png'))
     label "MyString"
   end
 end

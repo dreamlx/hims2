@@ -10,6 +10,7 @@ class Product < ActiveRecord::Base
   has_many :info_fields
 
   mount_uploader :instruction, FileUploader
+  mount_uploader :agreement, FileUploader
 
   def individual_fields
     info_fields.where(category: "个人投资者")

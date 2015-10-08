@@ -81,6 +81,11 @@ class Api::OrdersController < Api::BaseController
     render 'api/products/my'
   end
 
+  def by_number
+    investors_ids = Individual.where(id_no: params[:number]).ids + Institution.where(organ_reg: params[:number]).ids
+    @orders = Order.where(investable_id: investors_ids)
+  end
+
   private
     def order_params
       params.require(:order).permit(:product_id, :amount, :due_date, :mail_address, :remark)

@@ -58,7 +58,7 @@ RSpec.describe "products" do
       expect(json["direction"]).to eq product.direction
       expect(json["risk_control"]).to eq product.risk_control
       expect(json["instruction"]["instruction"]["url"]).to eq product.instruction.url
-      expect(json["agreement"]).to eq product.agreement
+      expect(json["agreement"]["agreement"]["url"]).to eq product.agreement.url
     end
 
     # when the filed is nil, it will not show up

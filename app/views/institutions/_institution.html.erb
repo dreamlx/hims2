@@ -3,7 +3,7 @@
     <% if column == "user_id" %>
       <td><%= institution.user.name %></td>
     <% elsif column == "business_licenses" %>
-      <td><%= image_tag(institution.send(column).thumb) %></td>
+      <td><%= link_to image_tag(institution.send(column).thumb), institution.send(column).url %></td>
     <% else %>
       <td><%= institution.send(column) %></td>
     <% end %>

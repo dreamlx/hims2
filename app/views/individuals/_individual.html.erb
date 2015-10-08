@@ -3,7 +3,7 @@
     <% if column == "user_id" %>
       <td><%= individual.user.name %></td>
     <% elsif column == "id_front" || column == "id_back" %>
-      <td><%= image_tag(individual.send(column).thumb) %></td>
+      <td><%= link_to image_tag(individual.send(column).thumb), individual.send(column).url %></td>
     <% else %>
       <td><%= individual.send(column) %></td>
     <% end %>

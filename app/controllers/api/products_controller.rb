@@ -17,9 +17,9 @@ class Api::ProductsController < Api::BaseController
   end
 
   def ordered
-    orders = current_user.orders
-    products = Product.joins(:orders).where(orders: {id: orders.ids})
-    @product = products.find_by(id: params[:id])
+    # orders = current_user.orders
+    # products = Product.joins(:orders).where(orders: {id: orders.ids})
+    @product = Product.find_by(id: params[:id])
     @notices = @product.attaches.where(category: "基金公告")
     @reports = @product.attaches.where(category: "投资报告")
   end
