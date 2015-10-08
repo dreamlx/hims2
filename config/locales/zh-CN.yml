@@ -39,6 +39,7 @@ zh-CN:
         content3: 内容3
         progress_bar: 进度条
         label: 标签
+        currency: 币种
         created_at: 创建
         updated_at: 更新
       individual:

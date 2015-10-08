@@ -128,7 +128,8 @@ response:
             "title3"=>"MyString", 
             "content3"=>"MyString", 
             "progress_bar"=>1,
-            "label"=>"每周起息"
+            "label"=>"每周起息",
+            "currency"=>"美元产品"
           },
           ......
         ]

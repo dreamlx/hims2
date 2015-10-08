@@ -10,5 +10,6 @@ FactoryGirl.define do
     content3  "MyString"
     progress_bar  1
     label     "MyString"
+    currency  "dollar"
   end
 end
