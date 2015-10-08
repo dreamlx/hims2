@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resources :products, only: [:show], defaults: {format: :json} do
       get :send_mail, on: :member, defaults: {format: :json}
       get :my, on: :collection, defaults: {format: :json}
-      get :orderd, on: :member, defaults: {format: :json}
+      get :ordered, on: :member, defaults: {format: :json}
     end
     resources :individuals, only: [:create, :index, :show, :update] ,defaults: {format: :json}
     resources :institutions, only: [:create, :index, :show, :update] ,defaults: {format: :json}

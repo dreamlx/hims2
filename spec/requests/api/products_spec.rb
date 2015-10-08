@@ -151,7 +151,7 @@ RSpec.describe "products" do
       order = create(:order, investable: individual, product_id: product.id)
       notice = create(:attach, attachable: product, category: "基金公告")
       report = create(:attach, attachable: product, category: "投资报告")
-      get "/api/products/#{product.id}/orderd", {}, valid_header
+      get "/api/products/#{product.id}/ordered", {}, valid_header
       expect(response).to be_success
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)["product"]
