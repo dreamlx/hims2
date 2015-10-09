@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>新建预约</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				var product = getInfo.getProductDetail();
+				if(!product) getInfo.turnproductliststep1();
+				var phead = $('#p-headblock');
+				phead.find('.p-subtitle').text(product.product.abbr||"");
+				phead.find('.p-title').text(product.product.name||"");
+				phead.find('.p-intro').text(product.product.instruction.instruction.url||"");
+				$('#submitBtn').attr('data-pid',product.product.id)
+				//绑定客户列表按钮
+				$("#inputInvesterSelect").bind("click",function(){
+					$("#inputInvesterSelect+.select-ul").empty()
+					var list = getInfo.getCustomerList();
+					if(list&&list.length>0){
+						$(list).each(function(){
+							var li = $("<li></li>");
+							for(var key in this){
+								li.attr('data-val',key).text(this[key]);
+							}
+							$("#inputInvesterSelect+.select-ul").append(li);
+						});
+					}
+					tabs.bind.selectulli();
+				});
+			}
+		});
+	</script>
+</head>
+<body class="bg-white">
+	<div class="main detail">
+		<div class="appointment-creat">
+			<article>
+				<div class="p-headblock" id="p-headblock">
+					<hgroup>
+						<h1 class="p-subtitle"></h1>
+						<h2 class="p-title"></h2>
+					</hgroup>
+					<p class="p-intro"></p>
+				</div>
+			</article>
+			<form class="radius-form mt20" id="form">
+				<div class="form-line">
+					<label>投资者</label>
+					<span class="input-box selectinput">
+						<input type="text" id="inputInvesterSelect" placeholder="请选择投资者姓名" readonly class="input-select" />
+						<ul class="select-ul">
+						</ul>
+					</span>
+				</div>
+				<div class="alert" role="alert" name="inputInvesterSelect"></div>
+				<div class="form-line">
+					<label></label>
+					<button data-turn="customer-creat" class="word-btn blue"><i class="icon blue plus-icon"></i>新建投资者</button>
+				</div>
+				<div class="form-line">
+					<label>预约金额</label>
+					<span class="input-box"><input type="number" id="inputMoney" placeholder="请输入预约金额" /><i class="unit">万</i></span>
+				</div>
+				<div class="alert" role="alert" name="inputMoney"></div>
+				<div class="form-line">
+					<label class="dbl">预约资金<br/>到位时间</label>
+					<span class="input-box"><input type="date" id="inputDate" placeholder="请选择日期" /></span>
+				</div>
+				<div class="alert" role="alert" name="inputDate"></div>
+				<div class="form-line">
+					<label class="dbl">合同<br/>邮寄地址</label>
+					<span class="input-box"><input type="text" id="inputAddress" placeholder="请输入合同文件邮寄地址" /></span>
+				</div>
+				<div class="alert" role="alert" name="inputAddress"></div>
+				<div class="form-line">
+					<label class="highmiddle">其他</label>
+					<span class="img-box">
+						<label class="img-default" for="inputOther"></label>
+						<input class="hide" type="file" id="inputOther" />
+					</span>
+				</div>
+				<div class="alert" role="alert" name="inputOther"></div>
+				<div class="form-line">
+					<label>备注</label>
+					<span class="input-box">
+						<textarea id="inputRemark" placeholder="请输入备注内容"></textarea>
+					</span>
+				</div>
+				<div class="alert" role="alert" name="inputRemark"></div>
+				<div class="form-line">
+					<label>&nbsp;</label>
+					<button class="submit-btn orange-btn" id="submitBtn" name="appointmentCreat">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+</body>
+</html>

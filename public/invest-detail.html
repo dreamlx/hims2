@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>投资详情</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				var detail = getInfo.getInvestDetail();
+				if(!detail || !detail.product){
+					getInfo.turninvestmineprofessor();
+				}
+				var d = $('#invest-detail');
+				var p = detail.product;
+				d.find('.a-headblock .a-title').text(p.name);
+				d.find('.a-headblock .a-text:eq(0)').text('开始时间：' + p.sales_period);
+				d.find('.a-headblock .a-text:eq(1)').text('到期时间：' + p.block_period);
+				d.find('.a-headblock .a-text:eq(2)').text('预期收益（年化）：');
+				d.find('.a-headblock .a-text:eq(3)').text('分配方式：' + p.paid);
+				if(p.notices&&p.notices.length>0){
+					for(var i =0;i<p.notices.length;i++){
+						var notice = p.notices[i];
+						var item = $('#template a').clone();
+						item.prepend(notice.title);
+						item.attr('data-id',notice.id);
+						item.attr('href',notice.attach.attach.url);
+						item.find('span').text(notice.date);
+						$('#infomation .link-list').append(item);
+					}
+				}
+				if(p.reports&&p.reports.length>0){
+					for(var i =0;i<p.reports.length;i++){
+						var report = p.reports[i];
+						var item = $('#template a').clone();
+						item.prepend(report.title);
+						item.attr('data-id',report.id);
+						item.attr('src',report.attach.attach.url);
+						item.find('href').text(report.date);
+						$('#reporter .link-list').append(item);
+					}
+				}
+			}
+		});
+	</script>
+</head>
+<body class="bg-white">
+	<div class="main detail">
+		<div class="invest-detail" id="invest-detail">
+			<article>
+				<div class="a-headblock">
+					<h1 class="a-title"></h1>
+					<p class="a-text"></p>
+					<p class="a-text"></p>
+					<p class="a-text"></p>
+					<p class="a-text"></p>
+				</div>
+			</article>
+			<ul class="i-tab select-tab" id="select-tab">
+				<li class="current">基金公告</li>
+				<li>投资报告</li>
+			</ul>
+			<div class="block-tab" id="infomation">
+				<div class="link-list">
+				</div>
+			</div>
+			<div class="block-tab hide" id="reporter">
+				<div class="link-list">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="hide" id="template">
+		<a href="#">
+			<span></span>
+		</a>
+	</div>
+</body>
+</html>

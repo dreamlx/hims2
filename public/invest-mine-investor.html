@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>我的投资</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+			}
+		});
+	</script>
+</head>
+<body class="bg-grey">
+	<div class="main detail">
+		<div class="invest-mine-investor">
+			<ul class="product-list nb">
+				<li class="product">
+					<section>
+						<h1 class="p-title">基金全名比较长唱唱唱唱唱唱唱唱唱唱唱唱</h1>
+						<p class="p-intro">说明：这里写说明的内容可以写是吧个中文字符字符字符字符字符字符字符字符字符</p>
+						<div class="p-info">
+							<div class="p-f1">
+								<div class="p-p">
+									产品期限：<span class="p-t blue">12-18个月</span>
+								</div>
+								<div class="p-p">
+									投资金额<span class="p-t blue">100万</span>
+								</div>
+							</div>
+							<div class="p-f2">
+								<div class="p-p">
+									预期收益<span class="p-t red whole-line">100万</span>
+								</div>
+							</div>
+						</div>
+					</section>
+				</li>
+				<li class="product">
+					<section>
+						<h1 class="p-title">基金全名比较长唱唱唱唱唱唱唱唱唱唱唱唱</h1>
+						<p class="p-intro">说明：这里写说明的内容可以写是吧个中文字符字符字符字符字符字符字符字符字符</p>
+						<div class="p-info">
+							<div class="p-f1">
+								<div class="p-p">
+									产品期限：<span class="p-t blue">12-18个月</span>
+								</div>
+								<div class="p-p">
+									投资金额<span class="p-t blue">100万</span>
+								</div>
+							</div>
+							<div class="p-f2">
+								<div class="p-p">
+									预期收益<span class="p-t red whole-line">100万</span>
+								</div>
+							</div>
+						</div>
+					</section>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+</body>
+</html>

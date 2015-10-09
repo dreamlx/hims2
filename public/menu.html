@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>菜单</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				//进入显示方法还要改,默认第一个
+				var para = getInfo.getUrlPara()[0];
+				if(para){
+					switch(para){
+						case "invest-list":
+							$("#menu .menu").addClass("hide")
+								.filter("#invest-list").removeClass("hide");
+							break;
+						case "mine-invest":
+							$("#menu .menu").addClass("hide")
+								.filter("#mine-invest").removeClass("hide");
+							break;
+						case "about-me":
+							$("#menu .menu").addClass("hide")
+								.filter("#about-me").removeClass("hide");
+							break;
+						default:
+					}
+				}
+			}
+		});
+	</script>
+</head>
+<body class="bg-white">
+	<div class="main" id="menu">
+		<div class="menu" id="invest-list">
+			<a class="menu-b" data-turn="product-list-step1">查看产品</a>
+			<a class="menu-b" data-turn="appointment-mine">我的预约</a>
+			<a class="menu-r" data-turn="menu" data-para="about-me">关于我</a>
+		</div>
+		<div class="menu hide" id="mine-invest">
+			<a class="menu-b" data-turn="invest-mine-check">理财师请进</a>
+			<a class="menu-r" data-turn="invest-mine-investor">投资者请进</a>
+		</div>
+		<div class="menu hide" id="about-me">
+			<a class="menu-b" data-turn="profile-mine">我的资料</a>
+			<a class="menu-r" data-turn="customer-mine">我的客户</a>
+		</div>
+	</div>
+</body>
+</html>

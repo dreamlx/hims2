@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>手机号码绑定</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(store) getInfo.turnprofilecreat();
+			//停留该页
+		});
+	</script>
+</head>
+<body class="bg-grey">
+	<div class="main">
+		<form class="full-form" id="form">
+			<div class="form-line">
+				<input type="number"  placeholder="请输入手机号码" id="inputCell" />
+			</div>
+			<div class="alert" role="alert" name="inputCell"></div>
+			<div class="form-line">
+				<input type="number" placeholder="请输入验证码"  id="inputCheckcode" />
+				<button class="rect-btn blue-btn" id="sendRegeistBtn">获取验证码</button>
+			</div>
+			<div class="alert" role="alert" name="inputCheckcode"></div>
+			<button class="submit-btn center-btn orange-btn" id="submitBtn" name="register">确认绑定</button>
+		</form>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test">绑定成功</span>
+		</div>
+	</div>
+</body>
+</html>

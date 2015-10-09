@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>我的投资</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				var invests = getInfo.getInvestMine();
+				if(!invests||invests.length<1){
+					getInfo.turnmenu('mine-invest');
+				}
+				for(var i=0; i<invests.length;i++){
+					var product = $('#template').find('.product').clone();
+					var appointment = $('#template').find('.line-list li').clone();
+					product.find('.line-list li').remove();
+					product.find('.p-title').text(invests[i].name);
+					product.find('.p-intro').text("说明："+invests[i].desc);
+					product.find('.p-f1 .p-p:eq(0) span:eq(0)').text(invests[i].title1+"：");
+					product.find('.p-f1 .p-p:eq(0) span:eq(1)').text(invests[i].content1);
+					product.find('.p-f1 .p-p:eq(1) span:eq(0)').text(invests[i].title2+"：");
+					product.find('.p-f1 .p-p:eq(1) span:eq(1)').text(invests[i].content2);
+					product.find('.p-f2 .p-p:eq(0) span:eq(0)').text(invests[i].title3+"：");
+					product.find('.p-f2 .p-p:eq(0) span:eq(1)').text(invests[i].content3);
+					product.find('section').attr('data-pid',invests[i].id);
+					if(invests[i].orders&&invests[i].orders.length>0){
+						for(var j = 0;j<invests[i].orders.length;j++){
+							var order = invests[i].orders[j];
+							var appoint = appointment.clone();
+							appoint.find('p:eq(0)').text(order.investor_name);
+							appoint.find('p:eq(1) span').text(order.currency);
+							appoint.find('p:eq(1) i').text(order.amount+"万");
+							appoint.attr('data-oid',order.id);
+							product.find('.line-list').append(appoint);
+						}
+					}
+					$('#product-list').append(product);
+				}
+				getInfo.turnBind.bindturninvestdetail();
+				getInfo.turnBind.bindturnappointmentdetailstep();
+				tabs.bind.foldslide();
+			}
+		});
+	</script>
+</head>
+<body class="bg-dark">
+	<div class="main detail">
+		<div class="invest-mine-professor">
+			<ul class="product-list nb" id="product-list">
+			</ul>
+		</div>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+	<ul class="hide" id="template">
+		<li class="product">
+			<section data-turn="invest-detail">
+				<h1 class="p-title"></h1>
+				<p class="p-intro"></p>
+				<div class="p-info">
+					<div class="p-f1">
+						<div class="p-p">
+							<span></span><span class="p-t blue"></span>
+						</div>
+						<div class="p-p">
+							<span></span><span class="p-t blue"></span>
+						</div>
+					</div>
+					<div class="p-f2">
+						<div class="p-p">
+							<span></span><span class="p-t red whole-line"></span>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="fold-list">
+				<i class="icon icon-arrow down"></i>
+				该产品的投资者
+			</div>
+			<ul class="line-list np">
+				<li data-turn="appointment-detail-step1">
+					<p class="flex"></p>
+					<p class="grey fr"><span></span><i class="blue"></i></p>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>我的资料</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/zp.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+</head>
+<body class="bg-white">
+	<div class="main">
+		<form class="radius-form">
+			<div class="form-line">
+				<label>您的姓名<span class="red">*</span></label>
+				<span class="input-box"><input type="text" placeholder="请输入您的姓名" /></span>
+			</div>
+			<div class="form-line">
+				<label>身份类型<span class="red">*</span></label>
+				<span class="input-box selectinput">
+					<input type="text" placeholder="请输入您的姓名" readonly />
+					<ul class="select-ul">
+						<li>个人</li>
+						<li>机构</li>
+					</ul>
+				</span>
+			</div>
+			<div class="form-line">
+				<label>昵称</label>
+				<span class="input-box"><input type="text" placeholder="请输入您的昵称"readonly /></span>
+			</div>
+			<div class="form-line">
+				<label>性别</label>
+				<span class="input-box selectinput">
+					<input type="text" placeholder="男/女" readonly/>
+					<ul class="select-ul">
+						<li>男</li>
+						<li>女</li>
+					</ul>
+				</span>
+			</div>
+			<div class="form-line">
+				<label>手机号码<i class="red">*</i></label>
+				<span class="input-box">
+					<input type="number" placeholder="请输入您的手机号码" />
+				</span>
+			</div>
+			<div class="form-line">
+				<label>电子邮箱<i class="red">*</i></label>
+				<span class="input-box">
+					<input type="email" placeholder="请输入您的电子邮箱" />
+				</span>
+			</div>
+			<div class="form-line">
+				<label>联系地址</label>
+				<span class="input-box">
+					<input type="text" placeholder="请输入联系地址" />
+				</span>
+			</div>
+			<div class="form-line ">
+				<label>证件类型</label>
+				<span class="input-box selectinput">
+					<input type="number" placeholder="身份证/护照/其他" readonly />
+					<ul class="select-ul">
+						<li>身份证</li>
+						<li>护照</li>
+						<li>其他</li>
+					</ul>
+				</span>
+			</div>
+			<div class="form-line">
+				<label>证件号码</label>
+				<span class="input-box">
+					<input type="number" placeholder="请输入证件号码" />
+				</span>
+			</div>
+			<div class="form-line">
+				<label class="highmiddle dbl">证件图片<br/>(正反面)</label>
+				<span class="img-box">
+					<label class="img-default" for="f1"></label>
+					<label class="img-default" for="f2"></label>
+					<input class="hide" type="file" id="f1" />
+					<input class="hide" type="file" id="f2" />
+				</span>
+			</div>
+			<div class="form-line">
+				<label>备注</label>
+				<span class="input-box">
+					<textarea placeholder="请输入备注内容"></textarea>
+				</span>
+			</div>
+			<div class="form-line">
+				<label>&nbsp;</label>
+				<button class="submit-btn orange-btn">保存</button>
+			</div>
+		</form>
+	</div>
+	<div class="pop-bg">
+		<div class="pop-alert">
+		</div>
+	</div>
+</body>
+</html>

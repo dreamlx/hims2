@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>我的预约</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				//byproduct
+				var orderobj = getInfo.getOrderMine();
+				if(orderobj&&orderobj.byProduct){
+					for(var i=0;i<orderobj.byProduct.length;i++){
+						var order = orderobj.byProduct[i];
+						var dl = $('#product-template').find('.fold-dl').clone();
+						var ddcopy = dl.find('.appoitment').clone();
+						dl.find('.appoitment').remove();
+						dl.find('.white span').text(order.name);
+						for(var j=0;j<order.orders.length;j++)
+						{
+							var pit = order.orders[j];
+							var dd = ddcopy.clone();
+							var state = "";
+							switch(pit.state){
+								case "已经预约，等待完成报单":
+									state = "待完成报单";
+									break;
+								case "已经完成报单，等待起息":
+									state = "待起息";
+									break;
+								case "已起息，但合同文本基金管理人未收讫":
+									state = "待收讫";
+									break;
+								default:
+							}
+							dd.find('.a-label').text(state);
+							dd.find('.a-title').text(order.name);
+							dd.find('.a-text:eq(0) span').text(order.desc);
+							dd.find('.a-text:eq(1) .cur').text(pit.currency);
+							dd.find('.a-text:eq(1) .blue').text(pit.amount+"万");
+							dd.attr('data-oid',pit.id);
+							dl.append(dd);
+						}
+						$('#by-product').append(dl);
+					}
+				}
+				//bystates
+				if(orderobj&&orderobj.byState){
+					if(orderobj.byState.booked&&orderobj.byState.booked.length>0)
+					{
+						var booked = orderobj.byState.booked;
+						var dl = $('#state-template').find('.fold-dl').clone();
+						var ddcopy = dl.find('.appoitment').clone();
+						dl.find('.appoitment').remove();
+						dl.find('.white span').text("已经预约，等待完成报单");
+						for(var i=0;i<booked.length;i++){
+							var dd = ddcopy.clone();
+							dd.find('.a-label').text("待完成报单");
+							dd.find('.a-title').text(booked[i].product_name);
+							dd.find('.a-text:eq(0) span').text(booked[i].product_desc);
+							dd.find('.a-text:eq(1) .cur').text(booked[i].currency);
+							dd.find('.a-text:eq(1) .blue').text(booked[i].amount+"万");
+							dd.attr('data-oid',booked[i].id);
+							dl.append(dd);
+						}
+						$("#by-status").append(dl);
+					}
+					if(orderobj.byState.completed&&orderobj.byState.completed.length>0)
+					{
+						var completed = orderobj.byState.completed;
+						var dl = $('#state-template').find('.fold-dl').clone();
+						var ddcopy = dl.find('.appoitment').clone();
+						dl.find('.appoitment').remove();
+						dl.find('.white span').text("已经完成报单，等待起息");
+						for(var i=0;i<completed.length;i++){
+							var dd = ddcopy.clone();
+							dd.find('.a-label').text("待起息");
+							dd.find('.a-title').text(completed[i].product_name);
+							dd.find('.a-text:eq(0) span').text(completed[i].product_desc);
+							dd.find('.a-text:eq(1) .cur').text(booked[i].currency);
+							dd.find('.a-text:eq(1) .blue').text(completed[i].amount+"万");
+							dd.attr('data-oid',completed[i].id);
+							dl.append(dd);
+						}
+						$("#by-status").append(dl);
+					}
+					if(orderobj.byState.valued&&orderobj.byState.valued.length>0)
+					{
+						var valued = orderobj.byState.valued;
+						var dl = $('#state-template').find('.fold-dl').clone();
+						var ddcopy = dl.find('.appoitment').clone();
+						dl.find('.appoitment').remove();
+						dl.find('.white span').text("已起息，但合同文本基金管理人未收讫");
+						for(var i=0;i<completed.length;i++){
+							var dd = ddcopy.clone();
+							dd.find('.a-label').text("待收讫");
+							dd.find('.a-title').text(completed[i].product_name);
+							dd.find('.a-text:eq(0) span').text(completed[i].product_desc);
+							dd.find('.a-text:eq(1) .cur').text(booked[i].currency);
+							dd.find('.a-text:eq(1) .blue').text(completed[i].amount+"万");
+							dd.attr('data-oid',completed[i].id);
+							dl.append(dd);
+						}
+						$("#by-status").append(dl);
+					}
+				}
+				tabs.bind.foldtoggle();
+				getInfo.turnBind.bindturnappointmentdetailstep();
+			}
+		});
+	</script>
+</head>
+<body class="bg-white">
+	<div class="main detail">
+		<div class="appointment-list">
+			<ul class="a-tab select-tab" id="select-tab">
+				<li class="current">按预约状态</li>
+				<li>按预约产品</li>
+			</ul>
+			<div class="block-tab" id="by-status">
+			</div>
+			<div class="block-tab hide" id="by-product">
+			</div>
+		</div>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+	<div class="hide" id="template">
+		<div id="state-template">
+			<dl class="fold-dl">
+				<dt class="white">
+					<i class="icon icon-white icon-arrow down"></i>
+					<span></span>
+				</dt>
+				<dd class="appoitment" data-turn="appointment-detail-step1">
+					<div class="a-labels">
+						<div class="a-label red-label"></div>
+					</div>
+					<section>
+						<h1 class="a-title"></h1>
+						<p class="a-text">产品简介：<span></span></p>
+						<p class="a-text">订单金额：<span class="cur"></span><span class="blue"></span></p>
+					</section>
+				</dd>
+			</dl>
+		</div>
+		<div id="product-template">
+			<dl class="fold-dl">
+				<dt class="white">
+					<i class="icon icon-white icon-arrow down"></i>
+					<span></span>
+				</dt>
+				<dd class="appoitment" data-turn="appointment-detail-step1">
+					<div class="a-labels">
+						<div class="a-label red-label"></div>
+					</div>
+					<section>
+						<h1 class="a-title"></h1>
+						<p class="a-text">产品简介：<span></span></p>
+						<p class="a-text">订单金额：<span class="cur"></span><span class="blue"></span></p>
+					</section>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</body>
+</html>

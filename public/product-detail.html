@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>产品详情</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				var product = getInfo.getProductDetail();
+				if(!product){
+					alert("网络原因，获取产品失败，点击确定重试！");
+					window.location.reload();
+				}else{
+					var item = $("#product-detail");
+					item.find('.p-subtitle').text(product.product.abbr||"");
+					item.find('.p-title').text(product.product.name||"");
+					item.find('.p-intro').text(product.product.desc||"");
+					item.find('#currency').text("（" + (product.product.currency||"人民币") + "）");
+					item.find('.tips p:eq(1)').text(product.product.starting_point||"暂无信息");
+					if(product.product.rois && product.product.rois.length>0){
+						_.each(product.product.rois,function(roi,key){
+							var td1 = $("<td></td>").text(roi.range);
+							var td2 = $("<td class='big red'></td>").text(roi.profit);
+							var tr = $("<tr></tr>").attr("data-rid",roi.id).append(td1).append(td2);
+							item.find('.line-table tbody').append(tr);
+						});
+					}
+					item.find('#pname').text(product.product.name||"暂无信息");
+					item.find('#pabbr').text(product.product.abbr||"暂无信息");
+					item.find('#pcurrency').text(product.product.currency||"暂无信息");
+					item.find('#pamount').text(product.product.amount||"暂无信息");
+					item.find('#pperiod').text(product.product.period||"暂无信息");
+					item.find('#ppaid').text(product.product.paid||"暂无信息");
+					item.find('#psales_period').text(product.product.sales_period||"暂无信息");
+					item.find('#pblock_period').text(product.product.block_period||"暂无信息");
+					item.find('#predeem').text(product.product.redeem||"暂无信息");
+					item.find('#pentity').text(product.product.entity||"暂无信息");
+					item.find('#padviser').text(product.product.adviser||"暂无信息");
+					item.find('#ptrustee').text(product.product.trustee||"暂无信息");
+					item.find('#preg_organ').text(product.product.reg_organ||"暂无信息");
+					item.find('#pwebsite').text(product.product.website||"暂无信息");
+					item.find('#pagency').text(product.product.agency||"暂无信息");
+					item.find('#pregulatory_filing').text(product.product.regulatory_filing||"暂无信息");
+					item.find('#plegal_consultant').text(product.product.legal_consultant||"暂无信息");
+					item.find('#paudit').text(product.product.audit||"暂无信息");
+					item.find('#pstarting_point').text(product.product.starting_point||"暂无信息");
+					item.find('#paccount').text(product.product.account||"暂无信息");
+					item.find('#pprogress').text(product.product.progress||"暂无信息");
+					item.find('#pdirection').text(product.product.direction||"暂无信息");
+					item.find('#prisk_control').text(product.product.risk_control||"暂无信息");
+					item.find('#pinstruction').html("<a href='"+product.product.instruction.instruction.url+"'>内容链接</a>"||"暂无信息");
+					item.find('#pagreement').text(product.product.agreement||"暂无信息");
+					item.find('.p-btns [data-turn=appointment-creat]').attr("data-pid",product.product.id);
+				}
+			}
+		});
+	</script>
+</head>
+<body class="bg-white"> 
+	<div class="main detail">
+		<div class="product-detail" id="product-detail">
+			<article>
+				<div class="p-headblock">
+					<hgroup>
+						<h1 class="p-subtitle">
+						</h1>
+						<h2 class="p-title">
+						</h2>
+					</hgroup>
+					<p class="p-intro"></p>
+				</div>
+				<ul class="p-tab select-tab" id="select-tab">
+					<li class="current">收益情况</li>
+					<li>产品详情</li>
+				</ul>
+				<div class="block-tab">
+					<table class="line-table">
+						<thead>
+							<tr>
+								<td>
+									认购金额<br/><span id="currency"></span>
+								</td>
+								<td>
+									预期收益<br/>（年化%）
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr>
+								<td>100万&le;X&lt;200万</td>
+								<td class="big red">10.5</td>
+							</tr>
+							<tr>
+								<td>200万&le;X&lt;500万</td>
+								<td class="big red">11.5</td>
+							</tr>
+							<tr>
+								<td>500万&le;X</td>
+								<td class="big red">12.5</td>
+							</tr> -->
+						</tbody>
+					</table>
+					<div class="tips">
+						<p>*起投金额：</p>
+						<p></p>
+					</div>
+				</div>
+				<div class="block-tab hide">
+					<form id="form">
+						<div class="input-searchgear">
+							<input type="email" placeholder="请输入邮箱地址" id="inputMail">
+							<button id="sendMailProduct">发送产品<br/>资料至邮箱</button>
+						</div>
+						<div class="alert" role="alert" name="inputMail"></div>
+					</form>
+					<ul class="line-list tline">
+						<li>
+							<label>产品名称</label>
+							<span id="pname"></span>
+						</li>
+						<li>
+							<label>产品简称</label>
+							<span id="pabbr"></span>
+						</li>
+						<li>
+							<label>产品币种</label>
+							<span id="pcurrency"></span>
+						</li>
+						<li>
+							<label>目标规模</label>
+							<span id="pamount"></span>
+						</li>
+						<li>
+							<label>存续期</label>
+							<span id="pperiod"></span>
+						</li>
+						<li>
+							<label>收益支付</label>
+							<span id="ppaid"></span>
+						</li>
+						<li>
+							<label>销售期</label>
+							<span id="psales_period"></span>
+						</li>
+						<li>
+							<label>封闭期</label>
+							<span id="pblock_period"></span>
+						</li>
+						<li>
+							<label>申购</label>
+							<span id="predeem"></span>
+						</li>
+						<li>
+							<label>基金实体</label>
+							<span id="pentity"></span>
+						</li>
+						<li>
+							<label>投资顾问</label>
+							<span id="padviser"></span>
+						</li>
+						<li>
+							<label>托管人</label>
+							<span id="ptrustee"></span>
+						</li>
+						<li>
+							<label>登记机构</label>
+							<span id="preg_organ"></span>
+						</li>
+						<li>
+							<label>净值网站</label>
+							<span id="pwebsite"></span>
+						</li>
+						<li>
+							<label>代销机构</label>
+							<span id="pagency"></span>
+						</li>
+						<li>
+							<label>监管备案</label>
+							<span id="pregulatory_filing"></span>
+						</li>
+						<li>
+							<label>法律顾问</label>
+							<span id="plegal_consultant"></span>
+						</li>
+						<li>
+							<label>审计师</label>
+							<span id="paudit"></span>
+						</li>
+						<li>
+							<label>认购起点</label>
+							<span id="pstarting_point"></span>
+						</li>
+						<li>
+							<label>募集账户</label>
+							<span id="paccount"></span>
+						</li>
+						<li>
+							<label>募集进度</label>
+							<span id="pprogress"></span>
+						</li>
+						<li>
+							<label>投资方向</label>
+							<span id="pdirection"></span>
+						</li>
+						<li>
+							<label>风控措施</label>
+							<span id="prisk_control"></span>
+						</li>
+						<li>
+							<label>说明文档</label>
+							<span id="pinstruction"></span>
+						</li>
+						<li>
+							<label>认购协议</label>
+							<span id="pagreement"></span>
+						</li>
+					</ul>
+				</div>
+			</article>
+			<div class="p-btns">
+				<button class="book-btn orange-btn" data-turn="appointment-creat">立即预约</button>
+				<button class="book-btn orange-btn" data-turn="appointment-mine">我的预约</button>
+			</div>
+		</div>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+</body>
+</html>

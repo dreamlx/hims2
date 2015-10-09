@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>新建客户</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				var customers = getInfo.getCustomerMine();
+				if(customers.personal && customers.personal.length>0){
+					var pc = $(customers.personal);
+					pc.each(function(){
+						var template = $("#c-list li").clone();
+						template.attr("data-type","individual");
+						template.attr("data-cid",this.id||"");
+						template.find('p').text(this.name||"");
+						template.find('.c-span:eq(0) .red').text((this.booking_count||0)+"单");
+						template.find('.c-span:eq(1) .blue').text((this.holding_count||0)+"单");
+						$("#personal .c-list").append(template);
+					});
+				}
+				if(customers.organizal && customers.organizal.length>0){
+					var oc = $(customers.organizal);
+					oc.each(function(){
+						var template = $("#c-list li").clone();
+						template.attr("data-type","institution");
+						template.attr("data-cid",this.id||"");
+						template.find('p').text(this.name||"");
+						template.find('.c-span:eq(0) .red').text((this.booking_count||0)+"单");
+						template.find('.c-span:eq(1) .blue').text((this.holding_count||0)+"单");
+						$("#organizal .c-list").append(template);
+					});
+				}
+				getInfo.turnBind.bindturncustomerdetail();
+			}
+		});
+	</script>
+</head>
+<body class="bg-white">
+	<div class="main detail">
+		<div class="customer-mine" id="customer-mine">
+			<div class="searchadd-block">
+				<div class="add-button" data-turn="customer-creat">
+					<i class="icon icon-redadd"></i>
+					新建客户
+				</div>
+				<div class="search-area">
+					<input type="text" placeholder="请输入投资者的名字" />
+					<span><i class="icon icon-search"></i></span>
+				</div>
+			</div>
+			<ul class="c-tab select-tab" id="select-tab">
+				<li class="current">个人投资者</li>
+				<li>机构投资者</li>
+			</ul>
+			<div class="block-tab" id="personal">
+				<ul class="c-list">
+				</ul>
+			</div>
+			<div class="block-tab hide" id="organizal">
+				<ul class="c-list">
+				</ul>
+			</div>
+		</div>
+	</div>
+	<ul class="c-list hide" id="c-list">
+		<li data-turn="customer-detail">
+			<p></p>
+			<div class="c-br c-span">预约投资：<span class="red"></span></div>
+			<div class="c-span">存续管理：<span class="blue"></span></div>
+		</li>
+	</ul>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+</body>
+</html>

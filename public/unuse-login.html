@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>登录</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(store) getInfo.turnprofilecreat();
+		});
+	</script>
+</head>
+<body class="bg-grey">
+	<div class="main">
+		<form class="full-form" id="form">
+			<div class="form-line">
+				<input type="number"  placeholder="请输入openid" id="inputOpenid" />
+			</div>
+			<div class="form-line">
+				<input type="number"  placeholder="请输入uid" id="inputUid" />
+			</div>
+			<button class="submit-btn center-btn orange-btn" id="submitBtn" name="login">确认登录</button>
+		</form>
+	</div>
+</body>
+</html>

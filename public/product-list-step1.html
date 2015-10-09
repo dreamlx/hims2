@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>产品类型列表</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				var fundlist = getInfo.getFundList();
+				if(!fundlist){
+					alert("网络原因，获取列表失败，点击确定重试！");
+					window.location.reload();
+				}else{
+					_.each(fundlist,function(fund,key){
+						var item = $("#template .product").clone();
+						item.attr("data-fid",fund.id);
+						item.find(".p-title").text(fund.name||"暂无信息");
+						item.find(".p-intro").text(fund.desc||"暂无信息");
+						if(fund.label){
+							item.find(".p-label.red-label").text(fund.label).removeClass('hide');
+						}
+						if(fund.currency){
+							item.find(".p-label.green-label").text(fund.currency+"产品").removeClass('hide');
+						}
+						item.find(".p-info .p-f1 .p-p:eq(0) span:eq(0)").text((fund.title1||"暂无信息")+"：");
+						item.find(".p-info .p-f1 .p-p:eq(0) .p-t").text(fund.content1||"暂无信息");
+						item.find(".p-info .p-f1 .p-p:eq(1) span:eq(0)").text((fund.title2||"暂无信息")+"：");
+						item.find(".p-info .p-f1 .p-p:eq(1) .p-t").text(fund.content2||"暂无信息");
+						item.find(".p-info .p-f2 .p-p:eq(0) span:eq(0)").text((fund.title3||"暂无信息")+"：");
+						item.find(".p-info .p-f2 .p-p:eq(0) .p-t").text(fund.content3||"暂无信息");
+						item.find(".p-range .p-percent").text((fund.progress_bar||0)+"%");
+						item.find(".p-range .range").attr("data-width",fund.progress_bar||0);
+						$("#product-list").append(item);
+					});
+					_.each($("#product-list .product .p-range .range"),function(range,key){
+						$(range).width($(range).attr("data-width")+"%");
+					});
+					//重新绑定跳转;
+					getInfo.turnBind.bindturnproductliststep2();
+				}
+			}
+		});
+	</script>
+</head>
+<body class="bg-grey">
+	<div class="main">
+		<ul class="product-list" id="product-list">
+		</ul>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+	<ul class="product-list hide" id="template">
+		<li class="product" data-turn="product-list-step2">
+			<div class="p-labels">
+				<div class="p-label red-label hide"></div>
+				<div class="p-label green-label hide"></div>
+			</div>
+			<section>
+				<h1 class="p-title"></h1>
+				<p class="p-intro"></p>
+				<div class="p-info">
+					<div class="p-f1">
+						<div class="p-p">
+							<span></span><span class="p-t blue"></span>
+						</div>
+						<div class="p-p">
+							<span></span><span class="p-t blue"></span>
+						</div>
+					</div>
+					<div class="p-f2">
+						<div class="p-p">
+							<span></span><span class="p-t red whole-line"></span>
+						</div>
+					</div>
+				</div>
+				<div class="p-range">
+					<div class="blue-range"><i class="range"></i></div>
+					<div class="p-percent blue"></div>
+				</div>
+			</section>
+		</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>新建客户</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				$('#inputRemark_nameP,#inputRemark_nameO').val(store.name);	
+			}
+		});
+	</script>
+</head>
+<body class="bg-white">
+	<div class="main">
+		<div class="customer-creat">
+			<form class="radius-form" id="form">
+				<div class="form-line">
+					<label>类型</label>
+					<span class="input-box selectinput">
+						<input type="text" placeholder="个人/机构" readonly id="type-select" class="input-select" />
+						<ul class="select-ul">
+							<li data-val="0">个人</li>
+							<li data-val="1">机构</li>
+						</ul>
+					</span>
+				</div>
+				<div class="alert" role="alert" name="type-select"></div>
+				<div class="hideblock hide" id="personal">
+					<div class="form-line">
+						<label>真实姓名<i class="red">*</i></label>
+						<span class="input-box">
+							<input type="text" id="inputNameP" placeholder="请输入姓名" />
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputNameP"></div>
+					<div class="form-line">
+						<label>联系电话<i class="red">*</i></label>
+						<span class="input-box">
+							<input type="number" id="inputCellP" placeholder="请输入联系电话号码" />
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputCellP"></div>
+					<div class="form-line">
+						<label>备注名</label>
+						<span class="input-box">
+							<input type="text" id="inputRemark_nameP" readonly />
+						</span>
+					</div>
+					<div class="form-line">
+						<label>证件类型</label>
+						<span class="input-box selectinput">
+							<input type="text" id="inputId_typeP" placeholder="身份证/护照/其他" readonly class="input-select" />
+							<ul class="select-ul">
+								<li data-val="0">身份证</li>
+								<li data-val="1">护照</li>
+								<li data-val="2">香港永久性居住身份证</li>
+								<li data-val="3">台胞证</li>
+								<li data-val="4">港澳同胞回乡证</li>
+								<li data-val="5">驾照</li>
+							</ul>
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputId_typeP"></div>
+					<div class="form-line">
+						<label>证件号码</label>
+						<span class="input-box">
+							<input type="text" id="inputId_noP" placeholder="请输入证件号码" />
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputId_noP"></div>
+					<div class="form-line">
+						<label class="highmiddle dbl">证件图片<br/>(正反面)</label>
+						<span class="img-box">
+							<label class="img-default" for="inputId_frontP"></label>
+							<input class="hide" id="inputId_frontP" type="file" />
+							<label class="img-default" for="inputId_backP"></label>			
+							<input class="hide" id="inputId_backP" type="file" />
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputId_imgP"></div>
+					<div class="form-line">
+						<label>备注</label>
+						<span class="input-box">
+							<textarea id="inputRemarkP" placeholder="请输入备注内容"></textarea>
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputRemarkP"></div>
+					<div class="form-line">
+						<label>
+						</label>
+						<button class="submit-btn orange-btn" id="submitBtnCreatCustomerP">提交</button>
+					</div>
+				</div>
+				<div class="hideblock hide" id="organizal">
+					<div class="form-line">
+						<label>机构名称<i class="red">*</i></label>
+						<span class="input-box">
+							<input type="text" id="inputNameO" placeholder="请输入机构名称" />
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputNameO"></div>
+					<div class="form-line">
+						<label>联系电话<i class="red">*</i></label>
+						<span class="input-box">
+							<input type="number" id="inputCellO" placeholder="请输入联系电话号码" />
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputCellO"></div>
+					<div class="form-line">
+						<label>备注名</label>
+						<span class="input-box">
+							<input type="text" id="inputRemark_nameO" readonly />
+						</span>
+					</div>
+					<div class="form-line">
+						<label>机构注册号</label>
+						<span class="input-box">
+							<input type="text" id="inputOrgan_regO" placeholder="请输入机构注册号" />
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputOrgan_regO"></div>
+					<div class="form-line">
+						<label class="highmiddle">营业执照</label>
+						<span class="img-box">
+							<label class="img-default" for="inputBusiness_licensesO"></label>
+							<input class="hide" type="file" id="inputBusiness_licensesO"/>
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputBusiness_licensesO"></div>
+					<div class="form-line">
+						<label>备注</label>
+						<span class="input-box">
+							<textarea id="inputRemarkO" placeholder="请输入备注内容"></textarea>
+						</span>
+					</div>
+					<div class="alert" role="alert" name="inputRemarkO"></div>
+					<div class="form-line">
+						<label>
+						</label>
+						<button class="submit-btn orange-btn" id="submitBtnCreatCustomerO">提交</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="pop-bg hide" id="pop">
+		<div class="pop-alert">
+			<span class="pop-test"></span>
+		</div>
+	</div>
+</body>
+</html>
