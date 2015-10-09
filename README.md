@@ -613,7 +613,8 @@ response:
               "investor_name"=>"MyString", 
               "product_name"=>"MyString",
               "product_abbr"=>"MyString",
-              "product_desc"=>"MyString"
+              "product_desc"=>"MyString",
+              "currency"=>"美元产品"
             },
             ...
           ], 
@@ -625,7 +626,8 @@ response:
               "investor_name"=>"MyString", 
               "product_name"=>"MyString",
               "product_abbr"=>"MyString",
-              "product_desc"=>"MyString"
+              "product_desc"=>"MyString",
+              "currency"=>"美元产品"
             },
             ...
           ], 
@@ -637,7 +639,8 @@ response:
               "investor_name"=>"MyString", 
               "product_name"=>"MyString",
               "product_abbr"=>"MyString",
-              "product_desc"=>"MyString"
+              "product_desc"=>"MyString",
+              "currency"=>"美元产品"
             },
             ...
           ]
