@@ -7,98 +7,163 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
 	<link rel="stylesheet" type="text/css" href="./css/pe.css">
 	<script type="text/javascript" src="./js/us.js"></script>
-	<script type="text/javascript" src="./js/zp.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
 	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				//停留该页
+				var info = getInfo.getUserInfo();
+				if(!info||!info.user) getInfo.turnprofilecreat();
+				var user = info.user;
+				$('#inputName').val(user.name||"");
+				var typeli =$('#type-select+.select-ul li');
+				for( var i=0;i<typeli.length;i++){
+					if($(typeli[i]).text() == user.id_type){
+						$('#type-select').val(user.id_type).attr('data-val',$(typeli[i]).attr('data-val'));
+						$(typeli[i]).addClass('current');
+					}
+				}
+				$('#inputNickName').val(user.nickname||"");
+				var renderli =$('#inputRender+.select-ul li');
+				for( var i=0;i<renderli.length;i++){
+					if($(renderli[i]).text() == user.gender){
+						$('#inputRender').val(user.gender).attr('data-val',$(renderli[i]).attr('data-val'));
+						$(renderli[i]).addClass('current');
+					}
+				}
+				$('#inputCell').val(user.cell||"");
+				$('#inputMail').val(user.email||"");
+				$('#inputAddress').val(user.address||"");
+				var idli =$('#inputId_typeP+.select-ul li');
+				for( var i=0;i<idli.length;i++){
+					if($(idli[i]).text() == user.card_type){
+						$('#inputId_typeP').val(user.card_type).attr('data-val',$(idli[i]).attr('data-val'));
+						$(idli[i]).addClass('current');
+					}
+				}
+				$('#inputId_noP').val(user.card_no||"");
+				if(user.card_front.card_front.thumb.url){
+					$('#inputId_frontP').prev().append('<img />')
+						.find('img').attr('src',user.card_front.card_front.thumb.url);
+				}
+				if(user.card_back.card_back.thumb.url){
+					$('#inputId_backP').prev().append('<img />')
+						.find('img').attr('src',user.card_back.card_back.thumb.url);
+				}
+				$('#inputRemarkP').val(user.remark||"");			
+			}
+		});
+	</script>
 </head>
 <body class="bg-white">
 	<div class="main">
-		<form class="radius-form">
+		<form class="radius-form" id="form">
 			<div class="form-line">
 				<label>您的姓名<span class="red">*</span></label>
-				<span class="input-box"><input type="text" placeholder="请输入您的姓名" /></span>
+				<span class="input-box"><input type="text" id="inputName" placeholder="请输入您的姓名" /></span>
 			</div>
+			<div class="alert" role="alert" name="inputName"></div>
 			<div class="form-line">
 				<label>身份类型<span class="red">*</span></label>
 				<span class="input-box selectinput">
-					<input type="text" placeholder="请输入您的姓名" readonly />
+					<input type="text" id="type-select" class="input-select" placeholder="个人/机构" readonly />
 					<ul class="select-ul">
-						<li>个人</li>
-						<li>机构</li>
+						<li data-val="0">个人</li>
+						<li data-val="1">机构</li>
 					</ul>
 				</span>
 			</div>
+			<div class="alert" role="alert" name="type-select"></div>
 			<div class="form-line">
 				<label>昵称</label>
-				<span class="input-box"><input type="text" placeholder="请输入您的昵称"readonly /></span>
+				<span class="input-box"><input type="text" id="inputNickName" placeholder="请输入您的昵称" /></span>
 			</div>
+			<div class="alert" role="alert" name="inputNickName"></div>
 			<div class="form-line">
 				<label>性别</label>
 				<span class="input-box selectinput">
-					<input type="text" placeholder="男/女" readonly/>
-					<ul class="select-ul">
-						<li>男</li>
-						<li>女</li>
+					<input type="text" class="input-select" id="inputRender" placeholder="男/女" readonly/>
+					<ul class="select-ul" >
+						<li data-val="0">男</li>
+						<li data-val="1">女</li>
 					</ul>
 				</span>
 			</div>
+			<div class="alert" role="alert" name="inputRender"></div>
 			<div class="form-line">
 				<label>手机号码<i class="red">*</i></label>
-				<span class="input-box">
-					<input type="number" placeholder="请输入您的手机号码" />
+				<span class="input-box nochange">
+					<input type="number" id="inputCell" placeholder="请输入您的手机号码" readonly />
 				</span>
 			</div>
+			<div class="alert" role="alert" name="inputCell"></div>
 			<div class="form-line">
 				<label>电子邮箱<i class="red">*</i></label>
 				<span class="input-box">
-					<input type="email" placeholder="请输入您的电子邮箱" />
+					<input type="email" id="inputMail" placeholder="请输入您的电子邮箱" />
 				</span>
 			</div>
+			<div class="alert" role="alert" name="inputMail"></div>
 			<div class="form-line">
 				<label>联系地址</label>
 				<span class="input-box">
-					<input type="text" placeholder="请输入联系地址" />
+					<input type="text" id="inputAddress" placeholder="请输入联系地址" />
 				</span>
 			</div>
-			<div class="form-line ">
+			<div class="alert" role="alert" name="inputAddress"></div>
+			<div class="form-line" >
 				<label>证件类型</label>
 				<span class="input-box selectinput">
-					<input type="number" placeholder="身份证/护照/其他" readonly />
+					<input type="text" class="input-select" id="inputId_typeP" placeholder="身份证/护照/其他" readonly />
 					<ul class="select-ul">
-						<li>身份证</li>
-						<li>护照</li>
-						<li>其他</li>
+						<li data-val="0">身份证</li>
+						<li data-val="1">护照</li>
+						<li data-val="2">香港永久性居住身份证</li>
+						<li data-val="3">台胞证</li>
+						<li data-val="4">港澳同胞回乡证</li>
+						<li data-val="5">驾照</li>
+						<li data-val="6">营业执照</li>
 					</ul>
 				</span>
 			</div>
+			<div class="alert" role="alert" name="inputId_typeP"></div>
 			<div class="form-line">
 				<label>证件号码</label>
 				<span class="input-box">
-					<input type="number" placeholder="请输入证件号码" />
+					<input type="text" id="inputId_noP" placeholder="请输入证件号码" />
 				</span>
 			</div>
+			<div class="alert" role="alert" name="inputId_noP"></div>
 			<div class="form-line">
 				<label class="highmiddle dbl">证件图片<br/>(正反面)</label>
 				<span class="img-box">
-					<label class="img-default" for="f1"></label>
-					<label class="img-default" for="f2"></label>
-					<input class="hide" type="file" id="f1" />
-					<input class="hide" type="file" id="f2" />
+					<label class="img-default" for="inputId_frontP"></label>
+					<input class="hide" id="inputId_frontP" type="file" />
+					<label class="img-default" for="inputId_backP"></label>			
+					<input class="hide" id="inputId_backP" type="file" />
 				</span>
 			</div>
+			<div class="alert" role="alert" name="inputId_imgP"></div>
 			<div class="form-line">
 				<label>备注</label>
 				<span class="input-box">
-					<textarea placeholder="请输入备注内容"></textarea>
+					<textarea id="inputRemarkP" placeholder="请输入备注内容"></textarea>
 				</span>
 			</div>
+			<div class="alert" role="alert" name="inputRemarkP"></div>
 			<div class="form-line">
 				<label>&nbsp;</label>
-				<button class="submit-btn orange-btn">保存</button>
+				<button class="submit-btn orange-btn" id="submitBtn" name="update-profile">保存</button>
 			</div>
 		</form>
 	</div>
-	<div class="pop-bg">
+	<div class="pop-bg hide" id="pop">
 		<div class="pop-alert">
+			<span class="pop-test"></span>
 		</div>
 	</div>
 </body>

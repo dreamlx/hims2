@@ -416,6 +416,9 @@ window.check = {
                 case "5":
                     reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                     break;
+                case "6":
+                    reg = /^[a-zA-Z0-9]{5,30}$/;
+                    break;
                 default:
                     check.select(null,idtypeinput);
                     return false;
@@ -640,7 +643,9 @@ window.check = {
             appointmentdeletesuccess:"删除订单信息成功",
             appointmentdeletefail:"由于网络原因删除订单未成功,请再次尝试",
             investchecksuccess:"验证信息成功",
-            investcheckfail:"由于网络原因验证信息成功未成功,请再次尝试",
+            investcheckfail:"由于网络原因验证信息未成功,请再次尝试",
+            profileUpdatesuccess:"更新个人信息成功",
+            profileUpdatefail:"由于网络原因更新信息未成功,请再次尝试",
         },
         alert:function(input,error){
             var id = input.attr('id');
@@ -716,7 +721,7 @@ window.check = {
         $("#inputCheckcode").bind("blur",function(){
             check.checkcode($(this));
         });
-        $("#inputName, #inputNameP").bind("blur",function(){
+        $("#inputName, #inputNameP,#inputNickName").bind("blur",function(){
             check.name($(this));
         });
         $("#inputNameO").bind("blur",function(){
@@ -1329,12 +1334,57 @@ window.submit = {
             success:function(data){
                 check.error.alertsuccess(btn,check.error.errorInfo.investchecksuccess);
                 setTimeout(function(){
-                    getInfo.turninvestmineprofessor();
+                    getInfo.turninvestmineinvestor(checkid);
                 },3000);
             },
             error:function(data){
                 check.error.alertfail(btn,"error",check.error.errorInfo.investcheckfail);
                 submit.bind.appointmentDeleteSubmitBind();
+            }
+        });
+    },
+    profileUpdateSubmit:function(btn){
+        var form = btn.closest('form');
+        var store = getInfo.checkstorage();
+        var uid = store.id;
+        if(!this.validate.profileUpdateSubmit(form))return false;
+        var user={
+            name: $("#inputName").val(),
+            email: $("#inputMail").val(),
+            id_type: $("#type-select").val(),
+            nickname: $("#inputNickName").val(),
+            gender: $("#inputRender").val(),
+            address: $("#inputAddress").val(),
+            card_type: $("#inputId_typeP").val(),
+            card_no: $("#inputId_noP").val(),
+            card_front: $("#inputId_frontP").attr("data-code"),
+            card_back: $("#inputId_backP").attr("data-code"),
+            remark: $("#inputRemarkP").val()
+        };
+        check.error.hideall(btn);
+        check.unbind.btn(btn,"click");
+        $.ajax({
+            url:getInfo.getUrl.fullurl('api/users/'+uid),
+            type:'PATCH',
+            data:{'user':user},
+            dataType:"json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+            },
+            success:function(data){
+                if(data.user && data.user.id>0){
+                    check.error.alertsuccess(btn,check.error.errorInfo.profileUpdatesuccess);
+                    setTimeout(function(){
+                        window.location.reload();
+                    },3000);
+                }else{
+                    check.error.alertfail(btn,"error",check.error.errorInfo.profileUpdatefail);
+                    submit.bind.profileUpdateSubmitBind();
+                }
+            },
+            error:function(data){
+                check.error.alertfail(btn,"error",check.error.errorInfo.profileUpdatefail);
+                submit.bind.profileUpdateSubmitBind();
             }
         });
     },
@@ -1582,7 +1632,49 @@ window.submit = {
                 return false;
             }
             return true;
-        }
+        },
+        profileUpdateSubmit:function(form){
+            if(!check.require.name(form.find('#inputName'))){
+                return false;
+            }
+            if(!check.require.select(form.find('#type-select'))){
+                return false;
+            }
+            if(!check.require.cell(form.find('#inputCell'))){
+                return false;
+            }
+            if(!check.require.mail(form.find('#inputMail'))){
+                return false;
+            }
+            if(!check.name(form.find('#inputName'))){
+                return false;
+            }
+            if(!check.name(form.find('#inputNickName'))){
+                return false;
+            }
+            if(!check.cell(form.find('#inputCell'))){
+                return false;
+            }
+            if(!check.mail(form.find('#inputMail'))){
+                return false;
+            }
+            if(!check.address(form.find('#inputAddress'))){
+                return false;
+            }
+            if(!check.idno(form.find('#inputId_noP'))){
+                return false;
+            }
+            if(!check.img(form.find('#inputId_frontP'))){
+                return false;
+            }
+            if(!check.img(form.find('#inputId_backP'))){
+                return false;
+            }
+            if(!check.text(form.find('#inputRemarkP'))){
+                return false;
+            }
+            return true;
+        },
     },
     bind:{
         sendRegeistCodeBind:function(){
@@ -1649,7 +1741,13 @@ window.submit = {
             $('#submitBtn[name="investcheck"]').bind('click',function(){
                 submit.investCheckSubmit($(this));
             });
-        }        
+        },
+        profileUpdateSubmitBind:function(){
+            $('#submitBtn[name="update-profile"]').bind('click',function(){
+                submit.profileUpdateSubmit($(this));
+            });
+        }  
+              
     },
     load:function(){
         this.bind.sendRegeistCodeBind();
@@ -1666,6 +1764,7 @@ window.submit = {
         this.bind.appointmentUpdateSubmitBind();
         this.bind.appointmentDeleteSubmitBind();
         this.bind.investCheckSubmitBind();
+        this.bind.profileUpdateSubmitBind();
     },
 }
 
@@ -1702,6 +1801,9 @@ window.getInfo = {
     },
     turnprofilecreat:function(){
         window.location.href=getInfo.getSiteUrl.fullurl("profile-creat.html");
+    },
+    turnprofilemine:function(){
+        window.location.href=getInfo.getSiteUrl.fullurl("profile-mine.html");
     },
     turnmenu:function(para){
         window.location.href=getInfo.getSiteUrl.fullurl("menu.html" + (para?("#" + para):""));
@@ -1749,8 +1851,8 @@ window.getInfo = {
     turninvestmineprofessor:function(){
         window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-professor.html");
     },
-    turninvestmineinvestor:function(){
-        window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-investor.html");
+    turninvestmineinvestor:function(num){
+        window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-investor.html#"+num);
     },
     turninvestminecheck:function(){
         window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-check.html");
@@ -2054,6 +2156,27 @@ window.getInfo = {
         });
         return result;
     },
+    getUserInfo:function(){
+        var store = getInfo.checkstorage(),
+        uid= store.id;
+        $.ajax({
+            url:getInfo.getUrl.fullurl('api/users/'+uid),
+            async: false,
+            type:'GET',
+            data:{},
+            dataType:"json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+            },
+            success:function(data){
+                result = data;
+            },
+            error:function(data){
+                result = false;
+            }
+        });
+        return result;
+    },
     getUrl:{
         host:"http://58.96.173.224/",
         fullurl:function(url){
@@ -2134,13 +2257,22 @@ window.getInfo = {
                 getInfo.turninvestmineinvestor();
             });
         },
+        bindturninvestmineprofessor:function(){
+            $("[data-turn=invest-mine-professor]").on('click',function(){
+                getInfo.turninvestmineprofessor();
+            });
+        },
         bindturninvestdetail:function(){
             $("[data-turn=invest-detail]").on('click',function(){
                 var pid = $(this).attr('data-pid');
                 getInfo.turninvestdetail(pid);
             });
+        },
+        bindturnprofilemine:function(){
+            $("[data-turn=profile-mine]").on('click',function(){
+                getInfo.turnprofilemine();
+            });
         }
-
     },
     load:function(){
         this.turnBind.bindregister();
@@ -2157,7 +2289,9 @@ window.getInfo = {
         this.turnBind.bindturncustomerdetail();
         this.turnBind.bindturninvestminecheck();
         this.turnBind.bindturninvestmineinvestor();
+        this.turnBind.bindturninvestmineprofessor();
         this.turnBind.bindturninvestdetail();
+        this.turnBind.bindturnprofilemine();
     }
 }
 
