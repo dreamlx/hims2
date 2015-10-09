@@ -56,11 +56,13 @@ class Api::OrdersController < Api::BaseController
     @order = current_user.orders.find(params[:id])
     infos_params = params[:infos]
     infos_params.each do |key, value|
+      info = Info.find(key)
       if value.keys.first == "photo"
-        Info.find(key).update_attribute(value.keys.first, parse_image_data(value.values.first))
+        info.update("#{value.keys.first}": parse_image_data(value.values.first))
       else
-        Info.find(key).update_attribute(value.keys.first, value.values.first)
+        info.update("#{value.keys.first}": value.values.first)
       end
+      info.submit
     end
     # Info.update(infos_params.keys, infos_params.values)
     render 'show'

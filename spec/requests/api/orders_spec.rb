@@ -214,15 +214,18 @@ RSpec.describe "orders" do
 
       expect(string_json["id"]).to eq string_info.id
       expect(string_json["string"]).to eq "new_string"
+      expect(string_json["state"]).to eq "已提交"
 
       expect(text_json["id"]).to eq text_info.id
       expect(text_json["text"]).to eq "new_text"
+      expect(text_json["state"]).to eq "已提交"      
 
       photo_info.reload
       expect(photo_json["id"]).to eq photo_info.id
       expect(photo_json["photo"]["photo"]["url"]).not_to be_nil
       expect(photo_json["photo"]["photo"]["url"]).to eq photo_info.photo.url
       expect(photo_json["photo"]["photo"]["url"]).not_to eq old_photo_url
+      expect(photo_json["state"]).to eq "已提交"
     end
   end
 
