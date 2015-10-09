@@ -7,39 +7,86 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
 	<link rel="stylesheet" type="text/css" href="./css/pe.css">
 	<script type="text/javascript" src="./js/us.js"></script>
-	<script type="text/javascript" src="./js/zp.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
 	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var store = getInfo.checkstorage();
+			if(!store || !store.name || !store.email){
+				getInfo.turnprofilecreat();
+			}else{
+				var customers = getInfo.getCustomerMine();
+				if(customers.personal && customers.personal.length>0){
+					var pc = $(customers.personal);
+					pc.each(function(){
+						var template = $("#template li").clone();
+						template.attr("data-type","individual");
+						template.attr("data-cid",this.id||"");
+						template.addClass('individual');
+						template.find('p').text(this.name||"");
+						$("#line-list").append(template);
+					});
+				}
+				if(customers.organizal && customers.organizal.length>0){
+					var oc = $(customers.organizal);
+					oc.each(function(){
+						var template = $("#template li").clone();
+						template.attr("data-type","institution");
+						template.attr("data-cid",this.id||"");
+						template.addClass('institution');
+						template.find('p').text(this.name||"");
+						$("#line-list").append(template);
+					});
+				}
+				$('#c-subsearch li').on('click',function(){
+					var index = $(this).index();
+					switch(index){
+						case 0:
+							$('#line-list li').removeClass('nosee');
+							break;
+						case 1:
+							$('#line-list li').addClass('nosee');
+							$('#line-list .individual').removeClass('nosee');
+							break;
+						case 2:
+							$('#line-list li').addClass('nosee');
+							$('#line-list .institution').removeClass('nosee');
+							break;
+						default:
+					}
+				});
+				$('#c-search').bind('propertychange input',function(){
+					var val = $('#c-search').val();
+					var list = $('#line-list li');
+					$('#line-list li').removeClass('hide');
+					for(var i= 0;i<list.length;i++){
+						if($(list[i]).find('p').text().indexOf(val)<0){
+							$(list[i]).addClass('hide');
+						}
+					}
+				});
+				getInfo.turnBind.bindturncustomerdetail();
+			}
+		});
+	</script>
 </head>
 <body class="bg-white">
 	<div class="main">
 		<div class="customer-search">
-			<input class="c-search" type="search" placeholder="输入搜索投资者姓名"/>
-			<ul class="c-subsearch">
+			<input class="c-search" id="c-search" type="search" placeholder="输入搜索投资者姓名"/>
+			<ul class="c-subsearch" id="c-subsearch">
 				<li class="on">所有</li>
 				<li>个人投资者</li>
 				<li>机构投资者</li>
 			</ul>
-			<ul class="line-list">
-				<li>
-					<p>用户名</p>
-				</li>
-				<li>
-					<p>用户名</p>
-				</li>
-				<li>
-					<p>用户名</p>
-				</li>
-				<li>
-					<p>用户名</p>
-				</li>
-				<li>
-					<p>用户名</p>
-				</li>
-				<li>
-					<p>用户名</p>
-				</li>
+			<ul class="line-list" id="line-list">
 			</ul>
 		</div>
 	</div>
+	<ul class="hide" id="template">
+		<li data-turn="customer-detail">
+			<p></p>
+		</li>
+	</ul>
 </body>
 </html>

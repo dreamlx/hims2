@@ -16,6 +16,23 @@
 				getInfo.turnprofilecreat();
 			}else{
 				//停留该页
+				var invest = getInfo.getInvesterInvest();
+				if(invest && invest.length>0) {
+					for(var i =0;i<invest.length;i++){
+						var template = $('#template li').clone();
+						template.attr('data-oid',invest[i].id)
+						template.find('.p-title').text(invest[i].product_name||"");
+						template.find('.p-intro').text(invest[i].product_desc||"");
+						template.find('.p-info .p-f1 .p-p:eq(0) span:eq(0)').text(invest[i].title1||"");
+						template.find('.p-info .p-f1 .p-p:eq(0) span:eq(1)').text(invest[i].content1||"");
+						template.find('.p-info .p-f1 .p-p:eq(1) span:eq(0)').text(invest[i].title2||"");
+						template.find('.p-info .p-f1 .p-p:eq(1) span:eq(1)').text(invest[i].content2||"");
+						template.find('.p-info .p-f2 .p-p:eq(0) span:eq(0)').text(invest[i].title3||"");
+						template.find('.p-info .p-f2 .p-p:eq(0) span:eq(1)').text(invest[i].content3||"");
+						$("#product-list").append(template);
+					}
+				}
+				getInfo.turnBind.bindturnappointmentdetailstep();
 			}
 		});
 	</script>
@@ -23,49 +40,7 @@
 <body class="bg-grey">
 	<div class="main detail">
 		<div class="invest-mine-investor">
-			<ul class="product-list nb">
-				<li class="product">
-					<section>
-						<h1 class="p-title">基金全名比较长唱唱唱唱唱唱唱唱唱唱唱唱</h1>
-						<p class="p-intro">说明：这里写说明的内容可以写是吧个中文字符字符字符字符字符字符字符字符字符</p>
-						<div class="p-info">
-							<div class="p-f1">
-								<div class="p-p">
-									产品期限：<span class="p-t blue">12-18个月</span>
-								</div>
-								<div class="p-p">
-									投资金额<span class="p-t blue">100万</span>
-								</div>
-							</div>
-							<div class="p-f2">
-								<div class="p-p">
-									预期收益<span class="p-t red whole-line">100万</span>
-								</div>
-							</div>
-						</div>
-					</section>
-				</li>
-				<li class="product">
-					<section>
-						<h1 class="p-title">基金全名比较长唱唱唱唱唱唱唱唱唱唱唱唱</h1>
-						<p class="p-intro">说明：这里写说明的内容可以写是吧个中文字符字符字符字符字符字符字符字符字符</p>
-						<div class="p-info">
-							<div class="p-f1">
-								<div class="p-p">
-									产品期限：<span class="p-t blue">12-18个月</span>
-								</div>
-								<div class="p-p">
-									投资金额<span class="p-t blue">100万</span>
-								</div>
-							</div>
-							<div class="p-f2">
-								<div class="p-p">
-									预期收益<span class="p-t red whole-line">100万</span>
-								</div>
-							</div>
-						</div>
-					</section>
-				</li>
+			<ul class="product-list nb" id="product-list">
 			</ul>
 		</div>
 	</div>
@@ -74,5 +49,28 @@
 			<span class="pop-test"></span>
 		</div>
 	</div>
+	<ul class="hide" id="template">
+		<li class="product" data-turn="appointment-detail-step1">
+			<section>
+				<h1 class="p-title"></h1>
+				<p class="p-intro"></p>
+				<div class="p-info">
+					<div class="p-f1">
+						<div class="p-p">
+							<span></span><span class="p-t blue"></span>
+						</div>
+						<div class="p-p">
+							<span></span><span class="p-t blue"></span>
+						</div>
+					</div>
+					<div class="p-f2">
+						<div class="p-p">
+							<span></span><span class="p-t red whole-line"></span>
+						</div>
+					</div>
+				</div>
+			</section>
+		</li>
+	</ul>
 </body>
 </html>

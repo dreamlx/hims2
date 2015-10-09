@@ -11,7 +11,7 @@ input,button,textarea{
 	border: none;
 	outline: none;
 }
-.hide{display: none;}
+.hide,.nosee{display: none !important;}
 /*--common--*/
 .bg-white{
 	background-color: #FFF;

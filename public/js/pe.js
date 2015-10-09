@@ -1332,10 +1332,15 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
-                check.error.alertsuccess(btn,check.error.errorInfo.investchecksuccess);
-                setTimeout(function(){
-                    getInfo.turninvestmineinvestor(checkid);
-                },3000);
+                if(data&&data.length>0){
+                    check.error.alertsuccess(btn,check.error.errorInfo.investchecksuccess);
+                    setTimeout(function(){
+                        getInfo.turninvestmineinvestor(checkid);
+                    },3000);
+                }else{
+                    check.error.alertfail(btn,"error",check.error.errorInfo.investcheckfail);
+                    submit.bind.appointmentDeleteSubmitBind();
+                }
             },
             error:function(data){
                 check.error.alertfail(btn,"error",check.error.errorInfo.investcheckfail);
@@ -1860,6 +1865,9 @@ window.getInfo = {
     turninvestdetail:function(pid){
         window.location.href=getInfo.getSiteUrl.fullurl("invest-detail.html#" + pid);
     },
+    turncustomersearch:function(){
+        window.location.href=getInfo.getSiteUrl.fullurl("customer-search.html");
+    },
     getUrlPara:function(){
         var url =window.location.href;
         var paraStr = url.split('#')[1];
@@ -2177,6 +2185,27 @@ window.getInfo = {
         });
         return result;
     },
+    getInvesterInvest:function(){
+        var store = getInfo.checkstorage(),
+        number = getInfo.getUrlPara()[0];
+        $.ajax({
+            url:getInfo.getUrl.fullurl('api/orders/by_number'),
+            async: false,
+            type:'GET',
+            data:{'number':number},
+            dataType:"json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+            },
+            success:function(data){
+                result = data;
+            },
+            error:function(data){
+                result = false;
+            }
+        });
+        return result;
+    },
     getUrl:{
         host:"http://58.96.173.224/",
         fullurl:function(url){
@@ -2272,6 +2301,11 @@ window.getInfo = {
             $("[data-turn=profile-mine]").on('click',function(){
                 getInfo.turnprofilemine();
             });
+        },
+        bindturncustomersearch:function(){
+            $("[data-turn=customer-search]").on('click',function(){
+                getInfo.turncustomersearch();
+            });
         }
     },
     load:function(){
@@ -2292,6 +2326,7 @@ window.getInfo = {
         this.turnBind.bindturninvestmineprofessor();
         this.turnBind.bindturninvestdetail();
         this.turnBind.bindturnprofilemine();
+        this.turnBind.bindturncustomersearch();
     }
 }
 
