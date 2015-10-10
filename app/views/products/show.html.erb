@@ -177,7 +177,7 @@
         <dd><%= link_to @product.instruction_identifier, @product.instruction.url if @product.instruction.url %></dd>
 
         <dt><%= Product.human_attribute_name('agreement') %></dt>
-        <dd><%= @product.agreement %></dd>
+        <dd><%= link_to @product.agreement_identifier, @product.agreement.url if @product.agreement.url %></dd>
 
         <dt><%= @product.title4 %></dt>
         <dd><%= @product.content4 %></dd>
