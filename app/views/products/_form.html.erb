@@ -8,17 +8,15 @@
   <div class="col-md-6">
     <%= f.input :fund_id, collection: Fund.all %>
     <%= f.input :name %>
-    <%= f.input :desc, as: :text %>
+    <%= f.input :desc %>
     <%= f.input :title1 %>
-    <%= f.input :content1, as: :text %>
+    <%= f.input :content1 %>
     <%= f.input :title2 %>
-    <%= f.input :content2, as: :text %>
+    <%= f.input :content2 %>
     <%= f.input :title3 %>
-    <%= f.input :content3, as: :text %>
+    <%= f.input :content3 %>
     <%= f.input :progress_bar, hint: "From 0 to 100" %>
     <%= f.input :label %>
-  </div>
-  <div class="col-md-3">
     <%= f.input :abbr %>
     <%= f.input :currency %>
     <%= f.input :amount %>
@@ -31,7 +29,7 @@
     <%= f.input :adviser %>
     <%= f.input :trustee %>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-6">
     <%= f.input :reg_organ %>
     <%= f.input :website %>
     <%= f.input :agency %>
@@ -45,6 +43,14 @@
     <%= f.input :risk_control %>
     <%= f.input :instruction %>
     <%= f.input :agreement %>
+    <%= f.input :title4 %>
+    <%= f.input :content4 %>
+    <%= f.input :title5 %>
+    <%= f.input :content5 %>
+    <%= f.input :title6 %>
+    <%= f.input :content6 %>
+    <%= f.input :title7 %>
+    <%= f.input :content7 %>
   </div>
   <div class="col-md-12">
     <%= f.button :submit %>

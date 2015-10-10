@@ -50,6 +50,7 @@ class ProductsController < ApplicationController
         :website, :agency, :regulatory_filing,
         :legal_consultant, :audit, :starting_point,
         :account, :progress, :direction, :risk_control,
-        :instruction, :agreement)
+        :instruction, :agreement, :title4, :content4,
+        :title5, :content5,:title6, :content6,:title7, :content7,)
     end
 end

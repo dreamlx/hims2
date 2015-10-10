@@ -705,9 +705,14 @@ response:
           {
             "id"=>505, 
             "name"=>"MyString", 
-            "sales_period"=>"MyString", 
-            "block_period"=>"MyString", 
-            "paid"=>"MyString", 
+            "title4"=>"MyString", 
+            "content4"=>"MyString", 
+            "title5"=>"MyString", 
+            "content5"=>"MyString", 
+            "title6"=>"MyString", 
+            "content6"=>"MyString", 
+            "title7"=>"MyString", 
+            "content7"=>"MyString",
             "notices"=>
             [
               {

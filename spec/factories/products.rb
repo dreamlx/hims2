@@ -35,5 +35,13 @@ FactoryGirl.define do
     instruction File.open(File.join(Rails.root, 'spec/fixtures/rails.png'))
     agreement File.open(File.join(Rails.root, 'spec/fixtures/rails.png'))
     label "MyString"
+    title4 "MyString"
+    content4 "MyString"
+    title5 "MyString"
+    content5 "MyString"
+    title6 "MyString"
+    content6 "MyString"
+    title7 "MyString"
+    content7 "MyString"
   end
 end

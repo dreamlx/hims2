@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008032154) do
+ActiveRecord::Schema.define(version: 20151010060823) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -183,6 +183,14 @@ ActiveRecord::Schema.define(version: 20151008032154) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.string   "label",             limit: 255
+    t.string   "title4",            limit: 255
+    t.string   "content4",          limit: 255
+    t.string   "title5",            limit: 255
+    t.string   "content5",          limit: 255
+    t.string   "title6",            limit: 255
+    t.string   "content6",          limit: 255
+    t.string   "title7",            limit: 255
+    t.string   "content7",          limit: 255
   end
 
   add_index "products", ["fund_id"], name: "index_products_on_fund_id", using: :btree

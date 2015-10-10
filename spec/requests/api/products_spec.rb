@@ -155,11 +155,17 @@ RSpec.describe "products" do
       expect(response).to be_success
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)["product"]
+      expect(json).to eq ""
       expect(json["id"]).to eq product.id
       expect(json["name"]).to eq product.name
-      expect(json["sales_period"]).to eq product.sales_period
-      expect(json["block_period"]).to eq product.block_period
-      expect(json["paid"]).to eq product.paid
+      expect(json["title4"]).to eq product.title4
+      expect(json["content4"]).to eq product.content4
+      expect(json["title5"]).to eq product.title5
+      expect(json["content5"]).to eq product.content5
+      expect(json["title6"]).to eq product.title6
+      expect(json["content6"]).to eq product.content6
+      expect(json["title7"]).to eq product.title7
+      expect(json["content7"]).to eq product.content7
       expect(json["notices"].first["id"]).to eq notice.id
       expect(json["notices"].first["title"]).to eq notice.title
       expect(json["notices"].first["attach"]["attach"]["url"]).to eq notice.attach.url
