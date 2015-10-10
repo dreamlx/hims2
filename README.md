@@ -762,3 +762,26 @@ response:
           ......
         ]
 ```
+self-defined memu
+```
+{
+  "button":
+  [
+    {  
+      "type":"view",
+      "name":"我要投资",
+      "url":"http://wx.hehuifunds.com/unuse-login.html"
+    },
+    {
+      "type":"view",
+      "name":"我的投资",
+      "url":"http://wx.hehuifunds.com/menu.html#mine-invest"
+    },
+    {
+      "type":"view",
+      "name":"关于禾晖",
+      "url":"http://wx.hehuifunds.com/about.html"
+    }
+  ]
+}
+```
