@@ -20,13 +20,13 @@
 				if(!detail || !detail.product){
 					getInfo.turninvestmineprofessor();
 				}
-				var d = $('#invest-detail');
+				var d = $('#appointment-detail-step2');
 				var p = detail.product;
 				d.find('.a-headblock .a-title').text(p.name);
-				d.find('.a-headblock .a-text:eq(0)').text('开始时间：' + p.sales_period);
-				d.find('.a-headblock .a-text:eq(1)').text('到期时间：' + p.block_period);
-				d.find('.a-headblock .a-text:eq(2)').text('预期收益（年化）：');
-				d.find('.a-headblock .a-text:eq(3)').text('分配方式：' + p.paid);
+				d.find('.a-headblock .a-text:eq(0)').text(p.title4 + '：' + p.content4);
+				d.find('.a-headblock .a-text:eq(1)').text(p.title5 + '：' + p.content5);
+				d.find('.a-headblock .a-text:eq(2)').text(p.title6 + '：' + p.content6);
+				d.find('.a-headblock .a-text:eq(3)').text(p.title7 + '：' + p.content7);
 				if(p.notices&&p.notices.length>0){
 					for(var i =0;i<p.notices.length;i++){
 						var notice = p.notices[i];

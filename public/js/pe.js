@@ -669,11 +669,32 @@ window.check = {
                 /*报错信息*/
                 case 1:
                     inputalert.html(error).addClass('active');
-                    $("#pop").removeClass("hide").find(".pop-test").html(error);
+                    $("#pop").removeClass("hide").find(".pop-test").empty().removeClass('popsub').text(error);
+                    pop.appear= setTimeout(function(){
+                        $("#pop .pop-alert").addClass('appear');
+                    },100);
+                    pop.disappear= setTimeout(function(){
+                        $("#pop .pop-alert").removeClass('appear');
+                    },2500);
+                    pop.hide=setTimeout(function(){
+                        $("#pop").addClass('hide');
+                    },2900);
                     break;
                 /*成功信息*/
                 case 2:
-                    $("#pop").removeClass("hide").find(".pop-test").html(error);
+                    $("#pop").removeClass("hide").find(".pop-test").empty().addClass('popsub').text("提交成功")
+                    .prepend('<i class="icon icon-success"></i>').append('<span class="sub"></span>')
+                    .find('.sub').text(error);
+                    pop.appear=setTimeout(function(){
+                        $("#pop .pop-alert").addClass('appear');
+                    },100);
+                    pop.disappear=setTimeout(function(){
+                        $("#pop .pop-alert").removeClass('appear');
+                    },2500);
+                    pop.hide=setTimeout(function(){
+                        $("#pop").addClass('hide');
+                    },2900);
+                    //3-0.3-0.3-2.2=0.2;
                     break;
                 /*确认选择框*/
                 //暂时去掉了
@@ -2331,9 +2352,21 @@ window.getInfo = {
 }
 
 window.pop={
+    appear:{},
+    disappear:{},
+    hide:{},
     bind:function(){
-        $("#pop").on("click",function(){
-            $(this).addClass('hide');
+        $("#pop").bind("click",function(){
+            clearTimeout(pop.disappear);
+            clearTimeout(pop.hide);
+            $("#pop").unbind('click');
+            pop.disappear = setTimeout(function(){
+                $("#pop").find(".pop-alert").removeClass('appear');
+            },100);
+            pop.hide = setTimeout(function(){
+                $("#pop").addClass('hide');
+                pop.bind();
+            },500);
         });
     },
     load:function(){

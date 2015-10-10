@@ -21,7 +21,7 @@
 				var phead = $('#p-headblock');
 				phead.find('.p-subtitle').text(product.product.abbr||"");
 				phead.find('.p-title').text(product.product.name||"");
-				phead.find('.p-intro').text(product.product.instruction.instruction.url||"");
+				phead.find('.p-intro').text(product.product.desc||"");
 				$('#submitBtn').attr('data-pid',product.product.id)
 				//绑定客户列表按钮
 				$("#inputInvesterSelect").bind("click",function(){
