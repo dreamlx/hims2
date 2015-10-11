@@ -1816,9 +1816,12 @@ window.getInfo = {
             data:{},
             dataType:"json",
             success:function(data){
+                alert(state);
+                alert("getopenid执行成功");
                 result = data;
             },
             error:function(data){
+                alert("getopenid执行失败");
                 result =  false;
             }
         });
