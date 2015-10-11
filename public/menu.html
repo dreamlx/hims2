@@ -16,9 +16,11 @@
 			var openidpara = paraall?paraall.split('?')[1]:"";
 			if(!openidpara){
 				if(para == "invest-list"){
-					getInfo.getopenid(1);
+					//getInfo.getopenid(1);
+					window.location.href = "http://wx.hehuifunds.com/auth/wechat?state=1";
 				}else if(para == "mine-invest"){
-					getInfo.getopenid(2);
+					//getInfo.getopenid(2);
+					window.location.href = "http://wx.hehuifunds.com/auth/wechat?state=2";
 				}
 			}
 
