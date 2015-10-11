@@ -1181,9 +1181,9 @@ input,button,textarea{
 /*--新增未整理--*/
 .icon-label{
 	display: block;
-	margin-right: 12px;
+	margin-right: 5%;
 	float: left;
-	width: 65px;
+	width: 20%;
 	font-style: normal;
 	text-align: center;
 	background-color: #E8E8E8;
@@ -1193,6 +1193,10 @@ input,button,textarea{
 }
 .about .dp{
 	line-height: 30px;
+}
+.about .dp span{
+	display: inline-block;
+	width: 75%;
 }
 .about .dp.first{
 	margin-top: 10px;
