@@ -22,21 +22,22 @@
 					//getInfo.getopenid(2);
 					window.location.href = "http://wx.hehuifunds.com/auth/wechat?state=2";
 				}
+				if(para!="about-me"){
+					var oidpara = openidpara.split("&")[0],
+					uidpara = openidpara.split("&")[1],
+					opid = "",
+					uid = "";
+					if(oidpara){
+						opid = oidpara.split("=")[1];
+					}
+					if(uidpara){
+						uid = uidpara.split("=")[1];
+					}
+					getInfo.getNewUserInfo(opid,uid);
+				}
 			}
 
-			if(para!="about-me"){
-				var oidpara = openidpara.split("&")[0],
-				uidpara = openidpara.split("&")[1],
-				opid = "",
-				uid = "";
-				if(oidpara){
-					opid = oidpara.split("=")[1];
-				}
-				if(uidpara){
-					uid = uidpara.split("=")[1];
-				}
-				getInfo.getNewUserInfo(opid,uid);
-			}
+			
 		
 			var store = getInfo.checkstorage();
 			if(!store || !store.name || !store.email){
