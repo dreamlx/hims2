@@ -11,13 +11,37 @@
 	<script type="text/javascript" src="./js/pe.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			var paraall = getInfo.getUrlPara()[0];
+			var para = paraall.split('?')[0];
+			var openidpara = paraall.split('?')[1];
+			if(!openidpara){
+				if(para == "invest-list"){
+					getInfo.getopenid(1);
+				}elseif(para == "mine-invest"){
+					getInfo.getopenid(2);
+				}
+			}
+			
+			if(para!="about-me"){
+				var oidpara = openidpara.split("&")[0],
+				uidpara = openidpara.split("&")[1],
+				opid = "",
+				uid = "";
+				if(oidpara){
+					opid = oidpara.split("=")[1];
+				}
+				if(uidpara){
+					uid = uidpara.split("=")[1];
+				}
+				getInfo.getNewUserInfo(opid,uid);
+			}
+		
 			var store = getInfo.checkstorage();
 			if(!store || !store.name || !store.email){
 				getInfo.turnprofilecreat();
 			}else{
 				//停留该页
 				//进入显示方法还要改,默认第一个
-				var para = getInfo.getUrlPara()[0];
 				if(para){
 					switch(para){
 						case "invest-list":

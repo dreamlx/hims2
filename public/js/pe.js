@@ -855,6 +855,18 @@ window.submit = {
         if(!this.validate.registerSubmit(form))return false;
         var cellNum = form.find('#inputCell').val();
         var checkCodeNum = form.find('#inputCheckcode').val();
+        var ref= window.location.href,
+        openidpara = ref.split('?')[1],
+        oid = "",
+        uid = "";
+        if(openidpara){
+            if(openidpara.split('?')[0]&&openidpara.split('?')[0].split('=')){
+                oid = openidpara.split('?')[0].split('=')[1];
+            }
+            if(openidpara.split('?')[1]&&openidpara.split('?')[1].split('=')){
+                uid = openidpara.split('?')[0].split('=')[1];
+            }
+        }
         check.error.hideall(btn);
         check.unbind.btn(btn,"click");
         $.ajax({
@@ -865,7 +877,7 @@ window.submit = {
                 {
                     cell: cellNum,
                     code: checkCodeNum,
-                    open_id: "111"
+                    open_id: oid
                 }
             },
             dataType:"json",
@@ -1795,6 +1807,23 @@ window.submit = {
 }
 
 window.getInfo = {
+    getopenid:function(state){
+        var result = false;
+        $.ajax({
+            url:'http://wx.hehuifunds.com/auth/wechat?state='+state),
+            async: false,
+            type:'GET',
+            data:{},
+            dataType:"json",
+            success:function(data){
+                result = data;
+            },
+            error:function(data){
+                result =  false;
+            }
+        });
+        return result;
+    },
     checkstorage:function(){
         if($.session.get('HIMS_APP_STORE')!=undefined){
             return this.getSession('HIMS_APP_STORE');
@@ -2184,6 +2213,24 @@ window.getInfo = {
             }
         });
         return result;
+    },
+    getNewUserInfo:function(openid,uid){
+        $.ajax({
+            url:getInfo.getUrl.fullurl('api/users/'+uid),
+            async: false,
+            type:'GET',
+            data:{},
+            dataType:"json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + openid + "\"");
+            },
+            success:function(data){
+                getInfo.setSession('HIMS_APP_STORE',data.user);
+            },
+            error:function(data){
+                alert('获取用户信息失败，请刷新重试！');
+            }
+        });
     },
     getUserInfo:function(){
         var store = getInfo.checkstorage(),
