@@ -1829,6 +1829,10 @@ window.getInfo = {
             return this.getSession('HIMS_APP_STORE');
         }else if($.cookie('HIMS_APP_STORE')!=undefined){
             return this.getCookie('HIMS_APP_STORE');
+        }else if(window.localStorage.getItem("HIMS_APP_STORE")){
+            var value = window.localStorage.getItem("HIMS_APP_STORE");
+            var result = JSON.parse(unescape(value));
+            return result;
         }else{
             return false;
         }
@@ -1838,6 +1842,8 @@ window.getInfo = {
     },
     setSession:function(name,value){
         $.session.set(name,escape(JSON.stringify(value)));
+        //localStorage也存了
+        window.localStorage.setItem(name,escape(JSON.stringify(value)));
     },
     deleteCookie:function(name){
         $.cookie(name,"",{ expires: -1 });
