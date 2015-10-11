@@ -63,9 +63,9 @@ class Api::UsersController < Api::BaseController
     user = User.find_by(open_id: open_id)
     if user
       if request.env["omniauth.params"]["state"] == "1"
-        redirect_to "http://wx.hehuifunds.com/menu.html#invest-list?open_id=#{open_id}"
+        redirect_to "http://wx.hehuifunds.com/menu.html#invest-list?open_id=#{open_id}&user_id=#{user.id}"
       elsif request.env["omniauth.params"]["state"] == "2"
-        redirect_to "http://wx.hehuifunds.com/menu.html#mine-invest?open_id=#{open_id}"
+        redirect_to "http://wx.hehuifunds.com/menu.html#mine-invest?open_id=#{open_id}&user_id=#{user.id}"
       end
     else
       redirect_to "http://wx.hehuifunds.com/register.html?open_id=#{open_id}"
