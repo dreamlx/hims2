@@ -12,16 +12,16 @@
 	<script type="text/javascript">
 		$(function(){
 			var paraall = getInfo.getUrlPara()[0];
-			var para = paraall.split('?')[0];
-			var openidpara = paraall.split('?')[1];
+			var para = paraall?paraall.split('?')[0]:"";
+			var openidpara = paraall?paraall.split('?')[1]:"";
 			if(!openidpara){
 				if(para == "invest-list"){
 					getInfo.getopenid(1);
-				}elseif(para == "mine-invest"){
+				}else if(para == "mine-invest"){
 					getInfo.getopenid(2);
 				}
 			}
-			
+
 			if(para!="about-me"){
 				var oidpara = openidpara.split("&")[0],
 				uidpara = openidpara.split("&")[1],

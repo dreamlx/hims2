@@ -1810,7 +1810,7 @@ window.getInfo = {
     getopenid:function(state){
         var result = false;
         $.ajax({
-            url:'http://wx.hehuifunds.com/auth/wechat?state='+state),
+            url:'http://wx.hehuifunds.com/auth/wechat?state='+state,
             async: false,
             type:'GET',
             data:{},
