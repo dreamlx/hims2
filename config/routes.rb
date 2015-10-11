@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get     'login'   => 'sessions#new'
   post    'login'   => 'sessions#create'
   delete  'logout'  => 'sessions#destroy'
+  match "auth/:provider/callback", :to => "api/users#check_open_id", via: [:get]
   namespace :api do
     resources :users, only: [:create, :update, :show], defaults: {format: :json} do
       get :send_code, on: :collection, defaults: {format: :json}

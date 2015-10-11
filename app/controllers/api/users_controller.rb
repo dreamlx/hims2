@@ -58,6 +58,20 @@ class Api::UsersController < Api::BaseController
     render json: @investors
   end
 
+  def check_open_id
+    open_id = request.env["omniauth.auth"]["uid"]
+    user = User.find_by(open_id: open_id)
+    if user
+      if request.env["omniauth.params"]["state"] == "1"
+        redirect_to "http://wx.hehuifunds.com/menu.html#invest-list?open_id=#{open_id}"
+      elsif request.env["omniauth.params"]["state"] == "2"
+        redirect_to "http://wx.hehuifunds.com/menu.html#mine-invest?open_id=#{open_id}"
+      end
+    else
+      redirect_to "http://wx.hehuifunds.com/register.html?open_id=#{open_id}"
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(

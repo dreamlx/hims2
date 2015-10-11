@@ -775,7 +775,7 @@ self-defined memu
     {  
       "type":"view",
       "name":"我要投资",
-      "url":"http://wx.hehuifunds.com/unuse-login.html"
+      "url":"http://wx.hehuifunds.com/menu.html#invest-list"
     },
     {
       "type":"view",
