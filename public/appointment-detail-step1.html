@@ -97,7 +97,7 @@
 						}else if(infos[i].state == "已确认"){
 							template.find('.icon-ahead .icon').addClass("icon-gright");
 						}
-						$("#moneyForm").append(template.find(".form-line"));
+						$("#moneyForm").append(template.find(".form-line,.alert"));
 					}
 				}
 				//删除按钮
@@ -123,19 +123,15 @@
 	            if(check.img($(this))){
 	                var input = $(this);
 	                var f = input[0].files[0];
-	                var src = window.URL.createObjectURL(f);
 	                var label = input.prev();
-	                if(label.attr("data-src") != src && src){
-	                    var img = $("<img />").attr('src',src);
+	                var reader = new FileReader();
+	                reader.onload=function(e){
+	                    input.attr('data-code',reader.result);
+	                    var img = $("<img />").attr('src',reader.result);
 	                    label.empty().append(img);
-	                    label.attr("data-src",src);
-	                    var reader = new FileReader();
-	                    reader.onload=function(e){
-	                        input.attr('data-code',reader.result);
-	                    }
-	                    if(f!=undefined){
-	                       reader.readAsDataURL(f); 
-	                    }
+	                }
+	                if(f){
+	                   reader.readAsDataURL(f); 
 	                }
 	            }
 	        });
@@ -268,12 +264,14 @@
 					<i class="unit">万</i>
 				</span>
 			</div>
+			<div class="alert" role="alert" name=""></div>
 			<div class="form-line">
 				<label class="icon-ahead"><i class="icon "></i>打款日期</label>
 				<span class="input-box nochange">
 					<input type="date" readonly />
 				</span>
 			</div>
+			<div class="alert" role="alert" name=""></div>
 			<div class="form-line">
 				<label class="icon-ahead"><i class="icon "></i>打款凭条</label>
 				<span class="img-box">
@@ -281,6 +279,7 @@
 					<input class="hide" type="file" readonly />
 				</span>
 			</div>
+			<div class="alert" role="alert" name=""></div>
 		</div>
 		<div id="string-template">
 			<div class="form-line">
