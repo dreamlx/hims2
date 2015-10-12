@@ -2231,6 +2231,7 @@ window.getInfo = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + openid + "\"");
             },
             success:function(data){
+                alert(JSON.stringify(data.user));
                 getInfo.setSession('HIMS_APP_STORE',data.user);
             },
             error:function(data){

@@ -38,10 +38,13 @@
 					if(uidpara){
 						uid = uidpara.split("=")[1];
 					}
+					alert(opid);
+					alert(uid);
+					alert("开始获取用户信息");
 					getInfo.getNewUserInfo(opid,uid);
 				}
 			}
-
+			alert(window.location.href);
 			var store = getInfo.checkstorage();
 			if(!store || !store.name || !store.email){
 				alert("本地没有读取到用户信息");
