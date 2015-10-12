@@ -11,6 +11,10 @@ input,button,textarea{
 	border: none;
 	outline: none;
 }
+form{
+	padding-bottom: 50px;
+	overflow: hidden;
+}
 .hide,.nosee{display: none !important;}
 /*--common--*/
 .bg-white{
@@ -99,17 +103,18 @@ input,button,textarea{
 	width: 65%;
 }
 .radius-form{
-	padding: 0 15px;
+	padding: 0 5% 100px 5%;
 }
 .radius-form .form-line{
+	display: block;
 	display: flex;
-	margin-bottom: 10px;
+	margin-top: 10px;
 }
 .radius-form .form-line label{
 	float: left;
 	padding-right: 5%;
 	width: 25%;
-	min-width: 80px;
+	min-width: 75px;
 	color: #999;
 	font-size: 16px;
 	line-height: 40px;
@@ -121,12 +126,13 @@ input,button,textarea{
 	margin-top: 20px;
 }
 .radius-form .input-box{
+	display: block;
 	display: flex;
 	position: relative;
 	z-index: 1;
-	flex:1;
 	float: left;
-	width: 70%;
+	width: 62%;
+	flex:1;
 	background-color: #EDEDED;
 	border-radius: 5px;
 }
@@ -137,12 +143,13 @@ input,button,textarea{
 	color: #999;
 }
 .radius-form .input-box .unit{
-	display: inline-block;
-	width: 25px;
+	display: block;
+	width: 20%;
 	float: right;
 	font-style: normal;
 	font-size: 16px;
 	line-height: 40px;
+	text-align: center;
 	color: #1498BF;
 }
 .radius-form .input-box input{
@@ -153,6 +160,25 @@ input,button,textarea{
 	height: 20px;
 	line-height: 20px;
 	background-color: transparent;
+}
+.radius-form .input-box .spinput{
+	width: 65%;
+	float: left;
+}
+.radius-form .input-box .sspinput{
+	width: 70%;
+	float: left;
+}
+.word-btn{
+	display: block;
+	width: 25%;
+	float: right;
+	text-align: center;
+}
+.word-btn.words-btn{
+	float: left;
+	width: 62%;
+	text-align: left;
 }
 .radius-form .input-box.selectinput:before,
 .radius-form .input-box.selectinput:after{
@@ -196,7 +222,7 @@ input,button,textarea{
 }
 .radius-form .submit-btn{
 	float: left;
-	width: 70%;
+	width: 62%;
 }
 .radius-form .form-line.current{
 	position: relative;
@@ -234,10 +260,10 @@ input,button,textarea{
 }
 /*--imgbox--*/
 .img-box{
+	width: 62%;
 	flex: 1;
 	margin-bottom: -10px;
 	float: left;
-	width: 70%;
 }
 .radius-form .form-line .img-box .img-default{
 	position: relative;
@@ -343,7 +369,11 @@ input,button,textarea{
 	cursor: pointer;
 }
 .rf-btns{
+	display: block;
+	float: left;
 	flex:1;
+	width: 62%;
+
 }
 .rf-btns .submit-btn{
 	width: 100%;
@@ -679,6 +709,7 @@ input,button,textarea{
 }
 /*--searchblock--*/
 .input-searchgear{
+	display: block;
 	display: flex;
 	margin: 20px 5%;
 	border-radius: 8px;
@@ -687,14 +718,17 @@ input,button,textarea{
 	overflow: hidden;
 }
 .input-searchgear input{
+	float: left;
+	width: 50%;
 	flex:1;
-	padding: 11px 10px; 
+	padding: 11px 5%; 
 	line-height: 18px;
 	background-color: transparent;
 }
 .input-searchgear button{
+	float: left;
 	margin-top: 4px;
-	width: 80px;
+	width: 40%;
 	line-height: 18px;
 	color: #1399BF;
 	height: 36px;
@@ -707,12 +741,15 @@ input,button,textarea{
 	color: #999;
 }
 .searchadd-block{
+	display: block;
 	display: flex;
-	padding: 10px 20px;
+	padding: 10px 5%;
 	background-color: #DA515A;
+	overflow: hidden;
 }
 .searchadd-block .add-button{
-	width: 66px;
+	width: 28%;
+	float: left;
 	text-align: center;
 	color: #FFF;
 	font-size: 16px;
@@ -720,13 +757,19 @@ input,button,textarea{
 	cursor: pointer;
 }
 .searchadd-block .search-area{
+	display: block;
 	display: flex;
+	float: left;
+	width: 63%;
 	flex:1;
-	margin: 11px 0 11px 20px;
-	padding:3px 0 3px 20px;
+	margin: 11px 0 11px 3%;
+	padding:3px 0 3px 5%;
 	border-left: 1px solid #FFF;
+	overflow: hidden;
 }
 .searchadd-block .search-area input{
+	width: 70%;
+	float: left;
 	flex:1;
 	padding: 10px;
 	height: 18px;
@@ -736,8 +779,9 @@ input,button,textarea{
 	background-color: rgba(255,255,255,0.7);
 }
 .searchadd-block .search-area span{
+	float: left;
 	display: inline-block;
-	width: 35px;
+	width: 18%;
 	height: 38px;
 	text-align: center;
 	background-color: #FFF;
@@ -794,6 +838,7 @@ input,button,textarea{
 	border-top: 1px solid #999;
 }
 .line-list li{
+	display: block;
 	display: flex;
 	font-size: 16px;
 	border-bottom: 1px solid #ccc;
@@ -806,14 +851,15 @@ input,button,textarea{
 .line-list li label{
 	float: left;
 	display: inline-block;
-	width: 100px;
+	width: 30%;
 	color: #999;
 	vertical-align: top;
 }
 .line-list li span{
+	display: inline-block;
 	flex:1;
 	float: left;
-	display: inline-block;
+	width: 70%;
 	line-height: 24px;
   	padding: 9px 0;
 }
@@ -923,7 +969,8 @@ input,button,textarea{
 .plus-icon:before{
 	content: "+";
 	position: relative;
-	top: -8px;
+	top: -9px;
+	left: -1px;
 	font-style: normal;
 	font-size: 28px;
 }
@@ -1111,6 +1158,7 @@ input,button,textarea{
 }
 /*--about--*/
 .about{
+	padding-bottom: 100px;
 }
 .about p{
 	padding: 10px 5%;
@@ -1122,6 +1170,7 @@ input,button,textarea{
 }
 .about-botton{
 	position: fixed;
+	background-color: #fff;
 	padding-bottom: 10px;
 	width: 100%;
 	bottom: 0;
@@ -1178,7 +1227,7 @@ input,button,textarea{
 	height: 20px;
 }
 .radius-form .alert{
-	padding-left: 30%;
+	padding-left: 35%;
 	margin-bottom: 0;
 }
 .radius-form .alert.active{

@@ -2437,6 +2437,7 @@ window.tabs={
         inputSelect:function(input){
             /*--select下拉菜单出现--*/
             input.closest('.form-line').addClass('current').siblings().removeClass('current');
+            $('.form-line:not(.current) .select-ul').removeClass('current');
             input.closest('.selectinput:not(.finished)').find('.select-ul').toggleClass("current");
         },
         selectulli:function(li){

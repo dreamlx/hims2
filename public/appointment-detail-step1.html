@@ -3,7 +3,7 @@
 <head>
 	<title>预约详情</title>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
 	<link rel="stylesheet" type="text/css" href="./css/pe.css">
 	<script type="text/javascript" src="./js/us.js"></script>
@@ -182,7 +182,7 @@
 				<div class="form-line">
 					<label class="icon-ahead"><i class="icon icon-gright"></i>证件号码</label>
 					<span class="input-box finished">
-						<input type="number" id="inputIdno" readonly />
+						<input type="text" class="spinput" id="inputIdno" readonly />
 						<button class="word-btn blue" id="editCustomerBtn" data-turn="customer-detail">编辑</button>
 					</span>
 				</div>
@@ -191,7 +191,7 @@
 				<div class="form-line">
 					<label class="icon-ahead" for="inputMoney"><i class="icon "></i>打款金额</label>
 					<span class="input-box">
-						<input type="number" id="inputMoney" placeholder="请输入打款金额" />
+						<input type="text" class="sspinput" id="inputMoney" placeholder="请输入打款金额" />
 						<i class="unit">万</i>
 					</span>
 				</div>
@@ -223,6 +223,7 @@
 						</ul>
 					</span>
 				</div>
+				<div class="alert" role="alert" name=""></div>
 				<div class="form-line">
 					<label class="icon-ahead"><i class="icon "></i>备注</label>
 					<span class="input-box">
@@ -231,7 +232,8 @@
 				</div>
 				<div class="alert" role="alert" name="inputRemark"></div>
 				<div class="form-line">
-					<label>&nbsp;</label>
+					<label  class="icon-ahead">&nbsp;
+					</label>
 					<div class="rf-btns">
 						<button class="submit-btn orange-btn" id="submitBtn" name="appointmentUpdate">提交</button>
 						<button class="submit-btn red-btn"  id="showdelete">删除此订单</button>
@@ -262,7 +264,7 @@
 			<div class="form-line">
 				<label class="icon-ahead"><i class="icon "></i>打款金额</label>
 				<span class="input-box nochange">
-					<input type="number" readonly />
+					<input type="text" class="sspinput" readonly />
 					<i class="unit">万</i>
 				</span>
 			</div>
