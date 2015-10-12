@@ -83,15 +83,20 @@ input,button,textarea{
 .full-form{
 }
 .full-form .form-line{
+	display: block;
 	display: flex;
 	margin-bottom: 1px;
 	height: 42px;
 }
 .full-form .form-line input{
+	width: 95%;
 	flex:1;
 	height: 18px;
 	line-height: 18px;
-	padding: 12px 15px;
+	padding: 12px 2.5%;
+}
+.full-form .form-line input.notfull{
+	width: 65%;
 }
 .radius-form{
 	padding: 0 15px;
@@ -284,7 +289,8 @@ input,button,textarea{
 }
 .rect-btn{
 	display: block;
-	width: 140px;
+	float: right;
+	width: 30%;
 	height: 40px;
 	font-size: 16px;
 	line-height: 40px;

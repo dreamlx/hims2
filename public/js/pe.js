@@ -781,7 +781,6 @@ window.check = {
                 var label = input.prev();
                 var reader = new FileReader();
                 reader.onload=function(e){
-                    alert(readr.result);
                     input.attr('data-code',reader.result);
                     var img = $("<img />").attr('src',reader.result);
                     label.empty().append(img);
@@ -2232,7 +2231,7 @@ window.getInfo = {
                 getInfo.setSession('HIMS_APP_STORE',data.user);
             },
             error:function(data){
-                alert('获取用户信息失败，请刷新重试！');
+                //alert('获取用户信息失败，请刷新重试！');
             }
         });
     },
