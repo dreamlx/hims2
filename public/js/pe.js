@@ -927,7 +927,7 @@ window.submit = {
                     check.error.alertsuccess(btn,check.error.errorInfo.creatprofilesuccess);
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
-                        getInfo.turnmenu();
+                        getInfo.turnmenu("invest-list");
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.creatprofilefail);
