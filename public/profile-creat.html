@@ -13,9 +13,9 @@
 		$(function(){
 			var store = getInfo.checkstorage();
 			if(!store){
-				getInfo.turnregister();
+				getInfo.turnmenu("#invest-list");
 			}else if(store.name && store.email){
-				getInfo.turnmenu();
+				getInfo.turnmenu("#invest-list");
 			}else{
 				//停留该页
 				$("#inputCell").val(store.cell||"");

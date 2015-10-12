@@ -775,12 +775,12 @@ self-defined memu
     {  
       "type":"view",
       "name":"我要投资",
-      "url":"http://wx.hehuifunds.com/menu.html#invest-list"
+      "url":"http://wx.hehuifunds.com/auth/wechat?state=1"
     },
     {
       "type":"view",
       "name":"我的投资",
-      "url":"http://wx.hehuifunds.com/menu.html#mine-invest"
+      "url":"http://wx.hehuifunds.com/auth/wechat?state=2"
     },
     {
       "type":"view",

@@ -13,7 +13,7 @@
 		$(function(){
 			var store = getInfo.checkstorage();
 			if(!store || !store.name || !store.email){
-				getInfo.turnprofilecreat();
+				//getInfo.turnprofilecreat();
 			}else{
 				var customers = getInfo.getCustomerMine();
 				if(customers.personal && customers.personal.length>0){

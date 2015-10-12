@@ -991,18 +991,18 @@ window.submit = {
             },
             success:function(data){
                 if(data.user && data.user.id>0){
-                    alert("登录成功");
+                    //alert("登录成功");
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
                         getInfo.turnprofilecreat();
                     },3000);
                 }else{
-                    alert("登录失败");
+                    //alert("登录失败");
                     submit.bind.loginSubmitBind();
                 }
             },
             error:function(data){
-                alert("登录失败");
+                //alert("登录失败");
                 submit.bind.loginSubmitBind();
             }
         });
@@ -2231,7 +2231,7 @@ window.getInfo = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + openid + "\"");
             },
             success:function(data){
-                alert(JSON.stringify(data.user));
+                //alert(JSON.stringify(data.user));
                 getInfo.setSession('HIMS_APP_STORE',data.user);
             },
             error:function(data){
