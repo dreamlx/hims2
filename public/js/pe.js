@@ -777,23 +777,17 @@ window.check = {
         #inputImgSend").bind("change",function(e){
             if(check.img($(this))){
                 var input = $(this);
-                alert(input.val());
                 var f = input[0].files[0];
-                var src = window.URL.createObjectURL(f);
-                alert(src);
                 var label = input.prev();
-                if(label.attr("data-src") != src && src){
-                    var img = $("<img />").attr('src',src);
+                var reader = new FileReader();
+                reader.onload=function(e){
+                    alert(readr.result);
+                    input.attr('data-code',reader.result);
+                    var img = $("<img />").attr('src',reader.result);
                     label.empty().append(img);
-                    label.attr("data-src",src);
-                    var reader = new FileReader();
-                    reader.onload=function(e){
-                        alert(readr.result);
-                        input.attr('data-code',reader.result);
-                    }
-                    if(f!=undefined){
-                       reader.readAsDataURL(f); 
-                    }
+                }
+                if(f){
+                   reader.readAsDataURL(f); 
                 }
             }
         });
