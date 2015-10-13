@@ -661,7 +661,8 @@ form{
 	margin-right: 0;
 	border: none;
 }
-.c-subsearch li.on{
+.c-subsearch li.on,
+.c-subsearch li:hover{
 	color: #1498BF;
 }
 /*--tabs--*/

@@ -38,8 +38,11 @@
 						$("#line-list").append(template);
 					});
 				}
-				$('#c-subsearch li').on('click',function(){
+
+				$('#c-subsearch li').bind('click',function(){
 					var index = $(this).index();
+					$('#c-subsearch li').removeClass('on');
+					$(this).addClass('on');
 					switch(index){
 						case 0:
 							$('#line-list li').removeClass('nosee');

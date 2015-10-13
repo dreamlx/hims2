@@ -88,7 +88,7 @@
 					var money = order.money_receipts
 					for(var i=0;i<money.length;i++){
 						var template = $("#money-template").clone();
-						template.find('input[type=number]').val(money[i].amount);
+						template.find('input[type=number]').val(money[i].bank_charge);
 						template.find('input[type=date]').val(money[i].date);
 						template.find('.img-default').append('<img />')
 							.find('img').attr('src',money[i].attach.attach.url);

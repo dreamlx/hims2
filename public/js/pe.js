@@ -752,10 +752,7 @@ window.check = {
             check.mail($(this));
         });
         //模拟select的特殊验证
-        $("#type-select+.select-ul li,\
-            #inputId_typeP+.select-ul li,\
-            #inputInvesterSelect+.select-ul li,\
-            #inputSendState+.select-ul li").bind("click",function(){
+        $("#inputId_typeP+.select-ul li").bind("click",function(){
             check.select($(this),$(this).closest('.selectinput').find('.input-select'));
         });
         $("#inputId_noP").bind("blur",function(){
@@ -987,18 +984,15 @@ window.submit = {
             },
             success:function(data){
                 if(data.user && data.user.id>0){
-                    //alert("登录成功");
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
                         getInfo.turnprofilecreat();
                     },3000);
                 }else{
-                    //alert("登录失败");
                     submit.bind.loginSubmitBind();
                 }
             },
             error:function(data){
-                //alert("登录失败");
                 submit.bind.loginSubmitBind();
             }
         });
@@ -1596,9 +1590,6 @@ window.submit = {
             if(!check.require.address(form.find('#inputAddress'))){
                 return false;
             }
-            if(!check.select(null,form.find('#inputInvesterSelect'))){
-                return false;
-            }
             if(!check.money(form.find('#inputMoney'))){
                 return false;
             }
@@ -1624,9 +1615,6 @@ window.submit = {
                 return false;
             }
             if(!check.img(form.find('#inputImgSend'))){
-                return false;
-            }
-            if(!check.select(null,form.find('#inputSendState'))){
                 return false;
             }
             if(!check.text(form.find('#inputRemark'))){
@@ -1812,11 +1800,8 @@ window.getInfo = {
             data:{},
             dataType:"json",
             success:function(data){
-                alert(state);
-                alert("getopenid执行成功");
             },
             error:function(data){
-                alert("getopenid执行失败");
             }
         });
     },
@@ -2227,11 +2212,9 @@ window.getInfo = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + openid + "\"");
             },
             success:function(data){
-                //alert(JSON.stringify(data.user));
                 getInfo.setSession('HIMS_APP_STORE',data.user);
             },
             error:function(data){
-                //alert('获取用户信息失败，请刷新重试！');
             }
         });
     },
