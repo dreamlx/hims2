@@ -19,7 +19,7 @@
 				var fundlist = getInfo.getFundList();
 				if(!fundlist){
 					alert("网络原因，获取列表失败，点击确定重试！");
-					window.location.reload();
+					window.location.reload(true);
 				}else{
 					_.each(fundlist,function(fund,key){
 						var item = $("#template .product").clone();

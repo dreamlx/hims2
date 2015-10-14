@@ -1073,7 +1073,7 @@ window.submit = {
                         if(back){
                             window.history.back();
                         }else{
-                            window.location.reload();
+                            window.location.reload(true);
                         }
                     },3000);
                 }else{
@@ -1161,7 +1161,7 @@ window.submit = {
                         if(back){
                             window.history.back();
                         }else{
-                            window.location.reload(); 
+                            window.location.reload(true); 
                         }
                     },3000);
                 }else{
@@ -1309,7 +1309,7 @@ window.submit = {
         if(states==true){
             check.error.alertsuccess(btn,check.error.errorInfo.appointmentupdatesuccess);
             setTimeout(function(){
-                 window.location.reload();
+                 window.location.reload(true);
             },3000);
         }else{
             check.error.alertfail(btn,"error",check.error.errorInfo.appointmentupdatefail);
@@ -1402,7 +1402,7 @@ window.submit = {
                 if(data.user && data.user.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.profileUpdatesuccess);
                     setTimeout(function(){
-                        window.location.reload();
+                        window.location.reload(true);
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.profileUpdatefail);
@@ -1852,7 +1852,7 @@ window.getInfo = {
         var subhref = getInfo.getSiteUrl.host+href.substring(href.lastIndexOf('/')+1,href.length);
         subhref = subhref.split("#")[0];
         if(subhref==getInfo.getSiteUrl.fullurl("menu.html")){
-            window.location.reload();
+            window.location.reload(true);
         }
     },
     turnproductliststep1:function(){
