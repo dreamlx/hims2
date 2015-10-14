@@ -441,7 +441,7 @@ window.check = {
     img:function(input){
         var type = input.val().substr(input.val().lastIndexOf(".")).toLowerCase();
         var alertarea =  input.closest('.form-line').next();
-        if(type!='.png'&&type!=''){
+        if(type!='.png'&&type!='.jpg'&&type!='.jpeg'&&type!='.gif'&&type!=''){
             check.error.alertrun(alertarea,check.error.errorInfo.imgformattype,0);
             return false;
         };
@@ -606,7 +606,7 @@ window.check = {
             selectnullid:"请选择证件类型",
             selectnull:"请选择正确的投资人",
             idnotype:"您的证件号码格式有误",
-            imgformattype:"请上传格式为png的图片文件",
+            imgformattype:"请上传图片文件",
             imgsizetype:"图片文件过大，请上传10M以下的图片",
             texttype:"描述文字请误超过200字",
             addresstype:"地址请误超过100字",
