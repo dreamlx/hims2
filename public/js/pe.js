@@ -320,7 +320,7 @@ jQuery.cookie = function(name, value, options) {
 window.check = {
     cell:function(input){
         var val = input.val();
-        var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+        var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
         if(val!="" && !reg.test(val)){
             check.error.alert(input,check.error.errorInfo.celltype);
             return false;
