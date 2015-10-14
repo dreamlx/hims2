@@ -36,29 +36,27 @@
 					}
 					getInfo.getNewUserInfo(opid,uid);
 				}
+				var store = getInfo.checkstorage();
+				if(!store || !store.name || !store.email){
+					getInfo.turnprofilecreat();
+				}
 			}
-			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				//停留该页
-				//进入显示方法还要改,默认第一个
-				if(para){
-					switch(para){
-						case "invest-list":
-							$("#menu .menu").addClass("hide")
-								.filter("#invest-list").removeClass("hide");
-							break;
-						case "mine-invest":
-							$("#menu .menu").addClass("hide")
-								.filter("#mine-invest").removeClass("hide");
-							break;
-						case "about-me":
-							$("#menu .menu").addClass("hide")
-								.filter("#about-me").removeClass("hide");
-							break;
-						default:
-					}
+
+			if(para){
+				switch(para){
+					case "invest-list":
+						$("#menu .menu").addClass("hide")
+							.filter("#invest-list").removeClass("hide");
+						break;
+					case "mine-invest":
+						$("#menu .menu").addClass("hide")
+							.filter("#mine-invest").removeClass("hide");
+						break;
+					case "about-me":
+						$("#menu .menu").addClass("hide")
+							.filter("#about-me").removeClass("hide");
+						break;
+					default:
 				}
 			}
 		});
