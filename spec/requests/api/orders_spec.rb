@@ -185,6 +185,51 @@ RSpec.describe "orders" do
       expect(json["photo"]["photo"]["url"]).to eq info.photo.url
       expect(json["state"]).to eq info.state
     end
+
+    it "failed to show the requested order without right user" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      another_user = create(:user)
+      individual = create(:individual, user_id: another_user.id)
+      order = create(:order, investable: individual)
+      info = create(:info, order_id: order.id)
+      get "/api/orders/#{order.id}",{}, valid_header
+      expect(response).not_to be_success
+      expect(response).to have_http_status(422)
+    end
+
+    it "show the requested order" do
+      adviser_user = create(:user)
+      investor_user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{investor_user.open_id}")
+      }
+      individual = create(:individual, user_id: adviser_user.id)
+      order = create(:order, investable: individual)
+      info = create(:info, order_id: order.id)
+      get "/api/orders/#{order.id}",{number: individual.id_no}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)["order"]
+      expect(json["id"]).to eq order.id
+      expect(json["investable_id"]).to eq order.investable_id
+      expect(json["investable_type"]).to eq order.investable_type
+      expect(json["product_id"]).to eq order.product_id
+      expect(json["user_id"]).to eq adviser_user.id
+      expect(json["amount"]).to eq order.amount.to_s
+      expect(json["due_date"]).to eq order.due_date.to_date.to_s
+      expect(json["mail_address"]).to eq order.mail_address
+      expect(json["other"]["other"]["thumb"]["url"]).to eq order.other.thumb.url
+      expect(json["remark"]).to eq order.remark
+      expect(json["state"]).to eq '已经预约，等待完成报单'
+      expect(json["booking_date"].to_date).to eq order.booking_date.to_date
+      expect(json["investor_name"]).to eq order.investable.name
+      expect(json["product_name"]).to eq order.product.name
+      expect(json["currency"]).to eq order.product.currency
+      expect(json["number"]).to eq order.investable.id_no
+    end
   end
 
   describe "PATCH update_infos" do

@@ -29,6 +29,8 @@ class Api::OrdersController < Api::BaseController
 
   def show
     @order = current_user.orders.find_by(id: params[:id])
+    investors_ids = Individual.where(id_no: params[:number]).ids + Institution.where(organ_reg: params[:number]).ids
+    @order = Order.where(investable_id: investors_ids).find_by(id: params[:id]) if @order.nil?
     return api_error(status: 422) if @order.nil?
   end
 

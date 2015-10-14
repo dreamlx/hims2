@@ -155,7 +155,6 @@ RSpec.describe "products" do
       expect(response).to be_success
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)["product"]
-      expect(json).to eq ""
       expect(json["id"]).to eq product.id
       expect(json["name"]).to eq product.name
       expect(json["title4"]).to eq product.title4

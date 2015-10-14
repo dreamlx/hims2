@@ -445,11 +445,11 @@ response: same as below
 ```
 ### 获取预约单
 ```
-curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/{order.id}
+curl -X GET --header "Authorization: Token token=#{open_id}" -d "number=xxxxxx" http://localhost:3000/api/orders/{order.id}
 ```
 ```
 url:    http://localhost:3000/api/orders/{order.id}
-params: no
+params: {number: xxxxxx} #optional
 action: get
 response:
         {
@@ -744,7 +744,7 @@ response:
 ```
 ### 投资者请进【我的投资（投资者）】
 ```
-curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/by_number
+curl -X GET --header "Authorization: Token token=#{open_id}" -d "number=xxxxxx" http://localhost:3000/api/orders/by_number
 ```
 ```
 url:    http://localhost:3000/api/orders/by_number
