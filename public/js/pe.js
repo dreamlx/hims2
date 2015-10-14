@@ -483,10 +483,8 @@ window.check = {
     date:function(input){
         var val = input.val();
         if(val!=""){
-            var now = new Date().getTime(),
-                date = new Date(val).getTime(),
-                newdate = now + 1000*60*60*24*365*2;
-            if(now>date||newdate<date){
+            var date = new Date(val).getTime();
+            if( date<0){
                 check.error.alert(input,check.error.errorInfo.datetype);
                 return false;
             }  
@@ -613,7 +611,7 @@ window.check = {
             addressnull:"请填写地址",
             organotype:"注册机构号格式有误",
             organametype:"机构名称格式有误",
-            datetype:"到位时间应在现在之后，且不超过2两年",
+            datetype:"填写时间格式有误",
             datenull:"请填写到位时间",
             moneytype:"资金最小单位0.01万，且不超过10亿",
             moneynull:"请填写资金",
@@ -1357,6 +1355,7 @@ window.submit = {
             success:function(data){
                 if(data&&data.length>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.investchecksuccess);
+                    window.localStorage.setItem("HIMS_APP_CHECKID",checkid);
                     setTimeout(function(){
                         getInfo.turninvestmineinvestor(checkid);
                     },3000);
@@ -2098,6 +2097,11 @@ window.getInfo = {
         oid = getInfo.getUrlPara()[0];
         if(!oid)return false;
         store = getInfo.checkstorage();
+        var data = {};
+        var lsid = window.localStorage.getItem("HIMS_APP_CHECKID");
+        if(lsid){
+            data = {"number":lsid}
+        }
         $.ajax({
             url:getInfo.getUrl.fullurl('api/orders/'+oid),
             async: false,
