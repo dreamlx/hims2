@@ -642,6 +642,7 @@ window.check = {
             appointmentdeletefail:"由于网络原因删除订单未成功,请再次尝试",
             investchecksuccess:"验证信息成功",
             investcheckfail:"由于网络原因验证信息未成功,请再次尝试",
+            investcheckerror:"证件号错误",
             profileUpdatesuccess:"更新个人信息成功",
             profileUpdatefail:"由于网络原因更新信息未成功,请再次尝试",
         },
@@ -1073,7 +1074,7 @@ window.submit = {
                         if(back){
                             window.history.back();
                         }else{
-                            window.location.reload(true);
+                            window.location.reload();
                         }
                     },3000);
                 }else{
@@ -1161,7 +1162,7 @@ window.submit = {
                         if(back){
                             window.history.back();
                         }else{
-                            window.location.reload(true); 
+                            window.location.reload(); 
                         }
                     },3000);
                 }else{
@@ -1309,7 +1310,7 @@ window.submit = {
         if(states==true){
             check.error.alertsuccess(btn,check.error.errorInfo.appointmentupdatesuccess);
             setTimeout(function(){
-                 window.location.reload(true);
+                 window.location.reload();
             },3000);
         }else{
             check.error.alertfail(btn,"error",check.error.errorInfo.appointmentupdatefail);
@@ -1360,7 +1361,7 @@ window.submit = {
                         getInfo.turninvestmineinvestor(checkid);
                     },3000);
                 }else{
-                    check.error.alertfail(btn,"error",check.error.errorInfo.investcheckfail);
+                    check.error.alertfail(btn,"error",check.error.errorInfo.investcheckerror);
                     submit.bind.appointmentDeleteSubmitBind();
                 }
             },
@@ -1402,7 +1403,7 @@ window.submit = {
                 if(data.user && data.user.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.profileUpdatesuccess);
                     setTimeout(function(){
-                        window.location.reload(true);
+                        window.location.reload();
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.profileUpdatefail);
@@ -1852,7 +1853,7 @@ window.getInfo = {
         var subhref = getInfo.getSiteUrl.host+href.substring(href.lastIndexOf('/')+1,href.length);
         subhref = subhref.split("#")[0];
         if(subhref==getInfo.getSiteUrl.fullurl("menu.html")){
-            window.location.reload(true);
+            window.location.reload();
         }
     },
     turnproductliststep1:function(){
