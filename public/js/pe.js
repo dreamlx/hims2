@@ -2106,7 +2106,7 @@ window.getInfo = {
             url:getInfo.getUrl.fullurl('api/orders/'+oid),
             async: false,
             type:'GET',
-            data:{},
+            data:data,
             dataType:"json",
             beforeSend:function(XMLHttpRequest){
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
