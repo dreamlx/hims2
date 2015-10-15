@@ -19,7 +19,7 @@
 				var product = getInfo.getProductDetail();
 				if(!product){
 					alert("网络原因，获取产品失败，点击确定重试！");
-					window.location.reload();
+					window.location.reload(true);
 				}else{
 					var item = $("#product-detail");
 					item.find('.p-subtitle').text(product.product.abbr||"");
