@@ -638,6 +638,7 @@ window.check = {
             appointmentcreatfail:"由于网络原因创建预约未成功,请再次尝试",
             appointmentupdatesuccess:"提交更新订单信息成功",
             appointmentupdatefail:"由于网络原因更新订单未成功,请再次尝试",
+            appointmentupdateneed:"汇款信息没有填完整",
             appointmentdeletesuccess:"删除订单信息成功",
             appointmentdeletefail:"由于网络原因删除订单未成功,请再次尝试",
             investchecksuccess:"验证信息成功",
@@ -1251,6 +1252,12 @@ window.submit = {
             amount: form.find("#inputMoney").val(),
             date:form.find("#inputDate").val(),
         }
+        if(moneySubmit.amount||moneySubmit.date){
+            if(!moneySubmit.amount||!moneySubmit.date){
+                check.error.alertfail(btn,"error",check.error.errorInfo.appointmentupdateneed);
+                return false;
+            }
+        }
         var states = true;
         check.error.hideall(btn);
         check.unbind.btn(btn,"click");
@@ -1288,7 +1295,7 @@ window.submit = {
                 states=false;
             }
         });
-        if(moneySubmit.attach && moneySubmit.amount && moneySubmit.date){
+        if(moneySubmit.attach || moneySubmit.amount || moneySubmit.date){
            $.ajax({
                 url:getInfo.getUrl.fullurl('api/orders/'+ oid + '/money_receipts'),
                 type:'POST',

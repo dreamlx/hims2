@@ -88,10 +88,28 @@
 					var money = order.money_receipts
 					for(var i=0;i<money.length;i++){
 						var template = $("#money-template").clone();
-						template.find('input[type=number]').val(money[i].bank_charge);
-						template.find('input[type=date]').val(money[i].date);
-						template.find('.img-default').append('<img />')
+						if(money[i].amount){
+							template.find('input[type=text]').val(money[i].amount);
+						}else{
+							var fl = template.find('input[type=text]').closest('.form-line');
+							fl.next().remove();
+							fl.remove();
+						}
+						if(money[i].date){
+							template.find('input[type=date]').val(money[i].date);
+						}else{
+							var fl = template.find('input[type=date]').closest('.form-line');
+							fl.next().remove();
+							fl.remove();
+						}
+						if(money[i].attach.attach.url){
+							template.find('.img-default').append('<img />')
 							.find('img').attr('src',money[i].attach.attach.url);
+						}else{
+							var fl = template.find('input[type=file]').closest('.form-line');
+							fl.next().remove();
+							fl.remove();
+						}
 						if(money[i].state == "未确认"){
 							template.find('.icon-ahead .icon').addClass("icon-rwrong");
 						}else if(infos[i].state == "已确认"){
