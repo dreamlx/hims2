@@ -642,6 +642,7 @@ window.check = {
             appointmentdeletefail:"由于网络原因删除订单未成功,请再次尝试",
             investchecksuccess:"验证信息成功",
             investcheckfail:"由于网络原因验证信息未成功,请再次尝试",
+            investcheckerror:"证件号错误",
             profileUpdatesuccess:"更新个人信息成功",
             profileUpdatefail:"由于网络原因更新信息未成功,请再次尝试",
         },
@@ -1360,7 +1361,7 @@ window.submit = {
                         getInfo.turninvestmineinvestor(checkid);
                     },3000);
                 }else{
-                    check.error.alertfail(btn,"error",check.error.errorInfo.investcheckfail);
+                    check.error.alertfail(btn,"error",check.error.errorInfo.investcheckerror);
                     submit.bind.appointmentDeleteSubmitBind();
                 }
             },
@@ -2106,7 +2107,7 @@ window.getInfo = {
             url:getInfo.getUrl.fullurl('api/orders/'+oid),
             async: false,
             type:'GET',
-            data:{},
+            data:data,
             dataType:"json",
             beforeSend:function(XMLHttpRequest){
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
