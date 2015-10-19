@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  ORDER_STATES = ["已经预约，等待完成报单", "info_short", "money_short", "已经完成报单，等待起息", "已起息，但合同文本基金管理人未收讫", :completed]
+  ORDER_STATES = ["已经预约，等待完成报单", "info_short", "money_short", "已经完成报单，等待起息", "已起息，但合同文本基金管理人未收讫", "completed"]
   DELIVER_STATES = ["未快递", "已快递"]
   validates :investable, presence: true
   validates :product_id, presence: true
