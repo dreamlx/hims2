@@ -80,7 +80,7 @@ class Api::OrdersController < Api::BaseController
 
   def by_product
     orders = current_user.orders
-    @products = Product.joins(:orders).where(orders: {id: orders.ids})
+    @products = Product.joins(:orders).where(orders: {id: orders.ids}).uniq
     @user_id = current_user.id
     render 'api/products/my'
   end
