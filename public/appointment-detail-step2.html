@@ -44,8 +44,8 @@
 						var item = $('#template a').clone();
 						item.prepend(report.title);
 						item.attr('data-id',report.id);
-						item.attr('src',report.attach.attach.url);
-						item.find('href').text(report.date);
+						item.attr('href',report.attach.attach.url);
+						item.find('span').text(report.date);
 						$('#reporter .link-list').append(item);
 					}
 				}

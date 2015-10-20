@@ -855,14 +855,21 @@ form{
 }
 .line-list li span{
 	display: inline-block;
-	flex:1;
 	float: left;
 	width: 70%;
 	line-height: 24px;
   	padding: 9px 0;
 }
 .line-list li p:first-child{
-	flex:1;
+	display: block;
+	width: 70%;
+}
+.line-list li p span{
+	width: auto;
+}
+.line-list li p:last-child{
+	display: block;
+	width: 30%;
 }
 .line-list li i{
 	margin-left: 5px;

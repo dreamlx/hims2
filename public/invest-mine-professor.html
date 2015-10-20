@@ -41,6 +41,10 @@
 							appoint.find('p:eq(1) span').text(order.currency);
 							appoint.find('p:eq(1) i').text(order.amount+"万");
 							appoint.attr('data-oid',order.id);
+							if(order.state=="已起息"){
+								appoint.attr('data-pid',invests[i].id);
+								appoint.attr('data-turn',"invest-detail");
+							}
 							product.find('.line-list').append(appoint);
 						}
 					}
