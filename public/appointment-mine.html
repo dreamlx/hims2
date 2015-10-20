@@ -31,13 +31,13 @@
 							var dd = ddcopy.clone();
 							var state = "";
 							switch(pit.state){
-								case "已经预约，等待完成报单":
+								case "已预约":
 									state = "待完成报单";
 									break;
-								case "已经完成报单，等待起息":
+								case "已报单":
 									state = "待起息";
 									break;
-								case "已起息，但合同文本基金管理人未收讫":
+								case "已起息":
 									state = "待收讫";
 									dd.attr("data-turn","appointment-detail-step2");
 									dd.attr("data-pid",order.id);

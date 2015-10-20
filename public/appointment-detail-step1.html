@@ -18,7 +18,7 @@
 				//停留该页
 				var order = getInfo.getOrderInfo();
 				if(!order || !order.order) {getInfo.turnappointmentmine();}
-				if(order.order.state=="已起息，但合同文本基金管理人未收讫"){
+				if(order.order.state=="已起息"){
 					getInfo.turnappointmentdetailstep2(order.order.id);
 				}
 				//order
