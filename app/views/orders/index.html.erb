@@ -9,7 +9,9 @@
     <thead>
       <tr>
         <% Order.column_names.each do |column| %>
-        <th><%= Order.human_attribute_name(column) %></th>
+          <% unless column == "created_at" || column == "updated_at" %>
+            <th><%= Order.human_attribute_name(column) %></th>
+          <% end %>
         <% end %>
         <th colspan="2"><%= t(:operations) %></th>
       </tr>
