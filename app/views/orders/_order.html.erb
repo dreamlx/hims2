@@ -1,13 +1,17 @@
 <tr>
-  <% Order.column_names.each do |column| %>
-    <% if column == "id" %>
-      <td><%= link_to order.id, order %></td>
-    <% elsif column == "other" %>
-      <td><%= image_tag(order.send(column).thumb) %></td>
-    <% else %>
-      <td><%= order.send(column) %></td>
-    <% end %>
-  <% end %>
+  <td><%= link_to order.id, order %></td>
+  <td><%= order.investable.name %></td>
+  <td><%= order.investable_type == "Individual" ? "个人" : "机构" %></td>
+  <td><%= order.product.name %></td>
+  <td><%= order.user.name %></td>
+  <td><%= order.amount %></td>
+  <td><%= order.due_date %></td>
+  <td><%= order.mail_address %></td>
+  <td><%= link_to image_tag(order.other.thumb), order.other.url %></td>
+  <td><%= order.remark %></td>
+  <td><%= order.state %></td>
+  <td><%= order.booking_date.to_date %></td>
+  <td><%= order.deliver %></td>
   <td><%= link_to t(:edit), edit_order_path(order) %></td>
   <td><%= link_to t(:destroy), order, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
 </tr>
