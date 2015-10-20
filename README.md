@@ -472,7 +472,7 @@ response:
               }
             }, 
             "remark"=>"MyString", 
-            "state"=>"已经预约，等待完成报单",
+            "state"=>"已预约",
             "booking_date"=> "2015-09-25",    #预约日期
             "investor_name"=> "MyString",     #投资者名称
             "product_name"=> "product name",  #预约产品
@@ -605,7 +605,7 @@ params: no
 action: get
 response:
         {
-          "booked"=>                            #已经预约，等待完成报单
+          "booked"=>                            #已预约
           [
             {
               "id"=>360, 
@@ -619,7 +619,7 @@ response:
             },
             ...
           ], 
-          "completed"=>                         #已经完成报单，等待起息
+          "completed"=>                         #已报单
           [
             {
               "id"=>361, 
@@ -633,7 +633,7 @@ response:
             },
             ...
           ], 
-          "valued"=>                            #已起息，但合同文本基金管理人未收讫
+          "valued"=>                            #已起息
           [
             {
               "id"=>362, 
@@ -687,7 +687,7 @@ response:
                 "investor_name"=>"MyString", 
                 "currency"=>"MyString", 
                 "amount"=>"9.99"
-                "state"=>"已经预约，等待完成报单"
+                "state"=>"已预约"
               },
               ......
             ]

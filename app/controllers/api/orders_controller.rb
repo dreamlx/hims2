@@ -73,9 +73,9 @@ class Api::OrdersController < Api::BaseController
   end
 
   def by_state
-    @booked = current_user.orders.where(state: "已经预约，等待完成报单")
-    @completed = current_user.orders.where(state: "已经完成报单，等待起息")
-    @valued = current_user.orders.where(state: "已起息，但合同文本基金管理人未收讫")
+    @booked = current_user.orders.where(state: "已预约")
+    @completed = current_user.orders.where(state: "已报单")
+    @valued = current_user.orders.where(state: "已起息")
   end
 
   def by_product

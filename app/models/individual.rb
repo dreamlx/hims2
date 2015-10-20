@@ -12,10 +12,10 @@ class Individual < ActiveRecord::Base
   mount_uploader :id_back, ImageUploader
 
   def booking_orders
-    orders.where('state=? OR state=? OR state=? OR state=?', '已经预约，等待完成报单', 'info_short', 'money_short', '已经完成报单，等待起息' )
+    orders.where('state=? OR state=?', '已预约', '已报单' )
   end
 
   def holding_orders
-    orders.where('state=? OR state=?', '已起息，但合同文本基金管理人未收讫', 'completed')
+    orders.where(state: '已起息')
   end
 end

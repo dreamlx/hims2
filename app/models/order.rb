@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  ORDER_STATES = ["已经预约，等待完成报单", "info_short", "money_short", "已经完成报单，等待起息", "已起息，但合同文本基金管理人未收讫", "completed"]
+  ORDER_STATES = ["已预约", "已报单", "已起息", "已关闭"]
   DELIVER_STATES = ["未快递", "已快递"]
   validates :investable, presence: true
   validates :product_id, presence: true
@@ -17,18 +17,15 @@ class Order < ActiveRecord::Base
 
   after_create :after_create
 
-  state_machine :state, :initial => :'已经预约，等待完成报单' do
-    event :get_info do
-      transition :'已经预约，等待完成报单' => :money_short, :info_short => :'已经完成报单，等待起息'
-    end
-    event :get_money do
-      transition :'已经预约，等待完成报单' => :info_short, :money_short => :'已经完成报单，等待起息'
+  state_machine :state, :initial => :'已预约' do
+    event :fill do
+      transition :'已预约' => :'已报单'
     end
     event :value do
-      transition :'已经完成报单，等待起息' => :'已起息，但合同文本基金管理人未收讫'
+      transition :'已报单' => :'已起息'
     end
-    event :finsh do
-      transition :'已起息，但合同文本基金管理人未收讫' => :completed
+    event :close do
+      transition :'已起息' => :'已关闭'
     end
   end
 

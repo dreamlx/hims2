@@ -32,7 +32,7 @@ RSpec.describe "orders" do
       expect(json["mail_address"]).to eq order.mail_address
       expect(json["other"]["other"]["thumb"]["url"]).to eq order.other.thumb.url
       expect(json["remark"]).to eq order.remark
-      expect(json["state"]).to eq '已经预约，等待完成报单'
+      expect(json["state"]).to eq '已预约'
       infos_json = JSON.parse(response.body)["infos"].first
       expect(infos_json["id"]).to eq order.infos.first.id
       expect(infos_json["category"]).to eq order.infos.first.category
@@ -137,7 +137,7 @@ RSpec.describe "orders" do
       expect(json["mail_address"]).to eq order.mail_address
       expect(json["other"]["other"]["thumb"]["url"]).to eq order.other.thumb.url
       expect(json["remark"]).to eq order.remark
-      expect(json["state"]).to eq '已经预约，等待完成报单'
+      expect(json["state"]).to eq '已预约'
       expect(json["booking_date"].to_date).to eq order.booking_date.to_date
       expect(json["investor_name"]).to eq order.investable.name
       expect(json["product_name"]).to eq order.product.name
@@ -223,7 +223,7 @@ RSpec.describe "orders" do
       expect(json["mail_address"]).to eq order.mail_address
       expect(json["other"]["other"]["thumb"]["url"]).to eq order.other.thumb.url
       expect(json["remark"]).to eq order.remark
-      expect(json["state"]).to eq '已经预约，等待完成报单'
+      expect(json["state"]).to eq '已预约'
       expect(json["booking_date"].to_date).to eq order.booking_date.to_date
       expect(json["investor_name"]).to eq order.investable.name
       expect(json["product_name"]).to eq order.product.name
@@ -328,9 +328,9 @@ RSpec.describe "orders" do
         authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
       }
       individual = create(:individual, user_id: user.id)
-      booked_order = create(:order, investable: individual, state: "已经预约，等待完成报单")
-      completed_order = create(:order, investable: individual, state: "已经完成报单，等待起息")
-      valued_order = create(:order, investable: individual, state: "已起息，但合同文本基金管理人未收讫")
+      booked_order = create(:order, investable: individual, state: "已预约")
+      completed_order = create(:order, investable: individual, state: "已报单")
+      valued_order = create(:order, investable: individual, state: "已起息")
       get "/api/orders/by_state",{}, valid_header
       expect(response).to be_success
       expect(response).to have_http_status(200)

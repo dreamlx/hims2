@@ -136,7 +136,7 @@ RSpec.describe "products" do
       expect(order_json["id"]).to eq order.id
       expect(order_json["investor_name"]).to eq individual.name
       expect(order_json["amount"]).to eq order.amount.to_s
-      expect(order_json["state"]).to eq "已经预约，等待完成报单"
+      expect(order_json["state"]).to eq "已预约"
     end
   end
 
