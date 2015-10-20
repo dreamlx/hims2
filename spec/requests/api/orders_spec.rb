@@ -338,6 +338,15 @@ RSpec.describe "orders" do
       expect(json["booked"].first["id"]).to eq booked_order.id
       expect(json["completed"].first["id"]).to eq completed_order.id
       expect(json["valued"].first["id"]).to eq valued_order.id
+      valued_order_json = json["valued"].first
+      expect(valued_order_json["id"]).to eq valued_order.id
+      expect(valued_order_json["amount"]).to eq valued_order.amount.to_s
+      expect(valued_order_json["investor_name"]).to eq valued_order.investable.name
+      expect(valued_order_json["product_id"]).to eq valued_order.product.id
+      expect(valued_order_json["product_name"]).to eq valued_order.product.name
+      expect(valued_order_json["product_abbr"]).to eq valued_order.product.abbr
+      expect(valued_order_json["product_desc"]).to eq valued_order.product.desc
+      expect(valued_order_json["currency"]).to eq valued_order.product.currency
     end
   end
 
