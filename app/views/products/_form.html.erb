@@ -41,8 +41,18 @@
     <%= f.input :progress %>
     <%= f.input :direction %>
     <%= f.input :risk_control %>
+    <%= link_to @product.instruction_identifier, @product.instruction.url, class: "col-sm-offset-3 col-sm-9" if @product.instruction? %>
     <%= f.input :instruction %>
+    <label class="col-sm-offset-3 col-sm-9">
+      <%= f.check_box :remove_instruction %>
+      Remove instruction
+    </label>
+    <%= link_to @product.agreement_identifier, @product.agreement.url, class: "col-sm-offset-3 col-sm-9" if @product.agreement? %>
     <%= f.input :agreement %>
+    <label class="col-sm-offset-3 col-sm-9">
+      <%= f.check_box :remove_agreement %>
+      Remove agreement
+    </label>
     <%= f.input :title4 %>
     <%= f.input :content4 %>
     <%= f.input :title5 %>
