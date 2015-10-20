@@ -32,6 +32,16 @@ RSpec.describe "users" do
       expect(response).not_to be_success
       expect(response).to     have_http_status(422)
     end
+
+    it "failed to create a new user if more than 1 hour" do
+      User.delete_all
+      valid_attributes = attributes_for(:user)
+      cell_code = create(:cell_code, cell: valid_attributes[:cell])
+      cell_code.update_column(:created_at, (Time.now - 1.hour))
+      post "/api/users", {user: valid_attributes.merge(code: cell_code.code)}
+      expect(response).not_to be_success
+      expect(response).to     have_http_status(422)
+    end
   end
 
   describe "Patch update" do

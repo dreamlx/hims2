@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   def User.send_code(cell, code)
     # the cell must exist and more than 11 digits
     return false unless cell && cell.to_s.length >= 11
-    msg         = "#{code}"
+    msg         = "#{code}，一小时内有效，请尽快完成操作。如需要帮助，请致电禾晖基金管理官方咨询热线 4006 025 100。"
     uri         = URI.parse("http://222.73.117.158/msg/HttpBatchSendSM")
     username    = Rails.application.secrets.sms_username
     password    = Rails.application.secrets.sms_password

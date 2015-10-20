@@ -5,7 +5,7 @@ class Api::UsersController < Api::BaseController
 
     # verify the cell code, return if no code or not match
     cell_code = CellCode.find_by(cell: params[:user][:cell])
-    unless cell_code && cell_code.code && (cell_code.code == params[:user][:code])
+    unless cell_code && cell_code.code && (cell_code.code == params[:user][:code]) && ((cell_code.created_at + 1.hour) > DateTime.now )
       return api_error(status: 422)
     end
 
