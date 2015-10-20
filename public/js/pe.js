@@ -1894,8 +1894,8 @@ window.getInfo = {
     turnappointmentdetailstep1:function(orderid){
         window.location.href=getInfo.getSiteUrl.fullurl("appointment-detail-step1.html#" + orderid);
     },
-    turnappointmentdetailstep2:function(orderid){
-        window.location.href=getInfo.getSiteUrl.fullurl("appointment-detail-step2.html#" + orderid);
+    turnappointmentdetailstep2:function(pid){
+        window.location.href=getInfo.getSiteUrl.fullurl("appointment-detail-step2.html#" + pid);
     },
     turninvestmineprofessor:function(){
         window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-professor.html");
@@ -2342,6 +2342,12 @@ window.getInfo = {
                 getInfo.turnappointmentdetailstep1(oid);
             });
         },
+        bindturnappointmentdetailstep2:function(){
+            $("[data-turn=appointment-detail-step2]").on('click',function(){
+                var pid = $(this).attr('data-pid');
+                getInfo.turnappointmentdetailstep2(pid);
+            });
+        },
         bindturninvestminecheck:function(){
             $("[data-turn=invest-mine-check]").on('click',function(){
                 getInfo.turninvestminecheck();
@@ -2393,6 +2399,8 @@ window.getInfo = {
         this.turnBind.bindturninvestdetail();
         this.turnBind.bindturnprofilemine();
         this.turnBind.bindturncustomersearch();
+        this.turnBind.bindturnappointmentdetailstep();
+        this.turnBind.bindturnappointmentdetailstep2();
     }
 }
 

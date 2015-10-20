@@ -39,6 +39,8 @@
 									break;
 								case "已起息，但合同文本基金管理人未收讫":
 									state = "待收讫";
+									dd.attr("data-turn","appointment-detail-step2");
+									dd.attr("data-pid",order.id);
 									break;
 								default:
 									state = "已完成";//完成起息
@@ -103,6 +105,8 @@
 						dl.find('.white span').text("已起息，但合同文本基金管理人未收讫");
 						for(var i=0;i<valued.length;i++){
 							var dd = ddcopy.clone();
+							dd.attr("data-turn","appointment-detail-step2");
+							dd.attr("data-pid",valued[i].product_id);
 							dd.find('.a-label').text("待收讫");
 							dd.find('.a-title').text(valued[i].product_name);
 							dd.find('.a-text:eq(0) span').text(valued[i].product_desc);
@@ -116,6 +120,7 @@
 				}
 				tabs.bind.foldtoggle();
 				getInfo.turnBind.bindturnappointmentdetailstep();
+				getInfo.turnBind.bindturnappointmentdetailstep2();
 			}
 		});
 	</script>
