@@ -6,7 +6,7 @@ li{list-style-type: none;}
 img{border:none;}
 body{width: 100%}
 input,button,textarea{
-	font-size: 16px;
+	font-size: 18px;
 	font-family: "Microsoft Yahei";
 	border: none;
 	outline: none;
@@ -29,7 +29,7 @@ form{
 .main{
 	margin-top: 20px;
 	font-family: "Microsoft Yahei";
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 20px;
 	color: #666;
 }
@@ -73,7 +73,7 @@ form{
 	padding: 0 25px;
 	height: 80px;
 	line-height: 80px;
-	font-size: 24px;
+	font-size: 28px;
 	color: #FFF;
 	cursor: pointer;
 }
@@ -116,7 +116,7 @@ form{
 	width: 25%;
 	min-width: 75px;
 	color: #999;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 40px;
 }
 .radius-form .form-line label.dbl{
@@ -147,7 +147,7 @@ form{
 	width: 20%;
 	float: right;
 	font-style: normal;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 40px;
 	text-align: center;
 	color: #1498BF;
@@ -221,8 +221,8 @@ form{
 	background-color: transparent;
 }
 .radius-form .submit-btn{
-	float: left;
-	width: 62%;
+	margin:0 auto;
+	width: 70%;
 }
 .radius-form .form-line.current{
 	position: relative;
@@ -245,7 +245,7 @@ form{
 	height: 38px;
 	line-height: 38px;
 	color: #999;
-	font-size: 16px;
+	font-size: 18px;
 	background-color: #FFF;
 	border: 1px solid #999;
 	border-bottom: none;
@@ -318,7 +318,7 @@ form{
 	float: right;
 	width: 30%;
 	height: 40px;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 40px;
 	cursor: pointer;
 }
@@ -327,7 +327,7 @@ form{
 	margin: 30px auto 0 auto;
 }
 .grey-btn{
-	font-size: 12px;
+	font-size: 14px;
 	color: #FFF;
 	background-color: #999;
 }
@@ -397,7 +397,7 @@ form{
 .p-title{
 	width: 80%;
 	font-weight: normal;
-	font-size: 24px;
+	font-size: 28px;
 	line-height: 44px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -406,7 +406,7 @@ form{
 .p-subtitle{
 	width: 80%;
 	color: #F99F1E;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 24px;
 	font-weight: normal;
 	white-space: nowrap;
@@ -418,7 +418,7 @@ form{
 }
 .p-info{
 	padding-top: 20px;
-	font-size: 16px;
+	font-size: 18px;
 	overflow: hidden;
 }
 .p-info .p-f1{
@@ -480,9 +480,9 @@ form{
 }
 .p-labels .p-label{
 	margin-bottom: 2px;
-	width: 65px;
-	height: 22px;
-	line-height: 22px;
+	width: 75px;
+	height: 24px;
+	line-height: 24px;
 	color: #fff;
 	text-align: center;
 	border-top-left-radius: 22px;
@@ -514,6 +514,7 @@ form{
 	font-size: 14px;
 	white-space: initial;
 	color: #fff;
+	min-height: 60px;
 }
 /*--appointment--*/
 .a-headblock{
@@ -525,14 +526,14 @@ form{
 	margin-bottom: 15px;
 	padding: 14px 5%;
 	line-height: 32px;
-	font-size:24px; 
+	font-size:28px; 
 	font-weight: normal;
 	background-color: #DA515A;
 }
 .a-headblock .a-text{
 	margin: 4px 0;
 	padding: 0 5%;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 24px;
 }
 .appoitment{
@@ -548,7 +549,7 @@ form{
 }
 .appoitment .a-labels .a-label{
 	margin-bottom: 2px;
-	width: 80px;
+	width: 95px;
 	height: 22px;
 	line-height: 22px;
 	color: #fff;
@@ -558,7 +559,7 @@ form{
 .appoitment .a-title{
 	margin-top: 20px;
 	line-height: 42px;
-	font-size: 24px;
+	font-size: 28px;
 	font-weight: normal;
 	white-space: nowrap;
 	overflow: hidden;
@@ -567,7 +568,7 @@ form{
 .appoitment .a-text{
 	line-height: 32px;
 	color: #999;
-	font-size: 16px;
+	font-size: 18px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow:ellipsis;
@@ -612,14 +613,14 @@ form{
 }
 .c-list li p{
 	line-height: 52px;
-	font-size: 24px;
+	font-size: 28px;
 }
 .c-list li .c-span{
 	float: left;
 	display: inline-block;
 	width: 50%;
 	text-align: right;
-	font-size: 16px;
+	font-size: 18px;
 }
 .c-list li .c-br{	
 	text-align: left;
@@ -632,7 +633,7 @@ form{
 	padding: 8px 10px;
 	width: 90%;
 	line-height: 18px;
-	font-size: 12px;
+	font-size: 14px;
 	border-bottom: 1px solid #CCC;
 }
 .c-subsearch{
@@ -669,11 +670,11 @@ form{
 }
 .select-tab li{
 	width: 50%;
-	height: 46px;
+	height: 56px;
 	float: left;
-	font-size: 16px;
+	font-size: 18px;
 	color: #999;
-	line-height: 46px;
+	line-height: 56px;
 	background-color: #EAEBED;
 	text-align: center;
 	cursor: pointer;
@@ -685,6 +686,9 @@ form{
 .block-tab{
 	padding-bottom: 72px;
 }
+.block-tab form{
+	padding-bottom: 0px;
+}
 /*--table--*/
 .line-table{
 	margin: 20px 10%;
@@ -693,7 +697,7 @@ form{
 }
 .line-table td{
 	height: 54px;
-	font-size: 16px;
+	font-size: 18px;
 	text-align: center;
 	border-bottom: 1px solid #CCC;
 }
@@ -730,7 +734,7 @@ form{
 	line-height: 18px;
 	color: #1399BF;
 	height: 36px;
-	font-size: 12px;
+	font-size: 14px;
 	border-left: 1px solid #FFF;
 	background-color: transparent;
 	cursor: pointer;
@@ -750,7 +754,7 @@ form{
 	float: left;
 	text-align: center;
 	color: #FFF;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 26px;
 	cursor: pointer;
 }
@@ -789,7 +793,6 @@ form{
 }
 /*--list--*/
 .fold-dl{
-	height: 320px;
 	overflow: hidden;
 	transition:all 0.8s ease;
 	-webkit-transition:all 0.8s ease;
@@ -798,12 +801,13 @@ form{
 }
 .fold-dl dt{
 	padding: 0 15px;
-	height: 28px;
-	line-height: 28px;
+	font-size:18px;
+	height: 32px;
+	line-height: 32px;
 	background-color: #AAA;
 }
 .fold-dl .appoitment{
-	padding: 10px 20px;
+	padding: 15px 20px;
 }
 .fold-dl .appoitment:nth-child(even){
 	background-color: #FFF;
@@ -838,7 +842,7 @@ form{
 .line-list li{
 	display: block;
 	display: flex;
-	font-size: 16px;
+	font-size: 18px;
 	border-bottom: 1px solid #ccc;
 	line-height: 42px;
 	overflow: hidden;
@@ -858,6 +862,7 @@ form{
 	float: left;
 	width: 70%;
 	line-height: 24px;
+	word-break: break-word;
   	padding: 9px 0;
 }
 .line-list li p:first-child{
@@ -880,7 +885,7 @@ form{
 }
 .link-list a{
 	line-height: 42px;
-	font-size: 16px;
+	font-size: 18px;
 	color: #666;
 	display: block;
 	border-bottom: 1px solid #ccc;
@@ -893,7 +898,7 @@ form{
 .bigtips{
 	padding-bottom: 40px;
 	margin-top: 30px;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 30px;
 	color: #999;
 	text-align: center;
@@ -905,7 +910,7 @@ form{
 }
 /*--check--*/
 .check-top{
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 60px;
 	text-align: center;
 	border-bottom: 1px solid #CCC;
@@ -934,7 +939,7 @@ form{
 	bottom: 0;
 	width: 100%;
 	text-align: center;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 80px;
 }
 
@@ -950,6 +955,9 @@ form{
 	border-top: 9px solid #53585F;
 }
 .icon-white.icon-arrow.down{
+	position: relative;
+	z-index: 1;
+	top: -2px;
 	border-top-color: #FFF;
 }
 .icon-arrow.right{
@@ -972,12 +980,26 @@ form{
 	border: 1px solid #1498BF;
 }
 .plus-icon:before{
-	content: "+";
+	content: "";
 	position: relative;
-	top: -9px;
-	left: -1px;
-	font-style: normal;
-	font-size: 28px;
+	display: block;
+	margin: 0 auto;
+	top: 3px;
+	left: 0px;
+	width: 2px;
+	height: 14px;
+	background-color: #1498BF;
+}
+.plus-icon:after{
+	content: "";
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	top: -5px;
+	left: 0px;
+	width: 14px;
+	height: 2px;
+	background-color: #1498BF;
 }
 .icon-redadd{
 	display: block;
@@ -1130,7 +1152,7 @@ form{
 .article h1{
 	margin-top: 40px;
 	text-align: center;
-	font-size: 24px;
+	font-size: 28px;
 	line-height: 60px;
 	font-weight: normal;
 }
@@ -1150,15 +1172,15 @@ form{
 	font-weight: normal;
 }
 .title-line-red{
-	font-size: 24px;
+	font-size: 28px;
 	background-color: #DA5259;
 }
 .title-line-blue{
-	font-size: 24px;
+	font-size: 28px;
 	background-color: #1498BF;
 }
 .title-line-grey{
-	font-size: 16px;
+	font-size: 18px;
 	background-color: #AAA;
 }
 /*--about--*/
@@ -1167,7 +1189,7 @@ form{
 }
 .about p{
 	padding: 10px 5%;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 20px;
 }
 .about h1+p{
@@ -1182,7 +1204,7 @@ form{
 }
 .about-botton p{
 	padding: 0 5%;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 20px;
 	text-align: center;
 }
@@ -1317,7 +1339,7 @@ form{
 	padding-top: 36px;
 	margin: 0 4%;
 	width: 92%;
-	font-size: 16px;
+	font-size: 18px;
 	font-family: "Microsoft Yahei";
 	line-height: 24px;
 }
@@ -1333,7 +1355,7 @@ form{
 	display: block;
 	margin: 5px 4%;
 	width: 92%;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 24px;
 }
 .pop-bg .pop-alert.appear{
@@ -1345,7 +1367,7 @@ form{
 }
 .pop-alert .big.middle{
 	padding-top: 26px;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 24px;
 }
 .pop-btns{

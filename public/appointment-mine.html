@@ -17,7 +17,49 @@
 			}else{
 				//停留该页
 				//byproduct
-				var orderobj = getInfo.getOrderMine();
+				//var orderobj = getInfo.getOrderMine();
+				var orderobj = false,
+				byState,
+				byProduct,
+				store = getInfo.checkstorage();
+				$.ajax({
+				    url:getInfo.getUrl.fullurl('api/orders/by_state'),
+				    async: false,
+				    type:'GET',
+				    data:{},
+				    dataType:"json",
+				    beforeSend:function(XMLHttpRequest){
+				        XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+				    },
+				    success:function(data){
+				        byState = data;
+				    },
+				    error:function(data){
+				    }
+				});
+				$.ajax({
+				    url:getInfo.getUrl.fullurl('api/orders/by_product'),
+				    async: false,
+				    type:'GET',
+				    data:{},
+				    dataType:"json",
+				    beforeSend:function(XMLHttpRequest){
+				        XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+				    },
+				    success:function(data){
+				        byProduct = data;
+				    },
+				    error:function(data){
+				    }
+				});
+				if(byState||byProduct){
+				    orderobj = {
+				        'byState':byState,
+				        'byProduct':byProduct
+				    }
+				}
+
+
 				if(orderobj&&orderobj.byProduct){
 					for(var i=0;i<orderobj.byProduct.length;i++){
 						var order = orderobj.byProduct[i];

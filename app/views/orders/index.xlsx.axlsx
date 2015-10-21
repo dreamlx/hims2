@@ -3,7 +3,11 @@ wb.add_worksheet(name: "Orders") do |sheet|
   sheet.add_row Order::HEADERS
   i = 1
   @orders.each do |order|
-    sheet.add_row [order.id, order.investable.name, order.investable_type, order.product.name, order.user.name, order.amount, order.due_date, order.mail_address,"", order.remark, order.state, order.booking_date, order.deliver]
+    if order.investable_type == "Individual"
+      sheet.add_row [order.id, order.investable.name, "个人", order.product.name, order.user.name, order.amount, order.due_date, order.mail_address,"", order.remark, order.state, order.booking_date, order.deliver]
+    else
+      sheet.add_row [order.id, order.investable.name, "机构", order.product.name, order.user.name, order.amount, order.due_date, order.mail_address,"", order.remark, order.state, order.booking_date, order.deliver]
+    end
     if order.other_url
       img = order.other.thumb
       t = Tempfile.new(['my_image','.jpg'])
