@@ -1,0 +1,22 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Orders") do |sheet|
+  sheet.add_row Order::HEADERS
+  i = 1
+  @orders.each do |order|
+    sheet.add_row [order.id, order.investable.name, order.investable_type, order.product.name, order.user.name, order.amount, order.due_date, order.mail_address,"", order.remark, order.state, order.booking_date, order.deliver]
+    if order.other_url
+      img = order.other.thumb
+      t = Tempfile.new(['my_image','.jpg'])
+      t.binmode
+      t.write img.read
+      t.close
+      sheet.add_image(:image_src => t.path, :noSelect => true, :noMove => true, :hyperlink=> order.other.url) do |image|
+        image.width=30
+        image.height=20
+        image.hyperlink.tooltip = "Labeled Link"
+        image.start_at 8, i
+      end
+    end
+    i += 1
+  end
+end
