@@ -48,4 +48,20 @@ module ApplicationHelper
     session.delete(:admin_id)
     @current_admin = nil
   end
+
+  def add_image(sheet, photo, column, row)
+    if photo.url
+      img = photo.thumb
+      t = Tempfile.new(['my_image','.jpg'])
+      t.binmode
+      t.write img.read
+      t.close
+      sheet.add_image(:image_src => t.path, :noSelect => true, :noMove => true, :hyperlink=> photo.url) do |image|
+        image.width=30
+        image.height=20
+        image.hyperlink.tooltip = photo.identifier
+        image.start_at column, row
+      end
+    end
+  end
 end

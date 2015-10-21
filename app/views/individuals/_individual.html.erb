@@ -1,5 +1,5 @@
 <tr>
-  <% Individual.column_names.each do |column| %>
+  <% Individual::HEADERS.each do |column| %>
     <% if column == "user_id" %>
       <td><%= individual.user.name %></td>
     <% elsif column == "id_front" || column == "id_back" %>

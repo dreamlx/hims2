@@ -1,5 +1,8 @@
 <div class="col-md-10">
-  <h3><%= t(:individual_list) %></h3>
+  <h3>
+    <%= t(:individual_list) %>
+    <small><%= link_to 'to_xls', individuals_path(format: :xlsx) %></small>
+  </h3>
 </div>
 <div class="col-md-2">
   <%= link_to t(:new_individual), new_individual_path, class: "btn btn-danger" %>
@@ -8,8 +11,8 @@
   <table class="table">
     <thead>
       <tr>
-        <% Individual.column_names.each do |column| %>
-        <th><%= Individual.human_attribute_name(column) %></th>
+        <% Individual::HEADERS.each do |column| %>
+          <th><%= Individual.human_attribute_name(column) %></th>
         <% end %>
         <th colspan="2"><%= t(:operations) %></th>
       </tr>

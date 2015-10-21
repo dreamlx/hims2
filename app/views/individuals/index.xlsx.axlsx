@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Orders") do |sheet|
+  sheet.add_row Individual::HEADERS.map {|column| Individual.human_attribute_name(column)}
+  i = 1
+  @individuals.each do |individual|
+    sheet.add_row [individual.id, individual.user.name, individual.name, individual.cell, individual.remark_name, individual.id_type, individual.id_no, "", "", individual.remark, individual.created_at, individual.updated_at]
+    add_image(sheet, individual.id_front, 7, i)
+    add_image(sheet, individual.id_back, 8, i)
+    i += 1
+  end
+end

@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
     @orders = Order.order(created_at: :desc)
     respond_to do |format|
       format.html
-      header_string = 'attachment; filename=' + DateTime.now.to_s(:number) + ".xlsx"
+      header_string = 'attachment; filename=orders' + DateTime.now.to_s(:number) + ".xlsx"
       format.xlsx{  response.headers['Content-Disposition'] = header_string}
     end
   end

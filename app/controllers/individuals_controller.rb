@@ -1,6 +1,11 @@
 class IndividualsController < ApplicationController
   def index
     @individuals = Individual.order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      header_string = 'attachment; filename=individuals' + DateTime.now.to_s(:number) + ".xlsx"
+      format.xlsx{  response.headers['Content-Disposition'] = header_string}
+    end
   end
 
   def new
