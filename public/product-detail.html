@@ -163,6 +163,16 @@
 					}
 					item.find('.p-btns [data-turn=appointment-creat]').attr("data-pid",product.product.id);
 				}
+				
+				var head = $('.p-headblock').children();
+				if(head&&head.length>0){
+					var hei = 0;
+					head.each(function(){
+						hei+=$(this).height();
+					});
+					var len = 0.5*($('.p-headblock').height()-hei);
+					$(head[0]).css({'margin-top':len+'px'});
+				}
 			}
 		});
 	</script>

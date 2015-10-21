@@ -2463,7 +2463,7 @@ window.tabs={
             var dl = $(dt).closest('dl');
             if(dl.height()==32){
                 dl.find('.icon-arrow').removeClass('right').addClass('down');
-                var hei = dl.find('.appoitment').length*146+28;
+                var hei = dl.find('.appoitment').length*156+32;
                 dl.height(hei);
             }else{
                 dl.find('.icon-arrow').removeClass('down').addClass('right');

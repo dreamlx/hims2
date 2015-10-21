@@ -20,7 +20,8 @@
 				if(invest && invest.length>0) {
 					for(var i =0;i<invest.length;i++){
 						var template = $('#template li').clone();
-						template.attr('data-oid',invest[i].id)
+						template.attr('data-oid',invest[i].id);
+						template.attr('data-pid',invest[i].product_id);
 						template.find('.p-title').text(invest[i].product_name||"");
 						template.find('.p-intro').text(invest[i].product_desc||"");
 						template.find('.p-info .p-f1 .p-p:eq(0) span:eq(0)').text(invest[i].title1||"");
@@ -33,6 +34,7 @@
 					}
 				}
 				getInfo.turnBind.bindturnappointmentdetailstep();
+				getInfo.turnBind.bindturnproductdetail();
 			}
 		});
 	</script>
@@ -50,7 +52,7 @@
 		</div>
 	</div>
 	<ul class="hide" id="template">
-		<li class="product" data-turn="appointment-detail-step1">
+		<li class="product" data-turn="product-detail">
 			<section>
 				<h1 class="p-title"></h1>
 				<p class="p-intro"></p>

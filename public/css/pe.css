@@ -71,8 +71,8 @@ form{
 	display: block;
 	margin-bottom: 20px;
 	padding: 0 25px;
-	height: 80px;
-	line-height: 80px;
+	height: 100px;
+	line-height: 100px;
 	font-size: 28px;
 	color: #FFF;
 	cursor: pointer;
@@ -425,14 +425,14 @@ form{
 	float: left;
 	padding-right: 4%;
 	margin-right: 4%;
-	width: 56%;
+	width: 48%;
 	height: 36px;
 	border-right: 1px solid #999;
 }
 .p-info .p-f2{
 	float: left;
 	margin-left: -1px;
-	width: 36%;
+	width: 44%;
 }
 .p-info .p-p{
 	line-height: 32px;
@@ -495,6 +495,7 @@ form{
 	background-color: #70BF41;
 }
 .p-headblock{
+	min-height: 150px;
 	padding: 10px 20px;
 	background-color: #DA5258;
 }
@@ -514,7 +515,6 @@ form{
 	font-size: 14px;
 	white-space: initial;
 	color: #fff;
-	min-height: 60px;
 }
 /*--appointment--*/
 .a-headblock{
@@ -696,8 +696,9 @@ form{
 	border-collapse: collapse;
 }
 .line-table td{
-	height: 54px;
+	height: 70px;
 	font-size: 18px;
+	line-height: 28px;
 	text-align: center;
 	border-bottom: 1px solid #CCC;
 }
