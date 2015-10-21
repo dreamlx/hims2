@@ -3,7 +3,11 @@
   <td><%= info.category %></td>
   <td><%= info.field_name %></td>
   <td><%= info.field_type %></td>
-  <td><%= info.send(info.field_type) %></td>
+  <% if info.field_type == "photo" %>
+    <td><%= link_to info.photo_identifier, info.photo.url if info.photo.url %></td>
+  <% else %>
+    <td><%= info.send(info.field_type) %></td>
+  <% end %>
   <td><%= info.state %></td>
   <td><%= link_to_if (info.state != "已确认"), t('confirm'), confirm_order_info_path(order_id: info.order, id: info), data: {confirm: 'Are you sure?'} %></td>
   <td><%= link_to_if (info.state == "未确认"), t('deny'), deny_order_info_path(order_id: info.order, id: info), data: {confirm: 'Are you sure?'} %></td>
