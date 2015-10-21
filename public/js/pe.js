@@ -448,7 +448,7 @@ window.check = {
         if(input[0].files.length>0){
             var size = input[0].files[0].size;
             var filesize = Math.round(size/1024*100)/100;
-            if(filesize>10000&&type!=''){
+            if(filesize>500&&type!=''){
                 check.error.alertrun(alertarea,check.error.errorInfo.imgsizetype,0);
                 return false;
             }
@@ -605,7 +605,7 @@ window.check = {
             selectnull:"请选择正确的投资人",
             idnotype:"您的证件号码格式有误",
             imgformattype:"请上传图片文件",
-            imgsizetype:"图片文件过大，请上传10M以下的图片",
+            imgsizetype:"图片文件过大，请上传500K以下的图片",
             texttype:"描述文字请误超过200字",
             addresstype:"地址请误超过100字",
             addressnull:"请填写地址",
