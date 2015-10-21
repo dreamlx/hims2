@@ -756,6 +756,7 @@ params: {number: xxxxxx}
 response:
         [
           {
+            "product_id"=>1,
             "product_name"=>"MyString", 
             "product_desc"=>"MyString", 
             "id"=>240, 
@@ -766,6 +767,7 @@ response:
             "title3"=>"MyString", 
             "content3"=>"MyString", 
             "amount"=>"9.99"
+            "state"=>"已预约"
           },
           ......
         ]

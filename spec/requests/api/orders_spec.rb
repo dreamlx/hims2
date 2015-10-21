@@ -381,10 +381,12 @@ RSpec.describe "orders" do
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body).first
       expect(json["id"]).to eq order.id
+      expect(json["product_id"]).to eq product.id
       expect(json["product_name"]).to eq product.name
       expect(json["product_desc"]).to eq product.desc
       expect(json["title1"]).to eq product.title1
       expect(json["amount"]).to eq order.amount.to_s
+      expect(json["state"]).to eq "已预约"
     end
 
     it "get all orders by number" do
