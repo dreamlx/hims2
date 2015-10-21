@@ -1,5 +1,8 @@
 <div class="col-md-10">
-  <h3><%= t(:institution_list) %></h3>
+  <h3>
+    <%= t(:institution_list) %>
+    <small><%= link_to 'to_xls', institutions_path(format: :xlsx) %></small>
+  </h3>
 </div>
 <div class="col-md-2">
   <%= link_to t(:new_institution), new_institution_path, class: "btn btn-danger" %>
@@ -8,7 +11,7 @@
   <table class="table">
     <thead>
       <tr>
-        <% Institution.column_names.each do |column| %>
+        <% Institution::HEADERS.each do |column| %>
         <th><%= Institution.human_attribute_name(column) %></th>
         <% end %>
         <th colspan="2"><%= t(:operations) %></th>

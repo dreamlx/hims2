@@ -1,0 +1,10 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Institutions") do |sheet|
+  sheet.add_row Institution::HEADERS.map {|column| Institution.human_attribute_name(column)}
+  i = 1
+  @institutions.each do |institution|
+    sheet.add_row [institution.id, institution.user.name, institution.name, institution.cell, institution.remark_name, institution.organ_reg, "", institution.remark, institution.created_at, institution.updated_at]
+    add_image(sheet, institution.business_licenses, 6, i)
+    i += 1
+  end
+end

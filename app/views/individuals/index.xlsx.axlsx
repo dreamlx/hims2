@@ -1,5 +1,5 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: "Orders") do |sheet|
+wb.add_worksheet(name: "Individuals") do |sheet|
   sheet.add_row Individual::HEADERS.map {|column| Individual.human_attribute_name(column)}
   i = 1
   @individuals.each do |individual|

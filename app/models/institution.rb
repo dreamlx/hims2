@@ -1,4 +1,5 @@
 class Institution < ActiveRecord::Base
+  HEADERS = ["id", "user_id", "name", "cell", "remark_name", "organ_reg", "business_licenses", "remark", "created_at", "updated_at"]
   validates :user_id, presence: true
   validates :name, presence: true
   validates :cell, presence: true
