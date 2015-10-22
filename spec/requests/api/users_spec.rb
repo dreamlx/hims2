@@ -167,6 +167,7 @@ RSpec.describe "users" do
       expect(json["id"]).to eq user.id
       expect(json["cell"]).to eq user.cell
       expect(json["open_id"]).to eq user.open_id
+      expect(json["number"]).to eq user.number
     end
   end
 end

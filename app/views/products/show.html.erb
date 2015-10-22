@@ -161,6 +161,9 @@
         <dt><%= Product.human_attribute_name('starting_point') %></dt>
         <dd><%= @product.starting_point %></dd>
 
+        <dt><%= Product.human_attribute_name('rate') %></dt>
+        <dd><%= simple_format(@product.rate) %></dd>
+
         <dt><%= Product.human_attribute_name('account') %></dt>
         <dd><%= @product.account %></dd>
 

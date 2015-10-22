@@ -52,6 +52,7 @@ class ProductsController < ApplicationController
         :account, :progress, :direction, :risk_control,
         :instruction, :agreement, :title4, :content4,
         :title5, :content5,:title6, :content6,:title7, 
-        :content7, :remove_instruction, :remove_agreement)
+        :content7, :remove_instruction, 
+        :remove_agreement, :rate)
     end
 end

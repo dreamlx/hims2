@@ -28,6 +28,7 @@ FactoryGirl.define do
     legal_consultant "MyString"
     audit "MyString"
     starting_point "MyString"
+    rate "MyString"
     account "MyString"
     progress "MyString"
     direction "MyString"

@@ -390,7 +390,7 @@ RSpec.describe "orders" do
     end
 
     it "get all orders by number" do
-      user = create(:user)
+      user = create(:user, number: nil)
       valid_header = {
         authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
       }
@@ -406,10 +406,13 @@ RSpec.describe "orders" do
       expect(json["product_desc"]).to eq product.desc
       expect(json["title1"]).to eq product.title1
       expect(json["amount"]).to eq order.amount.to_s
+      user.reload
+      expect(user.number).to eq institution.organ_reg
     end
 
     it "get all orders by number" do
       user = create(:user)
+      number = user.number
       valid_header = {
         authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
       }
@@ -423,6 +426,8 @@ RSpec.describe "orders" do
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)
       expect(json.count).to eq 2
+      user.reload
+      expect(user.number).to eq number
     end
   end
 end

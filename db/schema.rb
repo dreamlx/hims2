@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010060823) do
+ActiveRecord::Schema.define(version: 20151022113222) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20151010060823) do
     t.string   "content2",          limit: 255
     t.string   "title3",            limit: 255
     t.string   "content3",          limit: 255
-    t.integer  "progress_bar",      limit: 4,   default: 0
+    t.integer  "progress_bar",      limit: 4,     default: 0
     t.string   "abbr",              limit: 255
     t.string   "currency",          limit: 255
     t.string   "amount",            limit: 255
@@ -180,8 +180,8 @@ ActiveRecord::Schema.define(version: 20151010060823) do
     t.string   "risk_control",      limit: 255
     t.string   "instruction",       limit: 255
     t.string   "agreement",         limit: 255
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "label",             limit: 255
     t.string   "title4",            limit: 255
     t.string   "content4",          limit: 255
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20151010060823) do
     t.string   "content6",          limit: 255
     t.string   "title7",            limit: 255
     t.string   "content7",          limit: 255
+    t.text     "rate",              limit: 65535
   end
 
   add_index "products", ["fund_id"], name: "index_products_on_fund_id", using: :btree
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(version: 20151010060823) do
     t.string   "card_front", limit: 255
     t.string   "card_back",  limit: 255
     t.string   "remark",     limit: 255
+    t.string   "number",     limit: 255
   end
 
   add_foreign_key "individuals", "users"

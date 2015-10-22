@@ -146,6 +146,7 @@ zh-CN:
         label: 标签
         created_at: 创建
         updated_at: 更新
+        rate: 募集费率
       roi:
         product_id: 产品
         range: 认购金额
@@ -166,6 +167,7 @@ zh-CN:
         remark: 备注
         created_at: 创建
         updated_at: 更新
+        number: 绑定证件号
   new_user: 新建理财师
   user_list: 理财师列表
   operations: 操作
