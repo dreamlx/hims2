@@ -11,11 +11,4 @@ RSpec.describe Institution, type: :model do
     expect(institution).to be_invalid
     expect(institution.errors[:name].first).to eq I18n.t("errors.messages.blank")
   end
-
-  it "is invalid without cell" do
-    institution = build(:institution, cell: nil)
-    institution.valid?
-    expect(institution).to be_invalid
-    expect(institution.errors[:cell].first).to eq I18n.t("errors.messages.blank")
-  end
 end

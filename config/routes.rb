@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :individuals, only: [:create, :index, :show, :update] ,defaults: {format: :json}
     resources :institutions, only: [:create, :index, :show, :update] ,defaults: {format: :json}
     resources :orders, only: [:create, :index, :show, :destroy, :update] ,defaults: {format: :json} do
-      resources :money_receipts, only: [:create], defaults: {format: :json}
+      resources :money_receipts, only: [:create, :destroy], defaults: {format: :json}
       patch :update_infos, on: :member, defaults: {format: :json}
       get :by_state, on: :collection, defaults: {format: :json}
       get :by_product, on: :collection, defaults: {format: :json}

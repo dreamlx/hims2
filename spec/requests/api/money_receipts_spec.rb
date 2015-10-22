@@ -29,4 +29,32 @@ RSpec.describe "money_receipts" do
       expect(json["state"]).to eq "未确认" # initial state is pending
     end
   end
+
+  describe "DELETE destroy" do
+    it "destroy the requested money_receipt" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      order = create(:order, investable: individual)
+      money_receipt = create(:money_receipt, order_id: order.id)
+      delete "/api/orders/#{order.id}/money_receipts/#{money_receipt.id}",{}, valid_header
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+    end
+
+    it "failed to destroy the requested money_receipt if no money_receipt found" do
+      user = create(:user)
+      valid_header = {
+        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
+      }
+      individual = create(:individual, user_id: user.id)
+      order = create(:order, investable: individual)
+      money_receipt = create(:money_receipt)
+      delete "/api/orders/#{order.id}/money_receipts/#{money_receipt.id}",{}, valid_header
+      expect(response).not_to be_success
+      expect(response).to have_http_status(422)
+    end
+  end
 end

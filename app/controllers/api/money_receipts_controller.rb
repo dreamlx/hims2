@@ -1,5 +1,5 @@
 class Api::MoneyReceiptsController < Api::BaseController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!
   def create
     order = current_user.orders.find_by(id: params[:order_id])
     @money_receipt = order.money_receipts.build(money_receipt_params)
@@ -11,6 +11,17 @@ class Api::MoneyReceiptsController < Api::BaseController
     end
   ensure 
     clean_tempfile
+  end
+
+  def destroy
+    order = current_user.orders.find_by(id: params[:order_id])
+    money_receipt = order.money_receipts.find_by(id: params[:id])
+    if money_receipt && money_receipt.state != '已确认'
+      money_receipt.destroy
+      render json: {}, status: 200
+    else
+      return api_error(status: 422)
+    end
   end
 
   private

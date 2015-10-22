@@ -595,6 +595,16 @@ response:
           }
         }
 ```
+### 删除汇款信息(只有【未确认】,【已否决】状态才可以删除)
+```
+curl -X DELETE --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/{order.id}/money_receipts/{money_receipt.id}
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}/money_receipts/{money_receipt.id}
+params: no
+action: delete
+reponse: ok 200; NG 422
+```
 ### 我的预约(by_state)
 ```
 curl -X GET --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/by_state

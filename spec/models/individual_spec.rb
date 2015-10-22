@@ -11,11 +11,4 @@ RSpec.describe Individual, type: :model do
     expect(individual).to be_invalid
     expect(individual.errors[:name].first).to eq I18n.t("errors.messages.blank")
   end
-
-  it "is invalid without cell" do
-    individual = build(:individual, cell: nil)
-    individual.valid?
-    expect(individual).to be_invalid
-    expect(individual.errors[:cell].first).to eq I18n.t("errors.messages.blank")
-  end
 end

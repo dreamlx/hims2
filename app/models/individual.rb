@@ -3,7 +3,6 @@ class Individual < ActiveRecord::Base
   HEADERS = ["id", "user_id", "name", "cell", "remark_name", "id_type", "id_no", "id_front", "id_back", "remark", "created_at", "updated_at"]
   validates :user_id, presence: true
   validates :name, presence: true
-  validates :cell, presence: true
   validates :id_type, inclusion: ID_TYPES, allow_blank: true
 
   belongs_to :user
