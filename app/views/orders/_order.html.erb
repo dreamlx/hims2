@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to order.id, order %></td>
+  <td><%= order.id %></td>
   <td><%= order.investable.name %></td>
   <td><%= order.investable_type == "Individual" ? "个人" : "机构" %></td>
   <td><%= order.product.name %></td>
@@ -12,6 +12,7 @@
   <td><%= order.state %></td>
   <td><%= order.booking_date.to_date %></td>
   <td><%= order.deliver %></td>
+  <td><%= link_to t(:show), order %></td>
   <td><%= link_to t(:edit), edit_order_path(order) %></td>
   <td><%= link_to t(:destroy), order, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
 </tr>

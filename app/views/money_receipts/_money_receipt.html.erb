@@ -3,7 +3,7 @@
   <td><%= best_in_place money_receipt, :amount %></td>
   <td><%= best_in_place money_receipt, :bank_charge %></td>
   <td><%= best_in_place money_receipt, :date %></td>
-  <td><%= link_to money_receipt.attach_identifier, money_receipt.attach.url %></td>
+  <td><%= link_to money_receipt.attach_identifier, money_receipt.attach_url if money_receipt.attach_url %></td>
   <td><%= money_receipt.state %></td>
   <td><%= link_to_if (money_receipt.state != "已确认"), t('confirm'), confirm_order_money_receipt_path(order_id: money_receipt.order, id: money_receipt), data: {confirm: 'Are you sure?'} %></td>
   <td><%= link_to_if (money_receipt.state == "未确认"), t('deny'), deny_order_money_receipt_path(order_id: money_receipt.order, id: money_receipt), data: {confirm: 'Are you sure?'} %></td>

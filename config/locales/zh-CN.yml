@@ -196,3 +196,9 @@ zh-CN:
   reset_password: 重设密码
   invalid_name_or_password: 无效的用户名或密码
   please_log_in: 请登录
+  order_detail: 订单详情
+  money_receipts: 汇款
+  infos: 信息
+  update_infos: 更新信息
+  confirm: 确认
+  deny: 否决
