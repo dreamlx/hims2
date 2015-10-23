@@ -22,7 +22,6 @@ gem 'carrierwave-qiniu'
 gem 'mini_magick'
 gem 'state_machines-activerecord'
 gem 'rack-cors'
-gem "omniauth-wechat-oauth2"
 gem 'figaro'
 gem 'axlsx_rails'
 

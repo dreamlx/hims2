@@ -58,20 +58,6 @@ class Api::UsersController < Api::BaseController
     render json: @investors
   end
 
-  def check_open_id
-    open_id = request.env["omniauth.auth"]["uid"]
-    user = User.find_by(open_id: open_id)
-    if user
-      if request.env["omniauth.params"]["state"] == "1"
-        redirect_to "http://wx.hehuifunds.com/menu.html#invest-list?open_id=#{open_id}&user_id=#{user.id}"
-      elsif request.env["omniauth.params"]["state"] == "2"
-        redirect_to "http://wx.hehuifunds.com/menu.html#mine-invest?open_id=#{open_id}&user_id=#{user.id}"
-      end
-    else
-      redirect_to "http://wx.hehuifunds.com/register.html?open_id=#{open_id}"
-    end
-  end
-
   def receive_code
     uri = URI("https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{ENV["WECHAT_APP_ID"]}&secret=#{ENV["WECHAT_APP_SECRET"]}&code=#{params[:code]}&grant_type=authorization_code")
     res = Net::HTTP.get_response(uri)
