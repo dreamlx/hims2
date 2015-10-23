@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :update, :show], defaults: {format: :json} do
       get :send_code, on: :collection, defaults: {format: :json}
       get :all_investors, on: :collection, defaults: {format: :json}
+      get :receive_code, on: :collection
     end
     resources :funds, only: [:index], defaults: {format: :json} do
       resources :products, only: [:index], defaults: {format: :json}  

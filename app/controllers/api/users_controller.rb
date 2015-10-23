@@ -72,6 +72,28 @@ class Api::UsersController < Api::BaseController
     end
   end
 
+  def receive_code
+    uri = URI("https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{ENV["WECHAT_APP_ID"]}&secret=#{ENV["WECHAT_APP_SECRET"]}&code=#{params[:code]}&grant_type=authorization_code")
+    res = Net::HTTP.get_response(uri)
+    json =  JSON.parse(res.body.gsub(/[\u0000-\u001f]+/, ''))
+    if json["openid"].blank?
+      render json: {}, status: 200
+    else
+      open_id = json["openid"]
+      user = User.find_by(open_id: open_id)
+      if user
+        if params[:state] == "main"
+          redirect_to "http://wx.hehuifunds.com/menu.html#invest-list?open_id=#{open_id}&user_id=#{user.id}"
+        elsif params[:state] == "my"
+          redirect_to "http://wx.hehuifunds.com/menu.html#mine-invest?open_id=#{open_id}&user_id=#{user.id}"
+        end
+      else
+        redirect_to "http://wx.hehuifunds.com/register.html?open_id=#{open_id}"
+      end
+    end
+  end
+
+
   private
     def user_params
       params.require(:user).permit(

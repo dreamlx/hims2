@@ -807,3 +807,25 @@ self-defined memu
   ]
 }
 ```
+```
+{
+  "button":
+  [
+    {  
+      "type":"view",
+      "name":"我要投资",
+      "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx367dd49414ba2326&redirect_uri=http%3A%2F%2Fwx.hehuifunds.com%2Fapi%2Fusers%2Freceive_code&response_type=code&scope=snsapi_base&state=main#wechat_redirect"
+    },
+    {
+      "type":"view",
+      "name":"我的投资",
+      "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx367dd49414ba2326&redirect_uri=http%3A%2F%2Fwx.hehuifunds.com%2Fapi%2Fusers%2Freceive_code&response_type=code&scope=snsapi_base&state=my#wechat_redirect"
+    },
+    {
+      "type":"view",
+      "name":"关于禾晖",
+      "url":"http://wx.hehuifunds.com/about.html"
+    }
+  ]
+}
+```
