@@ -19,7 +19,6 @@ json.product do
   json.regulatory_filing @product.regulatory_filing if @product.regulatory_filing
   json.legal_consultant @product.legal_consultant if @product.legal_consultant
   json.audit @product.audit if @product.audit
-  json.starting_point @product.starting_point if @product.starting_point
   json.rate @product.rate if @product.rate
   json.account @product.account if @product.account
   json.progress @product.progress if @product.progress

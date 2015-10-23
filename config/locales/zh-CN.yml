@@ -146,7 +146,7 @@ zh-CN:
         label: 标签
         created_at: 创建
         updated_at: 更新
-        rate: 募集费率
+        rate: 自定义框
       roi:
         product_id: 产品
         range: 认购金额

@@ -190,8 +190,7 @@ response:
           "regulatory_filing"=>"MyString",#监管备案
           "legal_consultant"=>"MyString", #法律顾问
           "audit"=>"MyString",            #审计师
-          "starting_point"=>"MyString",   #认购起点
-          "rate"=>"MyString",             #募集费率
+          "rate"=>"MyString",             #自定义框
           "account"=>"MyString",          #募集账户
           "progress"=>"MyString",         #募集进度
           "direction"=>"MyString",        #投资方向
