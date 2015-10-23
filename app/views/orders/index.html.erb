@@ -2,6 +2,8 @@
   <h3>
     <%= t(:order_list) %>
     <small><%= link_to 'to_xls', orders_path(format: :xlsx) %></small>
+    &nbsp;
+    <small><%= link_to '汇款列表', money_receipts_path(format: :xlsx) %></small>
   </h3>
 </div>
 <div class="col-md-2">

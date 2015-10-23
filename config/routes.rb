@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
     get :update_infos, on: :member
   end
-  resources :money_receipts, only: :update
+  resources :money_receipts, only: [:update, :index]
   resources :admins
   get     'login'   => 'sessions#new'
   post    'login'   => 'sessions#create'

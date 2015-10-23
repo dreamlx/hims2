@@ -1,4 +1,13 @@
 class MoneyReceiptsController < ApplicationController
+
+  def index
+    @money_receipts = MoneyReceipt.all
+    respond_to do |format|
+      header_string = 'attachment; filename=money_receipts' + DateTime.now.to_s(:number) + ".xlsx"
+      format.xlsx{  response.headers['Content-Disposition'] = header_string}
+    end
+  end
+
   def create
     order = Order.find(params[:order_id])
     @money_receipt = order.money_receipts.build(money_receipt_params)
