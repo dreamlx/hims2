@@ -646,6 +646,8 @@ window.check = {
             investcheckerror:"证件号错误",
             profileUpdatesuccess:"更新个人信息成功",
             profileUpdatefail:"由于网络原因更新信息未成功,请再次尝试",
+            moneydeletesuccess:"删除报单成功",
+            moneydeletefail:"由于网络原因删除报单未成功,请再次尝试"
         },
         alert:function(input,error){
             var id = input.attr('id');
@@ -879,7 +881,7 @@ window.submit = {
                     check.error.alertsuccess(btn,check.error.errorInfo.registersuccess);
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
-                        getInfo.turnprofilecreat();
+                        getInfo.turnprofilemine();
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.registerfail);
@@ -986,7 +988,7 @@ window.submit = {
                 if(data.user && data.user.id>0){
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
-                        getInfo.turnprofilecreat();
+                        getInfo.menu();
                     },3000);
                 }else{
                     submit.bind.loginSubmitBind();
@@ -1180,6 +1182,9 @@ window.submit = {
     appointmentCreatSubmit:function(btn){
         var form = btn.closest('form');
         var store = getInfo.checkstorage();
+        if(!store.name || !store.email){
+            getInfo.turnprofilemine();
+        }
         var pid = btn.attr('data-pid');
         if(!this.validate.appointmentCreatSubmit(form))return false;
         var order = {
@@ -1231,19 +1236,28 @@ window.submit = {
             remark:form.find("#inputRemark").val()
         };
         //报单提交
-        var infoSubmit ={};
+        var infoSubmit={};
         var infolist = form.find("#infoForm :not(.finished) [id^=info]");
-        for(var i=0;i<infolist.length;i++){
-            var id = $(infolist[i]).attr('data-id');
-            var type = $(infolist[i]).attr('data-field_type');
-            infoSubmit[id] = {};
-            if(type=="photo"){
-                if($(infolist[i]).attr('data-code')){
-                    infoSubmit[id][type] = $(infolist[i]).attr('data-code')
+        if (infolist && infolist.length>0){
+            var t=0;
+            for(var i=0;i<infolist.length;i++){
+                var id = $(infolist[i]).attr('data-id');
+                var type = $(infolist[i]).attr('data-field_type');
+                infoSubmit[id] = {};
+                if(type=="photo"){
+                    if($(infolist[i]).attr('data-code')){
+                        infoSubmit[id][type] = $(infolist[i]).attr('data-code')
+                    }
+                }else{
+                    infoSubmit[id][type] = $(infolist[i]).val();
                 }
-            }else{
-                infoSubmit[id][type] = $(infolist[i]).val();
+                if(!infoSubmit[id][type]){
+                    delete infoSubmit[id];
+                }else{
+                    t++;
+                }
             }
+            infoSubmit = t>0?infoSubmit:null;
         }
         //汇款提交
         var  moneySubmit = {
@@ -1278,23 +1292,25 @@ window.submit = {
                 states=false;
             }
         });
-        $.ajax({
-            url:getInfo.getUrl.fullurl('api/orders/'+ oid + '/update_infos'),
-            type:'PATCH',
-            async: false,
-            data:{
-                infos:infoSubmit
-            },
-            dataType:"json",
-            beforeSend:function(XMLHttpRequest){
-                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
-            },
-            success:function(data){
-            },
-            error:function(data){
-                states=false;
-            }
-        });
+        if(infoSubmit){
+            $.ajax({
+                url:getInfo.getUrl.fullurl('api/orders/'+ oid + '/update_infos'),
+                type:'PATCH',
+                async: false,
+                data:{
+                    infos:infoSubmit
+                },
+                dataType:"json",
+                beforeSend:function(XMLHttpRequest){
+                    XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+                },
+                success:function(data){
+                },
+                error:function(data){
+                    states=false;
+                }
+            });
+        }
         if(moneySubmit.attach || moneySubmit.amount || moneySubmit.date){
            $.ajax({
                 url:getInfo.getUrl.fullurl('api/orders/'+ oid + '/money_receipts'),
@@ -1327,6 +1343,8 @@ window.submit = {
     appointmentDeleteSubmit:function(btn){
         var store = getInfo.checkstorage();
         var oid = btn.attr('data-oid');
+        check.error.hideall(btn);
+        check.unbind.btn(btn,"click");
         $.ajax({
             url:getInfo.getUrl.fullurl('api/orders/'+ oid),
             type:'DELETE',
@@ -1410,7 +1428,7 @@ window.submit = {
                 if(data.user && data.user.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.profileUpdatesuccess);
                     setTimeout(function(){
-                        window.location.reload(true);
+                        window.history.back();
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.profileUpdatefail);
@@ -1419,6 +1437,33 @@ window.submit = {
             },
             error:function(data){
                 check.error.alertfail(btn,"error",check.error.errorInfo.profileUpdatefail);
+                submit.bind.profileUpdateSubmitBind();
+            }
+        });
+    },
+    moneyDeleteSubmit:function(btn){
+        var form = btn.closest('form');
+        var store = getInfo.checkstorage();
+        var oid = btn.attr("data-oid");
+        var mid = btn.attr("data-mid");
+        check.error.hideall(btn);
+        check.unbind.btn(btn,"click");
+        $.ajax({
+            url:getInfo.getUrl.fullurl('api/orders/' + oid + '/money_receipts/' + mid),
+            type:'DELETE',
+            data:{},
+            dataType:"json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+            },
+            success:function(data){
+                check.error.alertsuccess(btn,check.error.errorInfo.moneydeletesuccess);
+                setTimeout(function(){
+                    window.location.reload(true);
+                },3000);
+            },
+            error:function(data){
+                check.error.alertfail(btn,"error",check.error.errorInfo.moneydeletefail);
                 submit.bind.profileUpdateSubmitBind();
             }
         });
@@ -1775,8 +1820,12 @@ window.submit = {
             $('#submitBtn[name="update-profile"]').bind('click',function(){
                 submit.profileUpdateSubmit($(this));
             });
-        }  
-              
+        },
+        moneyDeleteSubmitBind:function(){
+            $('#moneydeleteBtn[name="moneyDelete"]').bind('click',function(){
+                submit.moneyDeleteSubmit($(this));
+            });
+        }   
     },
     load:function(){
         this.bind.sendRegeistCodeBind();
@@ -1794,6 +1843,7 @@ window.submit = {
         this.bind.appointmentDeleteSubmitBind();
         this.bind.investCheckSubmitBind();
         this.bind.profileUpdateSubmitBind();
+        this.bind.moneyDeleteSubmitBind();
     },
 }
 
@@ -2531,3 +2581,17 @@ $(function(){
     pop.load();
     tabs.load();
 });
+
+String.prototype.toHtmlEncode = function()
+{
+    var str = this;
+        str=str.replace(/&/g,"&amp;");
+        str=str.replace(/</g,"&lt;");
+        str=str.replace(/>/g,"&gt;");
+        str=str.replace(/\'/g,"&apos;");
+        str=str.replace(/\"/g,"&quot;");
+        str=str.replace(/\n/g,"<br>");
+        str=str.replace(/\ /g,"&nbsp;");
+        str=str.replace(/\t/g,"&nbsp;&nbsp;&nbsp;&nbsp;");
+    return str;
+}

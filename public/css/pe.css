@@ -355,13 +355,18 @@ form{
 .p-btns .book-btn{
 	float: left;
 	display: inline-block;
-	margin: 0 5%;
-	width: 40%;
-	height: 52px;
-	line-height: 52px;
+	width: 36%;
+	height: 56px;
+	line-height: 56px;
 	text-align:center;
 	border-radius: 5px;
 	cursor: pointer;
+}
+.p-btns .book-btn:nth-child(1){
+	margin:0 5% 0 9%;
+}
+.p-btns .book-btn:nth-child(2){
+	margin:0 9% 0 5%;
 }
 .word-btn{
 	background-color:transparent;
@@ -407,7 +412,7 @@ form{
 	width: 80%;
 	color: #F99F1E;
 	font-size: 18px;
-	line-height: 24px;
+	line-height: 26px;
 	font-weight: normal;
 	white-space: nowrap;
 	overflow: hidden;
@@ -423,8 +428,8 @@ form{
 }
 .p-info .p-f1{
 	float: left;
-	padding-right: 4%;
-	margin-right: 4%;
+	padding-right: 6%;
+	margin-right: 6%;
 	width: 48%;
 	height: 36px;
 	border-right: 1px solid #999;
@@ -432,7 +437,7 @@ form{
 .p-info .p-f2{
 	float: left;
 	margin-left: -1px;
-	width: 44%;
+	width: 40%;
 }
 .p-info .p-p{
 	line-height: 32px;
@@ -451,9 +456,9 @@ form{
 .p-range .blue-range{
 	flex:1;
 	float: left;
-	margin-top: 3px;
+	margin-top: 4px;
 	margin-right: 2%;
-	width: 93%;
+	width: 88%;
 	height: 10px;
 	border:1px solid #1498BF;
 	border-radius: 10px;
@@ -471,6 +476,8 @@ form{
 }
 .p-range .p-percent{
 	float: right;
+	width: 10%;
+	text-align: right;
 }
 .p-labels{
 	position: absolute;
@@ -495,7 +502,7 @@ form{
 	background-color: #70BF41;
 }
 .p-headblock{
-	min-height: 150px;
+	min-height: 110px;
 	padding: 10px 20px;
 	background-color: #DA5258;
 }
@@ -512,7 +519,8 @@ form{
 	color: #fff;
 }
 .p-headblock .p-intro{
-	font-size: 14px;
+	font-size: 18px;
+	line-height: 26px;
 	white-space: initial;
 	color: #fff;
 }
@@ -599,6 +607,7 @@ form{
 	line-height: 15px;
 }
 .c-list{
+	border-bottom: 1px solid #999;
 }
 .c-list li{
 	padding: 5% 10%;
@@ -684,7 +693,7 @@ form{
 	background-color: #1399BF;
 }
 .block-tab{
-	padding-bottom: 72px;
+	padding-bottom: 90px;
 }
 .block-tab form{
 	padding-bottom: 0px;
@@ -701,6 +710,9 @@ form{
 	line-height: 28px;
 	text-align: center;
 	border-bottom: 1px solid #CCC;
+}
+.line-table tbody td:nth-child(1){
+	color: #333;
 }
 .line-table thead td{
 	line-height: 20px;
@@ -776,9 +788,19 @@ form{
 	flex:1;
 	padding: 10px;
 	height: 18px;
-	line-height: 18px;
+	line-height: 24px;
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-o-border-radius: 0px;
 	border-top-left-radius: 3px;
+	-webkit-border-top-left-radius: 3px;
+	-moz-border-top-left-radius: 3px;
+	-o-border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-bottom-left-radius: 3px;
+	-o-border-bottom-left-radius: 3px;
 	background-color: rgba(255,255,255,0.7);
 }
 .searchadd-block .search-area span{
@@ -794,6 +816,7 @@ form{
 }
 /*--list--*/
 .fold-dl{
+	border-bottom: 1px solid #999;
 	overflow: hidden;
 	transition:all 0.8s ease;
 	-webkit-transition:all 0.8s ease;
@@ -1064,6 +1087,9 @@ form{
 	height: 8px;
 	background-color: #D85258;
 	transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+	-moz-transform:rotate(-45deg);
+	-o-transform:rotate(-45deg);
 }
 .icon-ahead{
 	position: relative;
@@ -1216,7 +1242,7 @@ form{
 	display: block;
 	padding: 5px 10px;
 	margin: 5px auto;
-	width: 120px;
+	width: 150px;
 	text-align: center;
 	border-radius: 3px;
 	color: #1498BF;
@@ -1394,4 +1420,61 @@ form{
 }
 .pop-btns .half-btn:hover{
 	background-color: rgba(0,0,0,0.2);
+}
+.mt-block{
+	padding: 10px 0 20px 0;
+	border-top: 1px solid #ccc;
+	overflow: hidden;
+}
+.mt-block:last-child{
+	border-bottom:1px solid #ccc;
+}
+.rapin{
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px 10px 20px 0;
+	overflow: hidden;
+}
+.rapin .delet_pink{
+	margin-right: -10px;
+}
+.delet_pink{
+	position: relative;
+	z-index: 1;
+	margin-top: 10px;
+	margin-bottom: -20px;
+	display: block;
+	float: right;
+	width: 36px;
+	height: 36px;
+	background-color: #D1265A;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.delet_pink:before,
+.delet_pink:after{
+	content: "";
+	position: absolute;
+	z-index: 2;
+	background-color: #fff; 
+}
+.delet_pink:before{
+	width: 2px;
+	height: 30px;
+	left: 17px;
+	top: 3px;
+	transform: rotate(45deg);
+}
+.delet_pink:after{
+	width: 30px;
+	height: 2px;
+	left: 3px;
+	top: 17px;
+	transform: rotate(45deg);
+}
+.pink{
+	padding: 0 3%;
+	line-height: 32px;
+	font-size: 14px;
+	color: #D1265A;
 }

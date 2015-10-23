@@ -26,7 +26,7 @@
 					item.find('.p-title').text(product.product.name||"");
 					item.find('.p-intro').text(product.product.desc||"");
 					item.find('#currency').text("（" + (product.product.currency||"人民币") + "）");
-					item.find('.tips p:eq(1)').text(product.product.starting_point||"暂无信息");
+					item.find('.tips p:eq(0)').html(product.product.rate.toHtmlEncode()||"暂无信息");
 					if(product.product.rois && product.product.rois.length>0){
 						_.each(product.product.rois,function(roi,key){
 							var td1 = $("<td></td>").text(roi.range);
@@ -222,7 +222,6 @@
 						</tbody>
 					</table>
 					<div class="tips">
-						<p>*起投金额：</p>
 						<p></p>
 					</div>
 				</div>

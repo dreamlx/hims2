@@ -13,7 +13,6 @@
 		$(function(){
 			var store = getInfo.checkstorage();
 			if(!store || !store.name || !store.email){
-				/*getInfo.turnprofilecreat();*/
 			}else{
 				//停留该页
 				var order = getInfo.getOrderInfo();
@@ -33,7 +32,6 @@
 				if(info.deliver=="未快递"){
 					$("#inputSendState").val(info.deliver).attr('data-val',0);
 					$("#inputSendState+select-ul li:eq(0)").addClass('current');
-					addicon($("#inputSendState"),'icon-rwrong');
 				}else if(info.deliver=="已快递"){
 					$("#inputSendState").val(info.deliver).attr('data-val',1);
 					$("#inputSendState+select-ul li:eq(1)").addClass('current');
@@ -42,8 +40,6 @@
 				$('#inputRemark').val(info.remark);
 				if(info.remark){
 					addicon($('#inputRemark'),'icon-gright');
-				}else{
-					addicon($('#inputRemark'),'icon-rwrong');
 				}
 				$("#editCustomerBtn").attr({'data-type':info.investable_type,'data-cid':info.investable_id,'data-back':"appointment-detail-step1"});
 				$("#submitBtn[name=appointmentUpdate]").attr('data-oid',info.id)
@@ -76,6 +72,7 @@
 							template.find('.input-box input,.input-box textarea,.img-box input').attr("readonly",true).closest('span').addClass('nochange');
 							template.find('.icon-ahead .icon').addClass("icon-gright");
 						}else if(infos[i].state == "未确认"){
+						}else if(infos[i].state == "已否决"){
 							template.find('.icon-ahead .icon').addClass("icon-rwrong");
 						}
 						$("#infoForm").append(template.find(".form-line"));
@@ -110,12 +107,19 @@
 							fl.next().remove();
 							fl.remove();
 						}
-						if(money[i].state == "未确认"){
+						if(money[i].state == "已否决"){
 							template.find('.icon-ahead .icon').addClass("icon-rwrong");
-						}else if(infos[i].state == "已确认"){
+							template.find(".mt-block").append("<a class='delet_pink'></a>")
+								.find('.delet_pink').attr({"data-oid":order.order.id,"data-mid":money[i].id});
+						}else if(money[i].state == "已确认"){
 							template.find('.icon-ahead .icon').addClass("icon-gright");
+						}else if(money[i].state == "未确认"){
+							var out = template.find(".form-line,.alert").clone();
+							template.find(".mt-block").empty().append("<p class='pink' >信息已提交成功，正在审核中</p><div class='rapin'><a class='delet_pink'></a></div>")
+								.find(".rapin").prepend(out)
+								.find('.delet_pink').attr({"data-oid":order.order.id,"data-mid":money[i].id});
 						}
-						$("#moneyForm").append(template.find(".form-line,.alert"));
+						$("#moneyForm").append(template.find(".mt-block"));
 					}
 				}
 				//删除按钮
@@ -125,10 +129,17 @@
                         $("#popalert .pop-alert").addClass('appear');
                     },100);
 				});
-				$('#popalert button').bind('click',function(){
-					$("#popalert .pop-alert").removeClass('appear');
+				$('.delet_pink').bind('click',function(){
+					$('#moneyalert').removeClass('hide');
+					$('#moneydeleteBtn').attr({"data-oid":$(this).attr("data-oid"),"data-mid":$(this).attr("data-mid")});
 					pop.appear=setTimeout(function(){
-						$('#popalert').addClass('hide');
+                        $("#moneyalert .pop-alert").addClass('appear');
+                    },100);
+				});
+				$('#popalert button,#moneyalert button').bind('click',function(){
+					$("#popalert .pop-alert,#moneyalert .pop-alert").removeClass('appear');
+					pop.appear=setTimeout(function(){
+						$('#popalert,#moneyalert').addClass('hide');
 					},400);
 				});
 			}
@@ -272,31 +283,42 @@
 			</div>
 		</div>
 	</div>
+	<div class="pop-bg hide" id="moneyalert">
+		<div class="pop-alert">
+			<p class="big middle">请确认删除</p>
+			<div class="pop-btns">
+				<button class="half-btn" id="moneydeleteBtn" name="moneyDelete">确认</button>
+				<button class="half-btn">取消</button>
+			</div>
+		</div>
+	</div>
 	<div id="template" class="hide">
 		<div id="money-template">
-			<div class="form-line">
-				<label class="icon-ahead"><i class="icon "></i>打款金额</label>
-				<span class="input-box nochange">
-					<input type="text" class="sspinput" readonly />
-					<i class="unit">万</i>
-				</span>
+			<div class="mt-block">
+				<div class="form-line">
+					<label class="icon-ahead"><i class="icon "></i>打款金额</label>
+					<span class="input-box nochange">
+						<input type="text" class="sspinput" readonly />
+						<i class="unit">万</i>
+					</span>
+				</div>
+				<div class="alert" role="alert" name=""></div>
+				<div class="form-line">
+					<label class="icon-ahead"><i class="icon "></i>打款日期</label>
+					<span class="input-box nochange">
+						<input type="date" readonly />
+					</span>
+				</div>
+				<div class="alert" role="alert" name=""></div>
+				<div class="form-line">
+					<label class="icon-ahead"><i class="icon "></i>打款凭条</label>
+					<span class="img-box">
+						<label class="img-default"></label>
+						<input class="hide" type="file" readonly />
+					</span>
+				</div>
+				<div class="alert" role="alert" name=""></div>
 			</div>
-			<div class="alert" role="alert" name=""></div>
-			<div class="form-line">
-				<label class="icon-ahead"><i class="icon "></i>打款日期</label>
-				<span class="input-box nochange">
-					<input type="date" readonly />
-				</span>
-			</div>
-			<div class="alert" role="alert" name=""></div>
-			<div class="form-line">
-				<label class="icon-ahead"><i class="icon "></i>打款凭条</label>
-				<span class="img-box">
-					<label class="img-default"></label>
-					<input class="hide" type="file" readonly />
-				</span>
-			</div>
-			<div class="alert" role="alert" name=""></div>
 		</div>
 		<div id="string-template">
 			<div class="form-line">
