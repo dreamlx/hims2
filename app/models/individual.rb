@@ -6,7 +6,7 @@ class Individual < ActiveRecord::Base
   validates :id_type, inclusion: ID_TYPES, allow_blank: true
 
   belongs_to :user
-  has_many :orders, as: :investable
+  has_many :orders, as: :investable, dependent: :destroy
 
   mount_uploader :id_front, ImageUploader
   mount_uploader :id_back, ImageUploader

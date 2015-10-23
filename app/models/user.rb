@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
   validates :gender, inclusion: GENDER_TYPES, allow_blank: true
   validates :card_type, inclusion: Individual::ID_TYPES, allow_blank: true
 
-  has_many :individuals
-  has_many :institutions
-  has_many :orders
+  has_many :individuals, dependent: :destroy
+  has_many :institutions, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   mount_uploader :card_front, ImageUploader
   mount_uploader :card_back, ImageUploader

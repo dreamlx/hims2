@@ -4,7 +4,7 @@ class Institution < ActiveRecord::Base
   validates :name, presence: true
 
   belongs_to :user
-  has_many :orders, as: :investable
+  has_many :orders, as: :investable, dependent: :destroy
 
   mount_uploader :business_licenses, ImageUploader
 
