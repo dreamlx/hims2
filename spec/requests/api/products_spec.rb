@@ -52,7 +52,6 @@ RSpec.describe "products" do
       expect(json["regulatory_filing"]).to eq product.regulatory_filing
       expect(json["legal_consultant"]).to eq product.legal_consultant
       expect(json["audit"]).to eq product.audit
-      expect(json["starting_point"]).to eq product.starting_point
       expect(json["rate"]).to eq product.rate
       expect(json["account"]).to eq product.account
       expect(json["progress"]).to eq product.progress

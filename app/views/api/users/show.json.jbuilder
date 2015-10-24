@@ -9,5 +9,4 @@ json.user do
   json.card_front @user.card_front if @user.card_front
   json.card_back @user.card_back if @user.card_back
   json.remark @user.remark if @user.remark
-  json.number @user.number if @user.number
 end

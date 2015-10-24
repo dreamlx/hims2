@@ -1,0 +1,9 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "MoneyReceipts") do |sheet|
+  sheet.add_row MoneyReceipt::HEADERS
+  i = 1
+  @money_receipts.each do |money_receipt|
+    sheet.add_row [money_receipt.date, money_receipt.order.investable.name, money_receipt.amount, money_receipt.bank_charge, (money_receipt.amount - money_receipt.bank_charge), money_receipt.order.amount, "资料认证", money_receipt.order.user.name, "起息日", "渠道",  "收益率"]
+    i += 1
+  end
+end

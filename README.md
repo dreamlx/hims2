@@ -763,7 +763,7 @@ curl -X GET --header "Authorization: Token token=#{open_id}" -d "number=xxxxxx" 
 ```
 url:    http://localhost:3000/api/orders/by_number
 action: get
-params: {number: xxxxxx}
+params: {number: user.card_no}
 response:
         [
           {

@@ -86,9 +86,9 @@ class Api::OrdersController < Api::BaseController
   end
 
   def by_number
+    return api_error(status: 422) if current_user.card_no != params[:number]
     investors_ids = Individual.where(id_no: params[:number]).ids + Institution.where(organ_reg: params[:number]).ids
     @orders = Order.where(investable_id: investors_ids)
-    current_user.update(number: params[:number]) if current_user.number.blank?
   end
 
   private
