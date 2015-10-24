@@ -15,6 +15,8 @@ class Api::OrdersController < Api::BaseController
         @order.investable_type = "Individual"
       elsif params[:order][:investable_id].start_with?("institution:")
         @order.investable_type = "Institution"
+      elsif params[:order][:investable_id].start_with?("user:")
+        @order.investable_type = "User"
       end
     end
     return api_error(status: 422) if current_user.id != @order.investable.user_id
