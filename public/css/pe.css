@@ -140,6 +140,9 @@ form{
 	flex:1;
 	background-color: #EDEDED;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 }
 .radius-form .input-box.finished{
 	background-color:transparent; 
@@ -280,6 +283,9 @@ form{
 	height: 80px;
 	background-color: #EDEDED;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 	overflow: hidden;
 }
 .img-box .img-default:before,
@@ -316,6 +322,9 @@ form{
 	width: 100%;
 	height: 38px;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 	cursor: pointer;
 }
 .rect-btn{
@@ -365,6 +374,9 @@ form{
 	line-height: 56px;
 	text-align:center;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 	cursor: pointer;
 }
 .p-btns .book-btn:nth-child(1){
@@ -467,6 +479,9 @@ form{
 	height: 10px;
 	border:1px solid #1498BF;
 	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
 }
 .p-range .range{
 	display: block;
@@ -474,6 +489,9 @@ form{
 	width: 0%;
 	background-color: #1498BF;
 	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
 	transition:all 1s ease;
 	-webkit-transition:all 1s ease;
 	-moz-transition:all 1s ease;
@@ -733,6 +751,9 @@ form{
 	display: flex;
 	margin: 20px 5%;
 	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-o-border-radius: 8px;
 	background-color: #EDEDED;
 	border: 1px solid #1399BF;
 	overflow: hidden;
@@ -957,6 +978,9 @@ form{
 	width: 90%;
 	background-color: #EDEDED;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 }
 .check-form .submit-btn{
 	margin: 40px auto; 
@@ -1006,6 +1030,9 @@ form{
 	line-height: 33px;
 	text-align: center;
 	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-o-border-radius: 20px;
 	border: 1px solid #1498BF;
 }
 .plus-icon:before{
@@ -1039,6 +1066,9 @@ form{
 	text-align: center;
 	background-color: #FFF;
 	border-radius: 40px;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	-o-border-radius: 40px;
 }
 .icon-redadd:before{
 	content: "";
@@ -1065,6 +1095,9 @@ form{
 	width: 18px;
 	height: 18px;
 	border-radius: 18px;
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	-o-border-radius: 18px;
 	border: 2px solid #D85258;
 }
 .icon-search:before{
@@ -1077,6 +1110,9 @@ form{
 	width: 12px;
 	height: 12px;
 	border-radius: 16px;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	-o-border-radius: 16px;
 	border: 2px solid transparent;
 	border-top: 2px solid #D85258;
 }
@@ -1250,6 +1286,9 @@ form{
 	width: 150px;
 	text-align: center;
 	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
 	color: #1498BF;
 	background-color: #C6E4FA;
 }
@@ -1275,6 +1314,9 @@ form{
 	text-align: center;
 	background-color: rgba(0,0,0,0.6);
 	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	-o-border-radius: 15px;
 	z-index: 99;
 	opacity: 0;
 	filter:alpha(opacity=0);
@@ -1317,6 +1359,9 @@ form{
 	height: 30px;
 	line-height: 30px;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 }
 .about .dp{
 	line-height: 30px;
@@ -1437,6 +1482,9 @@ form{
 .rapin{
 	border: 1px solid #ccc;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 	padding: 10px 10px 20px 0;
 	overflow: hidden;
 }
@@ -1454,6 +1502,9 @@ form{
 	height: 36px;
 	background-color: #D1265A;
 	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
 	cursor: pointer;
 }
 .delet_pink:before,
@@ -1462,20 +1513,22 @@ form{
 	position: absolute;
 	z-index: 2;
 	background-color: #fff; 
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
 }
 .delet_pink:before{
 	width: 2px;
 	height: 30px;
 	left: 17px;
 	top: 3px;
-	transform: rotate(45deg);
 }
 .delet_pink:after{
 	width: 30px;
 	height: 2px;
 	left: 3px;
 	top: 17px;
-	transform: rotate(45deg);
 }
 .pink{
 	padding: 0 3%;
