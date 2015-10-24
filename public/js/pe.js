@@ -1877,7 +1877,7 @@ window.submit = {
 }
 
 window.getInfo = {
-    getopenid:function(state){
+    /*getopenid:function(state){
         var result = false;
         $.ajax({
             url:'http://wx.hehuifunds.com/auth/wechat?state='+state,
@@ -1890,7 +1890,7 @@ window.getInfo = {
             error:function(data){
             }
         });
-    },
+    },*/
     checkstorage:function(){
         if($.session.get('HIMS_APP_STORE')!=undefined){
             return this.getSession('HIMS_APP_STORE');

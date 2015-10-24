@@ -17,10 +17,12 @@
 			if(!openidpara){
 				if(para == "invest-list"){
 					//getInfo.getopenid(1);
-					window.location.href = "http://wx.hehuifunds.com/auth/wechat?state=1";
+					//window.location.href = "http://wx.hehuifunds.com/auth/wechat?state=1";
+					window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx30a803fb363c0222&redirect_uri=http%3A%2F%2Fwx.hehuifunds.com%2Fapi%2Fusers%2Freceive_code&response_type=code&scope=snsapi_base&state=main#wechat_redirect";
 				}else if(para == "mine-invest"){
 					//getInfo.getopenid(2);
-					window.location.href = "http://wx.hehuifunds.com/auth/wechat?state=2";
+					//window.location.href = "http://wx.hehuifunds.com/auth/wechat?state=2";
+					window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx30a803fb363c0222&redirect_uri=http%3A%2F%2Fwx.hehuifunds.com%2Fapi%2Fusers%2Freceive_code&response_type=code&scope=snsapi_base&state=my#wechat_redirect";
 				}
 			}else{
 				if(para!="about-me"){
