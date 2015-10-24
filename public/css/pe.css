@@ -100,7 +100,7 @@ form{
 	padding: 12px 2.5%;
 }
 .full-form .form-line input.notfull{
-	width: 65%;
+	width: 63%;
 }
 .radius-form{
 	padding: 0 5% 100px 5%;
@@ -316,7 +316,7 @@ form{
 .rect-btn{
 	display: block;
 	float: right;
-	width: 30%;
+	width: 32%;
 	height: 40px;
 	font-size: 18px;
 	line-height: 40px;
@@ -1477,4 +1477,56 @@ form{
 	line-height: 32px;
 	font-size: 14px;
 	color: #D1265A;
+}
+@media screen and (max-width: 400px){
+	.menu a,
+	.p-title,
+	.a-headblock .a-title,
+	.appoitment .a-title,
+	.c-list li p,
+	.article h1,
+	.title-line-red,
+	.title-line-blue,
+	.pop-test.popsub
+	{
+		font-size: 24px;
+	}
+	input,button,textarea,
+	.radius-form .form-line label,
+	.radius-form .input-box .unit,
+	.select-ul li,
+	.rect-btn,
+	.p-subtitle,
+	.p-info,
+	.p-headblock .p-intro,
+	.a-headblock .a-text,
+	.appoitment .a-text,
+	.c-list li .c-span,
+	.select-tab li,
+	.line-table td,
+	.searchadd-block .add-button,
+	.fold-dl dt,
+	.line-list li,
+	.link-list a,
+	.bigtips,
+	.check-top,
+	.check-bottom,
+	.title-line-grey,
+	.about p,
+	.pop-test,
+	.pop-test .sub,
+	.pop-alert .big.middle{
+		font-size: 16px;
+	}
+	.line-table tbody .big{
+		font-size: 32px;
+	}
+	.main,
+	.grey-btn,
+	.c-search,
+	.input-searchgear button,
+	.about-botton p,
+	.pink{
+		font-size: 12px;
+	}
 }

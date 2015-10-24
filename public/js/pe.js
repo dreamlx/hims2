@@ -448,7 +448,7 @@ window.check = {
         if(input[0].files.length>0){
             var size = input[0].files[0].size;
             var filesize = Math.round(size/1024*100)/100;
-            if(filesize>500&&type!=''){
+            if(filesize>5000&&type!=''){
                 check.error.alertrun(alertarea,check.error.errorInfo.imgsizetype,0);
                 return false;
             }
@@ -605,7 +605,7 @@ window.check = {
             selectnull:"请选择正确的投资人",
             idnotype:"您的证件号码格式有误",
             imgformattype:"请上传图片文件",
-            imgsizetype:"图片文件过大，请上传500K以下的图片",
+            imgsizetype:"图片文件过大，请上传5M以下的图片",
             texttype:"描述文字请误超过200字",
             addresstype:"地址请误超过100字",
             addressnull:"请填写地址",
@@ -778,12 +778,41 @@ window.check = {
                 var input = $(this);
                 var f = input[0].files[0];
                 var label = input.prev();
+
                 var reader = new FileReader();
                 reader.onload=function(e){
-                    input.attr('data-code',reader.result);
-                    var img = $("<img />").attr('src',reader.result);
-                    label.empty().append(img);
-                }
+                    $('body').append("<canvas style='display:none'></canvas>")
+                    var canvas = document.querySelector('canvas'),
+                    ctx = canvas.getContext('2d'),
+                    img = new Image();
+                    img.onload = function() { 
+                        var square = 1280; 
+                        canvas.width = square; 
+                        canvas.height = square; 
+                        var context = canvas.getContext('2d'); 
+                        context.clearRect(0, 0, square, square); 
+                        var imageWidth; var imageHeight; 
+                        var offsetX = 0; var offsetY = 0; 
+                        if (this.width > this.height) { 
+                            imageHeight = Math.round(square * this.height / this.width); 
+                            imageWidth = square;  
+                            offsetY = Math.round((square - imageHeight) / 2);  
+                            
+                        } else { 
+                            imageWidth = Math.round(square * this.width / this.height); 
+                            imageHeight = square; 
+                            offsetX = Math.round((square - imageWidth) / 2); 
+                        }    
+                        context.drawImage(this, offsetX, offsetY, imageWidth, imageHeight); 
+                        var base64 = canvas.toDataURL('image/jpeg',0.5); 
+
+                        input.attr('data-code',base64);
+                        var imga = $("<img />").attr('src',base64);
+                        label.empty().append(imga);
+                        $('body').find('canvas').remove();
+                    }; 
+                    img.src = reader.result;
+                };
                 if(f){
                    reader.readAsDataURL(f); 
                 }
@@ -988,7 +1017,7 @@ window.submit = {
                 if(data.user && data.user.id>0){
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
-                        getInfo.menu();
+                        getInfo.turnmenu("invest-list");
                     },3000);
                 }else{
                     submit.bind.loginSubmitBind();
