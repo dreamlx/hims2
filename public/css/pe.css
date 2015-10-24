@@ -476,7 +476,7 @@ form{
 	float: left;
 	margin-top: 4px;
 	margin-right: 2%;
-	width: 86%;
+	width: 88%;
 	height: 10px;
 	border:1px solid #1498BF;
 	border-radius: 10px;
@@ -499,8 +499,8 @@ form{
 	-o-transition:all 1s ease;
 }
 .p-range .p-percent{
-	float: right;
-	width: 12%;
+	float: left;
+	width: 10%;
 	text-align: right;
 	line-height: 20px;
 }
