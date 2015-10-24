@@ -12,42 +12,37 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				//停留该页
-				var product = getInfo.getProductDetail();
-				if(!product) getInfo.turnproductliststep1();
-				var phead = $('#p-headblock');
-				phead.find('.p-subtitle').text(product.product.abbr||"");
-				phead.find('.p-title').text(product.product.name||"");
-				phead.find('.p-intro').text(product.product.desc||"");
-				$('#submitBtn').attr('data-pid',product.product.id)
-				//绑定客户列表按钮
-				$("#inputInvesterSelect").bind("click",function(){
-					$("#inputInvesterSelect+.select-ul").empty()
-					var list = getInfo.getCustomerList();
-					if(list&&list.length>0){
-						$(list).each(function(){
-							var li = $("<li></li>");
-							for(var key in this){
-								li.attr('data-val',key).text(this[key]);
-							}
-							$("#inputInvesterSelect+.select-ul").append(li);
-						});
-					}
-					tabs.bind.selectulli();
-				});
-
-				var head = $('.p-headblock').children();
-				if(head&&head.length>0){
-					var hei = 0;
-					head.each(function(){
-						hei+=$(this).height();
+			var product = getInfo.getProductDetail();
+			if(!product) getInfo.turnproductliststep1();
+			var phead = $('#p-headblock');
+			phead.find('.p-subtitle').text(product.product.abbr||"");
+			phead.find('.p-title').text(product.product.name||"");
+			phead.find('.p-intro').text(product.product.desc||"");
+			$('#submitBtn').attr('data-pid',product.product.id)
+			//绑定客户列表按钮
+			$("#inputInvesterSelect").bind("click",function(){
+				$("#inputInvesterSelect+.select-ul").empty()
+				var list = getInfo.getCustomerList();
+				if(list&&list.length>0){
+					$(list).each(function(){
+						var li = $("<li></li>");
+						for(var key in this){
+							li.attr('data-val',key).text(this[key]);
+						}
+						$("#inputInvesterSelect+.select-ul").append(li);
 					});
-					var len = 0.5*($('.p-headblock').height()-hei);
-					$(head[0]).css({'margin-top':len+'px'});
 				}
+				tabs.bind.selectulli();
+			});
+
+			var head = $('.p-headblock').children();
+			if(head&&head.length>0){
+				var hei = 0;
+				head.each(function(){
+					hei+=$(this).height();
+				});
+				var len = 0.5*($('.p-headblock').height()-hei);
+				$(head[0]).css({'margin-top':len+'px'});
 			}
 		});
 	</script>

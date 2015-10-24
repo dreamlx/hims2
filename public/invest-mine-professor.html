@@ -12,48 +12,44 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				//停留该页
-				var invests = getInfo.getInvestMine();
-				if(!invests||invests.length<1){
-					getInfo.turnmenu('mine-invest');
-				}
-				for(var i=0; i<invests.length;i++){
-					var product = $('#template').find('.product').clone();
-					var appointment = $('#template').find('.line-list li').clone();
-					product.find('.line-list li').remove();
-					product.find('.p-title').text(invests[i].name);
-					product.find('.p-intro').text("说明："+invests[i].desc);
-					product.find('.p-f1 .p-p:eq(0) span:eq(0)').text(invests[i].title1+"：");
-					product.find('.p-f1 .p-p:eq(0) span:eq(1)').text(invests[i].content1);
-					product.find('.p-f1 .p-p:eq(1) span:eq(0)').text(invests[i].title2+"：");
-					product.find('.p-f1 .p-p:eq(1) span:eq(1)').text(invests[i].content2);
-					product.find('.p-f2 .p-p:eq(0) span:eq(0)').text(invests[i].title3+"：");
-					product.find('.p-f2 .p-p:eq(0) span:eq(1)').text(invests[i].content3);
-					product.find('section').attr('data-pid',invests[i].id);
-					if(invests[i].orders&&invests[i].orders.length>0){
-						for(var j = 0;j<invests[i].orders.length;j++){
-							var order = invests[i].orders[j];
-							var appoint = appointment.clone();
-							appoint.find('p:eq(0)').text(order.investor_name);
-							appoint.find('p:eq(1) span').text(order.currency);
-							appoint.find('p:eq(1) i').text(order.amount+"万");
-							appoint.attr('data-oid',order.id);
-							if(order.state=="已起息"){
-								appoint.attr('data-pid',invests[i].id);
-								appoint.attr('data-turn',"invest-detail");
-							}
-							product.find('.line-list').append(appoint);
-						}
-					}
-					$('#product-list').append(product);
-				}
-				getInfo.turnBind.bindturninvestdetail();
-				getInfo.turnBind.bindturnappointmentdetailstep();
-				tabs.bind.foldslide();
+			var invests = getInfo.getInvestMine();
+			if(!invests||invests.length<1){
+				getInfo.turnmenu('mine-invest');
 			}
+			for(var i=0; i<invests.length;i++){
+				var product = $('#template').find('.product').clone();
+				var appointment = $('#template').find('.line-list li').clone();
+				product.find('.line-list li').remove();
+				product.find('.p-title').text(invests[i].name);
+				product.find('.p-intro').text("说明："+invests[i].desc);
+				product.find('.p-f1 .p-p:eq(0) span:eq(0)').text(invests[i].title1+"：");
+				product.find('.p-f1 .p-p:eq(0) span:eq(1)').text(invests[i].content1);
+				product.find('.p-f1 .p-p:eq(1) span:eq(0)').text(invests[i].title2+"：");
+				product.find('.p-f1 .p-p:eq(1) span:eq(1)').text(invests[i].content2);
+				product.find('.p-f2 .p-p:eq(0) span:eq(0)').text(invests[i].title3+"：");
+				product.find('.p-f2 .p-p:eq(0) span:eq(1)').text(invests[i].content3);
+				product.find('section').attr('data-pid',invests[i].id);
+				if(invests[i].orders&&invests[i].orders.length>0){
+					for(var j = 0;j<invests[i].orders.length;j++){
+						var order = invests[i].orders[j];
+						var appoint = appointment.clone();
+						appoint.find('p:eq(0)').text(order.investor_name);
+						appoint.find('p:eq(1) span').text(order.currency);
+						appoint.find('p:eq(1) i').text(order.amount+"万");
+						appoint.attr('data-oid',order.id);
+						if(order.state=="已起息"){
+							appoint.attr('data-pid',invests[i].id);
+							appoint.attr('data-turn',"invest-detail");
+						}
+						product.find('.line-list').append(appoint);
+					}
+				}
+				$('#product-list').append(product);
+			}
+			getInfo.turnBind.bindturninvestdetail();
+			getInfo.turnBind.bindturnappointmentdetailstep();
+			tabs.bind.foldslide();
+			
 		});
 	</script>
 </head>

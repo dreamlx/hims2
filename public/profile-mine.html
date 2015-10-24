@@ -12,50 +12,45 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				//停留该页
-				var info = getInfo.getUserInfo();
-				if(!info||!info.user) getInfo.turnprofilecreat();
-				var user = info.user;
-				$('#inputName').val(user.name||"");
-				var typeli =$('#type-select+.select-ul li');
-				for( var i=0;i<typeli.length;i++){
-					if($(typeli[i]).text() == user.id_type){
-						$('#type-select').val(user.id_type).attr('data-val',$(typeli[i]).attr('data-val'));
-						$(typeli[i]).addClass('current');
-					}
+			var info = getInfo.getUserInfo();
+			if(!info||!info.user) getInfo.turnprofilecreat();
+			var user = info.user;
+			$('#inputName').val(user.name||"");
+			var typeli =$('#type-select+.select-ul li');
+			for( var i=0;i<typeli.length;i++){
+				if($(typeli[i]).text() == user.id_type){
+					$('#type-select').val(user.id_type).attr('data-val',$(typeli[i]).attr('data-val'));
+					$(typeli[i]).addClass('current');
 				}
-				$('#inputNickName').val(user.nickname||"");
-				var renderli =$('#inputRender+.select-ul li');
-				for( var i=0;i<renderli.length;i++){
-					if($(renderli[i]).text() == user.gender){
-						$('#inputRender').val(user.gender).attr('data-val',$(renderli[i]).attr('data-val'));
-						$(renderli[i]).addClass('current');
-					}
-				}
-				$('#inputCell').val(user.cell||"");
-				$('#inputMail').val(user.email||"");
-				$('#inputAddress').val(user.address||"");
-				var idli =$('#inputId_typeP+.select-ul li');
-				for( var i=0;i<idli.length;i++){
-					if($(idli[i]).text() == user.card_type){
-						$('#inputId_typeP').val(user.card_type).attr('data-val',$(idli[i]).attr('data-val'));
-						$(idli[i]).addClass('current');
-					}
-				}
-				$('#inputId_noP').val(user.card_no||"");
-				if(user.card_front.card_front.thumb.url){
-					$('#inputId_frontP').prev().append('<img />')
-						.find('img').attr('src',user.card_front.card_front.thumb.url);
-				}
-				if(user.card_back.card_back.thumb.url){
-					$('#inputId_backP').prev().append('<img />')
-						.find('img').attr('src',user.card_back.card_back.thumb.url);
-				}
-				$('#inputRemarkP').val(user.remark||"");			
 			}
+			$('#inputNickName').val(user.nickname||"");
+			var renderli =$('#inputRender+.select-ul li');
+			for( var i=0;i<renderli.length;i++){
+				if($(renderli[i]).text() == user.gender){
+					$('#inputRender').val(user.gender).attr('data-val',$(renderli[i]).attr('data-val'));
+					$(renderli[i]).addClass('current');
+				}
+			}
+			$('#inputCell').val(user.cell||"");
+			$('#inputMail').val(user.email||"");
+			$('#inputAddress').val(user.address||"");
+			var idli =$('#inputId_typeP+.select-ul li');
+			for( var i=0;i<idli.length;i++){
+				if($(idli[i]).text() == user.card_type){
+					$('#inputId_typeP').val(user.card_type).attr('data-val',$(idli[i]).attr('data-val'));
+					$(idli[i]).addClass('current');
+				}
+			}
+			$('#inputId_noP').val(user.card_no||"");
+			if(user.card_front.card_front.thumb.url){
+				$('#inputId_frontP').prev().append('<img />')
+					.find('img').attr('src',user.card_front.card_front.thumb.url);
+			}
+			if(user.card_back.card_back.thumb.url){
+				$('#inputId_backP').prev().append('<img />')
+					.find('img').attr('src',user.card_back.card_back.thumb.url);
+			}
+			$('#inputRemarkP').val(user.remark||"");
 		});
 	</script>
 </head>

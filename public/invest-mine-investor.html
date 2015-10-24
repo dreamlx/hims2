@@ -12,31 +12,28 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				if(!store.card_no){getInfo.turnprofilemine();}
-				//停留该页
-				var invest = getInfo.getInvesterInvest();
-				if(invest && invest.length>0) {
-					for(var i =0;i<invest.length;i++){
-						var template = $('#template li').clone();
-						template.attr('data-oid',invest[i].id);
-						template.attr('data-pid',invest[i].product_id);
-						template.find('.p-title').text(invest[i].product_name||"");
-						template.find('.p-intro').text(invest[i].product_desc||"");
-						template.find('.p-info .p-f1 .p-p:eq(0) span:eq(0)').text(invest[i].title1||"");
-						template.find('.p-info .p-f1 .p-p:eq(0) span:eq(1)').text(invest[i].content1||"");
-						template.find('.p-info .p-f1 .p-p:eq(1) span:eq(0)').text(invest[i].title2||"");
-						template.find('.p-info .p-f1 .p-p:eq(1) span:eq(1)').text(invest[i].content2||"");
-						template.find('.p-info .p-f2 .p-p:eq(0) span:eq(0)').text(invest[i].title3||"");
-						template.find('.p-info .p-f2 .p-p:eq(0) span:eq(1)').text(invest[i].content3||"");
-						$("#product-list").append(template);
-					}
+			if(!store.card_no){getInfo.turnprofilemine();}
+			//停留该页
+			var invest = getInfo.getInvesterInvest();
+			if(invest && invest.length>0) {
+				for(var i =0;i<invest.length;i++){
+					var template = $('#template li').clone();
+					template.attr('data-oid',invest[i].id);
+					template.attr('data-pid',invest[i].product_id);
+					template.find('.p-title').text(invest[i].product_name||"");
+					template.find('.p-intro').text(invest[i].product_desc||"");
+					template.find('.p-info .p-f1 .p-p:eq(0) span:eq(0)').text(invest[i].title1||"");
+					template.find('.p-info .p-f1 .p-p:eq(0) span:eq(1)').text(invest[i].content1||"");
+					template.find('.p-info .p-f1 .p-p:eq(1) span:eq(0)').text(invest[i].title2||"");
+					template.find('.p-info .p-f1 .p-p:eq(1) span:eq(1)').text(invest[i].content2||"");
+					template.find('.p-info .p-f2 .p-p:eq(0) span:eq(0)').text(invest[i].title3||"");
+					template.find('.p-info .p-f2 .p-p:eq(0) span:eq(1)').text(invest[i].content3||"");
+					$("#product-list").append(template);
 				}
-				getInfo.turnBind.bindturnappointmentdetailstep();
-				getInfo.turnBind.bindturnproductdetail();
 			}
+			getInfo.turnBind.bindturnappointmentdetailstep();
+			getInfo.turnBind.bindturnproductdetail();
+			
 		});
 	</script>
 </head>

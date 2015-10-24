@@ -12,44 +12,40 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				//停留该页
-				var detail = getInfo.getInvestDetail();
-				if(!detail || !detail.product){
-					getInfo.turninvestmineprofessor();
-				}
-				var d = $('#invest-detail');
-				var p = detail.product;
-				d.find('.a-headblock .a-title').text(p.name);
-				d.find('.a-headblock .a-text:eq(0)').text(p.title4 + '：' + p.content4);
-				d.find('.a-headblock .a-text:eq(1)').text(p.title5 + '：' + p.content5);
-				d.find('.a-headblock .a-text:eq(2)').text(p.title6 + '：' + p.content6);
-				d.find('.a-headblock .a-text:eq(3)').text(p.title7 + '：' + p.content7);
-				if(p.notices&&p.notices.length>0){
-					for(var i =0;i<p.notices.length;i++){
-						var notice = p.notices[i];
-						var item = $('#template a').clone();
-						item.prepend(notice.title);
-						item.attr('data-id',notice.id);
-						item.attr('href',notice.attach.attach.url);
-						item.find('span').text(notice.date);
-						$('#infomation .link-list').append(item);
-					}
-				}
-				if(p.reports&&p.reports.length>0){
-					for(var i =0;i<p.reports.length;i++){
-						var report = p.reports[i];
-						var item = $('#template a').clone();
-						item.prepend(report.title);
-						item.attr('data-id',report.id);
-						item.attr('href',report.attach.attach.url);
-						item.find('span').text(report.date);
-						$('#reporter .link-list').append(item);
-					}
+			var detail = getInfo.getInvestDetail();
+			if(!detail || !detail.product){
+				getInfo.turninvestmineprofessor();
+			}
+			var d = $('#invest-detail');
+			var p = detail.product;
+			d.find('.a-headblock .a-title').text(p.name);
+			d.find('.a-headblock .a-text:eq(0)').text(p.title4 + '：' + p.content4);
+			d.find('.a-headblock .a-text:eq(1)').text(p.title5 + '：' + p.content5);
+			d.find('.a-headblock .a-text:eq(2)').text(p.title6 + '：' + p.content6);
+			d.find('.a-headblock .a-text:eq(3)').text(p.title7 + '：' + p.content7);
+			if(p.notices&&p.notices.length>0){
+				for(var i =0;i<p.notices.length;i++){
+					var notice = p.notices[i];
+					var item = $('#template a').clone();
+					item.prepend(notice.title);
+					item.attr('data-id',notice.id);
+					item.attr('href',notice.attach.attach.url);
+					item.find('span').text(notice.date);
+					$('#infomation .link-list').append(item);
 				}
 			}
+			if(p.reports&&p.reports.length>0){
+				for(var i =0;i<p.reports.length;i++){
+					var report = p.reports[i];
+					var item = $('#template a').clone();
+					item.prepend(report.title);
+					item.attr('data-id',report.id);
+					item.attr('href',report.attach.attach.url);
+					item.find('span').text(report.date);
+					$('#reporter .link-list').append(item);
+				}
+			}
+			
 		});
 	</script>
 </head>

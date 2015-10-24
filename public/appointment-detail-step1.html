@@ -12,137 +12,134 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-			}else{
-				//停留该页
-				var order = getInfo.getOrderInfo();
-				if(!order || !order.order) {getInfo.turnappointmentmine();}
-				if(order.order.state=="已起息"){
-					getInfo.turnappointmentdetailstep2(order.order.id);
-				}
-				//order
-				var base = $('#order-base');
-				var info = order.order;
-				base.find('li:eq(0) span').text(info.investor_name||"");
-				base.find('li:eq(1) span').text(info.product_name||"");
-				base.find('li:eq(2) span').text(info.currency||"人民币");
-				base.find('li:eq(3) span').text(info.amount+"万");
-				base.find('li:eq(4) span').text(info.due_date||"");
-				$("#inputIdno").val(info.number);
-				if(info.deliver=="未快递"){
-					$("#inputSendState").val(info.deliver).attr('data-val',0);
-					$("#inputSendState+select-ul li:eq(0)").addClass('current');
-				}else if(info.deliver=="已快递"){
-					$("#inputSendState").val(info.deliver).attr('data-val',1);
-					$("#inputSendState+select-ul li:eq(1)").addClass('current');
-					addicon($("#inputSendState"),'icon-gright');
-				}
-				$('#inputRemark').val(info.remark);
-				if(info.remark){
-					addicon($('#inputRemark'),'icon-gright');
-				}
-				$("#editCustomerBtn").attr({'data-type':info.investable_type,'data-cid':info.investable_id,'data-back':"appointment-detail-step1"});
-				$("#submitBtn[name=appointmentUpdate]").attr('data-oid',info.id)
-				$("#deleteBtn[name=appointmentDelete]").attr('data-oid',info.id)
-				//infos
-				if(order.infos && order.infos.length>0){
-					var infos= order.infos;
-					for(var i=0;i<infos.length;i++){
-						var type = infos[i].field_type.toLowerCase();
-						var template = $("#" + type + "-template").clone();						
-						template.find('.icon-ahead span').text(infos[i].field_name);
-						template.find('.input-box input,.img-box input,.input-box textarea').attr({
-							"data-category":infos[i].category,
-							"data-field_type":type,
-							"data-id":infos[i].id,
-							"id":"info" + type +infos[i].id,
-							"name":"info" + type,
-							"placeholder":"请输入"+infos[i].field_name
-						});
-						if(type=="string"&&infos[i].string){
-							template.find('.input-box input').val(infos[i].string);
-						}else if(type=="text"&&infos[i].text){
-							template.find('.input-box textarea').val(infos[i].text);
-						}else if(type=="photo"&&infos[i].photo.photo.url){
-							template.find('.img-box .img-default').append("<img />").find('img').attr('src',infos[i].photo.photo.url);
-						}
-						template.find('label').attr('for',"info" + type +infos[i].id);
-						template.find('[role=alert]').attr("name","info" + type + infos[i].id);
-						if(infos[i].state == "已确认"){
-							template.find('.input-box input,.input-box textarea,.img-box input').attr("readonly",true).closest('span').addClass('nochange');
-							template.find('.icon-ahead .icon').addClass("icon-gright");
-						}else if(infos[i].state == "未确认"){
-						}else if(infos[i].state == "已否决"){
-							template.find('.icon-ahead .icon').addClass("icon-rwrong");
-						}
-						$("#infoForm").append(template.find(".form-line"));
-						$("#infoForm").append(template.find(".alert"));
-						rebind();
-					}
-				}
-				//money_receipts
-				if(order.money_receipts && order.money_receipts.length>0){
-					var money = order.money_receipts
-					for(var i=0;i<money.length;i++){
-						var template = $("#money-template").clone();
-						if(money[i].amount){
-							template.find('input[type=text]').val(money[i].amount);
-						}else{
-							var fl = template.find('input[type=text]').closest('.form-line');
-							fl.next().remove();
-							fl.remove();
-						}
-						if(money[i].date){
-							template.find('input[type=date]').val(money[i].date);
-						}else{
-							var fl = template.find('input[type=date]').closest('.form-line');
-							fl.next().remove();
-							fl.remove();
-						}
-						if(money[i].attach.attach.url){
-							template.find('.img-default').append('<img />')
-							.find('img').attr('src',money[i].attach.attach.url);
-						}else{
-							var fl = template.find('input[type=file]').closest('.form-line');
-							fl.next().remove();
-							fl.remove();
-						}
-						if(money[i].state == "已否决"){
-							template.find('.icon-ahead .icon').addClass("icon-rwrong");
-							template.find(".mt-block").append("<a class='delet_pink'></a>")
-								.find('.delet_pink').attr({"data-oid":order.order.id,"data-mid":money[i].id});
-						}else if(money[i].state == "已确认"){
-							template.find('.icon-ahead .icon').addClass("icon-gright");
-						}else if(money[i].state == "未确认"){
-							var out = template.find(".form-line,.alert").clone();
-							template.find(".mt-block").empty().append("<p class='pink' >信息已提交成功，正在审核中</p><div class='rapin'><a class='delet_pink'></a></div>")
-								.find(".rapin").prepend(out)
-								.find('.delet_pink').attr({"data-oid":order.order.id,"data-mid":money[i].id});
-						}
-						$("#moneyForm").append(template.find(".mt-block"));
-					}
-				}
-				//删除按钮
-				$('#showdelete').bind('click',function(){
-					$('#popalert').removeClass('hide');
-					pop.appear=setTimeout(function(){
-                        $("#popalert .pop-alert").addClass('appear');
-                    },100);
-				});
-				$('.delet_pink').bind('click',function(){
-					$('#moneyalert').removeClass('hide');
-					$('#moneydeleteBtn').attr({"data-oid":$(this).attr("data-oid"),"data-mid":$(this).attr("data-mid")});
-					pop.appear=setTimeout(function(){
-                        $("#moneyalert .pop-alert").addClass('appear');
-                    },100);
-				});
-				$('#popalert button,#moneyalert button').bind('click',function(){
-					$("#popalert .pop-alert,#moneyalert .pop-alert").removeClass('appear');
-					pop.appear=setTimeout(function(){
-						$('#popalert,#moneyalert').addClass('hide');
-					},400);
-				});
+			var order = getInfo.getOrderInfo();
+			if(!order || !order.order) {getInfo.turnappointmentmine();}
+			if(order.order.state=="已起息"){
+				getInfo.turnappointmentdetailstep2(order.order.id);
 			}
+			//order
+			var base = $('#order-base');
+			var info = order.order;
+			base.find('li:eq(0) span').text(info.investor_name||"");
+			base.find('li:eq(1) span').text(info.product_name||"");
+			base.find('li:eq(2) span').text(info.currency||"人民币");
+			base.find('li:eq(3) span').text(info.amount+"万");
+			base.find('li:eq(4) span').text(info.due_date||"");
+			$("#inputIdno").val(info.number);
+			if(info.deliver=="未快递"){
+				$("#inputSendState").val(info.deliver).attr('data-val',0);
+				$("#inputSendState+select-ul li:eq(0)").addClass('current');
+			}else if(info.deliver=="已快递"){
+				$("#inputSendState").val(info.deliver).attr('data-val',1);
+				$("#inputSendState+select-ul li:eq(1)").addClass('current');
+				addicon($("#inputSendState"),'icon-gright');
+			}
+			$('#inputRemark').val(info.remark);
+			if(info.remark){
+				addicon($('#inputRemark'),'icon-gright');
+			}
+			$("#editCustomerBtn").attr({'data-type':info.investable_type,'data-cid':info.investable_id,'data-back':"appointment-detail-step1"});
+			$("#submitBtn[name=appointmentUpdate]").attr('data-oid',info.id)
+			$("#deleteBtn[name=appointmentDelete]").attr('data-oid',info.id)
+			//infos
+			if(order.infos && order.infos.length>0){
+				var infos= order.infos;
+				for(var i=0;i<infos.length;i++){
+					var type = infos[i].field_type.toLowerCase();
+					var template = $("#" + type + "-template").clone();						
+					template.find('.icon-ahead span').text(infos[i].field_name);
+					template.find('.input-box input,.img-box input,.input-box textarea').attr({
+						"data-category":infos[i].category,
+						"data-field_type":type,
+						"data-id":infos[i].id,
+						"id":"info" + type +infos[i].id,
+						"name":"info" + type,
+						"placeholder":"请输入"+infos[i].field_name
+					});
+					if(type=="string"&&infos[i].string){
+						template.find('.input-box input').val(infos[i].string);
+					}else if(type=="text"&&infos[i].text){
+						template.find('.input-box textarea').val(infos[i].text);
+					}else if(type=="photo"&&infos[i].photo.photo.url){
+						template.find('.img-box .img-default').append("<img />").find('img').attr('src',infos[i].photo.photo.url);
+					}
+					template.find('label').attr('for',"info" + type +infos[i].id);
+					template.find('[role=alert]').attr("name","info" + type + infos[i].id);
+					if(infos[i].state == "已确认"){
+						template.find('.input-box input,.input-box textarea,.img-box input').attr("readonly",true).closest('span').addClass('nochange');
+						template.find('.icon-ahead .icon').addClass("icon-gright");
+					}else if(infos[i].state == "未确认"){
+					}else if(infos[i].state == "已否决"){
+						template.find('.icon-ahead .icon').addClass("icon-rwrong");
+					}
+					$("#infoForm").append(template.find(".form-line"));
+					$("#infoForm").append(template.find(".alert"));
+					rebind();
+				}
+			}
+			//money_receipts
+			if(order.money_receipts && order.money_receipts.length>0){
+				var money = order.money_receipts
+				for(var i=0;i<money.length;i++){
+					var template = $("#money-template").clone();
+					if(money[i].amount){
+						template.find('input[type=text]').val(money[i].amount);
+					}else{
+						var fl = template.find('input[type=text]').closest('.form-line');
+						fl.next().remove();
+						fl.remove();
+					}
+					if(money[i].date){
+						template.find('input[type=date]').val(money[i].date);
+					}else{
+						var fl = template.find('input[type=date]').closest('.form-line');
+						fl.next().remove();
+						fl.remove();
+					}
+					if(money[i].attach.attach.url){
+						template.find('.img-default').append('<img />')
+						.find('img').attr('src',money[i].attach.attach.url);
+					}else{
+						var fl = template.find('input[type=file]').closest('.form-line');
+						fl.next().remove();
+						fl.remove();
+					}
+					if(money[i].state == "已否决"){
+						template.find('.icon-ahead .icon').addClass("icon-rwrong");
+						template.find(".mt-block").append("<a class='delet_pink'></a>")
+							.find('.delet_pink').attr({"data-oid":order.order.id,"data-mid":money[i].id});
+					}else if(money[i].state == "已确认"){
+						template.find('.icon-ahead .icon').addClass("icon-gright");
+					}else if(money[i].state == "未确认"){
+						var out = template.find(".form-line,.alert").clone();
+						template.find(".mt-block").empty().append("<p class='pink' >信息已提交成功，正在审核中</p><div class='rapin'><a class='delet_pink'></a></div>")
+							.find(".rapin").prepend(out)
+							.find('.delet_pink').attr({"data-oid":order.order.id,"data-mid":money[i].id});
+					}
+					$("#moneyForm").append(template.find(".mt-block"));
+				}
+			}
+			//删除按钮
+			$('#showdelete').bind('click',function(){
+				$('#popalert').removeClass('hide');
+				pop.appear=setTimeout(function(){
+                    $("#popalert .pop-alert").addClass('appear');
+                },100);
+			});
+			$('.delet_pink').bind('click',function(){
+				$('#moneyalert').removeClass('hide');
+				$('#moneydeleteBtn').attr({"data-oid":$(this).attr("data-oid"),"data-mid":$(this).attr("data-mid")});
+				pop.appear=setTimeout(function(){
+                    $("#moneyalert .pop-alert").addClass('appear');
+                },100);
+			});
+			$('#popalert button,#moneyalert button').bind('click',function(){
+				$("#popalert .pop-alert,#moneyalert .pop-alert").removeClass('appear');
+				pop.appear=setTimeout(function(){
+					$('#popalert,#moneyalert').addClass('hide');
+				},400);
+			});
+			
 		});
 		function rebind(){
 			$("#infoForm input[type=file]").bind("blur",function(){

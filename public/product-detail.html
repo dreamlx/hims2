@@ -12,167 +12,162 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
+			var product = getInfo.getProductDetail();
+			if(!product){
+				alert("网络原因，获取产品失败，点击确定重试！");
+				window.location.reload(true);
 			}else{
-				//停留该页
-				var product = getInfo.getProductDetail();
-				if(!product){
-					alert("网络原因，获取产品失败，点击确定重试！");
-					window.location.reload(true);
+				var item = $("#product-detail");
+				item.find('.p-subtitle').text(product.product.abbr||"");
+				item.find('.p-title').text(product.product.name||"");
+				item.find('.p-intro').text(product.product.desc||"");
+				item.find('#currency').text("（" + (product.product.currency||"人民币") + "）");
+				item.find('.tips p:eq(0)').html(product.product.rate.toHtmlEncode()||"暂无信息");
+				if(product.product.rois && product.product.rois.length>0){
+					_.each(product.product.rois,function(roi,key){
+						var td1 = $("<td></td>").text(roi.range);
+						var td2 = $("<td class='big red'></td>").text(roi.profit);
+						var tr = $("<tr></tr>").attr("data-rid",roi.id).append(td1).append(td2);
+						item.find('.line-table tbody').append(tr);
+					});
+				}
+				if(product.product.name){
+					item.find('#pname').text(product.product.name);
 				}else{
-					var item = $("#product-detail");
-					item.find('.p-subtitle').text(product.product.abbr||"");
-					item.find('.p-title').text(product.product.name||"");
-					item.find('.p-intro').text(product.product.desc||"");
-					item.find('#currency').text("（" + (product.product.currency||"人民币") + "）");
-					item.find('.tips p:eq(0)').html(product.product.rate.toHtmlEncode()||"暂无信息");
-					if(product.product.rois && product.product.rois.length>0){
-						_.each(product.product.rois,function(roi,key){
-							var td1 = $("<td></td>").text(roi.range);
-							var td2 = $("<td class='big red'></td>").text(roi.profit);
-							var tr = $("<tr></tr>").attr("data-rid",roi.id).append(td1).append(td2);
-							item.find('.line-table tbody').append(tr);
-						});
-					}
-					if(product.product.name){
-						item.find('#pname').text(product.product.name);
-					}else{
-						item.find('#pname').closest('li').remove();
-					}
-					if(product.product.abbr){
-						item.find('#pabbr').text(product.product.abbr);
-					}else{
-						item.find('#pabbr').closest('li').remove();
-					}
-					if(product.product.abbr){
-						item.find('#pcurrency').text(product.product.currency);
-					}else{
-						item.find('#pcurrency').closest('li').remove();
-					}
-					
-					if(product.product.amount){
-						item.find('#pamount').text(product.product.amount);
-					}else{
-						item.find('#pamount').closest('li').remove();
-					}
-					if(product.product.period){
-						item.find('#pperiod').text(product.product.period);
-					}else{
-						item.find('#pperiod').closest('li').remove();
-					}
-					if(product.product.paid){
-						item.find('#ppaid').text(product.product.paid);
-					}else{
-						item.find('#ppaid').closest('li').remove();
-					}
-					if(product.product.sales_period){
-						item.find('#psales_period').text(product.product.sales_period);
-					}else{
-						item.find('#psales_period').closest('li').remove();
-					}
-					if(product.product.block_period){
-						item.find('#pblock_period').text(product.product.block_period);
-					}else{
-						item.find('#pblock_period').closest('li').remove();
-					}
-					if(product.product.redeem){
-						item.find('#predeem').text(product.product.redeem);
-					}else{
-						item.find('#predeem').closest('li').remove();
-					}
-					if(product.product.entity){
-						item.find('#pentity').text(product.product.entity);
-					}else{
-						item.find('#pentity').closest('li').remove();
-					}
-					if(product.product.adviser){
-						item.find('#padviser').text(product.product.adviser);
-					}else{
-						item.find('#padviser').closest('li').remove();
-					}
-					if(product.product.trustee){
-						item.find('#ptrustee').text(product.product.trustee);
-					}else{
-						item.find('#ptrustee').closest('li').remove();
-					}
-					if(product.product.reg_organ){
-						item.find('#preg_organ').text(product.product.reg_organ);
-					}else{
-						item.find('#preg_organ').closest('li').remove();
-					}
-					if(product.product.website){
-						item.find('#pwebsite').text(product.product.website);
-					}else{
-						item.find('#pwebsite').closest('li').remove();
-					}
-					if(product.product.agency){
-						item.find('#pagency').text(product.product.agency);
-					}else{
-						item.find('#pagency').closest('li').remove();
-					}
-					if(product.product.regulatory_filing){
-						item.find('#pregulatory_filing').text(product.product.regulatory_filing);
-					}else{
-						item.find('#pregulatory_filing').closest('li').remove();
-					}
-					if(product.product.legal_consultant){
-						item.find('#plegal_consultant').text(product.product.legal_consultant);
-					}else{
-						item.find('#plegal_consultant').closest('li').remove();
-					}
-					if(product.product.audit){
-						item.find('#paudit').text(product.product.audit);
-					}else{
-						item.find('#paudit').closest('li').remove();
-					}
-					if(product.product.starting_point){
-						item.find('#pstarting_point').text(product.product.starting_point);
-					}else{
-						item.find('#pstarting_point').closest('li').remove();
-					}
-					if(product.product.account){
-						item.find('#paccount').text(product.product.account);
-					}else{
-						item.find('#paccount').closest('li').remove();
-					}
-					if(product.product.progress){
-						item.find('#pprogress').text(product.product.progress);
-					}else{
-						item.find('#pprogress').closest('li').remove();
-					}
-					if(product.product.direction){
-						item.find('#pdirection').text(product.product.direction);
-					}else{
-						item.find('#pdirection').closest('li').remove();
-					}
-					if(product.product.risk_control){
-						item.find('#prisk_control').text(product.product.risk_control);
-					}else{
-						item.find('#prisk_control').closest('li').remove();
-					}
-					if(product.product.instruction.instruction.url){
-						item.find('#pinstruction').html("<a href='"+product.product.instruction.instruction.url+"'>内容链接</a>");
-					}else{
-						item.find('#pinstruction').closest('li').remove();
-					}
-					if(product.product.agreement.agreement.url){
-						item.find('#pagreement').html("<a href='"+product.product.agreement.agreement.url+"'>内容链接</a>");
-					}else{
-						item.find('#pagreement').closest('li').remove();
-					}
-					item.find('.p-btns [data-turn=appointment-creat]').attr("data-pid",product.product.id);
+					item.find('#pname').closest('li').remove();
+				}
+				if(product.product.abbr){
+					item.find('#pabbr').text(product.product.abbr);
+				}else{
+					item.find('#pabbr').closest('li').remove();
+				}
+				if(product.product.abbr){
+					item.find('#pcurrency').text(product.product.currency);
+				}else{
+					item.find('#pcurrency').closest('li').remove();
 				}
 				
-				var head = $('.p-headblock').children();
-				if(head&&head.length>0){
-					var hei = 0;
-					head.each(function(){
-						hei+=$(this).height();
-					});
-					var len = 0.5*($('.p-headblock').height()-hei);
-					$(head[0]).css({'margin-top':len+'px'});
+				if(product.product.amount){
+					item.find('#pamount').text(product.product.amount);
+				}else{
+					item.find('#pamount').closest('li').remove();
 				}
+				if(product.product.period){
+					item.find('#pperiod').text(product.product.period);
+				}else{
+					item.find('#pperiod').closest('li').remove();
+				}
+				if(product.product.paid){
+					item.find('#ppaid').text(product.product.paid);
+				}else{
+					item.find('#ppaid').closest('li').remove();
+				}
+				if(product.product.sales_period){
+					item.find('#psales_period').text(product.product.sales_period);
+				}else{
+					item.find('#psales_period').closest('li').remove();
+				}
+				if(product.product.block_period){
+					item.find('#pblock_period').text(product.product.block_period);
+				}else{
+					item.find('#pblock_period').closest('li').remove();
+				}
+				if(product.product.redeem){
+					item.find('#predeem').text(product.product.redeem);
+				}else{
+					item.find('#predeem').closest('li').remove();
+				}
+				if(product.product.entity){
+					item.find('#pentity').text(product.product.entity);
+				}else{
+					item.find('#pentity').closest('li').remove();
+				}
+				if(product.product.adviser){
+					item.find('#padviser').text(product.product.adviser);
+				}else{
+					item.find('#padviser').closest('li').remove();
+				}
+				if(product.product.trustee){
+					item.find('#ptrustee').text(product.product.trustee);
+				}else{
+					item.find('#ptrustee').closest('li').remove();
+				}
+				if(product.product.reg_organ){
+					item.find('#preg_organ').text(product.product.reg_organ);
+				}else{
+					item.find('#preg_organ').closest('li').remove();
+				}
+				if(product.product.website){
+					item.find('#pwebsite').text(product.product.website);
+				}else{
+					item.find('#pwebsite').closest('li').remove();
+				}
+				if(product.product.agency){
+					item.find('#pagency').text(product.product.agency);
+				}else{
+					item.find('#pagency').closest('li').remove();
+				}
+				if(product.product.regulatory_filing){
+					item.find('#pregulatory_filing').text(product.product.regulatory_filing);
+				}else{
+					item.find('#pregulatory_filing').closest('li').remove();
+				}
+				if(product.product.legal_consultant){
+					item.find('#plegal_consultant').text(product.product.legal_consultant);
+				}else{
+					item.find('#plegal_consultant').closest('li').remove();
+				}
+				if(product.product.audit){
+					item.find('#paudit').text(product.product.audit);
+				}else{
+					item.find('#paudit').closest('li').remove();
+				}
+				if(product.product.starting_point){
+					item.find('#pstarting_point').text(product.product.starting_point);
+				}else{
+					item.find('#pstarting_point').closest('li').remove();
+				}
+				if(product.product.account){
+					item.find('#paccount').text(product.product.account);
+				}else{
+					item.find('#paccount').closest('li').remove();
+				}
+				if(product.product.progress){
+					item.find('#pprogress').text(product.product.progress);
+				}else{
+					item.find('#pprogress').closest('li').remove();
+				}
+				if(product.product.direction){
+					item.find('#pdirection').text(product.product.direction);
+				}else{
+					item.find('#pdirection').closest('li').remove();
+				}
+				if(product.product.risk_control){
+					item.find('#prisk_control').text(product.product.risk_control);
+				}else{
+					item.find('#prisk_control').closest('li').remove();
+				}
+				if(product.product.instruction.instruction.url){
+					item.find('#pinstruction').html("<a href='"+product.product.instruction.instruction.url+"'>内容链接</a>");
+				}else{
+					item.find('#pinstruction').closest('li').remove();
+				}
+				if(product.product.agreement.agreement.url){
+					item.find('#pagreement').html("<a href='"+product.product.agreement.agreement.url+"'>内容链接</a>");
+				}else{
+					item.find('#pagreement').closest('li').remove();
+				}
+				item.find('.p-btns [data-turn=appointment-creat]').attr("data-pid",product.product.id);
+			}
+			
+			var head = $('.p-headblock').children();
+			if(head&&head.length>0){
+				var hei = 0;
+				head.each(function(){
+					hei+=$(this).height();
+				});
+				var len = 0.5*($('.p-headblock').height()-hei);
+				$(head[0]).css({'margin-top':len+'px'});
 			}
 		});
 	</script>

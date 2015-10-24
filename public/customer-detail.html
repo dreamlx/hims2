@@ -12,71 +12,67 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				//停留该页
-				var detail = getInfo.getCustomerDetail();
-				if(!detail || !(detail.individual || detail.institution)){
-					getInfo.turncustomermine();
-				} 
-				var back = getInfo.getUrlPara()[2];
-				if(back){
-					$('#submitBtnUpdateCustomerP,\
-						#submitBtnUpdateCustomerO')
-						.attr('data-back',back);
-				}
-				if(detail.individual){
-					var p = detail.individual;
-					$('#submitBtnUpdateCustomerP').attr('data-pid',p.id);
-					$('#personal').removeClass('hide');
-					$('#creat-time').text(p.created_at||(new Date().toLocaleString().split(" ")[0]));
-					$('#booking-count').text((p.booking_count||"0") + "单");
-					$('#holding-count').text((p.holding_count||"0") + "单");
-					$('#inputNameP').val(p.name||"");
-					$('#inputCellP').val(p.cell||"");
-					$('#inputRemark_nameP').val(p.remark_name||store.name);
-					if(p.id_type){
-						$('#inputId_typeP').val(p.id_type);
-						$('#inputId_typeP+.select-ul li').each(function(){
-							if($(this).text()==p.id_type){
-								$(this).addClass('current');
-								$('#inputId_typeP').attr('data-val',$(this).attr('data-val'));
-							}
-						});
-					}
-					$('#inputId_noP').val(p.id_no);
-					if(p.id_front&&p.id_front.id_front&&p.id_front.id_front.url){
-						var front = p.id_front.id_front;
-						$('#inputId_frontP').prev().append("<img />")
-							.find("img").attr("src",front.url);
-					}
-					if(p.id_back&&p.id_back.id_back&&p.id_back.id_back.url){
-						var back = p.id_back.id_back;
-						$('#inputId_backP').prev().append("<img />")
-							.find("img").attr("src",back.url);
-					}
-					$('#inputRemarkP').val(p.remark||"");
-				}
-				if(detail.institution){
-					var o = detail.institution;
-					$('#submitBtnUpdateCustomerO').attr('data-oid',o.id);
-					$('#organizal').removeClass('hide');
-					$('#creat-time').text(o.created_at||(new Date().toLocaleString().split(" ")[0]));
-					$('#booking-count').text((o.booking_count||"0") + "单");
-					$('#holding-count').text((o.holding_count||"0") + "单");
-					$('#inputNameO').val(o.name||"");
-					$('#inputCellO').val(o.cell||"");
-					$('#inputRemark_nameO').val(o.remark_name||store.name);
-					$('#inputOrgan_regO').val(o.organ_reg);
-					if(o.business_licenses&&o.business_licenses.business_licenses){
-						var business = o.business_licenses.business_licenses;
-						$('#inputBusiness_licensesO').prev().append("<img />")
-							.find("img").attr("src",business.url);
-					}
-					$('#inputRemarkO').val(o.remark||"");
-				}
+			var detail = getInfo.getCustomerDetail();
+			if(!detail || !(detail.individual || detail.institution)){
+				getInfo.turncustomermine();
+			} 
+			var back = getInfo.getUrlPara()[2];
+			if(back){
+				$('#submitBtnUpdateCustomerP,\
+					#submitBtnUpdateCustomerO')
+					.attr('data-back',back);
 			}
+			if(detail.individual){
+				var p = detail.individual;
+				$('#submitBtnUpdateCustomerP').attr('data-pid',p.id);
+				$('#personal').removeClass('hide');
+				$('#creat-time').text(p.created_at||(new Date().toLocaleString().split(" ")[0]));
+				$('#booking-count').text((p.booking_count||"0") + "单");
+				$('#holding-count').text((p.holding_count||"0") + "单");
+				$('#inputNameP').val(p.name||"");
+				$('#inputCellP').val(p.cell||"");
+				$('#inputRemark_nameP').val(p.remark_name||store.name);
+				if(p.id_type){
+					$('#inputId_typeP').val(p.id_type);
+					$('#inputId_typeP+.select-ul li').each(function(){
+						if($(this).text()==p.id_type){
+							$(this).addClass('current');
+							$('#inputId_typeP').attr('data-val',$(this).attr('data-val'));
+						}
+					});
+				}
+				$('#inputId_noP').val(p.id_no);
+				if(p.id_front&&p.id_front.id_front&&p.id_front.id_front.url){
+					var front = p.id_front.id_front;
+					$('#inputId_frontP').prev().append("<img />")
+						.find("img").attr("src",front.url);
+				}
+				if(p.id_back&&p.id_back.id_back&&p.id_back.id_back.url){
+					var back = p.id_back.id_back;
+					$('#inputId_backP').prev().append("<img />")
+						.find("img").attr("src",back.url);
+				}
+				$('#inputRemarkP').val(p.remark||"");
+			}
+			if(detail.institution){
+				var o = detail.institution;
+				$('#submitBtnUpdateCustomerO').attr('data-oid',o.id);
+				$('#organizal').removeClass('hide');
+				$('#creat-time').text(o.created_at||(new Date().toLocaleString().split(" ")[0]));
+				$('#booking-count').text((o.booking_count||"0") + "单");
+				$('#holding-count').text((o.holding_count||"0") + "单");
+				$('#inputNameO').val(o.name||"");
+				$('#inputCellO').val(o.cell||"");
+				$('#inputRemark_nameO').val(o.remark_name||store.name);
+				$('#inputOrgan_regO').val(o.organ_reg);
+				if(o.business_licenses&&o.business_licenses.business_licenses){
+					var business = o.business_licenses.business_licenses;
+					$('#inputBusiness_licensesO').prev().append("<img />")
+						.find("img").attr("src",business.url);
+				}
+				$('#inputRemarkO').val(o.remark||"");
+			}
+			
 		});
 	</script>
 </head>

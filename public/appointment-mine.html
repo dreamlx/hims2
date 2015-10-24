@@ -12,158 +12,151 @@
 	<script type="text/javascript">
 		$(function(){
 			var store = getInfo.checkstorage();
-			if(!store || !store.name || !store.email){
-				//getInfo.turnprofilecreat();
-			}else{
-				//停留该页
-				//byproduct
-				//var orderobj = getInfo.getOrderMine();
-				var orderobj = false,
-				byState,
-				byProduct,
-				store = getInfo.checkstorage();
-				$.ajax({
-				    url:getInfo.getUrl.fullurl('api/orders/by_state'),
-				    async: false,
-				    type:'GET',
-				    data:{},
-				    dataType:"json",
-				    beforeSend:function(XMLHttpRequest){
-				        XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
-				    },
-				    success:function(data){
-				        byState = data;
-				    },
-				    error:function(data){
-				    }
-				});
-				$.ajax({
-				    url:getInfo.getUrl.fullurl('api/orders/by_product'),
-				    async: false,
-				    type:'GET',
-				    data:{},
-				    dataType:"json",
-				    beforeSend:function(XMLHttpRequest){
-				        XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
-				    },
-				    success:function(data){
-				        byProduct = data;
-				    },
-				    error:function(data){
-				    }
-				});
-				if(byState||byProduct){
-				    orderobj = {
-				        'byState':byState,
-				        'byProduct':byProduct
-				    }
-				}
-
-
-				if(orderobj&&orderobj.byProduct){
-					for(var i=0;i<orderobj.byProduct.length;i++){
-						var order = orderobj.byProduct[i];
-						var dl = $('#product-template').find('.fold-dl').clone();
-						var ddcopy = dl.find('.appoitment').clone();
-						dl.find('.appoitment').remove();
-						dl.find('.white span').text(order.name);
-						for(var j=0;j<order.orders.length;j++)
-						{
-							var pit = order.orders[j];
-							var dd = ddcopy.clone();
-							var state = "";
-							switch(pit.state){
-								case "已预约":
-									state = "待完成报单";
-									break;
-								case "已报单":
-									state = "待起息";
-									break;
-								case "已起息":
-									state = "待收讫";
-									dd.attr("data-turn","appointment-detail-step2");
-									dd.attr("data-pid",order.id);
-									break;
-								default:
-									state = "已完成";//完成起息
-							}
-							dd.find('.a-label').text(state);
-							dd.find('.a-title').text(order.name);
-							dd.find('.a-text:eq(0) span').text(order.desc);
-							dd.find('.a-text:eq(1) .cur').text(pit.currency);
-							dd.find('.a-text:eq(1) .blue').text(pit.amount+"万");
-							dd.attr('data-oid',pit.id);
-							dl.append(dd);
-						}
-						$('#by-product').append(dl);
-					}
-				}
-				//bystates
-				if(orderobj&&orderobj.byState){
-					if(orderobj.byState.booked&&orderobj.byState.booked.length>0)
-					{
-						var booked = orderobj.byState.booked;
-						var dl = $('#state-template').find('.fold-dl').clone();
-						var ddcopy = dl.find('.appoitment').clone();
-						dl.find('.appoitment').remove();
-						dl.find('.white span').text("已经预约，等待完成报单");
-						for(var i=0;i<booked.length;i++){
-							var dd = ddcopy.clone();
-							dd.find('.a-label').text("待完成报单");
-							dd.find('.a-title').text(booked[i].product_name);
-							dd.find('.a-text:eq(0) span').text(booked[i].product_desc);
-							dd.find('.a-text:eq(1) .cur').text(booked[i].currency);
-							dd.find('.a-text:eq(1) .blue').text(booked[i].amount+"万");
-							dd.attr('data-oid',booked[i].id);
-							dl.append(dd);
-						}
-						$("#by-status").append(dl);
-					}
-					if(orderobj.byState.completed&&orderobj.byState.completed.length>0)
-					{
-						var completed = orderobj.byState.completed;
-						var dl = $('#state-template').find('.fold-dl').clone();
-						var ddcopy = dl.find('.appoitment').clone();
-						dl.find('.appoitment').remove();
-						dl.find('.white span').text("已经完成报单，等待起息");
-						for(var i=0;i<completed.length;i++){
-							var dd = ddcopy.clone();
-							dd.find('.a-label').text("待起息");
-							dd.find('.a-title').text(completed[i].product_name);
-							dd.find('.a-text:eq(0) span').text(completed[i].product_desc);
-							dd.find('.a-text:eq(1) .cur').text(completed[i].currency);
-							dd.find('.a-text:eq(1) .blue').text(completed[i].amount+"万");
-							dd.attr('data-oid',completed[i].id);
-							dl.append(dd);
-						}
-						$("#by-status").append(dl);
-					}
-					if(orderobj.byState.valued&&orderobj.byState.valued.length>0)
-					{
-						var valued = orderobj.byState.valued;
-						var dl = $('#state-template').find('.fold-dl').clone();
-						var ddcopy = dl.find('.appoitment').clone();
-						dl.find('.appoitment').remove();
-						dl.find('.white span').text("已起息，但合同文本基金管理人未收讫");
-						for(var i=0;i<valued.length;i++){
-							var dd = ddcopy.clone();
-							dd.attr("data-turn","appointment-detail-step2");
-							dd.attr("data-pid",valued[i].product_id);
-							dd.find('.a-label').text("待收讫");
-							dd.find('.a-title').text(valued[i].product_name);
-							dd.find('.a-text:eq(0) span').text(valued[i].product_desc);
-							dd.find('.a-text:eq(1) .cur').text(valued[i].currency);
-							dd.find('.a-text:eq(1) .blue').text(valued[i].amount+"万");
-							dd.attr('data-oid',valued[i].id);
-							dl.append(dd);
-						}
-						$("#by-status").append(dl);
-					}
-				}
-				tabs.bind.foldtoggle();
-				getInfo.turnBind.bindturnappointmentdetailstep();
-				getInfo.turnBind.bindturnappointmentdetailstep2();
+			var orderobj = false,
+			byState,
+			byProduct,
+			store = getInfo.checkstorage();
+			$.ajax({
+			    url:getInfo.getUrl.fullurl('api/orders/by_state'),
+			    async: false,
+			    type:'GET',
+			    data:{},
+			    dataType:"json",
+			    beforeSend:function(XMLHttpRequest){
+			        XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+			    },
+			    success:function(data){
+			        byState = data;
+			    },
+			    error:function(data){
+			    }
+			});
+			$.ajax({
+			    url:getInfo.getUrl.fullurl('api/orders/by_product'),
+			    async: false,
+			    type:'GET',
+			    data:{},
+			    dataType:"json",
+			    beforeSend:function(XMLHttpRequest){
+			        XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+			    },
+			    success:function(data){
+			        byProduct = data;
+			    },
+			    error:function(data){
+			    }
+			});
+			if(byState||byProduct){
+			    orderobj = {
+			        'byState':byState,
+			        'byProduct':byProduct
+			    }
 			}
+
+
+			if(orderobj&&orderobj.byProduct){
+				for(var i=0;i<orderobj.byProduct.length;i++){
+					var order = orderobj.byProduct[i];
+					var dl = $('#product-template').find('.fold-dl').clone();
+					var ddcopy = dl.find('.appoitment').clone();
+					dl.find('.appoitment').remove();
+					dl.find('.white span').text(order.name);
+					for(var j=0;j<order.orders.length;j++)
+					{
+						var pit = order.orders[j];
+						var dd = ddcopy.clone();
+						var state = "";
+						switch(pit.state){
+							case "已预约":
+								state = "待完成报单";
+								break;
+							case "已报单":
+								state = "待起息";
+								break;
+							case "已起息":
+								state = "待收讫";
+								dd.attr("data-turn","appointment-detail-step2");
+								dd.attr("data-pid",order.id);
+								break;
+							default:
+								state = "已完成";//完成起息
+						}
+						dd.find('.a-label').text(state);
+						dd.find('.a-title').text(order.name);
+						dd.find('.a-text:eq(0) span').text(order.desc);
+						dd.find('.a-text:eq(1) .cur').text(pit.currency);
+						dd.find('.a-text:eq(1) .blue').text(pit.amount+"万");
+						dd.attr('data-oid',pit.id);
+						dl.append(dd);
+					}
+					$('#by-product').append(dl);
+				}
+			}
+			//bystates
+			if(orderobj&&orderobj.byState){
+				if(orderobj.byState.booked&&orderobj.byState.booked.length>0)
+				{
+					var booked = orderobj.byState.booked;
+					var dl = $('#state-template').find('.fold-dl').clone();
+					var ddcopy = dl.find('.appoitment').clone();
+					dl.find('.appoitment').remove();
+					dl.find('.white span').text("已经预约，等待完成报单");
+					for(var i=0;i<booked.length;i++){
+						var dd = ddcopy.clone();
+						dd.find('.a-label').text("待完成报单");
+						dd.find('.a-title').text(booked[i].product_name);
+						dd.find('.a-text:eq(0) span').text(booked[i].product_desc);
+						dd.find('.a-text:eq(1) .cur').text(booked[i].currency);
+						dd.find('.a-text:eq(1) .blue').text(booked[i].amount+"万");
+						dd.attr('data-oid',booked[i].id);
+						dl.append(dd);
+					}
+					$("#by-status").append(dl);
+				}
+				if(orderobj.byState.completed&&orderobj.byState.completed.length>0)
+				{
+					var completed = orderobj.byState.completed;
+					var dl = $('#state-template').find('.fold-dl').clone();
+					var ddcopy = dl.find('.appoitment').clone();
+					dl.find('.appoitment').remove();
+					dl.find('.white span').text("已经完成报单，等待起息");
+					for(var i=0;i<completed.length;i++){
+						var dd = ddcopy.clone();
+						dd.find('.a-label').text("待起息");
+						dd.find('.a-title').text(completed[i].product_name);
+						dd.find('.a-text:eq(0) span').text(completed[i].product_desc);
+						dd.find('.a-text:eq(1) .cur').text(completed[i].currency);
+						dd.find('.a-text:eq(1) .blue').text(completed[i].amount+"万");
+						dd.attr('data-oid',completed[i].id);
+						dl.append(dd);
+					}
+					$("#by-status").append(dl);
+				}
+				if(orderobj.byState.valued&&orderobj.byState.valued.length>0)
+				{
+					var valued = orderobj.byState.valued;
+					var dl = $('#state-template').find('.fold-dl').clone();
+					var ddcopy = dl.find('.appoitment').clone();
+					dl.find('.appoitment').remove();
+					dl.find('.white span').text("已起息，但合同文本基金管理人未收讫");
+					for(var i=0;i<valued.length;i++){
+						var dd = ddcopy.clone();
+						dd.attr("data-turn","appointment-detail-step2");
+						dd.attr("data-pid",valued[i].product_id);
+						dd.find('.a-label').text("待收讫");
+						dd.find('.a-title').text(valued[i].product_name);
+						dd.find('.a-text:eq(0) span').text(valued[i].product_desc);
+						dd.find('.a-text:eq(1) .cur').text(valued[i].currency);
+						dd.find('.a-text:eq(1) .blue').text(valued[i].amount+"万");
+						dd.attr('data-oid',valued[i].id);
+						dl.append(dd);
+					}
+					$("#by-status").append(dl);
+				}
+			}
+			tabs.bind.foldtoggle();
+			getInfo.turnBind.bindturnappointmentdetailstep();
+			getInfo.turnBind.bindturnappointmentdetailstep2();
 		});
 	</script>
 </head>
