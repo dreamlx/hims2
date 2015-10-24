@@ -19,6 +19,8 @@ class OrdersController < ApplicationController
       @order.investable_type = "Individual"
     elsif params[:order][:investable_id].start_with?("机构:")
       @order.investable_type = "Institution"
+    elsif params[:order][:investable_id].start_with?("理财师:")
+        @order.investable_type = "User"
     end
     if @order.save
       redirect_to orders_url
@@ -58,14 +60,14 @@ class OrdersController < ApplicationController
 
   def update_infos
     @order = Order.find(params[:id])
-    if @order.investable_type == "Individual"
+    if @order.investable_type == "Individual" || (@order.investable_type == "User" && @order.investable.id_type == "个人")
       @order.product.individual_fields.each do |field|
         @order.infos.find_or_create_by(
           category: field.category,
           field_name: field.field_name,
           field_type: field.field_type)
       end
-    elsif @order.investable_type == "Institution"
+    elsif @order.investable_type == "Institution" || (@order.investable_type == "User" && @order.investable.id_type == "机构")
       @order.product.institution_fields.each do |field|
         @order.infos.find_or_create_by(
           category: field.category,

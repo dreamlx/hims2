@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :individuals, dependent: :destroy
   has_many :institutions, dependent: :destroy
-  has_many :orders, dependent: :destroy
-
+  has_many :user_orders, class_name: "Order", dependent: :destroy
+  has_many :orders, as: :investable,  dependent: :destroy
   mount_uploader :card_front, ImageUploader
   mount_uploader :card_back, ImageUploader
 

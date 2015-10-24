@@ -2,7 +2,7 @@ class Api::OrdersController < Api::BaseController
   before_action :authenticate_user!
   def create
     return api_error(status: 422) if params[:order].nil?
-    @order = current_user.orders.build(order_params)
+    @order = current_user.user_orders.build(order_params)
     if params[:order][:other]
       @order.other = parse_image_data(params[:order][:other]) 
     end
@@ -28,14 +28,14 @@ class Api::OrdersController < Api::BaseController
   end
 
   def show
-    @order = current_user.orders.find_by(id: params[:id])
+    @order = current_user.user_orders.find_by(id: params[:id])
     investors_ids = Individual.where(id_no: params[:number]).ids + Institution.where(organ_reg: params[:number]).ids
     @order = Order.where(investable_id: investors_ids).find_by(id: params[:id]) if @order.nil?
     return api_error(status: 422) if @order.nil?
   end
 
   def update
-    @order = current_user.orders.find_by(id: params[:id])
+    @order = current_user.user_orders.find_by(id: params[:id])
     
     if params[:order] && @order.update(deliver: params[:order][:deliver], remark: params[:order][:remark])
       render 'show'
@@ -45,7 +45,7 @@ class Api::OrdersController < Api::BaseController
   end
 
   def destroy
-    order = current_user.orders.find_by(id: params[:id])
+    order = current_user.user_orders.find_by(id: params[:id])
     if order
       order.destroy
       render json: {}, status: 200
@@ -55,7 +55,7 @@ class Api::OrdersController < Api::BaseController
   end
 
   def update_infos
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.user_orders.find(params[:id])
     infos_params = params[:infos]
     infos_params.each do |key, value|
       info = Info.find(key)
@@ -73,13 +73,13 @@ class Api::OrdersController < Api::BaseController
   end
 
   def by_state
-    @booked = current_user.orders.where(state: "已预约")
-    @completed = current_user.orders.where(state: "已报单")
-    @valued = current_user.orders.where(state: "已起息")
+    @booked = current_user.user_orders.where(state: "已预约")
+    @completed = current_user.user_orders.where(state: "已报单")
+    @valued = current_user.user_orders.where(state: "已起息")
   end
 
   def by_product
-    orders = current_user.orders
+    orders = current_user.user_orders
     @products = Product.joins(:orders).where(orders: {id: orders.ids}).uniq
     @user_id = current_user.id
     render 'api/products/my'

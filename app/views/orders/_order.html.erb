@@ -1,7 +1,13 @@
 <tr>
   <td><%= order.id %></td>
   <td><%= order.investable.name %></td>
-  <td><%= order.investable_type == "Individual" ? "个人" : "机构" %></td>
+  <% if order.investable_type == "Individual" %>
+    <td><%= "个人" %></td>
+  <% elsif order.investable_type == "Institution" %>
+    <td><%= "机构" %></td>
+  <% elsif order.investable_type == "User" %>
+    <td><%= "理财师" %></td>
+  <% end %>
   <td><%= order.product.name %></td>
   <td><%= order.user.name %></td>
   <td><%= order.amount %></td>

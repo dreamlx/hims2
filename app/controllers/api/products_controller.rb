@@ -11,7 +11,7 @@ class Api::ProductsController < Api::BaseController
   end
 
   def my
-    orders = current_user.orders
+    orders = current_user.user_orders
     @products = Product.joins(:orders).where(orders: {id: orders.ids}).uniq
     @user_id = current_user.id
   end

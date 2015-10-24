@@ -31,15 +31,19 @@ class Order < ActiveRecord::Base
   end
 
   def after_create
-    update(user_id: self.investable.user_id, booking_date: self.created_at)
-    if investable_type == "Individual"
+    if self.investable_type = "User"    
+      update(user_id: self.investable_id, booking_date: self.created_at)
+    else
+      update(user_id: self.investable.user_id, booking_date: self.created_at)
+    end
+    if investable_type == "Individual" || (investable_type == "User" && investable.id_type == "个人")
       product.individual_fields.each do |field|
         infos.create(
           category: field.category,
           field_name: field.field_name,
           field_type: field.field_type)
       end
-    elsif investable_type == "Institution"
+    elsif investable_type == "Institution" || (investable_type == "User" && investable.id_type == "机构")
       product.institution_fields.each do |field|
         infos.create(
           category: field.category,
