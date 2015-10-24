@@ -15,6 +15,7 @@
 			if(!store || !store.name || !store.email){
 				//getInfo.turnprofilecreat();
 			}else{
+				if(!store.card_no){getInfo.turnprofilemine();}
 				//停留该页
 				var invest = getInfo.getInvesterInvest();
 				if(invest && invest.length>0) {

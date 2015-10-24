@@ -910,7 +910,7 @@ window.submit = {
                     check.error.alertsuccess(btn,check.error.errorInfo.registersuccess);
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
-                        getInfo.turnprofilemine();
+                        getInfo.turnmenu("invest-list");
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.registerfail);
@@ -1979,8 +1979,8 @@ window.getInfo = {
     turninvestmineprofessor:function(){
         window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-professor.html");
     },
-    turninvestmineinvestor:function(num){
-        window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-investor.html#"+num);
+    turninvestmineinvestor:function(){
+        window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-investor.html");
     },
     turninvestminecheck:function(){
         window.location.href=getInfo.getSiteUrl.fullurl("invest-mine-check.html");
@@ -2332,7 +2332,7 @@ window.getInfo = {
     },
     getInvesterInvest:function(){
         var store = getInfo.checkstorage(),
-        number = getInfo.getUrlPara()[0];
+        number = store.card_no;
         $.ajax({
             url:getInfo.getUrl.fullurl('api/orders/by_number'),
             async: false,
