@@ -13,7 +13,10 @@
 		$(function(){
 			var store = getInfo.checkstorage();
 			if(!store || !store.name || !store.email){
-				getInfo.turnprofilemine();
+				check.error.alertfail($(".main"),"error",check.error.errorInfo.personfirst);
+				setTimeout(function(){
+					getInfo.turnprofilemine();
+				},3100);
 			}else{
 				//停留该页
 				$('#inputRemark_nameP,#inputRemark_nameO').val(store.name);	

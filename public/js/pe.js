@@ -647,7 +647,8 @@ window.check = {
             profileUpdatesuccess:"更新个人信息成功",
             profileUpdatefail:"由于网络原因更新信息未成功,请再次尝试",
             moneydeletesuccess:"删除报单成功",
-            moneydeletefail:"由于网络原因删除报单未成功,请再次尝试"
+            moneydeletefail:"由于网络原因删除报单未成功,请再次尝试",
+            personfirst:"您需要先完善您的个人信息"
         },
         alert:function(input,error){
             var id = input.attr('id');
@@ -1212,7 +1213,11 @@ window.submit = {
         var form = btn.closest('form');
         var store = getInfo.checkstorage();
         if(!store.name || !store.email){
-            getInfo.turnprofilemine();
+            check.error.alertfail($(".main"),"error",check.error.errorInfo.personfirst);
+            setTimeout(function(){
+                getInfo.turnprofilemine();
+            },3100);
+            return false;
         }
         var pid = btn.attr('data-pid');
         if(!this.validate.appointmentCreatSubmit(form))return false;
