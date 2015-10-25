@@ -23,7 +23,7 @@
 			base.find('li:eq(0) span').text(info.investor_name||"");
 			base.find('li:eq(1) span').text(info.product_name||"");
 			base.find('li:eq(2) span').text(info.currency||"人民币");
-			base.find('li:eq(3) span').text(info.amount+"万");
+			base.find('li:eq(3) span').text(info.amount||0);
 			base.find('li:eq(4) span').text(info.due_date||"");
 			$("#inputIdno").val(info.number);
 			if(info.deliver=="未快递"){
@@ -214,7 +214,6 @@
 					<label class="icon-ahead" for="inputMoney"><i class="icon "></i>打款金额</label>
 					<span class="input-box">
 						<input type="text" class="sspinput" id="inputMoney" placeholder="请输入打款金额" />
-						<i class="unit">万</i>
 					</span>
 				</div>
 				<div class="alert" role="alert" name="inputMoney"></div>
@@ -296,7 +295,6 @@
 					<label class="icon-ahead"><i class="icon "></i>打款金额</label>
 					<span class="input-box nochange">
 						<input type="text" class="sspinput" readonly />
-						<i class="unit">万</i>
 					</span>
 				</div>
 				<div class="alert" role="alert" name=""></div>
