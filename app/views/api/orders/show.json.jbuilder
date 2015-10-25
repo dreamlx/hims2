@@ -7,6 +7,8 @@ json.order do
     json.number @order.investable.id_no
   elsif @order.investable_type == "Institution"
     json.number @order.investable.organ_reg
+  elsif @order.investable_type == "User"
+    json.number @order.investable.card_no
   end
 end
 json.money_receipts do
