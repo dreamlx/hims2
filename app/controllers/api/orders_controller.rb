@@ -19,7 +19,7 @@ class Api::OrdersController < Api::BaseController
         @order.investable_type = "User"
       end
     end
-    return api_error(status: 422) if (current_user.id != @order.investable.user_id) && (current_user.id != @order.investable_id)
+    return api_error(status: 422) if (current_user.id != @order.investable_id) && (current_user.id != @order.investable.user_id)
     if @order.save
       render 'show', status: 201
     else
