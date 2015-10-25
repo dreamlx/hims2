@@ -25,6 +25,10 @@
 			base.find('li:eq(2) span').text(info.currency||"人民币");
 			base.find('li:eq(3) span').text(info.amount||0);
 			base.find('li:eq(4) span').text(info.due_date||"");
+			if(info.investable_type=="User"){
+				$('#editCustomerBtn').attr('data-turn',"profile-mine");
+				getInfo.turnBind.bindturnprofilemine();
+			}
 			$("#inputIdno").val(info.number);
 			if(info.deliver=="未快递"){
 				$("#inputSendState").val(info.deliver).attr('data-val',0);
