@@ -1461,6 +1461,7 @@ window.submit = {
             success:function(data){
                 if(data.user && data.user.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.profileUpdatesuccess);
+                    getInfo.setSession('HIMS_APP_STORE',data.user);
                     setTimeout(function(){
                         window.history.back();
                     },3000);
