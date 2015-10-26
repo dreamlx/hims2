@@ -1,4 +1,4 @@
-<% if item.state == "提交" %>
+<% if item.state == "提交" && !item.audits.blank? %>
   <tr>
     <td colspan="4"></td>
     <td colspan="20">
