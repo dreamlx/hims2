@@ -6,14 +6,13 @@ zh-CN:
       cell_code: 手机验证码
       fund: 基金
       individual: 个人投资者
-      info_field: 信息字段
-      info: 信息
       institution: 机构投资者
       money_receipt: 汇款
       order: 订单
       product: 产品
       roi: 投资回报
       user: 理财师
+      picture: 图片
     attributes:
       admin:
         name: 用户名
@@ -54,20 +53,6 @@ zh-CN:
         remark: 备注
         created_at: 创建
         updated_at: 更新
-        state: 状态
-      info_field:
-        product_id: 产品
-        category: 类别
-        field_name: 字段名称
-        field_type: 字段类型
-      info:
-        order_id: 订单
-        category: 类别
-        field_name: 字段名称
-        field_type: 字段类型
-        string: 字符串
-        text: 文本
-        photo: 照片
         state: 状态
       institution:
         user_id: 理财师
@@ -171,6 +156,10 @@ zh-CN:
         updated_at: 更新
         number: 绑定证件号
         state: 状态
+      picture:
+        title: 标题
+        pic: 图片
+        state: 状态
   new_user: 新建理财师
   user_list: 理财师列表
   operations: 操作
@@ -187,7 +176,6 @@ zh-CN:
   product_detail: 产品详情
   rois: 投资回报
   attaches: 附件
-  info_fields: 信息字段
   new_product: 新建产品
   product_list: 产品列表
   new_individual: 新建个人投资者
@@ -203,7 +191,6 @@ zh-CN:
   please_log_in: 请登录
   order_detail: 订单详情
   money_receipts: 汇款
-  infos: 信息
-  update_infos: 更新信息
   confirm: 确认
   deny: 否决
+  pictures: 图片

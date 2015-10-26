@@ -56,24 +56,6 @@ class Api::OrdersController < Api::BaseController
     end
   end
 
-  def update_infos
-    @order = current_user.user_orders.find(params[:id])
-    infos_params = params[:infos]
-    infos_params.each do |key, value|
-      info = Info.find(key)
-      if value.keys.first == "photo"
-        info.update("#{value.keys.first}": parse_image_data(value.values.first))
-      else
-        info.update("#{value.keys.first}": value.values.first)
-      end
-      info.submit
-    end
-    # Info.update(infos_params.keys, infos_params.values)
-    render 'show'
-  ensure 
-    clean_tempfile
-  end
-
   def by_state
     @booked = current_user.user_orders.where(state: "已预约")
     @completed = current_user.user_orders.where(state: "已报单")

@@ -8,7 +8,6 @@ RSpec.describe "orders" do
       individual = create(:individual, user_id: adviser.id)
       fund = create(:fund)
       product = create(:product, fund_id: fund.id)
-      info_field = create(:info_field, product_id: product.id, category: "个人投资者")
       valid_header = {
         authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{adviser.open_id}")
       }
@@ -33,15 +32,6 @@ RSpec.describe "orders" do
       expect(json["other"]["other"]["thumb"]["url"]).to eq order.other.thumb.url
       expect(json["remark"]).to eq order.remark
       expect(json["state"]).to eq '已预约'
-      infos_json = JSON.parse(response.body)["infos"].first
-      expect(infos_json["id"]).to eq order.infos.first.id
-      expect(infos_json["category"]).to eq order.infos.first.category
-      expect(infos_json["field_name"]).to eq order.infos.first.field_name
-      expect(infos_json["field_type"]).to eq order.infos.first.field_type
-      expect(infos_json["string"]).to eq order.infos.first.string
-      expect(infos_json["text"]).to eq order.infos.first.text
-      expect(infos_json["photo"]["photo"]["url"]).to eq order.infos.first.photo.url
-      expect(infos_json["state"]).to eq order.infos.first.state
     end
 
     it "failed to create a new order without authentication" do
@@ -122,7 +112,6 @@ RSpec.describe "orders" do
       }
       individual = create(:individual, user_id: user.id)
       order = create(:order, investable: individual)
-      info = create(:info, order_id: order.id)
       get "/api/orders/#{order.id}",{}, valid_header
       expect(response).to be_success
       expect(response).to have_http_status(200)
@@ -145,7 +134,7 @@ RSpec.describe "orders" do
       expect(json["number"]).to eq order.investable.id_no
     end
 
-    it "show the requested order with money_receipts" do
+    it "show the requested order with money_receipts and pictures" do
       user = create(:user)
       valid_header = {
         authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
@@ -153,37 +142,22 @@ RSpec.describe "orders" do
       individual = create(:individual, user_id: user.id)
       order = create(:order, investable: individual)
       money_receipt = create(:money_receipt, order_id: order.id)
+      picture = create(:picture, order_id: order.id)
       get "/api/orders/#{order.id}",{}, valid_header
       expect(response).to be_success
       expect(response).to have_http_status(200)
-      json = JSON.parse(response.body)["money_receipts"].first
-      expect(json["id"]).to eq money_receipt.id
-      expect(json["amount"]).to eq money_receipt.amount.to_s
-      expect(json["bank_charge"]).to eq money_receipt.bank_charge.to_s
-      expect(json["date"].to_date).to eq money_receipt.date.to_date
-      expect(json["attach"]["attach"]["url"]).to eq money_receipt.attach.url
-      expect(json["state"]).to eq money_receipt.state
-    end
-
-    it "show the requested order with infos" do
-      user = create(:user)
-      valid_header = {
-        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
-      }
-      individual = create(:individual, user_id: user.id)
-      order = create(:order, investable: individual)
-      info = create(:info, order_id: order.id)
-      get "/api/orders/#{order.id}",{}, valid_header
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
-      json = JSON.parse(response.body)["infos"].first
-      expect(json["id"]).to eq info.id
-      expect(json["field_name"]).to eq info.field_name
-      expect(json["field_type"]).to eq info.field_type
-      expect(json["string"]).to eq info.string
-      expect(json["text"]).to eq info.text
-      expect(json["photo"]["photo"]["url"]).to eq info.photo.url
-      expect(json["state"]).to eq info.state
+      m_json = JSON.parse(response.body)["money_receipts"].first
+      expect(m_json["id"]).to eq money_receipt.id
+      expect(m_json["amount"]).to eq money_receipt.amount.to_s
+      expect(m_json["bank_charge"]).to eq money_receipt.bank_charge.to_s
+      expect(m_json["date"].to_date).to eq money_receipt.date.to_date
+      expect(m_json["attach"]["attach"]["url"]).to eq money_receipt.attach.url
+      expect(m_json["state"]).to eq money_receipt.state
+      p_json = JSON.parse(response.body)["pictures"].first
+      expect(p_json["id"]).to eq picture.id
+      expect(p_json["title"]).to eq picture.title
+      expect(p_json["pic"]["pic"]["url"]).to eq picture.pic_url
+      expect(p_json["state"]).to eq picture.state
     end
 
     it "failed to show the requested order without right user" do
@@ -194,7 +168,6 @@ RSpec.describe "orders" do
       another_user = create(:user)
       individual = create(:individual, user_id: another_user.id)
       order = create(:order, investable: individual)
-      info = create(:info, order_id: order.id)
       get "/api/orders/#{order.id}",{}, valid_header
       expect(response).not_to be_success
       expect(response).to have_http_status(422)
@@ -208,7 +181,6 @@ RSpec.describe "orders" do
       }
       individual = create(:individual, user_id: adviser_user.id)
       order = create(:order, investable: individual)
-      info = create(:info, order_id: order.id)
       get "/api/orders/#{order.id}",{number: individual.id_no}, valid_header
       expect(response).to be_success
       expect(response).to have_http_status(200)
@@ -232,48 +204,6 @@ RSpec.describe "orders" do
     end
   end
 
-  describe "PATCH update_infos" do
-    it "update the infos of order: string" do
-      user = create(:user)
-      valid_header = {
-        authorization: ActionController::HttpAuthentication::Token.encode_credentials("#{user.open_id}")
-      }
-      individual = create(:individual, user_id: user.id)
-      order = create(:order, investable: individual)
-      string_info = create(:info, order_id: order.id, field_type: "string")
-      text_info = create(:info, order_id: order.id, field_type: "text")
-      photo_info = create(:info, order_id: order.id, field_type: "photo")
-      old_photo_url = photo_info.photo.url
-      new_attributes = {
-        "#{string_info.id}": {"#{string_info.field_type}": "new_string"},
-        "#{text_info.id}": {"#{text_info.field_type}": "new_text"},
-        "#{photo_info.id}": {"#{photo_info.field_type}": 'data:image/png;base64,' + Base64.strict_encode64(File.open(File.join(Rails.root, 'spec/fixtures/rails.png')).read)}
-      }
-      patch "/api/orders/#{order.id}/update_infos", {infos: new_attributes}, valid_header
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
-      json = JSON.parse(response.body)["infos"]
-      string_json = json[0]
-      text_json = json[1]
-      photo_json = json[2]
-
-      expect(string_json["id"]).to eq string_info.id
-      expect(string_json["string"]).to eq "new_string"
-      expect(string_json["state"]).to eq "已提交"
-
-      expect(text_json["id"]).to eq text_info.id
-      expect(text_json["text"]).to eq "new_text"
-      expect(text_json["state"]).to eq "已提交"      
-
-      photo_info.reload
-      expect(photo_json["id"]).to eq photo_info.id
-      expect(photo_json["photo"]["photo"]["url"]).not_to be_nil
-      expect(photo_json["photo"]["photo"]["url"]).to eq photo_info.photo.url
-      expect(photo_json["photo"]["photo"]["url"]).not_to eq old_photo_url
-      expect(photo_json["state"]).to eq "已提交"
-    end
-  end
-
   describe "DELETE destroy" do
     it "destroy the requested order" do
       user = create(:user)
@@ -282,7 +212,6 @@ RSpec.describe "orders" do
       }
       individual = create(:individual, user_id: user.id)
       order = create(:order, investable: individual)
-      info = create(:info, order_id: order.id)
       money_receipt = create(:money_receipt, order_id: order.id)
       delete "/api/orders/#{order.id}",{}, valid_header
       expect(response).to be_success
@@ -296,7 +225,6 @@ RSpec.describe "orders" do
       }
       individual = create(:individual, user_id: user.id)
       order = create(:order, investable: individual)
-      info = create(:info, order_id: order.id)
       money_receipt = create(:money_receipt, order_id: order.id)
       delete "/api/orders/invalid",{}, valid_header
       expect(response).not_to be_success

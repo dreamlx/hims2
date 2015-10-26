@@ -4,11 +4,9 @@ Rails.application.routes.draw do
   resources :products do
     resources :rois, only: [:create, :destroy]
     resources :attaches, only: [:create, :destroy]
-    resources :info_fields, only: [:create, :destroy]
   end
   resources :rois, only: :update
   resources :attaches, only: :update
-  resources :info_fields, only: :update
   resources :individuals do
     get :confirm, on: :member
     get :deny, on: :member
@@ -22,17 +20,17 @@ Rails.application.routes.draw do
     get :deny, on: :member
   end
   resources :orders do
-    resources :infos, only: [:destroy] do
-      get :confirm, on: :member
-      get :deny, on: :member
-    end
     resources :money_receipts, only: [:create, :destroy] do
       get :confirm, on: :member
       get :deny, on: :member
     end
-    get :update_infos, on: :member
+    resources :pictures, only: [:create, :destroy] do
+      get :confirm, on: :member
+      get :deny, on: :member
+    end
   end
   resources :money_receipts, only: [:update, :index]
+  resources :pictures, only: [:update, :index]
   resources :admins
   get     'login'   => 'sessions#new'
   post    'login'   => 'sessions#create'
@@ -55,7 +53,7 @@ Rails.application.routes.draw do
     resources :institutions, only: [:create, :index, :show, :update] ,defaults: {format: :json}
     resources :orders, only: [:create, :index, :show, :destroy, :update] ,defaults: {format: :json} do
       resources :money_receipts, only: [:create, :destroy], defaults: {format: :json}
-      patch :update_infos, on: :member, defaults: {format: :json}
+      resources :pictures, only: [:create, :destroy], defaults: {format: :json}
       get :by_state, on: :collection, defaults: {format: :json}
       get :by_product, on: :collection, defaults: {format: :json}
       get :by_number, on: :collection, defaults: {format: :json}

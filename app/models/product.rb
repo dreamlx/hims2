@@ -7,16 +7,7 @@ class Product < ActiveRecord::Base
   has_many :rois, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :attaches, as: :attachable, dependent: :destroy
-  has_many :info_fields, dependent: :destroy
 
   mount_uploader :instruction, FileUploader
   mount_uploader :agreement, FileUploader
-
-  def individual_fields
-    info_fields.where(category: "个人投资者")
-  end
-
-  def institution_fields
-    info_fields.where(category: "机构投资者")
-  end
 end

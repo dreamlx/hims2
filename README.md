@@ -492,30 +492,33 @@ response:
               "date"=>"2015-09-27", 
               "attach"=>{
                 "attach"=>{
-                  "url"=>"/uploads/money_receipt/attach/83/rails.png"
+                  "attach"=>{
+                    "url"=>"/uploads/money_receipt/attach/47/rails.png", 
+                    "thumb"=>{
+                      "url"=>"/uploads/money_receipt/attach/47/thumb_rails.png"
+                    }
+                  }
                 }
               }, 
               "state"=>"未确认"
             },
             ......
-          ],
-          "infos"=>
+          ]
+          "pictures"=>
           [
             {
-              "id"=>56, 
-              "category"=>"MyString", 
-              "field_name"=>"MyString", 
-              "field_type"=>"string",   # 只有三个类型：string, text, photo，与类型对应的字段才是有效字段
-              "string"=>"MyString", 
-              "text"=>"MyText", 
-              "photo"=>{
-                "photo"=>{
-                  "url"=>"/uploads/info/photo/56/rails.png"
+              "id"=>5, 
+              "title"=>"MyString", 
+              "pic"=>{
+                "pic"=>{
+                  "url"=>"/uploads/picture/pic/5/rails.png", 
+                  "thumb"=>{
+                    "url"=>"/uploads/picture/pic/5/thumb_rails.png"
+                  }
                 }
               }, 
               "state"=>"未确认"
-            },
-            ......
+            }
           ]
         }
 ```
@@ -546,24 +549,6 @@ response:
         200 if ok
         422 if failed
 ```
-### 提交报单信息
-```
-curl -X PATCH --header "Authorization: Token token=#{open_id}" -d "infos[1][string]=new_string&xxx" http://localhost:3000/api/orders/{order.id}/update_infos
-```
-```
-url:    http://localhost:3000/api/orders/{order.id}/update_infos
-params: {
-          infos:
-          {
-            1: {string: "new_string"},
-            2: {text: "new_text"},
-            3: {photo: 'data:image/png;base64,'},
-            id: {field_type: "new_info"}
-          }
-        }
-action: patch
-response: same as above
-```
 ### 提交汇款信息
 ```
 curl -X POST --header "Authorization: Token token=#{open_id}" -d "money_receipt[order_id]=1&xxxxxxxx" http://localhost:3000/api/orders/{order.id}/money_receipts
@@ -591,7 +576,12 @@ response:
             "date"=>"2015-09-27", 
             "attach"=>{
               "attach"=>{
-                "url"=>"/uploads/money_receipt/attach/38/20151003141836.png"
+                "attach"=>{
+                  "url"=>"/uploads/money_receipt/attach/47/rails.png", 
+                  "thumb"=>{
+                    "url"=>"/uploads/money_receipt/attach/47/thumb_rails.png"
+                  }
+                }
               }
             }, 
             "state"=>"未确认"
@@ -604,6 +594,50 @@ curl -X DELETE --header "Authorization: Token token=#{open_id}" http://localhost
 ```
 ```
 url:    http://localhost:3000/api/orders/{order.id}/money_receipts/{money_receipt.id}
+params: no
+action: delete
+reponse: ok 200; NG 422
+```
+### 提交图片信息
+```
+curl -X POST --header "Authorization: Token token=#{open_id}" -d "picture[order_id]=1&xxxxxxxx" http://localhost:3000/api/orders/{order.id}/pictures
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}/pictures
+action: post
+params: {
+          picture:
+          {
+            order_id: 1,
+            pic: 'data:image/png;base64,xxxxx',
+            title: "MyString"
+          }
+        }
+response:
+        {
+          "picture"=>
+          {
+            "id"=>38, 
+            "order_id"=>136, 
+            "title"=>"MyString", 
+            "pic"=>{
+                "pic"=>{
+                  "url"=>"/uploads/picture/pic/5/rails.png", 
+                  "thumb"=>{
+                    "url"=>"/uploads/picture/pic/5/thumb_rails.png"
+                  }
+                }
+              }, 
+            "state"=>"未确认"
+          }
+        }
+```
+### 删除图片信息(只有【未确认】,【已否决】状态才可以删除)
+```
+curl -X DELETE --header "Authorization: Token token=#{open_id}" http://localhost:3000/api/orders/{order.id}/pictures/{picture.id}
+```
+```
+url:    http://localhost:3000/api/orders/{order.id}/pictures/{picture.id}
 params: no
 action: delete
 reponse: ok 200; NG 422

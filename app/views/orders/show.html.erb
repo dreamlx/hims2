@@ -64,19 +64,20 @@
 <div class="col-md-6">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">
-        <%= t('infos') %>&nbsp;
-        <small>
-          <%= link_to t(:update_infos), update_infos_order_path(@order) %>
-        </small>
-      </h3>
+      <h3 class="panel-title"><%= t('pictures') %></h3>
     </div>
     <div class="panel-body">
       <table class="table table-striped">
         <tbody>
-          <%= render @order.infos %>
+          <%= render @order.pictures %>
         </tbody>
       </table>
+      <%= simple_form_for([@order, @order.pictures.build]) do |f| %>
+        <%= f.input :title %>
+        <%= f.input :pic %>
+        <%= f.input :state, collection: MoneyReceipt::RECEIPT_STATES  %>
+        <%= f.button :submit %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ class MoneyReceipt < ActiveRecord::Base
   validates :order_id, presence: true
   belongs_to :order
 
-  mount_uploader :attach, FileUploader
+  mount_uploader :attach, ImageUploader
 
   state_machine :state, :initial => :'未确认' do
     event :confirm do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026130330) do
+ActiveRecord::Schema.define(version: 20151026155723) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -170,6 +170,17 @@ ActiveRecord::Schema.define(version: 20151026130330) do
   add_index "orders", ["product_id"], name: "index_orders_on_product_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
+  create_table "pictures", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "pic",        limit: 255
+    t.string   "state",      limit: 255
+    t.integer  "order_id",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "pictures", ["order_id"], name: "index_pictures_on_order_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.integer  "fund_id",           limit: 4
     t.string   "name",              limit: 255
@@ -258,6 +269,7 @@ ActiveRecord::Schema.define(version: 20151026130330) do
   add_foreign_key "money_receipts", "orders"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
+  add_foreign_key "pictures", "orders"
   add_foreign_key "products", "funds"
   add_foreign_key "rois", "products"
 end
