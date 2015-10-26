@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" type="text/css" href="./css/pe.css">
+	<script type="text/javascript" src="./js/us.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
+	<script type="text/javascript" src="./js/pe.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var pid = getInfo.getUrlPara();
+			$("#menu a").attr("data-pid",pid);
+		});
+	</script>
+</head>
+<body class="bg-white">
+	<div class="main" id="menu">
+		<div class="menu">
+			<a class="menu-b" data-tid="1" data-turn="appointment-creat">理财师预约</a>
+			<a class="menu-b" data-tid="2" data-turn="appointment-creat">个人投资者预约</a>
+			<a class="menu-r" data-tid="3" data-turn="appointment-creat">机构投资者预约</a>
+		</div>
+	</div>
+</body>
+</html>

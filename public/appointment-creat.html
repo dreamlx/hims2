@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="./js/pe.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			var st = window.localStorage.getItem("HIMS_APP_APPOINTMENT_USER_TYPE");
 			var store = getInfo.checkstorage();
 			var product = getInfo.getProductDetail();
 			if(!product) getInfo.turnproductliststep1();
@@ -25,11 +26,27 @@
 				var list = getInfo.getCustomerList();
 				if(list&&list.length>0){
 					$(list).each(function(){
-						var li = $("<li></li>");
 						for(var key in this){
-							li.attr('data-val',key).text(this[key]);
+							if(st == 1){
+								if(key.indexOf('user')>-1){
+									var li = $("<li></li>");
+									li.attr('data-val',key).text(this[key]);
+									$("#inputInvesterSelect+.select-ul").append(li);
+								}
+							}else if(st == 2){
+								if(key.indexOf('individual')>-1){
+									var li = $("<li></li>");
+									li.attr('data-val',key).text(this[key]);
+									$("#inputInvesterSelect+.select-ul").append(li);
+								}
+							}else if(st == 3){
+								if(key.indexOf('institution')>-1){
+									var li = $("<li></li>");
+									li.attr('data-val',key).text(this[key]);
+									$("#inputInvesterSelect+.select-ul").append(li);
+								}
+							}
 						}
-						$("#inputInvesterSelect+.select-ul").append(li);
 					});
 				}
 				tabs.bind.selectulli();

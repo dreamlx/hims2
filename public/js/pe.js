@@ -1960,6 +1960,9 @@ window.getInfo = {
     turnappointmentcreat:function(pid){
         window.location.href=getInfo.getSiteUrl.fullurl("appointment-creat.html#"+pid);
     },
+    turnnewpage:function(pid){
+        window.location.href=getInfo.getSiteUrl.fullurl("newpage.html#"+pid);
+    },
     turnappointmentmine:function(){
         window.location.href=getInfo.getSiteUrl.fullurl("appointment-mine.html");
     },
@@ -2397,7 +2400,17 @@ window.getInfo = {
         bindturnappointmentcreat:function(){
             $("[data-turn=appointment-creat]").on('click',function(){
                 var pid = $(this).attr("data-pid");
+                var tid = $(this).attr("data-tid");
+                if(tid){
+                    window.localStorage.setItem("HIMS_APP_APPOINTMENT_USER_TYPE",tid);
+                }
                 getInfo.turnappointmentcreat(pid);
+            });
+        },
+        bindturnnewpage:function(){
+            $("[data-turn=newpage]").on('click',function(){
+                var pid = $(this).attr("data-pid");
+                getInfo.turnnewpage(pid);
             });
         },
         bindturnappointmentmine:function(){
@@ -2473,6 +2486,7 @@ window.getInfo = {
         this.turnBind.bindturnproductliststep2();
         this.turnBind.bindturnproductdetail();
         this.turnBind.bindturnappointmentcreat();
+        this.turnBind.bindturnnewpage();
         this.turnBind.bindturnappointmentmine();
         this.turnBind.bindturnappointmentmine();
         this.turnBind.bindturncustomermine();

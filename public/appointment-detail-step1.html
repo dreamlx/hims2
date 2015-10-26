@@ -29,6 +29,13 @@
 				$('#editCustomerBtn').attr('data-turn',"profile-mine");
 				getInfo.turnBind.bindturnprofilemine();
 			}
+			if(store.state=="提交"){
+
+			}else if(store.state == "确认"){
+				$("#inputIdno").closest('.form-line').find('.icon ').addClass('icon-gright');
+			}else if(store.state == "否决"){
+				$("#inputIdno").closest('.form-line').find('.icon ').addClass('icon-rwrong');
+			}
 			$("#inputIdno").val(info.number);
 			if(info.deliver=="未快递"){
 				$("#inputSendState").val(info.deliver).attr('data-val',0);
@@ -206,7 +213,7 @@
 			<div class="title-line-grey">打款/签约情况<span class="small">（打勾代表已确认）</span></div>
 			<form class="radius-form mt20" id="form">
 				<div class="form-line">
-					<label class="icon-ahead"><i class="icon icon-gright"></i>证件号码</label>
+					<label class="icon-ahead"><i class="icon"></i>证件号码</label>
 					<span class="input-box finished">
 						<input type="text" class="spinput" id="inputIdno" readonly />
 						<button class="word-btn blue" id="editCustomerBtn" data-turn="customer-detail">编辑</button>
