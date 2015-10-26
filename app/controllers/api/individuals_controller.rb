@@ -33,6 +33,7 @@ class Api::IndividualsController < Api::BaseController
     @individual.id_back = parse_image_data(params[:individual][:id_back]) if params[:individual][:id_back]
     
     if @individual.update(indivdual_params)
+      @individual.submit
       render 'show'
     else
       return api_error(status: 422)

@@ -39,10 +39,20 @@ class InstitutionsController < ApplicationController
     redirect_to institutions_url
   end
 
+  def confirm
+    Institution.find(params[:id]).confirm
+    redirect_to root_url
+  end
+
+  def deny
+    Institution.find(params[:id]).deny
+    redirect_to root_url
+  end
+
   private
     def institution_params
       params.require(:institution).permit(
         :user_id, :name, :cell, :remark_name, :organ_reg,
-        :business_licenses, :remark)
+        :business_licenses, :remark, :state)
     end
 end

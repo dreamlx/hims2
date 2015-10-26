@@ -13,6 +13,7 @@
     <%= f.input :organ_reg %>
     <%= f.input :business_licenses %>
     <%= f.input :remark %>
+    <%= f.input :state, collection: User::STATES %>
     <%= f.button :submit %>
   <% end %>
 </div>

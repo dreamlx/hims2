@@ -8,6 +8,9 @@
       <td><%= individual.send(column) %></td>
     <% end %>
   <% end %>
+  <td><%= link_to t(:confirm), confirm_individual_path(individual) %></td>
+  <td><%= link_to t(:deny), deny_individual_path(individual) %></td>
   <td><%= link_to t(:edit), edit_individual_path(individual) %></td>
   <td><%= link_to t(:destroy), individual, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
 </tr>
+<%= render partial: 'shared/audit',  locals: {item: individual} %>

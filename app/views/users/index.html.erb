@@ -11,7 +11,7 @@
         <% User.column_names.each do |column| %>
           <th><%= User.human_attribute_name(column) %></th>
         <% end %>
-        <th colspan="2"><%= t(:operations) %></th>
+        <th colspan="4"><%= t(:operations) %></th>
       </tr>
     </thead>
     <tbody>

@@ -27,6 +27,7 @@ RSpec.describe "individuals" do
       expect(json["id_front"]["id_front"]["thumb"]["url"]).to eq individual.id_front.thumb.url
       expect(json["id_back"]["id_back"]["thumb"]["url"]).to eq individual.id_back.thumb.url
       expect(json["remark"]).to eq individual.remark
+      expect(json["state"]).to eq "提交"
     end
 
     it "failed to create a new individual without individual name" do
@@ -115,6 +116,7 @@ RSpec.describe "individuals" do
       expect(json["created_at"].to_date).to eq individual.created_at.to_date
       expect(json["booking_count"]).to eq 0
       expect(json["holding_count"]).to eq 0
+      expect(json["state"]).to eq "提交"
     end
 
     it "failed to get the requested individual without authentication" do
@@ -170,6 +172,7 @@ RSpec.describe "individuals" do
       expect(json["id_back"]["id_back"]["thumb"]["url"]).not_to be_nil
       expect(json["id_back"]["id_back"]["thumb"]["url"]).to eq old_id_back
       expect(json["remark"]).to eq new_attributes[:remark]
+      expect(json["state"]).to eq "提交"
     end
 
     it "failed to update individual without authentication" do

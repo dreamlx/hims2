@@ -30,6 +30,7 @@ class Api::UsersController < Api::BaseController
     @user.card_back = parse_image_data(params[:user][:card_back]) if params[:user][:card_back]
 
     if @user.update(user_params)
+      @user.submit
       render 'show'
     else
       return api_error(status: 422)

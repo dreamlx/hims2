@@ -15,6 +15,7 @@
     <%= f.input :id_front %>
     <%= f.input :id_back %>
     <%= f.input :remark %>
+    <%= f.input :state, collection: User::STATES %>
     <%= f.button :submit %>
   <% end %>
 </div>

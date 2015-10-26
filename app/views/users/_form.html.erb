@@ -16,9 +16,12 @@
     <%= f.input :address %>
     <%= f.input :card_type, collection: Individual::ID_TYPES %>
     <%= f.input :card_no %>
+    <%= link_to image_tag(@user.card_front.thumb), @user.card_front.url, class: "col-sm-offset-3 col-sm-9" if @user.card_front? %>
     <%= f.input :card_front %>
+    <%= link_to image_tag(@user.card_back.thumb), @user.card_back.url, class: "col-sm-offset-3 col-sm-9" if @user.card_back? %>
     <%= f.input :card_back %>
     <%= f.input :remark %>
+    <%= f.input :state, collection: User::STATES %>
     <%= f.button :submit %>
   <% end %>
 </div>

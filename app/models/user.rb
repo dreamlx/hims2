@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   ID_TYPES = ["个人", "机构"]
   GENDER_TYPES = ["男", "女"]
+  STATES = ["提交", "确认", "否决"]
   validates :open_id, presence: true
   validates :cell, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :update }, allow_blank: true
@@ -15,6 +16,10 @@ class User < ActiveRecord::Base
   mount_uploader :card_front, ImageUploader
   mount_uploader :card_back, ImageUploader
 
+  scope :submitted, -> { where(state: '提交') }
+
+  audited
+
   def User.send_code(cell, code)
     # the cell must exist and more than 11 digits
     return false unless cell && cell.to_s.length >= 11
@@ -25,5 +30,17 @@ class User < ActiveRecord::Base
     res         = Net::HTTP.post_form(uri, account: username, pswd: password, mobile: cell, msg: msg, needstatus: true)
     batch_code  = res.body.split[1]
     return (batch_code ? true : false)
-  end  
+  end
+
+  state_machine :state, :initial => :'提交' do
+    event :confirm do
+      transition [:'提交', :'否决'] => :'确认'
+    end
+    event :deny do
+      transition [:'提交', :'确认'] => :'否决'
+    end
+    event :submit do
+      transition [:'确认', :'否决'] => :'提交'
+    end
+  end
 end

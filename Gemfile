@@ -24,6 +24,7 @@ gem 'state_machines-activerecord'
 gem 'rack-cors'
 gem 'figaro'
 gem 'axlsx_rails'
+gem "audited-activerecord"
 
 group :development, :test do
   gem 'byebug'

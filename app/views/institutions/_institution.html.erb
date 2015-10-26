@@ -8,6 +8,9 @@
       <td><%= institution.send(column) %></td>
     <% end %>
   <% end %>
+  <td><%= link_to t(:confirm), confirm_institution_path(institution) %></td>
+  <td><%= link_to t(:deny), deny_institution_path(institution) %></td>
   <td><%= link_to t(:edit), edit_institution_path(institution) %></td>
   <td><%= link_to t(:destroy), institution, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
 </tr>
+<%= render partial: 'shared/audit',  locals: {item: institution} %>

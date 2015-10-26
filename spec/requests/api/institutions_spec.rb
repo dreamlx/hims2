@@ -24,6 +24,7 @@ RSpec.describe "institutions" do
       expect(json["organ_reg"]).to eq institution.organ_reg
       expect(json["business_licenses"]["business_licenses"]["thumb"]["url"]).to eq institution.business_licenses.thumb.url
       expect(json["remark"]).to eq institution.remark
+      expect(json["state"]).to eq "提交"
     end
 
     it "failed to create a new institution without institution name" do
@@ -108,6 +109,7 @@ RSpec.describe "institutions" do
       expect(json["created_at"].to_date).to eq institution.created_at.to_date
       expect(json["booking_count"]).to eq 0
       expect(json["holding_count"]).to eq 0
+      expect(json["state"]).to eq "提交"
     end
 
     it "failed to get the requested institution without authentication" do
@@ -158,6 +160,7 @@ RSpec.describe "institutions" do
       expect(json["business_licenses"]["business_licenses"]["thumb"]["url"]).not_to be_nil
       expect(json["business_licenses"]["business_licenses"]["thumb"]["url"]).not_to eq old_business_licenses
       expect(json["remark"]).to eq new_attributes[:remark]
+      expect(json["state"]).to eq "提交"
     end
 
     it "failed to update institution without authentication" do

@@ -1,0 +1,18 @@
+<% if item.state == "提交" %>
+  <tr>
+    <td colspan="4"></td>
+    <td colspan="20">
+      <ul class="list-group">
+        <% item.audits.reverse.each do |audit| %>
+          <li class="list-group-item">
+            Version:<%= audit.version %>
+            &nbsp;
+            Time:<%= audit.created_at.to_s(:db) %>
+            &nbsp;
+            Change:<%= audit.audited_changes.map {|k,v|  [User.human_attribute_name(k), v]} %>
+          </li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+<% end %>

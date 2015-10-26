@@ -1,1 +1,47 @@
 <h1>Welcome to HIMS</h1>
+<% if current_admin %>
+  <div class="col-md-12">
+    <h2><%= User.model_name.human %></h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <% User.column_names.each do |column| %>
+            <th><%= User.human_attribute_name(column) %></th>
+          <% end %>
+          <th colspan="4"><%= t(:operations) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render User.submitted %>
+      </tbody>
+    </table>
+    <h2><%= Individual.model_name.human %></h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <% Individual::HEADERS.each do |column| %>
+            <th><%= Individual.human_attribute_name(column) %></th>
+          <% end %>
+          <th colspan="4"><%= t(:operations) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render Individual.submitted %>
+      </tbody>
+    </table>
+    <h2><%= Institution.model_name.human %></h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <% Institution::HEADERS.each do |column| %>
+          <th><%= Institution.human_attribute_name(column) %></th>
+          <% end %>
+          <th colspan="4"><%= t(:operations) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render Institution.submitted %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

@@ -9,9 +9,18 @@ Rails.application.routes.draw do
   resources :rois, only: :update
   resources :attaches, only: :update
   resources :info_fields, only: :update
-  resources :individuals
-  resources :institutions
-  resources :users
+  resources :individuals do
+    get :confirm, on: :member
+    get :deny, on: :member
+  end
+  resources :institutions do
+    get :confirm, on: :member
+    get :deny, on: :member
+  end
+  resources :users do
+    get :confirm, on: :member
+    get :deny, on: :member
+  end
   resources :orders do
     resources :infos, only: [:destroy] do
       get :confirm, on: :member

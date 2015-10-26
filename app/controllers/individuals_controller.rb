@@ -39,10 +39,20 @@ class IndividualsController < ApplicationController
     redirect_to individuals_url
   end
 
+  def confirm
+    Individual.find(params[:id]).confirm
+    redirect_to root_url
+  end
+
+  def deny
+    Individual.find(params[:id]).deny
+    redirect_to root_url
+  end
+
   private
     def individual_params
       params.require(:individual).permit(
         :user_id, :name, :cell, :remark_name, :id_type,
-        :id_no, :id_front, :id_back, :remark)
+        :id_no, :id_front, :id_back, :remark, :state)
     end
 end

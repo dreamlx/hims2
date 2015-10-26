@@ -96,7 +96,7 @@ response:
               }
             }, 
             "remark"=>"new_remark",
-            "number"=>"MyString"
+            "state"=>"确认"                 #["提交", "确认", "否决"]
           }
         }
 ```
@@ -268,7 +268,8 @@ response:
             "remark"=>"MyString",
             "created_at"=>"2015-09-25",
             "booking_count"=>0,
-            "holding_count"=>0
+            "holding_count"=>0,
+            "state"=>"确认"                 #["提交", "确认", "否决"]
           }
         }
 ```
@@ -340,7 +341,8 @@ response:
             "remark"=>"MyString",
             "created_at"=>"2015-09-25",
             "booking_count"=>0,
-            "holding_count"=>0
+            "holding_count"=>0,
+            "state"=>"确认"                 #["提交", "确认", "否决"]
           }
         }
 ```

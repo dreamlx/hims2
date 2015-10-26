@@ -33,12 +33,22 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     redirect_to users_url
   end
+
+  def confirm
+    User.find(params[:id]).confirm
+    redirect_to root_url
+  end
+
+  def deny
+    User.find(params[:id]).deny
+    redirect_to root_url
+  end
   
   private
    def user_params
     params.require(:user).permit(
       :open_id, :cell, :name, :email, :id_type, :nickname, :gender, 
       :address, :card_type, :card_no, :card_front, :card_back, 
-      :remark, :number)
+      :remark, :number, :state)
    end
 end

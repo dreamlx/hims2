@@ -35,6 +35,7 @@ class Api::InstitutionsController < Api::BaseController
     end
 
     if @institution.update(institution_params)
+      @institution.submit
       render 'show'
     else
       return api_error(status: 422)
