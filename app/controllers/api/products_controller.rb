@@ -33,10 +33,10 @@ class Api::ProductsController < Api::BaseController
         :api_user => Rails.application.secrets.send_mail_user, # 使用api_user和api_key进行验证
         :api_key => Rails.application.secrets.send_mail_password,
         :from => Rails.application.secrets.from_email,
-        :fromname => "hehui",
+        :fromname => "HCM",
         :substitution_vars => vars,
-        :template_invoke_name => 'pro_ins',
-        :subject => "来自禾晖的理财产品说明",
+        :template_invoke_name => 'pdf_hims',
+        :subject => "投资指南",
         :resp_email_id => 'true'
       render json: response
     else
