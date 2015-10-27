@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026155723) do
+ActiveRecord::Schema.define(version: 20151027023723) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -228,6 +228,7 @@ ActiveRecord::Schema.define(version: 20151026155723) do
     t.string   "title7",            limit: 255
     t.string   "content7",          limit: 255
     t.text     "rate",              limit: 65535
+    t.text     "condition",         limit: 65535
   end
 
   add_index "products", ["fund_id"], name: "index_products_on_fund_id", using: :btree

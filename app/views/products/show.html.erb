@@ -155,6 +155,9 @@
         <dt><%= Product.human_attribute_name('agreement') %></dt>
         <dd><%= link_to @product.agreement_identifier, @product.agreement.url if @product.agreement.url %></dd>
 
+        <dt><%= Product.human_attribute_name('condition') %></dt>
+        <dd><%= simple_format(@product.condition) %></dd>
+
         <dt><%= @product.title4 %></dt>
         <dd><%= @product.content4 %></dd>
 

@@ -32,6 +32,7 @@ RSpec.describe "orders" do
       expect(json["other"]["other"]["thumb"]["url"]).to eq order.other.thumb.url
       expect(json["remark"]).to eq order.remark
       expect(json["state"]).to eq '已预约'
+      expect(json["product_condition"]).to eq product.condition
     end
 
     it "failed to create a new order without authentication" do
@@ -132,6 +133,7 @@ RSpec.describe "orders" do
       expect(json["product_name"]).to eq order.product.name
       expect(json["currency"]).to eq order.product.currency
       expect(json["number"]).to eq order.investable.id_no
+      expect(json["product_condition"]).to eq order.product.condition
     end
 
     it "show the requested order with money_receipts and pictures" do
@@ -201,6 +203,7 @@ RSpec.describe "orders" do
       expect(json["product_name"]).to eq order.product.name
       expect(json["currency"]).to eq order.product.currency
       expect(json["number"]).to eq order.investable.id_no
+      expect(json["product_condition"]).to eq order.product.condition
     end
   end
 

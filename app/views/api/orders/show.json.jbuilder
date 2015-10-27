@@ -3,6 +3,7 @@ json.order do
   json.investor_name @order.investable.name
   json.product_name @order.product.name
   json.currency @order.product.currency
+  json.product_condition @order.product.condition if @order.product
   if @order.investable_type == "Individual"
     json.number @order.investable.id_no
   elsif @order.investable_type == "Institution"

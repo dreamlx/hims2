@@ -53,6 +53,6 @@ class ProductsController < ApplicationController
         :instruction, :agreement, :title4, :content4,
         :title5, :content5,:title6, :content6,:title7, 
         :content7, :remove_instruction, 
-        :remove_agreement, :rate)
+        :remove_agreement, :rate, :condition)
     end
 end

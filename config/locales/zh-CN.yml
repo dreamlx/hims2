@@ -134,6 +134,7 @@ zh-CN:
         created_at: 创建
         updated_at: 更新
         rate: 自定义框
+        condition: 条件说明
       roi:
         product_id: 产品
         range: 认购金额

@@ -196,7 +196,8 @@ response:
           "direction"=>"MyString",        #投资方向
           "risk_control"=>"MyString",     #风控措施 
           "instruction"=>"MyString",      #说明文档 
-          "agreement"=>"MyString"         #认购协议
+          "agreement"=>"MyString",        #认购协议
+          "condition"=>"MyString"         #条件说明
           "rois"=>[
             {
               "id"=>7, 
@@ -481,7 +482,8 @@ response:
             "product_name"=> "product name",  #预约产品
             "currency"=>"人民币",              #币种
             "number"=>"xxxxxxxxxxxxxx",       #证件号码
-            "deliver"=>"未快递"                #合同快递至管理人,只有【未快递】和【已快递】两个选项
+            "deliver"=>"未快递",               #合同快递至管理人,只有【未快递】和【已快递】两个选项
+            "product_condition"               #条件说明
           }, 
           "money_receipts"=>
           [
