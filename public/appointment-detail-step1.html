@@ -53,7 +53,7 @@
 			$("#submitBtn[name=appointmentUpdate]").attr('data-oid',info.id)
 			$("#deleteBtn[name=appointmentDelete]").attr('data-oid',info.id)
 			//infos
-			if(order.infos && order.infos.length>0){
+			/*if(order.infos && order.infos.length>0){
 				var infos= order.infos;
 				for(var i=0;i<infos.length;i++){
 					var type = infos[i].field_type.toLowerCase();
@@ -87,10 +87,36 @@
 					$("#infoForm").append(template.find(".alert"));
 					rebind();
 				}
-			}
+			}*/
 			//money_receipts
+			if(order.pictures && order.pictures.length>0){
+				var pics = order.pictures;
+				for(var i=0;i<pics.length;i++){
+					var template = $("#photo-template").clone();
+					if(pics[i].title){
+						template.find('.icon-ahead span').text(pics[i].title);
+					}
+					if(pics[i].pic.pic.url){
+						template.find('.img-default').append('<img />')
+						.find('img').attr('src',pics[i].pic.pic.url);
+					}
+					if(pics[i].state == "已否决"){
+						template.find('.icon-ahead .icon').addClass("icon-rwrong");
+						template.find(".mt-block").append("<a class='delet_pink'></a>")
+							.find('.delet_pink').attr({"data-oid":order.order.id,"data-pid":pics[i].id});
+					}else if(pics[i].state == "已确认"){
+						template.find('.icon-ahead .icon').addClass("icon-gright");
+					}else if(pics[i].state == "未确认"){
+						var out = template.find(".form-line,.alert").clone();
+						template.find(".mt-block").empty().append("<p class='pink' >信息已提交成功，正在审核中</p><div class='rapin'><a class='delet_pink'></a></div>")
+							.find(".rapin").prepend(out)
+							.find('.delet_pink').attr({"data-oid":order.order.id,"data-mid":pics[i].id});
+					}
+					$("#infoForm").append(template.find(".mt-block"));
+				}
+			}
 			if(order.money_receipts && order.money_receipts.length>0){
-				var money = order.money_receipts
+				var money = order.money_receipts;
 				for(var i=0;i<money.length;i++){
 					var template = $("#money-template").clone();
 					if(money[i].amount){
@@ -172,12 +198,12 @@
 	                }
 	            }
 	        });
-	        $('#infoForm textarea').bind("blur",function(){
+	        /*$('#infoForm textarea').bind("blur",function(){
 	            check.text($(this));
 	        });
 	        $('#infoForm input[type=text]').bind("blur",function(){
 	            check.string($(this));
-	        });
+	        });*/
 		}
 		function addicon(input,type){
 			$(input).closest('.form-line').find('.icon-ahead .icon').addClass(type);
@@ -345,14 +371,16 @@
 			<div class="alert" role="alert"></div>
 		</div>
 		<div id="photo-template">
-			<div class="form-line">
-				<label class="icon-ahead"><i class="icon"></i><span></span></label>
-				<span class="img-box">
-					<label class="img-default"></label>
-					<input class="hide" type="file"/>
-				</span>
+			<div class="mt-block">
+				<div class="form-line">
+					<label class="icon-ahead"><i class="icon"></i><span></span></label>
+					<span class="img-box">
+						<label class="img-default"></label>
+						<input class="hide" type="file"/>
+					</span>
+				</div>
+				<div class="alert" role="alert"></div>
 			</div>
-			<div class="alert" role="alert"></div>
 		</div>
 	</div>
 </body>
