@@ -648,7 +648,9 @@ window.check = {
             profileUpdatefail:"由于网络原因更新信息未成功,请再次尝试",
             moneydeletesuccess:"删除报单成功",
             moneydeletefail:"由于网络原因删除报单未成功,请再次尝试",
-            personfirst:"您需要先完善您的个人信息"
+            personfirst:"您需要先完善您的个人信息",
+            picupdatesuccess:"更新图片成功",
+            picupdatefail:"更新图片失败，请重试",
         },
         alert:function(input,error){
             var id = input.attr('id');
@@ -787,7 +789,7 @@ window.check = {
                     ctx = canvas.getContext('2d'),
                     img = new Image();
                     img.onload = function() { 
-                        var square = 1280; 
+                        var square = 960; 
                         var context = canvas.getContext('2d'); 
                         var imageWidth; var imageHeight; 
                         var offsetX = 0; var offsetY = 0; 
@@ -845,7 +847,10 @@ window.check = {
 window.submit = {
     sendRegeistCode:function(btn){
         var form = btn.closest('form');
-        if(!this.validate.sendRegeistCode(form))return false;
+        if(!this.validate.sendRegeistCode(form)){
+            loading.end();
+            return false;
+        }
         var cellNum = form.find('#inputCell').val();
         check.error.hideall(btn);
         check.unbind.btn(btn,"click");
@@ -855,6 +860,7 @@ window.submit = {
             data:{cell:cellNum},
             dataType:"json",
             success:function(data){
+                loading.end();
                 check.error.alertsuccess(btn,check.error.errorInfo.sendcodesuccess);
                 var i=180;
                 var btnword = btn.html();
@@ -870,6 +876,7 @@ window.submit = {
                 var run = setInterval(countTurn,1000);
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.sendcodefail);
                 submit.bind.sendRegeistCodeBind();
             }
@@ -877,7 +884,10 @@ window.submit = {
     },
     registerSubmit:function(btn){
         var form = btn.closest('form');
-        if(!this.validate.registerSubmit(form))return false;
+        if(!this.validate.registerSubmit(form)){
+            loading.end();
+            return false;
+        }
         var cellNum = form.find('#inputCell').val();
         var checkCodeNum = form.find('#inputCheckcode').val();
         var ref= window.location.href,
@@ -907,6 +917,7 @@ window.submit = {
             },
             dataType:"json",
             success:function(data){
+                loading.end();
                 if(data.user && data.user.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.registersuccess);
                     setTimeout(function(){
@@ -919,6 +930,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.registerfail);
                 submit.bind.registerSubmitBind();
             }
@@ -926,12 +938,16 @@ window.submit = {
     },
     profileCreatSubmit:function(btn){
         var form = btn.closest('form');
-        if(!this.validate.profileCreatSubmit(form))return false;
+        if(!this.validate.profileCreatSubmit(form)){
+            loading.end();
+            return false;
+        }
         var store = getInfo.checkstorage();
         var name = form.find('#inputName').val();
         var mail = form.find('#inputMail').val();
         check.error.hideall(btn);
         check.unbind.btn(btn,"click");
+        loading.start();
         $.ajax({
             url:getInfo.getUrl.fullurl('api/users/' + store.id),
             type:'PATCH',
@@ -948,6 +964,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\""+store.open_id+"\"")
             },
             success:function(data){
+                loading.end();
                 if(data.user && data.user.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.creatprofilesuccess);
                     setTimeout(function(){
@@ -960,6 +977,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.creatprofilefail);
                 submit.bind.profileCreatSubmitBind();
             }
@@ -967,7 +985,10 @@ window.submit = {
     },
     sendMailProduct:function(btn){
         var form = btn.closest('form');
-        if(!this.validate.sendMailProduct(form))return false;
+        if(!this.validate.sendMailProduct(form)){
+            loading.end();
+            return false;
+        }
         var pid = getInfo.getUrlPara()[0];
         if(!pid)return false;
         var mail = form.find('#inputMail').val();
@@ -979,6 +1000,7 @@ window.submit = {
             data:{email:mail},
             dataType:"json",
             success:function(data){
+                loading.end();
                 check.error.alertsuccess(btn,check.error.errorInfo.sendmailsuccess);
                 var i=180;
                 var btnword = btn.html();
@@ -994,6 +1016,7 @@ window.submit = {
                 var run = setInterval(countTurn,1000);
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.sendmailfail);
                 submit.bind.sendMailProductBind();
             }
@@ -1001,7 +1024,10 @@ window.submit = {
     },
     loginSubmit:function(btn){
         var form = btn.closest('form');
-        if(!this.validate.loginSubmit(form))return false;
+        if(!this.validate.loginSubmit(form)){
+            loading.end();
+            return false;
+        }
         var open_id = form.find('#inputOpenid').val();
         var uid = form.find('#inputUid').val();
         check.error.hideall(btn);
@@ -1015,6 +1041,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data.user && data.user.id>0){
                     setTimeout(function(){
                         getInfo.setSession('HIMS_APP_STORE',data.user);
@@ -1025,6 +1052,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 submit.bind.loginSubmitBind();
             }
         });
@@ -1032,7 +1060,10 @@ window.submit = {
     customerCreatPersonalSubmit:function(btn){
         var form = btn.closest('form');
         var store = getInfo.checkstorage();
-        if(!this.validate.customerCreatPersonalSubmit(form))return false;
+        if(!this.validate.customerCreatPersonalSubmit(form)){
+            loading.end();
+            return false;
+        }
         var individual = {
             name:form.find('#inputNameP').val(),
             cell:form.find('#inputCellP').val(),
@@ -1056,6 +1087,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data.individual && data.individual.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.customercreatpersonalsuccess);
                     setTimeout(function(){
@@ -1067,6 +1099,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.customercreatpersonalfail);
                 submit.bind.customerCreatPersonalSubmitBind();
             }
@@ -1077,7 +1110,10 @@ window.submit = {
         var store = getInfo.checkstorage();
         var pid = btn.attr('data-pid');
         var back = btn.attr('data-back');
-        if(!this.validate.customerUpdatePersonalSubmit(form))return false;
+        if(!this.validate.customerUpdatePersonalSubmit(form)){
+            loading.end();
+            return false;
+        }
         var individual = {
             name:form.find('#inputNameP').val(),
             cell:form.find('#inputCellP').val(),
@@ -1101,6 +1137,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data.individual && data.individual.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.customerupdatepersonalsuccess);
                     setTimeout(function(){
@@ -1116,6 +1153,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.customerupdatepersonalfail);
                 submit.bind.customerUpdatePersonalSubmitBind();
             }
@@ -1124,7 +1162,10 @@ window.submit = {
     customerCreatOrganizalSubmit:function(btn){
         var form = btn.closest('form');
         var store = getInfo.checkstorage();
-        if(!this.validate.customerCreatOrganizalSubmit(form))return false;
+        if(!this.validate.customerCreatOrganizalSubmit(form)){
+            loading.end();
+            return false;
+        }
         var institution = {
             name:form.find('#inputNameO').val(),
             cell:form.find('#inputCellO').val(),
@@ -1146,6 +1187,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data.institution && data.institution.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.customercreatorganizalsuccess);
                     setTimeout(function(){
@@ -1157,6 +1199,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.customercreatorganizalfail);
                 submit.bind.customerCreatOrganizalSubmitBind();
             }
@@ -1167,7 +1210,10 @@ window.submit = {
         var store = getInfo.checkstorage();
         var oid = btn.attr('data-oid');
         var back = btn.attr('data-back');
-        if(!this.validate.customerUpdateOrganizalSubmit(form))return false;
+        if(!this.validate.customerUpdateOrganizalSubmit(form)){
+            loading.end();
+            return false;
+        }
         var institution = {
             name:form.find('#inputNameO').val(),
             cell:form.find('#inputCellO').val(),
@@ -1189,6 +1235,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data.institution && data.institution.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.customerupdateorganizalsuccess);
                     setTimeout(function(){
@@ -1204,6 +1251,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.customerupdateorganizalfail);
                 submit.bind.customerUpdatePersonalSubmitBind();
             }
@@ -1217,10 +1265,14 @@ window.submit = {
             setTimeout(function(){
                 getInfo.turnprofilemine();
             },3100);
+            loading.end();
             return false;
         }
         var pid = btn.attr('data-pid');
-        if(!this.validate.appointmentCreatSubmit(form))return false;
+        if(!this.validate.appointmentCreatSubmit(form)){
+            loading.end();
+            return false;
+        }
         var order = {
             investable_id:form.find('#inputInvesterSelect').attr('data-val'),
             product_id:pid,
@@ -1243,6 +1295,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data.order && data.order.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.appointmentcreatsuccess);
                     setTimeout(function(){
@@ -1254,6 +1307,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.appointmentcreatfail);
                 submit.bind.appointmentCreatSubmitBind();
             }
@@ -1263,14 +1317,17 @@ window.submit = {
         var form = btn.closest('form');
         var store = getInfo.checkstorage();
         var oid = btn.attr('data-oid');
-        if(!this.validate.appointmentUpdateSubmit(form))return false;
+        if(!this.validate.appointmentUpdateSubmit(form)){
+            loading.end();
+            return false;
+        }
         //订单更新
         var orderUpdate = {
             deliver:form.find("#inputSendState").val(),
             remark:form.find("#inputRemark").val()
         };
         //报单提交
-        var infoSubmit={};
+        /*var infoSubmit={};
         var infolist = form.find("#infoForm :not(.finished) [id^=info]");
         if (infolist && infolist.length>0){
             var t=0;
@@ -1292,6 +1349,11 @@ window.submit = {
                 }
             }
             infoSubmit = t>0?infoSubmit:null;
+        }*/
+        //图片提交
+        var  picSubmit ={
+            order_id: oid,
+            pic: $("#pic").attr('data-code')
         }
         //汇款提交
         var  moneySubmit = {
@@ -1309,6 +1371,7 @@ window.submit = {
         var states = true;
         check.error.hideall(btn);
         check.unbind.btn(btn,"click");
+        
         $.ajax({
             url:getInfo.getUrl.fullurl('api/orders/'+oid),
             type:'PATCH',
@@ -1326,13 +1389,32 @@ window.submit = {
                 states=false;
             }
         });
-        if(infoSubmit){
+        /*if(infoSubmit){
             $.ajax({
                 url:getInfo.getUrl.fullurl('api/orders/'+ oid + '/update_infos'),
                 type:'PATCH',
                 async: false,
                 data:{
                     infos:infoSubmit
+                },
+                dataType:"json",
+                beforeSend:function(XMLHttpRequest){
+                    XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+                },
+                success:function(data){
+                },
+                error:function(data){
+                    states=false;
+                }
+            });
+        }*/
+        if(picSubmit.pic){
+            $.ajax({
+                url:getInfo.getUrl.fullurl('api/orders/'+ oid + '/pictures'),
+                type:'POST',
+                async: false,
+                data:{
+                    picture:picSubmit
                 },
                 dataType:"json",
                 beforeSend:function(XMLHttpRequest){
@@ -1365,11 +1447,13 @@ window.submit = {
             }); 
         }
         if(states==true){
+            loading.end();
             check.error.alertsuccess(btn,check.error.errorInfo.appointmentupdatesuccess);
             setTimeout(function(){
                  window.location.reload(true);
             },3000);
         }else{
+            loading.end();
             check.error.alertfail(btn,"error",check.error.errorInfo.appointmentupdatefail);
             submit.bind.appointmentUpdateSubmitBind();
         }
@@ -1388,12 +1472,14 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 check.error.alertsuccess(btn,check.error.errorInfo.appointmentdeletesuccess);
                 setTimeout(function(){
                     getInfo.turnappointmentmine();
                 },3000);
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.appointmentdeletefail);
                 submit.bind.appointmentDeleteSubmitBind();
             }
@@ -1403,7 +1489,10 @@ window.submit = {
         var form = btn.closest('form');
         var store = getInfo.checkstorage();
         var checkid = $('#inputCheckId').val();
-        if(!this.validate.investCheckSubmit(form))return false;
+        if(!this.validate.investCheckSubmit(form)){
+            loading.end();
+            return false;
+        }
         $.ajax({
             url:getInfo.getUrl.fullurl('api/orders/by_number'),
             type:'GET',
@@ -1413,6 +1502,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data&&data.length>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.investchecksuccess);
                     window.localStorage.setItem("HIMS_APP_CHECKID",checkid);
@@ -1425,6 +1515,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.investcheckfail);
                 submit.bind.appointmentDeleteSubmitBind();
             }
@@ -1434,7 +1525,10 @@ window.submit = {
         var form = btn.closest('form');
         var store = getInfo.checkstorage();
         var uid = store.id;
-        if(!this.validate.profileUpdateSubmit(form))return false;
+        if(!this.validate.profileUpdateSubmit(form)){
+            loading.end();
+            return false;
+        }
         var user={
             name: $("#inputName").val(),
             email: $("#inputMail").val(),
@@ -1459,6 +1553,7 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 if(data.user && data.user.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.profileUpdatesuccess);
                     getInfo.setSession('HIMS_APP_STORE',data.user);
@@ -1471,6 +1566,7 @@ window.submit = {
                 }
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.profileUpdatefail);
                 submit.bind.profileUpdateSubmitBind();
             }
@@ -1492,16 +1588,72 @@ window.submit = {
                 XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
             },
             success:function(data){
+                loading.end();
                 check.error.alertsuccess(btn,check.error.errorInfo.moneydeletesuccess);
                 setTimeout(function(){
                     window.location.reload(true);
                 },3000);
             },
             error:function(data){
+                loading.end();
                 check.error.alertfail(btn,"error",check.error.errorInfo.moneydeletefail);
                 submit.bind.profileUpdateSubmitBind();
             }
         });
+    },
+    updatePicSubmit:function(btn){
+        var form = btn.closest('form');
+        var store = getInfo.checkstorage();
+        var oid = btn.attr('data-oid');
+        var pid = btn.attr('data-pid');
+        var picsubmit = {
+            order_id: oid,
+            pic: btn.attr('data-code')
+        }
+        var reuslt = true;
+        check.error.hideall(btn);
+        $.ajax({
+            url:getInfo.getUrl.fullurl('api/orders/'+oid+'/pictures/'+pid),
+            async: false,
+            type:'DELETE',
+            data:{},
+            dataType:"json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+            },
+            success:function(data){
+            },
+            error:function(data){
+                reuslt = false;
+            }
+        });
+        $.ajax({
+            url:getInfo.getUrl.fullurl('api/orders/'+oid+'/pictures'),
+            async: false,
+            type:'POST',
+            data:{
+                picture:picsubmit
+            },
+            dataType:"json",
+            beforeSend:function(XMLHttpRequest){
+                XMLHttpRequest.setRequestHeader("Authorization","Token token=\"" + store.open_id + "\"");
+            },
+            success:function(data){
+            },
+            error:function(data){
+                reuslt = false;
+            }
+        });
+        if(reuslt==true){
+            loading.end();
+            check.error.alertsuccess(btn,check.error.errorInfo.picupdatesuccess);
+            setTimeout(function(){
+                 window.location.reload(true);
+            },3000);
+        }else{
+            loading.end();
+            check.error.alertfail(btn,"error",check.error.errorInfo.picupdatefail);
+        }
     },
     validate:{
         sendRegeistCode:function(form){
@@ -1788,77 +1940,137 @@ window.submit = {
     bind:{
         sendRegeistCodeBind:function(){
             $('#sendRegeistBtn').bind('click',function(){
-                submit.sendRegeistCode($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.sendRegeistCode(t);
+                },100);
             });
         },
         registerSubmitBind:function(){
             $('#submitBtn[name="register"]').bind('click',function(){
-                submit.registerSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.registerSubmit(t);
+                },100);
             });
         },
         profileCreatSubmitBind:function(){
             $('#submitBtn[name="profileCreat"]').bind('click',function(){
-                submit.profileCreatSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.profileCreatSubmit(t);
+                },100);
             });
         },
         sendMailProductBind:function(){
             $('#sendMailProduct').bind('click',function(){
-                submit.sendMailProduct($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.sendMailProduct(t);
+                },100);
             });
         },
         loginSubmitBind:function(){
             $('#submitBtn[name="login"]').bind('click',function(){
-                submit.loginSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.loginSubmit(t);
+                },100);
             });
         },
         customerCreatPersonalSubmitBind:function(){
             $('#submitBtnCreatCustomerP').bind('click',function(){
-                submit.customerCreatPersonalSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.customerCreatPersonalSubmit(t);
+                },100);
             });
         },
         customerUpdatePersonalSubmitBind:function(){
             $('#submitBtnUpdateCustomerP').bind('click',function(){
-                submit.customerUpdatePersonalSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.customerUpdatePersonalSubmit(t);
+                },100);
             });
         },
         customerCreatOrganizalSubmitBind:function(){
             $('#submitBtnCreatCustomerO').bind('click',function(){
-                submit.customerCreatOrganizalSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.customerCreatOrganizalSubmit(t);
+                },100);
             });
         },
         customerUpdateOrganizalSubmitBind:function(){
             $('#submitBtnUpdateCustomerO').bind('click',function(){
-                submit.customerUpdateOrganizalSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.customerUpdateOrganizalSubmit(t);
+                },100);
             });
         },
         appointmentCreatSubmitBind:function(){
             $('#submitBtn[name="appointmentCreat"]').bind('click',function(){
-                submit.appointmentCreatSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.appointmentCreatSubmit(t);
+                },100);
             });
         },
         appointmentUpdateSubmitBind:function(){
             $('#submitBtn[name="appointmentUpdate"]').bind('click',function(){
-                submit.appointmentUpdateSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.appointmentUpdateSubmit(t);
+                },100);
             });
         },
         appointmentDeleteSubmitBind:function(){
             $('#deleteBtn[name="appointmentDelete"]').bind('click',function(){
-                submit.appointmentDeleteSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.appointmentDeleteSubmit(t);
+                },100);
             });
         },
         investCheckSubmitBind:function(){
             $('#submitBtn[name="investcheck"]').bind('click',function(){
-                submit.investCheckSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.investCheckSubmit(t);
+                },100);
             });
         },
         profileUpdateSubmitBind:function(){
             $('#submitBtn[name="update-profile"]').bind('click',function(){
-                submit.profileUpdateSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.profileUpdateSubmit(t);
+                },100);
             });
         },
         moneyDeleteSubmitBind:function(){
             $('#moneydeleteBtn[name="moneyDelete"]').bind('click',function(){
-                submit.moneyDeleteSubmit($(this));
+                loading.start();
+                var t = $(this);
+                setTimeout(function(){
+                    submit.moneyDeleteSubmit(t);
+                },100);
             });
         }   
     },
@@ -2643,4 +2855,15 @@ String.prototype.toHtmlEncode = function()
         str=str.replace(/\ /g,"&nbsp;");
         str=str.replace(/\t/g,"&nbsp;&nbsp;&nbsp;&nbsp;");
     return str;
+}
+
+window.loading = {
+    start:function(){
+        $("#imgloadding").removeClass('hide');
+        $('#imgloadding .pop-alert').addClass('appear');
+    },
+    end:function(){
+        $('#imgloadding .pop-alert').removeClass('appear');
+        $("#imgloadding").addClass('hide');
+    }
 }

@@ -1473,6 +1473,9 @@ form{
 .pop-btns .half-btn:hover{
 	background-color: rgba(0,0,0,0.2);
 }
+#infoForm{
+	margin-top: 20px;
+}
 .mt-block{
 	padding: 10px 0 20px 0;
 	border-top: 1px solid #ccc;
@@ -1589,4 +1592,20 @@ form{
 	.pink{
 		font-size: 12px;
 	}
+}
+.loadingimg{
+	border: none;
+    opacity: 0.8;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 80px;
+}
+.pop-bg .pop-alert.loading{
+	-webkit-transition:all 0.3s ease;
+	-moz-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+.pop-bg .pop-alert.loading .pop-test{
+	padding-top: 10px;
 }
