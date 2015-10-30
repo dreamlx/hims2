@@ -1609,3 +1609,10 @@ form{
 .pop-bg .pop-alert.loading .pop-test{
 	padding-top: 10px;
 }
+.ppd{
+	font-size: 18px;
+    padding-left: 6%;
+    color: #666;
+    line-height: 24px;
+    margin: 5px 0;
+}

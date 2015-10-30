@@ -120,6 +120,7 @@
 			pictemplate.find(".img-default").attr('for','pic');
 			pictemplate.find("input[type=file]").attr('id','pic');
 			$("#infoForm").append(pictemplate.find(".mt-block"));
+			$("#infoForm").prepend("<div class='ppd'>" + order.order.product_condition + "</div>")
 			rebind();
 			//money_receipts
 			if(order.money_receipts && order.money_receipts.length>0){
@@ -186,6 +187,10 @@
 			
 		});
 		function rebind(){
+			$("#infoForm input[type=file]").bind("click",function(){
+	            var alert = $(this).closest(".form-line").next();
+	            check.error.hide(alert);
+	        });
 			$("#infoForm input[type=file]").bind("blur",function(){
 				check.img($(this));
 	        });
