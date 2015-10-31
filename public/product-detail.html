@@ -32,118 +32,118 @@
 					});
 				}
 				if(product.product.name){
-					item.find('#pname').text(product.product.name);
+					item.find('#pname').html(product.product.name.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pname').closest('li').remove();
 				}
 				if(product.product.abbr){
-					item.find('#pabbr').text(product.product.abbr);
+					item.find('#pabbr').html(product.product.abbr.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pabbr').closest('li').remove();
 				}
 				if(product.product.abbr){
-					item.find('#pcurrency').text(product.product.currency);
+					item.find('#pcurrency').html(product.product.currency.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pcurrency').closest('li').remove();
 				}
 				
 				if(product.product.amount){
-					item.find('#pamount').text(product.product.amount);
+					item.find('#pamount').html(product.product.amount.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pamount').closest('li').remove();
 				}
 				if(product.product.period){
-					item.find('#pperiod').text(product.product.period);
+					item.find('#pperiod').html(product.product.period.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pperiod').closest('li').remove();
 				}
 				if(product.product.paid){
-					item.find('#ppaid').text(product.product.paid);
+					item.find('#ppaid').html(product.product.paid.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#ppaid').closest('li').remove();
 				}
 				if(product.product.sales_period){
-					item.find('#psales_period').text(product.product.sales_period);
+					item.find('#psales_period').html(product.product.sales_period.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#psales_period').closest('li').remove();
 				}
 				if(product.product.block_period){
-					item.find('#pblock_period').text(product.product.block_period);
+					item.find('#pblock_period').html(product.product.block_period.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pblock_period').closest('li').remove();
 				}
 				if(product.product.redeem){
-					item.find('#predeem').text(product.product.redeem);
+					item.find('#predeem').html(product.product.redeem.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#predeem').closest('li').remove();
 				}
 				if(product.product.entity){
-					item.find('#pentity').text(product.product.entity);
+					item.find('#pentity').html(product.product.entity.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pentity').closest('li').remove();
 				}
 				if(product.product.adviser){
-					item.find('#padviser').text(product.product.adviser);
+					item.find('#padviser').html(product.product.adviser.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#padviser').closest('li').remove();
 				}
 				if(product.product.trustee){
-					item.find('#ptrustee').text(product.product.trustee);
+					item.find('#ptrustee').html(product.product.trustee.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#ptrustee').closest('li').remove();
 				}
 				if(product.product.reg_organ){
-					item.find('#preg_organ').text(product.product.reg_organ);
+					item.find('#preg_organ').html(product.product.reg_organ.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#preg_organ').closest('li').remove();
 				}
 				if(product.product.website){
-					item.find('#pwebsite').text(product.product.website);
+					item.find('#pwebsite').html(product.product.website.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pwebsite').closest('li').remove();
 				}
 				if(product.product.agency){
-					item.find('#pagency').text(product.product.agency);
+					item.find('#pagency').html(product.product.agency.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pagency').closest('li').remove();
 				}
 				if(product.product.regulatory_filing){
-					item.find('#pregulatory_filing').text(product.product.regulatory_filing);
+					item.find('#pregulatory_filing').html(product.product.regulatory_filing.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pregulatory_filing').closest('li').remove();
 				}
 				if(product.product.legal_consultant){
-					item.find('#plegal_consultant').text(product.product.legal_consultant);
+					item.find('#plegal_consultant').html(product.product.legal_consultant.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#plegal_consultant').closest('li').remove();
 				}
 				if(product.product.audit){
-					item.find('#paudit').text(product.product.audit);
+					item.find('#paudit').html(product.product.audit.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#paudit').closest('li').remove();
 				}
 				if(product.product.starting_point){
-					item.find('#pstarting_point').text(product.product.starting_point);
+					item.find('#pstarting_point').html(product.product.starting_point.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pstarting_point').closest('li').remove();
 				}
 				if(product.product.account){
-					item.find('#paccount').text(product.product.account);
+					item.find('#paccount').html(product.product.account.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#paccount').closest('li').remove();
 				}
 				if(product.product.progress){
-					item.find('#pprogress').text(product.product.progress);
+					item.find('#pprogress').html(product.product.progress.toHtmlEncode().replace(/；/g,"；<br/>"));
 				}else{
 					item.find('#pprogress').closest('li').remove();
 				}
 				if(product.product.direction){
-					item.find('#pdirection').text(product.product.direction);
+					item.find('#pdirection').html(product.product.direction.toHtmlEncode());
 				}else{
 					item.find('#pdirection').closest('li').remove();
 				}
 				if(product.product.risk_control){
-					item.find('#prisk_control').text(product.product.risk_control);
+					item.find('#prisk_control').html(product.product.risk_control.toHtmlEncode());
 				}else{
 					item.find('#prisk_control').closest('li').remove();
 				}

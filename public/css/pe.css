@@ -38,6 +38,8 @@ form{
 }
 .whole-line{
 	display: block;
+	overflow: hidden;
+    text-overflow: ellipsis;
 }
 .fl{
 	float: left;
@@ -467,6 +469,7 @@ form{
 	margin-top: -15px;
 }
 .p-range{
+	display: block;
 	display: flex;
 	margin-top: 10px;
 	overflow: hidden;
@@ -476,7 +479,7 @@ form{
 	float: left;
 	margin-top: 4px;
 	margin-right: 2%;
-	width: 88%;
+	width: 85%;
 	height: 10px;
 	border:1px solid #1498BF;
 	border-radius: 10px;
@@ -919,14 +922,17 @@ form{
 }
 .line-list li p:first-child{
 	display: block;
-	width: 70%;
+	width: 50%;
 }
 .line-list li p span{
+	display: inline;
+	float: none;
 	width: auto;
 }
 .line-list li p:last-child{
 	display: block;
-	width: 30%;
+	width: 50%;
+	text-align: right;
 }
 .line-list li i{
 	margin-left: 5px;
@@ -1611,8 +1617,29 @@ form{
 }
 .ppd{
 	font-size: 18px;
-    padding-left: 6%;
+    padding-left: 7%;
     color: #666;
     line-height: 24px;
     margin: 5px 0;
+}
+.pink.sp{
+	line-height: 24px;
+	margin-top: 15px;
+}
+#infoForm{
+	padding: 10px 0 20px 0;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+#infoForm .mt-block{
+	padding-top: 0px;
+	padding-bottom: 0px;
+	border: none;
+}
+.radius-form #infoForm .form-line .icon-ahead{
+	width: 0%;
+	min-width: 0px;
+}
+.radius-form #infoForm .form-line .img-box .img-default{
+	margin-right: 20px;
 }

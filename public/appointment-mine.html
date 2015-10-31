@@ -85,7 +85,7 @@
 						dd.find('.a-title').text(order.name);
 						dd.find('.a-text:eq(0) span').text(order.desc);
 						dd.find('.a-text:eq(1) .cur').text(pit.currency);
-						dd.find('.a-text:eq(1) .blue').text(pit.amount);
+						dd.find('.a-text:eq(1) .blue').text(parseFloat(pit.amount).toFixed(2)+"元");
 						dd.attr('data-oid',pit.id);
 						dl.append(dd);
 					}
@@ -107,7 +107,7 @@
 						dd.find('.a-title').text(booked[i].product_name);
 						dd.find('.a-text:eq(0) span').text(booked[i].product_desc);
 						dd.find('.a-text:eq(1) .cur').text(booked[i].currency);
-						dd.find('.a-text:eq(1) .blue').text(booked[i].amount);
+						dd.find('.a-text:eq(1) .blue').text(parseFloat(booked[i].amount).toFixed(2)+"元");
 						dd.attr('data-oid',booked[i].id);
 						dl.append(dd);
 					}
@@ -126,7 +126,7 @@
 						dd.find('.a-title').text(completed[i].product_name);
 						dd.find('.a-text:eq(0) span').text(completed[i].product_desc);
 						dd.find('.a-text:eq(1) .cur').text(completed[i].currency);
-						dd.find('.a-text:eq(1) .blue').text(completed[i].amount);
+						dd.find('.a-text:eq(1) .blue').text(parseFloat(completed[i].amount).toFixed(2)+"元");
 						dd.attr('data-oid',completed[i].id);
 						dl.append(dd);
 					}
@@ -147,7 +147,7 @@
 						dd.find('.a-title').text(valued[i].product_name);
 						dd.find('.a-text:eq(0) span').text(valued[i].product_desc);
 						dd.find('.a-text:eq(1) .cur').text(valued[i].currency);
-						dd.find('.a-text:eq(1) .blue').text(valued[i].amount);
+						dd.find('.a-text:eq(1) .blue').text(parseFloat(valued[i].amount).toFixed(2)+"元");
 						dd.attr('data-oid',valued[i].id);
 						dl.append(dd);
 					}

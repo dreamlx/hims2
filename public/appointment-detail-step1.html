@@ -23,7 +23,7 @@
 			base.find('li:eq(0) span').text(info.investor_name||"");
 			base.find('li:eq(1) span').text(info.product_name||"");
 			base.find('li:eq(2) span').text(info.currency||"人民币");
-			base.find('li:eq(3) span').text(info.amount||0);
+			base.find('li:eq(3) span').text(parseFloat(info.amount).toFixed(2)+"元"||"0.00元");
 			base.find('li:eq(4) span').text(info.due_date||"");
 			if(info.investable_type=="User"){
 				$('#editCustomerBtn').attr('data-turn',"profile-mine");
@@ -104,13 +104,13 @@
 						template.find('.icon-ahead .icon').addClass("icon-rwrong");
 						template.find(".mt-block").find('input[type=file]').attr({"data-oid":order.order.id,"data-pid":pics[i].id,"id":"pic"+pics[i].id});
 						template.find(".mt-block").find('label').attr('for',"pic"+pics[i].id);
+						template.find(".mt-block .img-box").append("<p class='pink sp' >图片审核未通过，<br/>点击可以重新上传</p>")
 					}else if(pics[i].state == "已确认"){
 						template.find('.icon-ahead .icon').addClass("icon-gright");
+						template.find(".mt-block .img-box").append("<p class='pink sp' >图片审核通过，<br/>已经确认</p>")
 					}else if(pics[i].state == "未确认"){
-						var out = template.find(".form-line,.alert").clone();
-						template.find(".mt-block").empty().append("<p class='pink' >信息已提交成功，正在审核中</p><div class='rapin'></div>")
-							.find(".rapin").prepend(out)
-							.find('input[type=file]').attr({"data-oid":order.order.id,"data-pid":pics[i].id,"id":"pic"+pics[i].id});
+						template.find(".mt-block .img-box").append("<p class='pink sp' >图片已提交成功，<br/>正在审核中</p>")
+						template.find('input[type=file]').attr({"data-oid":order.order.id,"data-pid":pics[i].id,"id":"pic"+pics[i].id});
 						template.find(".mt-block").find('label').attr('for',"pic"+pics[i].id);
 					}
 					$("#infoForm").append(template.find(".mt-block"));
@@ -128,7 +128,7 @@
 				for(var i=0;i<money.length;i++){
 					var template = $("#money-template").clone();
 					if(money[i].amount){
-						template.find('input[type=text]').val(money[i].amount);
+						template.find('input[type=text]').val(parseFloat(money[i].amount).toFixed(2));
 					}else{
 						var fl = template.find('input[type=text]').closest('.form-line');
 						fl.next().remove();
@@ -294,6 +294,7 @@
 					<label class="icon-ahead" for="inputMoney"><i class="icon "></i>打款金额</label>
 					<span class="input-box">
 						<input type="text" class="sspinput" id="inputMoney" placeholder="请输入打款金额" />
+						<i class="unit">元</i>
 					</span>
 				</div>
 				<div class="alert" role="alert" name="inputMoney"></div>
@@ -381,6 +382,7 @@
 					<label class="icon-ahead"><i class="icon "></i>打款金额</label>
 					<span class="input-box nochange">
 						<input type="text" class="sspinput" readonly />
+						<i class="unit">元</i>
 					</span>
 				</div>
 				<div class="alert" role="alert" name=""></div>
