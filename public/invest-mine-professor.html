@@ -35,7 +35,7 @@
 						var appoint = appointment.clone();
 						appoint.find('p:eq(0)').text(order.investor_name);
 						appoint.find('p:eq(1) span').text(order.currency);
-						appoint.find('p:eq(1) i').text(parseFloat(order.amount).toFixed(2)+"元");
+						appoint.find('p:eq(1) i').text(decimalstr(parseFloat(order.amount).toFixed(2))+"元");
 						appoint.attr('data-oid',order.id);
 						if(order.state=="已起息"){
 							appoint.attr('data-pid',invests[i].id);

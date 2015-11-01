@@ -23,7 +23,7 @@
 			base.find('li:eq(0) span').text(info.investor_name||"");
 			base.find('li:eq(1) span').text(info.product_name||"");
 			base.find('li:eq(2) span').text(info.currency||"人民币");
-			base.find('li:eq(3) span').text(parseFloat(info.amount).toFixed(2)+"元"||"0.00元");
+			base.find('li:eq(3) span').text(decimalstr(parseFloat(info.amount).toFixed(2))+"元"||"0.00元");
 			base.find('li:eq(4) span').text(info.due_date||"");
 			if(info.investable_type=="User"){
 				$('#editCustomerBtn').attr('data-turn',"profile-mine");
@@ -128,7 +128,7 @@
 				for(var i=0;i<money.length;i++){
 					var template = $("#money-template").clone();
 					if(money[i].amount){
-						template.find('input[type=text]').val(parseFloat(money[i].amount).toFixed(2));
+						template.find('input[type=text]').val(decimalstr(parseFloat(money[i].amount).toFixed(2)));
 					}else{
 						var fl = template.find('input[type=text]').closest('.form-line');
 						fl.next().remove();

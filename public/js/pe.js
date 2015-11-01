@@ -2867,3 +2867,14 @@ window.loading = {
         $("#imgloadding").addClass('hide');
     }
 }
+
+function decimalstr(str){
+    str = str.toString();
+    b = str.split(".")[0]+".",
+    c = str.split(".")[1]||"00",
+    d=Math.floor((b.length-2)/3);
+    for (var i=1;i<=d;i++){
+     b = b.substr(0,b.length-4*i)+","+b.substr(-4*i,4*i);
+    }
+    return str = b+c;
+}
