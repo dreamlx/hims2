@@ -13,6 +13,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :money_receipts, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  has_many :infos, dependent: :destroy
 
   mount_uploader :other, ImageUploader
 
