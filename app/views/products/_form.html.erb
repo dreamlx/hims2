@@ -6,62 +6,97 @@
       file: :horizontal_file_input,
       boolean: :horizontal_boolean}) do |f| %>
   <div class="col-md-6">
-    <%= f.input :fund_id, collection: Fund.all %>
-    <%= f.input :name %>
-    <%= f.input :desc %>
-    <%= f.input :title1 %>
-    <%= f.input :content1 %>
-    <%= f.input :title2 %>
-    <%= f.input :content2 %>
-    <%= f.input :title3 %>
-    <%= f.input :content3 %>
-    <%= f.input :progress_bar, hint: "From 0 to 100" %>
-    <%= f.input :label %>
-    <%= f.input :abbr %>
-    <%= f.input :currency %>
-    <%= f.input :amount %>
-    <%= f.input :period %>
-    <%= f.input :paid %>
-    <%= f.input :sales_period %>
-    <%= f.input :block_period %>
-    <%= f.input :redeem %>
-    <%= f.input :entity %>
-    <%= f.input :adviser %>
-    <%= f.input :trustee %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">子基金页面介绍</h3>
+      </div>
+      <div class="panel-body">
+        <%= f.input :fund_id, collection: Fund.all %>
+        <%= f.input :name %>
+        <%= f.input :desc %>
+        <%= f.input :title1 %>
+        <%= f.input :content1 %>
+        <%= f.input :title2 %>
+        <%= f.input :content2 %>
+        <%= f.input :title3 %>
+        <%= f.input :content3 %>
+        <%= f.input :progress_bar, hint: "From 0 to 100" %>
+        <%= f.input :label %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">收益情况</h3>
+      </div>
+      <div class="panel-body">
+        <%= f.input :rate %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">我的预约-预约情况</h3>
+      </div>
+      <div class="panel-body">
+        <%= f.input :condition %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">基金公告（起息后可见）</h3>
+      </div>
+      <div class="panel-body">
+        <%= f.input :title4 %>
+        <%= f.input :content4 %>
+        <%= f.input :title5 %>
+        <%= f.input :content5 %>
+        <%= f.input :title6 %>
+        <%= f.input :content6 %>
+        <%= f.input :title7 %>
+        <%= f.input :content7 %>
+      </div>
+    </div>
   </div>
   <div class="col-md-6">
-    <%= f.input :reg_organ %>
-    <%= f.input :website %>
-    <%= f.input :agency %>
-    <%= f.input :regulatory_filing %>
-    <%= f.input :legal_consultant, as: :text %>
-    <%= f.input :audit %>
-    <%= f.input :rate %>
-    <%= f.input :account, as: :text %>
-    <%= f.input :progress %>
-    <%= f.input :direction, as: :text %>
-    <%= f.input :risk_control %>
-    <%= link_to @product.instruction_identifier, @product.instruction.url, class: "col-sm-offset-3 col-sm-9" if @product.instruction? %>
-    <%= f.input :instruction %>
-    <label class="col-sm-offset-3 col-sm-9">
-      <%= f.check_box :remove_instruction %>
-      Remove instruction
-    </label>
-    <%= link_to @product.agreement_identifier, @product.agreement.url, class: "col-sm-offset-3 col-sm-9" if @product.agreement? %>
-    <%= f.input :agreement %>
-    <label class="col-sm-offset-3 col-sm-9">
-      <%= f.check_box :remove_agreement %>
-      Remove agreement
-    </label>
-    <%= f.input :condition %>
-    <%= f.input :title4 %>
-    <%= f.input :content4 %>
-    <%= f.input :title5 %>
-    <%= f.input :content5 %>
-    <%= f.input :title6 %>
-    <%= f.input :content6 %>
-    <%= f.input :title7 %>
-    <%= f.input :content7 %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">产品详情</h3>
+      </div>
+      <div class="panel-body">
+        <%= f.input :abbr %>
+        <%= f.input :currency %>
+        <%= f.input :amount %>
+        <%= f.input :period %>
+        <%= f.input :paid %>
+        <%= f.input :sales_period %>
+        <%= f.input :block_period %>
+        <%= f.input :redeem %>
+        <%= f.input :entity %>
+        <%= f.input :adviser %>
+        <%= f.input :trustee %>
+        <%= f.input :reg_organ %>
+        <%= f.input :website %>
+        <%= f.input :agency %>
+        <%= f.input :regulatory_filing %>
+        <%= f.input :legal_consultant, as: :text %>
+        <%= f.input :audit %>
+        <%= f.input :account, as: :text %>
+        <%= f.input :progress %>
+        <%= f.input :direction, as: :text %>
+        <%= f.input :risk_control %>
+        <%= link_to @product.instruction_identifier, @product.instruction.url, class: "col-sm-offset-3 col-sm-9" if @product.instruction? %>
+        <%= f.input :instruction %>
+        <label class="col-sm-offset-3 col-sm-9">
+          <%= f.check_box :remove_instruction %>
+          Remove instruction
+        </label>
+        <%= link_to @product.agreement_identifier, @product.agreement.url, class: "col-sm-offset-3 col-sm-9" if @product.agreement? %>
+        <%= f.input :agreement %>
+        <label class="col-sm-offset-3 col-sm-9">
+          <%= f.check_box :remove_agreement %>
+          Remove agreement
+        </label>
+      </div>
+    </div>
   </div>
   <div class="col-md-12">
     <%= f.button :submit %>
