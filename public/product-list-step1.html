@@ -40,7 +40,7 @@
 						item.find(".p-label.red-label").text(fund.label).removeClass('hide');
 					}
 					if(fund.currency){
-						item.find(".p-label.green-label").text(fund.currency+"产品").removeClass('hide');
+						item.find(".p-label.green-label").text(fund.currency).removeClass('hide');
 					}
 					item.find(".p-info .p-f1 .p-p:eq(0) span:eq(0)").text((fund.title1||"暂无信息")+"：");
 					item.find(".p-info .p-f1 .p-p:eq(0) .p-t").text(fund.content1||"暂无信息");
@@ -102,6 +102,7 @@
 						</div>
 					</div>
 				</div>
+				<div class="range-tile">募集进度</div>
 				<div class="p-range">
 					<div class="blue-range"><i class="range"></i></div>
 					<div class="p-percent blue"></div>

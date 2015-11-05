@@ -471,8 +471,19 @@ form{
 .p-range{
 	display: block;
 	display: flex;
+	width: 100%;
 	margin-top: 10px;
 	overflow: hidden;
+}
+.range-tile{
+	padding-top: 5px;
+	margin-top: 5px;
+	float: left;
+	width: 100%;
+	font-size: 18px;
+	line-height: 32px;
+    white-space: nowrap;
+    border-top: 1px solid #ccc;
 }
 .p-range .blue-range{
 	flex:1;
@@ -1584,7 +1595,8 @@ form{
 	.about p,
 	.pop-test,
 	.pop-test .sub,
-	.pop-alert .big.middle{
+	.pop-alert .big.middle,
+	.p-range .range-tile{
 		font-size: 16px;
 	}
 	.line-table tbody .big{
