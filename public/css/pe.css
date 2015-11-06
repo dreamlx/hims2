@@ -1397,6 +1397,7 @@ form{
 	width: 75%;
 }
 .about .dp span span{
+	color: #666 !important;
 	display: inline;
 	width: auto;
 }
