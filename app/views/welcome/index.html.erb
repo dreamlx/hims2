@@ -1,47 +1,24 @@
-<h1>Welcome to HIMS</h1>
 <% if current_admin %>
+<div class="row-fluid">
   <div class="col-md-12">
-    <h2><%= User.model_name.human %></h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <% User.column_names.each do |column| %>
-            <th><%= User.human_attribute_name(column) %></th>
-          <% end %>
-          <th colspan="4"><%= t(:operations) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render User.submitted %>
-      </tbody>
-    </table>
-    <h2><%= Individual.model_name.human %></h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <% Individual::HEADERS.each do |column| %>
-            <th><%= Individual.human_attribute_name(column) %></th>
-          <% end %>
-          <th colspan="4"><%= t(:operations) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render Individual.submitted %>
-      </tbody>
-    </table>
-    <h2><%= Institution.model_name.human %></h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <% Institution::HEADERS.each do |column| %>
-          <th><%= Institution.human_attribute_name(column) %></th>
-          <% end %>
-          <th colspan="4"><%= t(:operations) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render Institution.submitted %>
-      </tbody>
-    </table>
+    <p class="lead text-center bg-success"><%= current_admin.name %>，欢迎使用HiMS</p>
   </div>
+</div>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <p class="lead text-center bg-info"><%= User.model_name.human %></p>
+    <%= render :partial => 'users/users_grid' %>
+    <%= render_grid(@users_grid) %>
+  </div>
+  <div class="col-md-12">
+    <p class="lead text-center bg-info"><%= Individual.model_name.human %></p>
+    <%= render :partial => 'individuals/individuals_grid' %>
+    <%= render_grid(@individuals_grid) %>
+  </div>
+  <div class="col-md-12">
+    <p class="lead text-center bg-info"><%= Institution.model_name.human %></p>
+    <%= render :partial => 'institutions/institutions_grid' %>
+    <%= render_grid(@institutions_grid) %>
+  </div>
+</div>
 <% end %>

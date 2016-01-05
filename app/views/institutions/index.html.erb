@@ -1,24 +1,17 @@
-<div class="col-md-10">
-  <h3>
-    <%= t(:institution_list) %>
-    <small><%= link_to 'to_xls', institutions_path(format: :xlsx) %></small>
-  </h3>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <p class="lead text-center bg-info"><%= t(:institution_list) %></p>
+  </div>
 </div>
-<div class="col-md-2">
-  <%= link_to t(:new_institution), new_institution_path, class: "btn btn-danger" %>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <%= render :partial => 'institutions_grid' %>
+    <%= render_grid(@institutions_grid) %>
+  </div>
 </div>
-<div class="col-md-12">
-  <table class="table">
-    <thead>
-      <tr>
-        <% Institution::HEADERS.each do |column| %>
-        <th><%= Institution.human_attribute_name(column) %></th>
-        <% end %>
-        <th colspan="4"><%= t(:operations) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @institutions %>
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <div class="col-md-4">
+    <%= link_to t(:new_institution), new_institution_path, class: "btn btn-danger" %>
+    <%= link_to '导出', institutions_path(format: :xlsx), class: "btn btn-default" %>
+  </div>
 </div>

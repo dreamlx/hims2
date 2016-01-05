@@ -1,26 +1,19 @@
-<div class="col-md-10">
-  <h3>
-    <%= t(:order_list) %>
-    <small><%= link_to 'to_xls', orders_path(format: :xlsx) %></small>
-    &nbsp;
-    <small><%= link_to '汇款列表', money_receipts_path(format: :xlsx) %></small>
-  </h3>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <p class="lead text-center bg-info"><%= t(:order_list) %></p>
+  </div>
 </div>
-<div class="col-md-2">
-  <%= link_to t(:new_order), new_order_path, class: "btn btn-danger" %>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <%= render :partial => 'orders_grid' %>
+    <%= render_grid(@orders_grid) %>
+  </div>
 </div>
-<div class="col-md-12">
-  <table class="table">
-    <thead>
-      <tr>
-        <% Order::HEADERS.each do |column| %>
-          <th><%= column %></th>
-        <% end %>
-        <th colspan="3"><%= t(:operations) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @orders %>
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <div class="col-md-6">
+    <%= link_to t(:new_fund), new_fund_path, class: "btn btn-danger" %>
+    <%= link_to t(:new_order), new_order_path, class: "btn btn-info" %>
+    <%= link_to '导出', orders_path(format: :xlsx), class: "btn btn-default" %>
+    <%= link_to '汇款列表', money_receipts_path(format: :xlsx), class: "btn btn-default" %>
+  </div>
 </div>

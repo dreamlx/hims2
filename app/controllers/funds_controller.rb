@@ -1,6 +1,7 @@
 class FundsController < ApplicationController
   def index
     @funds = Fund.order(created_at: :desc)
+    @funds_grid = initialize_grid(Fund)
   end
 
   def new
@@ -38,7 +39,7 @@ class FundsController < ApplicationController
     def fund_params
       params.require(:fund).permit(
         :name, :desc, :title1, :content1,
-        :title2, :content2, :title3, 
+        :title2, :content2, :title3,
         :content3, :progress_bar, :label, :currency)
     end
 end

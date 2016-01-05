@@ -1,0 +1,23 @@
+<%= define_grid(@admins_grid) do |g|
+
+  g.blank_slate  do
+	  "没有记录"
+	end
+
+  g.column :name => '用户名', :attribute => 'name', filter_type: :string
+
+  g.column :name => '开户日期', :attribute => 'created_at', filter: false do |admin|
+    admin.created_at.strftime('%F')
+  end
+
+  g.column :name => '更新日期', :attribute => 'updated_at', filter: false do |admin|
+    admin.updated_at.strftime('%F')
+  end
+
+  g.column :name => '操作'  do |admin|
+    buffer = link_to t(:reset_password), edit_admin_path(admin)
+    buffer += ' '
+    buffer += link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)}
+    raw buffer
+  end
+end -%>

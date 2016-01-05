@@ -1,6 +1,7 @@
 class AdminsController < ApplicationController
   def index
     @admins = Admin.all
+    # @admins_grid = initialize_grid(Admin)
   end
 
   def new
@@ -33,7 +34,7 @@ class AdminsController < ApplicationController
     Admin.find(params[:id]).destroy
     redirect_to admins_url
   end
-  
+
   private
    def admin_params
     params.require(:admin).permit(

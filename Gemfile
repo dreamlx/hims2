@@ -25,6 +25,8 @@ gem 'rack-cors'
 gem 'figaro'
 gem 'axlsx_rails'
 gem "audited-activerecord"
+gem "wice_grid", '3.6.0.pre4'
+# gem 'font-awesome-sass',  '~> 4.3'
 
 group :development, :test do
   gem 'byebug'
@@ -38,4 +40,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-passenger', '0.0.2'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end

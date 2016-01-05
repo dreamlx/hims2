@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       get :receive_code, on: :collection
     end
     resources :funds, only: [:index], defaults: {format: :json} do
-      resources :products, only: [:index], defaults: {format: :json}  
+      resources :products, only: [:index], defaults: {format: :json}
     end
     resources :products, only: [:show], defaults: {format: :json} do
       get :send_mail, on: :member, defaults: {format: :json}
