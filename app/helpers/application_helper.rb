@@ -37,7 +37,7 @@ module ApplicationHelper
   end
 
   def current_admin
-    @current_admin || Admin.find_by(id: session[:admin_id]) 
+    @current_admin || Admin.find_by(id: session[:admin_id])
   end
 
   def logged_in?

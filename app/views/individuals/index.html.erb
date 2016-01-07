@@ -1,12 +1,14 @@
 <div class="row-fluid">
   <div class="col-md-12">
-    <p class="lead text-center bg-info"><%= t(:individual_list) %></p>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="col-md-12">
-    <%= render :partial => 'individuals_grid' %>
-    <%= render_grid(@individuals_grid) %>
+    <div class="panel panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <h4 class="panel-title text-center"><%= t(:individual_list) %></h4>
+      </div>
+      <!-- Table -->
+      <%= render :partial => 'individuals_grid' %>
+      <%= render_grid(@individuals_grid) %>
+    </div>
   </div>
 </div>
 <div class="row-fluid">

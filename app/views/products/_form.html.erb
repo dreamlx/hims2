@@ -1,4 +1,5 @@
-<%= simple_form_for(@product, html: { class: 'form-horizontal' }, 
+<div class="row-fluid">
+<%= simple_form_for(@product, html: { class: 'form-horizontal' },
       wrapper: :horizontal_form,
       wrapper_mappings: {
       check_boxes: :horizontal_radio_and_checkboxes,
@@ -6,7 +7,7 @@
       file: :horizontal_file_input,
       boolean: :horizontal_boolean}) do |f| %>
   <div class="col-md-6">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">子基金页面介绍</h3>
       </div>
@@ -24,7 +25,7 @@
         <%= f.input :label %>
       </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">收益情况</h3>
       </div>
@@ -32,7 +33,7 @@
         <%= f.input :rate %>
       </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">我的预约-预约情况</h3>
       </div>
@@ -40,7 +41,7 @@
         <%= f.input :condition %>
       </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">基金公告（起息后可见）</h3>
       </div>
@@ -57,7 +58,7 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">产品详情</h3>
       </div>
@@ -98,11 +99,13 @@
       </div>
     </div>
   </div>
-  <div class="col-md-12">
-    <%= f.button :submit %>
-  </div>
+</div>
+<div class="row-fluid">
+<div class="well col-md-12 text-center">
+  <!-- <p class="text-center"> -->
+      <%= f.button :submit, class: "btn btn-danger" %>
+      <%= link_to t(:back), :back, class: "btn btn-default" %>
+  <!-- </p> -->
+</div>
 <% end %>
-
-<div class="col-md-12">
-  <%= link_to t(:back), :back %>
 </div>

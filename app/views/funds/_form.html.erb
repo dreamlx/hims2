@@ -1,25 +1,36 @@
-<div class="col-md-6">
-  <%= simple_form_for(@fund, html: { class: 'form-horizontal' }, 
-      wrapper: :horizontal_form,
-      wrapper_mappings: {
-      check_boxes: :horizontal_radio_and_checkboxes,
-      radio_buttons: :horizontal_radio_and_checkboxes,
-      file: :horizontal_file_input,
-      boolean: :horizontal_boolean}) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :desc, as: :text %>
-    <%= f.input :title1 %>
-    <%= f.input :content1, as: :text %>
-    <%= f.input :title2 %>
-    <%= f.input :content2, as: :text %>
-    <%= f.input :title3 %>
-    <%= f.input :content3, as: :text %>
-    <%= f.input :progress_bar, hint: "从0到100" %>
-    <%= f.input :label %>
-    <%= f.input :currency %>
-    <%= f.button :submit %>
-  <% end %>
-</div>
-<div class="col-md-12">
-  <%= link_to t(:back), :back %>
+<div class="row-fluid">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+         <h4 class="panel-title text-center">新增</h4>
+      </div>
+      <div class="panel-body">
+        <%= simple_form_for(@fund, html: { class: 'form-horizontal' },
+            wrapper: :horizontal_form,
+            wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean}) do |f| %>
+          <%= f.input :name %>
+          <%= f.input :desc, as: :text %>
+          <%= f.input :title1 %>
+          <%= f.input :content1, as: :text %>
+          <%= f.input :title2 %>
+          <%= f.input :content2, as: :text %>
+          <%= f.input :title3 %>
+          <%= f.input :content3, as: :text %>
+          <%= f.input :progress_bar, hint: "从0到100" %>
+          <%= f.input :label %>
+          <%= f.input :currency %>
+      </div>
+      <div class="panel-footer text-center">
+        <!-- <p class="text-center"> -->
+            <%= f.button :submit, class: "btn btn-danger" %>
+            <%= link_to t(:back), :back, class: "btn btn-default" %>
+        <!-- </p> -->
+      </div>
+      <% end %>
+    </div>
+  </div>
 </div>

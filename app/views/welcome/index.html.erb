@@ -1,24 +1,31 @@
 <% if current_admin %>
 <div class="row-fluid">
   <div class="col-md-12">
-    <p class="lead text-center bg-success"><%= current_admin.name %>，欢迎使用HiMS</p>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="col-md-12">
-    <p class="lead text-center bg-info"><%= User.model_name.human %></p>
-    <%= render :partial => 'users/users_grid' %>
-    <%= render_grid(@users_grid) %>
-  </div>
-  <div class="col-md-12">
-    <p class="lead text-center bg-info"><%= Individual.model_name.human %></p>
-    <%= render :partial => 'individuals/individuals_grid' %>
-    <%= render_grid(@individuals_grid) %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h4 class="panel-title text-center"><%= User.model_name.human %></h4>
+      </div>
+      <%= render :partial => 'users/users_grid' %>
+      <%= render_grid(@users_grid) %>
+    </div>
   </div>
   <div class="col-md-12">
-    <p class="lead text-center bg-info"><%= Institution.model_name.human %></p>
-    <%= render :partial => 'institutions/institutions_grid' %>
-    <%= render_grid(@institutions_grid) %>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h4 class="panel-title text-center"><%= Individual.model_name.human %></h4>
+      </div>
+      <%= render :partial => 'individuals/individuals_grid' %>
+      <%= render_grid(@individuals_grid) %>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h4 class="panel-title text-center"><%= Institution.model_name.human %></h4>
+      </div>
+      <%= render :partial => 'institutions/institutions_grid' %>
+      <%= render_grid(@institutions_grid) %>
+    </div>
   </div>
 </div>
 <% end %>
