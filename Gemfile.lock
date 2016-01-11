@@ -68,6 +68,7 @@ GEM
     builder (3.2.2)
     byebug (6.0.2)
     callsite (0.0.11)
+    cancancan (1.13.1)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -283,6 +284,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass
   byebug
+  cancancan
   capistrano-passenger (= 0.0.2)
   capistrano-rails
   capistrano-rvm
