@@ -3,13 +3,19 @@ wb.add_worksheet(name: "Orders") do |sheet|
   sheet.add_row Order::HEADERS
   i = 1
   @orders.each do |order|
-    if order.investable_type == "Individual"
-      sheet.add_row [order.id, order.investable.name, "个人", order.product.name, order.user.name, order.amount, order.due_date, order.mail_address,"", order.remark, order.state, order.booking_date, order.deliver]
-    elsif order.investable_type == "Institution"
-      sheet.add_row [order.id, order.investable.name, "机构", order.product.name, order.user.name, order.amount, order.due_date, order.mail_address,"", order.remark, order.state, order.booking_date, order.deliver]
-    elsif order.investable_type == "User"
-      sheet.add_row [order.id, order.investable.name, "理财师", order.product.name, order.user.name, order.amount, order.due_date, order.mail_address,"", order.remark, order.state, order.booking_date, order.deliver]
-    end
+    sheet.add_row [ order.id, 
+                    order.investable.name, 
+                    Kernel.const_get(order.investable_type).model_name.human, 
+                    order.product.name, 
+                    order.user.name, 
+                    order.amount, 
+                    order.due_date, 
+                    order.mail_address,
+                    "", 
+                    order.remark, 
+                    order.state, 
+                    order.booking_date, 
+                    order.deliver]
     add_image(sheet, order.other, 8, i)
     i += 1
   end
