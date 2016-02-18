@@ -46,12 +46,21 @@
 
   g.column :name => '合同快递至管理人', :attribute => 'deliver', filter: false
 
-  g.column :name => '操作'  do |product|
-    buffer = link_to t(:show), order
+  g.column :name => '操作'  do |order|
+    buffer =
+    if can? :read, Order
+      link_to t(:show), order
+    end
     buffer += ' '
-    buffer += link_to t(:edit), edit_order_path(order)
+    buffer +=
+    if can? :update, Order
+     link_to t(:edit), edit_order_path(order)
+    end
     buffer += ' '
-    buffer += link_to t(:destroy), order, method: :delete, data: {confirm: t(:are_you_sure)}
+    buffer +=
+    if can? :destroy, Order
+      link_to t(:destroy), order, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
     raw buffer
   end
 end -%>

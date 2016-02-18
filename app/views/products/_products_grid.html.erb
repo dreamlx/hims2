@@ -29,9 +29,15 @@
   g.column :name => '标签', :attribute => 'label', filter_type: :string
 
   g.column :name => '操作'  do |product|
-    buffer = link_to t(:edit), edit_product_path(product)
+    buffer =
+    if can? :update, Product
+      link_to t(:edit), edit_product_path(product)
+    end
     buffer += ' '
-    buffer += link_to t(:destroy), product, method: :delete, data: {confirm: t(:are_you_sure)}
+    buffer +=
+    if can? :destroy, Product
+      link_to t(:destroy), product, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
     raw buffer
   end
 end -%>

@@ -188,6 +188,7 @@ zh-CN:
   new_admin: 新建管理员
   admin_list: 管理员列表
   reset_password: 重设密码
+  role_edit: 设置权限
   invalid_name_or_password: 无效的用户名或密码
   please_log_in: 请登录
   order_detail: 订单详情

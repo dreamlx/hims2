@@ -33,13 +33,25 @@
   end
 
   g.column :name => '操作'  do |user|
-    buffer = link_to t(:confirm), confirm_user_path(user)
+    buffer =
+    if can? :confirm, User
+      link_to t(:confirm), confirm_user_path(user)
+    end
     buffer += ' '
-    buffer += link_to t(:deny), deny_user_path(user)
+    buffer +=
+    if can? :deny, User
+      link_to t(:deny), deny_user_path(user)
+    end
     buffer += ' '
-    buffer += link_to t(:edit), edit_user_path(user)
+    buffer +=
+    if can? :udate, User
+      link_to t(:edit), edit_user_path(user)
+    end
     buffer += ' '
-    buffer +=link_to t(:destroy), user, method: :delete, data: {confirm: t(:are_you_sure)}
+    buffer +=
+    if can? :destroy, User
+      link_to t(:destroy), user, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
     raw buffer
   end
 end -%>

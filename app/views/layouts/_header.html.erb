@@ -15,15 +15,29 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if logged_in? %>
         <ul class="nav navbar-nav">
+          <% if can? :read, User %>
           <li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to User.model_name.human, users_path %></li>
+          <% end %>
+          <% if can? :read, Fund %>
           <li class="<%= 'active' if params[:controller] == 'funds' %>"><%= link_to Fund.model_name.human, funds_path %></li>
+          <% end %>
+          <% if can? :read, Product %>
           <li class="<%= 'active' if params[:controller] == 'products' %>"><%= link_to Product.model_name.human , products_path %></li>
+          <% end %>
+          <% if can? :read, Individual %>
           <li class="<%= 'active' if params[:controller] == 'individuals' %>"><%= link_to Individual.model_name.human, individuals_path %></li>
+          <% end %>
+          <% if can? :read, Institution %>
           <li class="<%= 'active' if params[:controller] == 'institutions' %>"><%= link_to Institution.model_name.human, institutions_path %></li>
+          <% end %>
+          <% if can? :read, Order %>
           <li class="<%= 'active' if params[:controller] == 'orders' %>"><%= link_to Order.model_name.human, orders_path %></li>
+          <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          <% if can? :read, Admin %>
           <li class="<%= 'active' if params[:controller] == 'admins' %>"><%= link_to Admin.model_name.human, admins_path %></li>
+          <% end %>
           <li><%= link_to t('logout'), logout_path, method: :delete %></li>
         </ul>
       <% else %>

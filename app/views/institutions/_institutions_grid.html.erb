@@ -31,13 +31,25 @@
   end
 
   g.column :name => '操作'  do |institution|
-    buffer = link_to t(:confirm), confirm_institution_path(institution)
+    buffer =
+    if can? :confirm, Institution
+      link_to t(:confirm), confirm_institution_path(institution)
+    end
     buffer += ' '
-    buffer += link_to t(:deny), deny_institution_path(institution)
+    buffer +=
+    if can? :deny, Institution
+      link_to t(:deny), deny_institution_path(institution)
+    end
     buffer += ' '
-    buffer += link_to t(:edit), edit_institution_path(institution)
+    buffer +=
+    if can? :update, Institution
+      link_to t(:edit), edit_institution_path(institution)
+    end
     buffer += ' '
-    buffer +=link_to t(:destroy), institution, method: :delete, data: {confirm: t(:are_you_sure)}
+    buffer +=
+    if can? :destroy, Institution
+      link_to t(:destroy), institution, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
     raw buffer
   end
 end -%>

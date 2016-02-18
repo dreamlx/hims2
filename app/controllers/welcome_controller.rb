@@ -7,5 +7,9 @@ class WelcomeController < ApplicationController
               :per_page => 5)
     @individuals_grid = initialize_grid(Individual,
               :per_page => 5)
+    @funds_grid = initialize_grid(Fund,
+              :per_page => 5)
+    @products_grid = initialize_grid(Product,
+              :per_page => 5)
   end
 end

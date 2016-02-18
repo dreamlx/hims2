@@ -4,8 +4,8 @@
       <div class="panel-heading">
          <h4 class="panel-title text-center">新增</h4>
       </div>
+      <%= simple_form_for(@order) do |f| %>
       <div class="panel-body">
-        <%= simple_form_for(@order) do |f| %>
           <%= f.input :investable_id, collection: Individual.all.map {|e| ["个人:#{e.name}", "个人:#{e.id}"]} + Institution.all.map {|e| ["机构:#{e.name}", "机构:#{e.id}"]} + User.all.map {|e| ["理财师:#{e.name}", "理财师:#{e.id}"]} %>
           <%= f.input :product_id, collection: Product.all %>
           <%= f.input :amount %>

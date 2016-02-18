@@ -10,7 +10,7 @@
           <tr>
             <th>#</th>
             <th><%= Admin.human_attribute_name("name") %></th>
-            <th colspan="2"><%= t(:operations) %></th>
+            <th colspan="3"><%= t(:operations) %></th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +18,7 @@
             <tr>
               <td><%= admin.id %></td>
               <td><%= admin.name %></td>
+              <td><%= link_to t(:role_edit), edit_role_admin_path(admin) %></td>
               <td><%= link_to t(:reset_password), edit_admin_path(admin) %></td>
               <td><%= link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
             </tr>

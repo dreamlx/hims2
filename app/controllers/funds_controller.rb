@@ -1,4 +1,6 @@
 class FundsController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @funds = Fund.order(created_at: :desc)
     @funds_grid = initialize_grid(Fund)

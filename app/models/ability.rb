@@ -2,6 +2,42 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
+    if user.has_role? :系统管理员
+      can :manage, :all
+
+    elsif user.has_role? :基金负责人
+      can :manage, :all
+
+    elsif user.has_role? :产品管理
+      can :crud, Fund
+      can :crud, Product
+      can :crud, Picture
+      can :crud, Roi
+      can :crud, MoneyReceipt
+
+    elsif user.has_role? :客户管理
+      can :crud, User
+      can :confirm, User
+      can :deny, User
+      can :crud, Order
+      can :crud, Individual
+      can :confirm, Individual
+      can :deny, Individual
+      can :crud, Institution
+      can :confirm, Institution
+      can :deny, Institution
+      can :read, Picture
+      can :read, Roi
+      can :read, Product
+      can :crud, MoneyReceipt
+    elsif user.has_role? :禁用账户
+      cannot :read, :all
+    else
+      cannot :read, :all
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

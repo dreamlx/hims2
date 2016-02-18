@@ -35,9 +35,15 @@
   end
 
   g.column :name => '操作'  do |fund|
-    buffer = link_to t(:edit), edit_fund_path(fund)
+    buffer =
+    if can? :update, Fund
+      link_to t(:edit), edit_fund_path(fund)
+    end
     buffer += ' '
-    buffer += link_to t(:destroy), fund, method: :delete, data: {confirm: t(:are_you_sure)} 
+    buffer +=
+    if can? :destroy, Fund
+      link_to t(:destroy), fund, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
     raw buffer
   end
 end -%>

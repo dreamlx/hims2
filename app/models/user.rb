@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :open_id, presence: true
   validates :cell, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :update }, allow_blank: true
-  validates :id_type, inclusion: ID_TYPES, allow_blank: true 
+  validates :id_type, inclusion: ID_TYPES, allow_blank: true
   validates :gender, inclusion: GENDER_TYPES, allow_blank: true
   validates :card_type, inclusion: Individual::ID_TYPES, allow_blank: true
 
@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
   def User.send_code(cell, code)
     # the cell must exist and more than 11 digits
     return false unless cell && cell.to_s.length >= 11
-    msg         = "微信公众号手机验证码：#{code}。禾晖咨询热线 4006 025 100。"
-    uri         = URI.parse("http://222.73.117.158/msg/HttpBatchSendSM")
+    msg         = "微信公众号手机验证码：#{code}。#{APP_CONFIG['shortname']}咨询热线 #{APP_CONFIG['phone']}。"
+    uri         = URI.parse("http://#{APP_CONFIG['ip']}/msg/HttpBatchSendSM")
     username    = Rails.application.secrets.sms_username
     password    = Rails.application.secrets.sms_password
     res         = Net::HTTP.post_form(uri, account: username, pswd: password, mobile: cell, msg: msg, needstatus: true)

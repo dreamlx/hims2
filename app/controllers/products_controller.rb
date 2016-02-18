@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @products = Product.order(created_at: :desc)
     @products_grid = initialize_grid(Product)

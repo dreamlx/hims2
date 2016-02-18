@@ -15,9 +15,20 @@
   end
 
   g.column :name => '操作'  do |admin|
-    buffer = link_to t(:reset_password), edit_admin_path(admin)
+    buffer =
+    if can? :create, Admin
+      link_to t(:reset_password), edit_admin_path(admin)
+    end
     buffer += ' '
-    buffer += link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)}
+    buffer +=
+    if can? :update, Admin
+      link_to t(:role_edit), edit_role_admin_path(admin)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :destroy, Admin
+      link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
     raw buffer
   end
 end -%>

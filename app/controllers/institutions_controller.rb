@@ -1,7 +1,9 @@
 class InstitutionsController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @institutions = Institution.order(created_at: :desc)
-    @institutions_grid = initialize_grid(Institution)   
+    @institutions_grid = initialize_grid(Institution)
     respond_to do |format|
       format.html
       header_string = 'attachment; filename=institutions' + DateTime.now.to_s(:number) + ".xlsx"
