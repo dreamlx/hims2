@@ -1,0 +1,57 @@
+<%= define_grid(@users_grid) do |g|
+
+  g.blank_slate  do
+	  "没有记录"
+	end
+
+  g.column :name => '姓名', :attribute => 'name', filter_type: :string
+
+  g.column :name => '手机', :attribute => 'cell', filter_type: :string
+
+  g.column :name => '邮箱', :attribute => 'email', filter: false
+
+  g.column :name => '身份类型', :attribute => 'id_type', filter: false
+
+  g.column :name => '性别', :attribute => 'gender', filter: false
+
+  g.column :name => '联系地址', :attribute => 'address', filter: false
+
+  g.column :name => '证件类型', :attribute => 'card_type', filter: false
+
+  g.column :name => '证件号码', :attribute => 'card_no', filter_type: :string
+
+  g.column :name => '状态', :attribute => 'state', custom_filter: :auto
+
+  g.column :name => '备注', :attribute => 'remark', filter: false
+
+  g.column :name => '开户日期', :attribute => 'created_at', filter: false do |user|
+    user.created_at.strftime('%F')
+  end
+
+  g.column :name => '更新日期', :attribute => 'updated_at', filter: false do |user|
+    user.updated_at.strftime('%F')
+  end
+
+  g.column :name => '操作'  do |user|
+    buffer =
+    if can? :confirm, User
+      link_to t(:confirm), confirm_user_path(user)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :deny, User
+      link_to t(:deny), deny_user_path(user)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :udate, User
+      link_to t(:edit), edit_user_path(user)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :destroy, User
+      link_to t(:destroy), user, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
+    raw buffer
+  end
+end -%>

@@ -1,5 +1,5 @@
 <div class="col-md-6">
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><%= t('order_detail') %></h3>
     </div>
@@ -40,7 +40,7 @@
       </dl>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><%= t('money_receipts') %></h3>
     </div>
@@ -62,7 +62,7 @@
   </div>
 </div>
 <div class="col-md-6">
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><%= t('pictures') %></h3>
     </div>
@@ -88,5 +88,5 @@
   </div>
 </div>
 <div class="col-md-12">
-  <%= link_to 'Back', :back %>
+  <%= link_to t(:back), :back, class: "btn btn-default" %>
 </div>

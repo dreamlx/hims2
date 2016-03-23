@@ -13,11 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require bootstrap-sprockets
 //= require jquery-ui
 //= require best_in_place
 //= require best_in_place.purr
+//= require wice_grid
+//= require_tree .
 
 $(document).ready(function() {
   /* Activating Best In Place */

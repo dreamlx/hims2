@@ -31,18 +31,28 @@ Rails.application.routes.draw do
   end
   resources :money_receipts, only: [:update, :index]
   resources :pictures, only: [:update, :index]
-  resources :admins
+  resources :admins do
+    get :edit_role, on: :member
+  end
   get     'login'   => 'sessions#new'
   post    'login'   => 'sessions#create'
   delete  'logout'  => 'sessions#destroy'
   namespace :api do
+    resources :config, defaults: {format: :json} do
+      get :fullname, on: :collection
+      get :shortname, on: :collection
+      get :phone, on: :collection
+      get :email, on: :collection
+      get :address, on: :collection
+      get :detail, on: :collection
+    end
     resources :users, only: [:create, :update, :show], defaults: {format: :json} do
       get :send_code, on: :collection, defaults: {format: :json}
       get :all_investors, on: :collection, defaults: {format: :json}
       get :receive_code, on: :collection
     end
     resources :funds, only: [:index], defaults: {format: :json} do
-      resources :products, only: [:index], defaults: {format: :json}  
+      resources :products, only: [:index], defaults: {format: :json}
     end
     resources :products, only: [:show], defaults: {format: :json} do
       get :send_mail, on: :member, defaults: {format: :json}

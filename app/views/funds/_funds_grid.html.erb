@@ -1,0 +1,49 @@
+<%= define_grid(@funds_grid) do |g|
+
+  g.blank_slate  do
+	  "没有记录"
+	end
+
+  g.column :name => '基金名称', :attribute => 'name', filter_type: :string
+
+  g.column :name => '描述', :attribute => 'desc', filter: false
+
+  g.column :name => '标题1', :attribute => 'title1', filter_type: :string
+
+  g.column :name => '内容1', :attribute => 'content1', filter: false
+
+  g.column :name => '标题2', :attribute => 'title2', filter: false
+
+  g.column :name => '内容2', :attribute => 'content2', filter: false
+
+  g.column :name => '标题3', :attribute => 'title3', filter: false
+
+  g.column :name => '内容3', :attribute => 'content3', filter: false
+
+  g.column :name => '进度条', :attribute => 'progress_bar', filter: false
+
+  g.column :name => '标签', :attribute => 'label', filter_type: :string
+
+  g.column :name => '币种', :attribute => 'currency', custom_filter: :auto
+
+  g.column :name => '创建日期', :attribute => 'created_at', filter: false do |fund|
+    fund.created_at.strftime('%F')
+  end
+
+  g.column :name => '更新日期', :attribute => 'updated_at', filter: false do |fund|
+    fund.updated_at.strftime('%F')
+  end
+
+  g.column :name => '操作'  do |fund|
+    buffer =
+    if can? :update, Fund
+      link_to t(:edit), edit_fund_path(fund)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :destroy, Fund
+      link_to t(:destroy), fund, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
+    raw buffer
+  end
+end -%>

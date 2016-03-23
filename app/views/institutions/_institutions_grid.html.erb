@@ -1,0 +1,55 @@
+<%= define_grid(@institutions_grid) do |g|
+
+  g.blank_slate  do
+	  "没有记录"
+	end
+
+  g.column :name => '理财师', :attribute => 'user_id', filter: false do |institution|
+    institution.user.name
+  end
+
+  g.column :name => '机构名称', :attribute => 'name', filter_type: :string
+
+  g.column :name => '联系电话', :attribute => 'cell', filter_type: :string
+
+  g.column :name => '备注名', :attribute => 'remark_name', filter: false
+
+  g.column :name => '机构注册号', :attribute => 'organ_reg', filter_type: :string
+
+  g.column :name => '营业执照', :attribute => 'business_licenses', filter: false
+
+  g.column :name => '状态', :attribute => 'state', custom_filter: :auto
+
+  g.column :name => '备注', :attribute => 'remark', filter: false
+
+  g.column :name => '开户日期', :attribute => 'created_at', filter: false do |institution|
+    institution.created_at.strftime('%F')
+  end
+
+  g.column :name => '更新日期', :attribute => 'updated_at', filter: false do |institution|
+    institution.updated_at.strftime('%F')
+  end
+
+  g.column :name => '操作'  do |institution|
+    buffer =
+    if can? :confirm, Institution
+      link_to t(:confirm), confirm_institution_path(institution)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :deny, Institution
+      link_to t(:deny), deny_institution_path(institution)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :update, Institution
+      link_to t(:edit), edit_institution_path(institution)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :destroy, Institution
+      link_to t(:destroy), institution, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
+    raw buffer
+  end
+end -%>

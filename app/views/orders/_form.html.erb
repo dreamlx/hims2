@@ -1,17 +1,28 @@
-<div class="col-md-6">
-  <%= simple_form_for(@order) do |f| %>
-    <%= f.input :investable_id, collection: Individual.all.map {|e| ["个人:#{e.name}", "个人:#{e.id}"]} + Institution.all.map {|e| ["机构:#{e.name}", "机构:#{e.id}"]} + User.all.map {|e| ["理财师:#{e.name}", "理财师:#{e.id}"]} %>
-    <%= f.input :product_id, collection: Product.all %>
-    <%= f.input :amount %>
-    <%= f.input :due_date, as: :date, html5: true %>
-    <%= f.input :mail_address %>
-    <%= f.input :other %>
-    <%= f.input :remark %>
-    <%= f.input :state, collection: Order::ORDER_STATES %>
-    <%= f.input :deliver, collection: Order::DELIVER_STATES %>
-    <%= f.button :submit %>
-  <% end %>
-</div>
-<div class="col-md-12">
-  <%= link_to t(:back), :back %>
+<div class="row-fluid">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+         <h4 class="panel-title text-center">新增</h4>
+      </div>
+      <%= simple_form_for(@order) do |f| %>
+      <div class="panel-body">
+          <%= f.input :investable_id, collection: Individual.all.map {|e| ["个人:#{e.name}", "个人:#{e.id}"]} + Institution.all.map {|e| ["机构:#{e.name}", "机构:#{e.id}"]} + User.all.map {|e| ["理财师:#{e.name}", "理财师:#{e.id}"]} %>
+          <%= f.input :product_id, collection: Product.all %>
+          <%= f.input :amount %>
+          <%= f.input :due_date, as: :date, html5: true %>
+          <%= f.input :mail_address %>
+          <%= f.input :other %>
+          <%= f.input :remark %>
+          <%= f.input :state, collection: Order::ORDER_STATES %>
+          <%= f.input :deliver, collection: Order::DELIVER_STATES %>
+      </div>
+      <div class="panel-footer text-center">
+        <!-- <p class="text-center"> -->
+            <%= f.button :submit, class: "btn btn-danger" %>
+            <%= link_to t(:back), :back, class: "btn btn-default" %>
+        <!-- </p> -->
+      </div>
+      <% end %>
+    </div>
+  </div>
 </div>

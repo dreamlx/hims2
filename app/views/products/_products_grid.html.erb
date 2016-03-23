@@ -1,0 +1,43 @@
+<%= define_grid(@products_grid) do |g|
+
+  g.blank_slate  do
+	  "没有记录"
+	end
+
+  g.column :name => '基金', :attribute => 'fund_id', filter: false do |product|
+    product.fund.name if product.fund
+  end
+
+  g.column :name => '产品名称', :attribute => 'name', filter_type: :string
+
+  g.column :name => '描述', :attribute => 'desc', filter: false
+
+  g.column :name => '标题1', :attribute => 'title1', filter_type: :string
+
+  g.column :name => '内容1', :attribute => 'content1', filter: false
+
+  g.column :name => '标题2', :attribute => 'title2', filter: false
+
+  g.column :name => '内容2', :attribute => 'content2', filter: false
+
+  g.column :name => '标题3', :attribute => 'title3', filter: false
+
+  g.column :name => '内容3', :attribute => 'content3', filter: false
+
+  g.column :name => '进度条', :attribute => 'progress_bar', filter: false
+
+  g.column :name => '标签', :attribute => 'label', filter_type: :string
+
+  g.column :name => '操作'  do |product|
+    buffer =
+    if can? :update, Product
+      link_to t(:edit), edit_product_path(product)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :destroy, Product
+      link_to t(:destroy), product, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
+    raw buffer
+  end
+end -%>

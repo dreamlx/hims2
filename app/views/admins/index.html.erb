@@ -1,27 +1,35 @@
-<div class="col-md-10">
-  <h3><%= t(:admin_list) %></h3>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <div class="panel panel-danger">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <h4 class="panel-title text-center"><%= t(:admin_list) %></h4>
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th><%= Admin.human_attribute_name("name") %></th>
+            <th colspan="3"><%= t(:operations) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @admins.each do |admin| %>
+            <tr>
+              <td><%= admin.id %></td>
+              <td><%= admin.name %></td>
+              <td><%= link_to t(:role_edit), edit_role_admin_path(admin) %></td>
+              <td><%= link_to t(:reset_password), edit_admin_path(admin) %></td>
+              <td><%= link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-<div class="col-md-2">
-  <%= link_to t(:new_admin), new_admin_path, class: "btn btn-danger" %>
-</div>
-<div class="col-md-12">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>id</th>
-        <th><%= Admin.human_attribute_name("name") %></th>
-        <th colspan="2"><%= t(:operations) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <% @admins.each do |admin| %>
-          <td><%= admin.id %></td>
-          <td><%= admin.name %></td>
-          <td><%= link_to t(:reset_password), edit_admin_path(admin) %></td>
-          <td><%= link_to t(:destroy), admin, method: :delete, data: {confirm: t(:are_you_sure)} %></td>
-        <% end %>
-      </tr>  
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <div class="col-md-4">
+    <%= link_to t(:new_admin), new_admin_path, class: "btn btn-danger" %>
+  </div>
 </div>

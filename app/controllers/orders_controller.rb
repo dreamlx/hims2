@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @orders = Order.order(created_at: :desc)
+    @orders_grid = initialize_grid(Order)
     respond_to do |format|
       format.html
       header_string = 'attachment; filename=orders' + DateTime.now.to_s(:number) + ".xlsx"

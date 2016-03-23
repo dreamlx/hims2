@@ -1,21 +1,18 @@
-<div class="col-md-10">
-  <h3><%= t(:fund_list) %></h3>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <h4 class="panel-title text-center"><%= t(:fund_list) %></h4>
+      </div>
+      <!-- Table -->
+      <%= render :partial => 'funds_grid' %>
+      <%= render_grid(@funds_grid) %>
+    </div>
+  </div>
 </div>
-<div class="col-md-2">
-  <%= link_to t(:new_fund), new_fund_path, class: "btn btn-danger" %>
-</div>
-<div class="col-md-12">
-  <table class="table">
-    <thead>
-      <tr>
-        <% Fund.column_names.each do |column| %>
-          <th><%= Fund.human_attribute_name(column) %></th>
-        <% end %>
-        <th colspan="2"><%= t(:operations) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @funds %>
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <div class="col-md-4">
+    <%= link_to t(:new_fund), new_fund_path, class: "btn btn-danger" %>
+  </div>
 </div>

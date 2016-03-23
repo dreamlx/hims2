@@ -1,47 +1,102 @@
-<h1>Welcome to HIMS</h1>
-<% if current_admin %>
-  <div class="col-md-12">
-    <h2><%= User.model_name.human %></h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <% User.column_names.each do |column| %>
-            <th><%= User.human_attribute_name(column) %></th>
-          <% end %>
-          <th colspan="4"><%= t(:operations) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render User.submitted %>
-      </tbody>
-    </table>
-    <h2><%= Individual.model_name.human %></h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <% Individual::HEADERS.each do |column| %>
-            <th><%= Individual.human_attribute_name(column) %></th>
-          <% end %>
-          <th colspan="4"><%= t(:operations) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render Individual.submitted %>
-      </tbody>
-    </table>
-    <h2><%= Institution.model_name.human %></h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <% Institution::HEADERS.each do |column| %>
-          <th><%= Institution.human_attribute_name(column) %></th>
-          <% end %>
-          <th colspan="4"><%= t(:operations) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render Institution.submitted %>
-      </tbody>
-    </table>
+<% if current_user && (current_user.has_role? :禁用账户) %>
+  <div class="row-fluid">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h4 class="panel-title text-center">提示</h4>
+        </div>
+        <div class="panel-body">
+          <p class="text-center">
+            您的账户已被禁用
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% elsif current_user %>
+  <div class="row-fluid">
+    <% if can? :read, User %>
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4 class="panel-title text-center"><%= User.model_name.human %></h4>
+        </div>
+        <%= render :partial => 'users/users_grid' %>
+        <%= render_grid(@users_grid) %>
+      </div>
+    </div>
+    <% end %>
+    <% if can? :read, Individual %>
+    <div class="col-md-12">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h4 class="panel-title text-center"><%= Individual.model_name.human %></h4>
+        </div>
+        <%= render :partial => 'individuals/individuals_grid' %>
+        <%= render_grid(@individuals_grid) %>
+      </div>
+    </div>
+    <% end %>
+    <% if can? :read, Institution %>
+    <div class="col-md-12">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h4 class="panel-title text-center"><%= Institution.model_name.human %></h4>
+        </div>
+        <%= render :partial => 'institutions/institutions_grid' %>
+        <%= render_grid(@institutions_grid) %>
+      </div>
+    </div>
+    <% end %>
+    <% if can? :read, Fund %>
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4 class="panel-title text-center"><%= Fund.model_name.human %></h4>
+        </div>
+        <%= render :partial => 'funds/funds_grid' %>
+        <%= render_grid(@funds_grid) %>
+      </div>
+    </div>
+    <% end %>
+    <% if can? :read, Product %>
+    <div class="col-md-12">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h4 class="panel-title text-center"><%= Product.model_name.human %></h4>
+        </div>
+        <%= render :partial => 'products/products_grid' %>
+        <%= render_grid(@products_grid) %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row-fluid">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+           <h4 class="panel-title text-center">登录</h4>
+        </div>
+        <div class="panel-body">
+          <%= simple_form_for(:session, url: login_path, html: { class: 'form-horizontal' },
+              wrapper: :horizontal_form,
+              wrapper_mappings: {
+              check_boxes: :horizontal_radio_and_checkboxes,
+              radio_buttons: :horizontal_radio_and_checkboxes,
+              file: :horizontal_file_input,
+              boolean: :horizontal_boolean}) do |f| %>
+          <%= f.input :name, label: Admin.human_attribute_name("name") %>
+          <%= f.input :password, label: Admin.human_attribute_name("password") %>
+        </div>
+        <div class="panel-footer text-center">
+          <!-- <p class="text-center"> -->
+              <%= f.button :submit, t(:login), class: "btn btn-danger" %>
+              <%= link_to t(:back), :back, class: "btn btn-default" %>
+          <!-- </p> -->
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>

@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @users = User.all
+    @users_grid = initialize_grid(User)
   end
 
   def new
@@ -43,12 +46,12 @@ class UsersController < ApplicationController
     User.find(params[:id]).deny
     redirect_to root_url
   end
-  
+
   private
    def user_params
     params.require(:user).permit(
-      :open_id, :cell, :name, :email, :id_type, :nickname, :gender, 
-      :address, :card_type, :card_no, :card_front, :card_back, 
+      :open_id, :cell, :name, :email, :id_type, :nickname, :gender,
+      :address, :card_type, :card_no, :card_front, :card_back,
       :remark, :number, :state)
    end
 end

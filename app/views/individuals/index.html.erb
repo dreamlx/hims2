@@ -1,24 +1,19 @@
-<div class="col-md-10">
-  <h3>
-    <%= t(:individual_list) %>
-    <small><%= link_to 'to_xls', individuals_path(format: :xlsx) %></small>
-  </h3>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <h4 class="panel-title text-center"><%= t(:individual_list) %></h4>
+      </div>
+      <!-- Table -->
+      <%= render :partial => 'individuals_grid' %>
+      <%= render_grid(@individuals_grid) %>
+    </div>
+  </div>
 </div>
-<div class="col-md-2">
-  <%= link_to t(:new_individual), new_individual_path, class: "btn btn-danger" %>
-</div>
-<div class="col-md-12">
-  <table class="table">
-    <thead>
-      <tr>
-        <% Individual::HEADERS.each do |column| %>
-          <th><%= Individual.human_attribute_name(column) %></th>
-        <% end %>
-        <th colspan="4"><%= t(:operations) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @individuals %>
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <div class="col-md-4">
+    <%= link_to t(:new_individual), new_individual_path, class: "btn btn-danger" %>
+    <%= link_to '导出', individuals_path(format: :xlsx), class: "btn btn-default" %>
+  </div>
 </div>

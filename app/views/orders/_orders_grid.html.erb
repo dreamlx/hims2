@@ -1,0 +1,66 @@
+<%= define_grid(@orders_grid) do |g|
+
+  g.blank_slate  do
+	  "没有记录"
+	end
+
+  g.column :name => '投资者', :attribute => 'id', filter: false do |order|
+    order.investable.name if order.investable
+  end
+
+  g.column :name => '投资者类型', :attribute => 'investable_type', filter_type: :auto do |order|
+    if order.investable_type == "Individual"
+      "个人"
+    elsif order.investable_type == "Institution"
+      "机构"
+    elsif order.investable_type == "User"
+      "理财师"
+    end
+  end
+
+  g.column :name => '产品', :attribute => 'product_id', filter: false do |order|
+    order.product.name if order.product
+  end
+
+  g.column :name => '理财师', :attribute => 'user_id', filter: false do |order|
+    order.user.name if order.user
+  end
+
+  g.column :name => '预约金额', :attribute => 'amount', filter: false
+
+  g.column :name => '预计资金到位时间', :attribute => 'due_date', filter: false
+
+  g.column :name => '合同邮寄地址', :attribute => 'mail_address', filter: false
+
+  g.column :name => '其他', :attribute => 'other', filter: false do |order|
+    link_to image_tag(order.other.thumb), order.other.url
+  end
+
+  g.column :name => '备注', :attribute => 'remark', filter: false
+
+  g.column :name => '状态', :attribute => 'state', filter_type: :auto
+
+  g.column :name => '预约日期', :attribute => 'booking_date', filter: false do |order|
+    order.booking_date.to_date if order.booking_date
+  end
+
+  g.column :name => '合同快递至管理人', :attribute => 'deliver', filter: false
+
+  g.column :name => '操作'  do |order|
+    buffer =
+    if can? :read, Order
+      link_to t(:show), order
+    end
+    buffer += ' '
+    buffer +=
+    if can? :update, Order
+     link_to t(:edit), edit_order_path(order)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :destroy, Order
+      link_to t(:destroy), order, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
+    raw buffer
+  end
+end -%>

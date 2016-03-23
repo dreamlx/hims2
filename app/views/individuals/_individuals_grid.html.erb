@@ -1,0 +1,59 @@
+<%= define_grid(@individuals_grid) do |g|
+
+  g.blank_slate  do
+	  "没有记录"
+	end
+
+  g.column :name => '理财师', :attribute => 'user_id', filter: false do |individual|
+    individual.user.name
+  end
+
+  g.column :name => '真实姓名', :attribute => 'name', filter_type: :string
+
+  g.column :name => '联系电话', :attribute => 'cell', filter_type: :string
+
+  g.column :name => '备注名', :attribute => 'remark_name', filter: false
+
+  g.column :name => '证件类型', :attribute => 'id_type', filter: false
+
+  g.column :name => '证件号码', :attribute => 'id_no', filter_type: :string
+
+  g.column :name => '证件正面', :attribute => 'id_front', filter: false
+
+  g.column :name => '证件反面', :attribute => 'id_back', filter: false
+
+  g.column :name => '状态', :attribute => 'state', custom_filter: :auto
+
+  g.column :name => '备注', :attribute => 'remark', filter: false
+
+  g.column :name => '开户日期', :attribute => 'created_at', filter: false do |individual|
+    individual.created_at.strftime('%F')
+  end
+
+  g.column :name => '更新日期', :attribute => 'updated_at', filter: false do |individual|
+    individual.updated_at.strftime('%F')
+  end
+
+  g.column :name => '操作'  do |individual|
+    buffer =
+    if can? :confirm, Individual
+      link_to t(:confirm), confirm_individual_path(individual)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :deny, Individual
+      link_to t(:deny), deny_individual_path(individual)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :edit, Individual
+      link_to t(:edit), edit_individual_path(individual)
+    end
+    buffer += ' '
+    buffer +=
+    if can? :destroy, Individual
+      link_to t(:destroy), individual, method: :delete, data: {confirm: t(:are_you_sure)}
+    end
+    raw buffer
+  end
+end -%>

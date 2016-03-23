@@ -1,6 +1,9 @@
 class IndividualsController < ApplicationController
+  load_and_authorize_resource
+  
   def index
     @individuals = Individual.order(created_at: :desc)
+    @individuals_grid = initialize_grid(Individual)
     respond_to do |format|
       format.html
       header_string = 'attachment; filename=individuals' + DateTime.now.to_s(:number) + ".xlsx"
