@@ -2,8 +2,8 @@
   config.storage             = :qiniu
   config.qiniu_access_key    = Rails.application.secrets.qiniu_access
   config.qiniu_secret_key    = Rails.application.secrets.qiniu_secret
-  config.qiniu_bucket        = "hims"
-  config.qiniu_bucket_domain = "7xk5gp.com1.z0.glb.clouddn.com"
+  config.qiniu_bucket        = Rails.application.secrets.qiniu_bucket
+  config.qiniu_bucket_domain = Rails.application.secrets.qiniu_domain
   # config.qiniu_bucket_private= true #default is false
   config.qiniu_block_size    = 4*1024*1024
   config.qiniu_protocol      = "http"
