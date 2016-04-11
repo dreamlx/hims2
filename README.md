@@ -837,9 +837,18 @@ self-defined memu
       "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx30a803fb363c0222&redirect_uri=http%3A%2F%2Fwx.hehuifunds.com%2Fapi%2Fusers%2Freceive_code&response_type=code&scope=snsapi_base&state=my#wechat_redirect"
     },
     {
-      "type":"view",
       "name":"关于禾晖",
-      "url":"http://wx.hehuifunds.com/about.html"
+      "sub_button":[
+      {  
+        "type":"view",
+        "name":"微官网",
+        "url":"http://56908313.waw.q.knet.cn/"
+      },
+      {
+         "type":"view",
+         "name":"关于禾晖",
+         "url":"http://wx.hehuifunds.com/about.html"
+      }]
     }
   ]
 }
