@@ -16,7 +16,9 @@
 
   g.column :name => '机构注册号', :attribute => 'organ_reg', filter_type: :string
 
-  g.column :name => '营业执照', :attribute => 'business_licenses', filter: false
+  g.column :name => '营业执照', :attribute => 'business_licenses', filter: false do |institution|
+    link_to image_tag(institution.business_licenses.thumb), "#", data: {toggle: "modal", target: "#Modal#{institution.id}"}
+  end
 
   g.column :name => '状态', :attribute => 'state', custom_filter: :auto
 
@@ -51,5 +53,9 @@
       link_to t(:destroy), institution, method: :delete, data: {confirm: t(:are_you_sure)}
     end
     raw buffer
+  end
+
+  g.column :name => '', html: {style: ''}, :attribute => 'id', filter: false do |institution|
+    render 'institutions/modal', :institution => institution, :path => institution.business_licenses
   end
 end -%>

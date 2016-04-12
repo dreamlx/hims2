@@ -18,9 +18,13 @@
 
   g.column :name => '证件号码', :attribute => 'id_no', filter_type: :string
 
-  g.column :name => '证件正面', :attribute => 'id_front', filter: false
+  g.column :name => '证件正面', :attribute => 'id_front', filter: false do |individual|
+    link_to image_tag(individual.id_front.thumb), "#", data: {toggle: "modal", target: "#frontModal#{individual.id}"}
+  end
 
-  g.column :name => '证件反面', :attribute => 'id_back', filter: false
+  g.column :name => '证件反面', :attribute => 'id_back', filter: false do |individual|
+    link_to image_tag(individual.id_back.thumb), "#", data: {toggle: "modal", target: "#backModal#{individual.id}"}
+  end
 
   g.column :name => '状态', :attribute => 'state', custom_filter: :auto
 
@@ -56,4 +60,11 @@
     end
     raw buffer
   end
+
+  g.column :name => '', html: {style: ''}, :attribute => 'id', filter: false do |individual|
+    buffer = render 'individuals/modal_front', :individual => individual, :path => individual.id_front
+    buffer += render 'individuals/modal_back', :individual => individual, :path => individual.id_back
+    raw buffer
+  end
+
 end -%>

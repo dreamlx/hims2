@@ -33,7 +33,7 @@
   g.column :name => '合同邮寄地址', :attribute => 'mail_address', filter: false
 
   g.column :name => '其他', :attribute => 'other', filter: false do |order|
-    link_to image_tag(order.other.thumb), order.other.url
+    link_to image_tag(order.other.thumb), "#", data: {toggle: "modal", target: "#Modal#{order.id}"}
   end
 
   g.column :name => '备注', :attribute => 'remark', filter: false
@@ -62,5 +62,9 @@
       link_to t(:destroy), order, method: :delete, data: {confirm: t(:are_you_sure)}
     end
     raw buffer
+  end
+
+  g.column :name => '', html: {style: ''}, :attribute => 'id', filter: false do |order|
+    render 'orders/modal', :order => order, :path => order.other
   end
 end -%>

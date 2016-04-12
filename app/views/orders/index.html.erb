@@ -13,8 +13,7 @@
 </div>
 <div class="row-fluid">
   <div class="col-md-6">
-    <%= link_to t(:new_fund), new_fund_path, class: "btn btn-danger" %>
-    <%= link_to t(:new_order), new_order_path, class: "btn btn-info" %>
+    <%= link_to t(:new_order), new_order_path, class: "btn btn-danger" %>
     <%= link_to '导出', orders_path(format: :xlsx), class: "btn btn-default" %>
     <%= link_to '汇款列表', money_receipts_path(format: :xlsx), class: "btn btn-default" %>
   </div>
