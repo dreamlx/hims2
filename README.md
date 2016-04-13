@@ -846,7 +846,7 @@ self-defined memu
       },
       {
          "type":"view",
-         "name":"关于禾晖",
+         "name":"禾晖简介",
          "url":"http://wx.hehuifunds.com/about.html"
       }]
     }
