@@ -196,3 +196,7 @@ zh-CN:
   confirm: 确认
   deny: 否决
   pictures: 图片
+  wice_grid:
+    next_label: 下一页
+    show_all_records_label: 显示所有
+    switch_back_to_paginated_mode_label: 切换到分页模式

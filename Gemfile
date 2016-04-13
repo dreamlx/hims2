@@ -29,6 +29,7 @@ gem "wice_grid", '3.6.0.pre4'
 gem 'cancancan'
 gem 'bitmask_attributes'
 # gem 'font-awesome-sass',  '~> 4.3'
+gem 'ffaker'
 
 group :development, :test do
   gem 'byebug'
