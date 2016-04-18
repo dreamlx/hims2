@@ -2,7 +2,7 @@
   <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-primary">
       <div class="panel-heading">
-         <h4 class="panel-title text-center">新增</h4>
+         <h4 class="panel-title text-center"><%= Order.model_name.human %></h4>
       </div>
       <%= simple_form_for(@order) do |f| %>
       <div class="panel-body">
@@ -17,10 +17,8 @@
           <%= f.input :deliver, collection: Order::DELIVER_STATES %>
       </div>
       <div class="panel-footer text-center">
-        <!-- <p class="text-center"> -->
-            <%= f.button :submit, class: "btn btn-danger" %>
-            <%= link_to t(:back), :back, class: "btn btn-default" %>
-        <!-- </p> -->
+        <%= f.button :submit, class: "btn btn-danger" %>
+        <%= link_to t(:back), :back, class: "btn btn-default" %>
       </div>
       <% end %>
     </div>

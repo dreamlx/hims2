@@ -43,7 +43,7 @@
 
   g.column :name => '状态', :attribute => 'state', custom_filter: :auto
 
-  g.column :name => '预约日期', :attribute => 'booking_date', filter: false do |order|
+  g.column :name => '预约日期', :attribute => 'booking_date', custom_filter: :auto do |order|
     order.booking_date.to_date if order.booking_date
   end
 
@@ -52,7 +52,7 @@
   g.column :name => '操作'  do |order|
     buffer =
     if can? :read, Order
-      link_to t(:show), order
+      link_to '详细', order
     end
     buffer += ' '
     buffer +=

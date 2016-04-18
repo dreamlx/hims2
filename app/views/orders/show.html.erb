@@ -6,13 +6,13 @@
     <div class="panel-body">
       <dl class="dl-horizontal">
         <dt><%= Order.human_attribute_name('investable_id') %></dt>
-        <dd><%= @order.investable_id %></dd>
+        <dd><%= @order.investable.name %></dd>
 
         <dt><%= Order.human_attribute_name('product_id') %></dt>
-        <dd><%= @order.product_id %></dd>
+        <dd><%= @order.product.name %></dd>
 
         <dt><%= Order.human_attribute_name('user_id') %></dt>
-        <dd><%= @order.user_id %></dd>
+        <dd><%= @order.user.name %></dd>
 
         <dt><%= Order.human_attribute_name('amount') %></dt>
         <dd><%= @order.amount %></dd>
@@ -39,6 +39,9 @@
         <dd><%= @order.deliver %></dd>
       </dl>
     </div>
+    <div class="panel-footer text-center">
+      <%= link_to t(:back), :back, class: "btn btn-default" %>
+    </div>
   </div>
 </div>
 <div class="col-md-6">
@@ -47,20 +50,46 @@
       <h3 class="panel-title"><%= t('money_receipts') %></h3>
     </div>
     <div class="panel-body">
-      <table class="table table-striped">
+      <table class="table table-striped table-bordered table-condensed">
+        <thead>
+          <tr>
+            <td><strong><%= MoneyReceipt.human_attribute_name('amount') %></strong></td>
+            <td><strong><%= MoneyReceipt.human_attribute_name('bank_charge') %></strong></td>
+            <td><strong><%= MoneyReceipt.human_attribute_name('date') %></strong></td>
+            <td><strong><%= MoneyReceipt.human_attribute_name('attach') %></strong></td>
+            <td><strong><%= MoneyReceipt.human_attribute_name('state') %></strong></td>
+            <td colspan="3"></td>
+          </tr>
+        </thead>
         <tbody>
           <%= render @order.money_receipts %>
+          <tr>
+            <td colspan="6"></td>
+            <td>已确认汇款金额</td>
+            <td><%= @order.money_receipts.where(state: '已确认').sum(:amount) %></td>
+          </tr>
+          <tr>
+            <td colspan="6"></td>
+            <td>总汇款金额</td>
+            <td><%= @order.money_receipts.sum(:amount) %></td>
+          </tr>
         </tbody>
       </table>
-      <%= simple_form_for([@order, @order.money_receipts.build]) do |f| %>
-        <%= f.input :amount %>
-        <%= f.input :bank_charge %>
-        <%= f.input :date, as: :date, html5: true %>
-        <%= f.input :attach %>
-        <%= f.input :state, collection: MoneyReceipt::RECEIPT_STATES  %>
-        <%= f.button :submit %>
-      <% end %>
     </div>
+    <hr class="divider" style="margin-top: 0px; margin-bottom: 0px;">
+    <%= simple_form_for([@order, @order.money_receipts.build]) do |f| %>
+    <div class="panel-body">
+      <h4><p class="text-center">添加汇款</p></h4>
+      <%= f.input :amount %>
+      <%= f.input :bank_charge %>
+      <%= f.input :date, as: :date, html5: true %>
+      <%= f.input :attach %>
+      <%= f.input :state, collection: MoneyReceipt::RECEIPT_STATES  %>
+    </div>
+    <div class="panel-footer text-center">
+      <%= f.button :submit, class: "btn btn-danger" %>
+    </div>
+    <% end %>
   </div>
 </div>
 <div class="col-md-6">
@@ -69,26 +98,35 @@
       <h3 class="panel-title"><%= t('pictures') %></h3>
     </div>
     <div class="panel-body">
-      <div class="panel-body">
-        <dl class="dl-horizontal">
-          <dt><%= Product.human_attribute_name('condition') %></dt>
-          <dd><%= simple_format(@order.product.condition) if @order.product %></dd>
-        </dl>
-      </div>
-      <table class="table table-striped">
+      <table class="table table-striped table-bordered table-condensed">
+        <thead>
+          <tr>
+            <td><strong><%= Picture.human_attribute_name('title') %></strong></td>
+            <td><strong><%= Picture.human_attribute_name('pic') %></strong></td>
+            <td><strong><%= Picture.human_attribute_name('state') %></strong></td>
+            <td colspan="3"></td>
+          </tr>
+        </thead>
         <tbody>
           <%= render @order.pictures %>
         </tbody>
       </table>
-      <%= simple_form_for([@order, @order.pictures.build]) do |f| %>
-        <%= f.input :title %>
-        <%= f.input :pic %>
-        <%= f.input :state, collection: MoneyReceipt::RECEIPT_STATES  %>
-        <%= f.button :submit %>
-      <% end %>
     </div>
+    <hr class="divider" style="margin-top: 0px; margin-bottom: 0px;">
+    <%= simple_form_for([@order, @order.pictures.build]) do |f| %>
+    <div class="panel-body">
+      <h4><p class="text-center">添加图片</p></h4>
+      <%= f.input :title %>
+      <%= f.input :pic %>
+      <%= f.input :state, collection: MoneyReceipt::RECEIPT_STATES  %>
+      <dl class="dl-horizontal text-muted">
+        <dt><%= Product.human_attribute_name('condition') %></dt>
+        <dd><%= simple_format(@order.product.condition) if @order.product %></dd>
+      </dl>
+    </div>
+    <div class="panel-footer text-center">
+      <%= f.button :submit, class: "btn btn-danger" %>
+    </div>
+    <% end %>
   </div>
-</div>
-<div class="col-md-12">
-  <%= link_to t(:back), :back, class: "btn btn-default" %>
 </div>

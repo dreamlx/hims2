@@ -2,8 +2,8 @@
   <td><%= best_in_place picture, :title %></td>
   <td><%= link_to image_tag(picture.pic.thumb), "#", data: {toggle: "modal", target: "#myModal#{picture.id}"} %></td>
   <td><%= picture.state %></td>
-  <td><%= link_to_if (picture.state != "已确认"), t('confirm'), confirm_order_picture_path(order_id: picture.order, id: picture), data: {confirm: 'Are you sure?'} %></td>
-  <td><%= link_to_if (picture.state == "未确认"), t('deny'), deny_order_picture_path(order_id: picture.order, id: picture), data: {confirm: 'Are you sure?'} %></td>
-  <td><%= link_to t('destroy'), [picture.order, picture], method: :delete, data: {confirm: 'Are you sure?'} %></td>
+  <td><%= link_to_if (picture.state != "已确认"), t('confirm'), confirm_order_picture_path(order_id: picture.order, id: picture), data: {confirm: '是否确认?'} %></td>
+  <td><%= link_to_if (picture.state == "未确认"), t('deny'), deny_order_picture_path(order_id: picture.order, id: picture), data: {confirm: '是否确认?'} %></td>
+  <td><%= link_to t('destroy'), [picture.order, picture], method: :delete, data: {confirm: '是否确认?'} %></td>
 </tr>
 <%= render 'pictures/modal', :picture => picture %>

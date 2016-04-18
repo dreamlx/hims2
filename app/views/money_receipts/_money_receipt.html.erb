@@ -2,9 +2,10 @@
   <td><%= best_in_place money_receipt, :amount %></td>
   <td><%= best_in_place money_receipt, :bank_charge %></td>
   <td><%= best_in_place money_receipt, :date %></td>
-  <td><%= link_to money_receipt.attach_identifier, money_receipt.attach_url if money_receipt.attach_url %></td>
+  <td><%= link_to image_tag(money_receipt.attach.thumb), "#", data: {toggle: "modal", target: "#money_receiptModal#{money_receipt.id}"} %></td>
   <td><%= money_receipt.state %></td>
-  <td><%= link_to_if (money_receipt.state != "已确认"), t('confirm'), confirm_order_money_receipt_path(order_id: money_receipt.order, id: money_receipt), data: {confirm: 'Are you sure?'} %></td>
-  <td><%= link_to_if (money_receipt.state == "未确认"), t('deny'), deny_order_money_receipt_path(order_id: money_receipt.order, id: money_receipt), data: {confirm: 'Are you sure?'} %></td>
-  <td><%= link_to t('destroy'), [money_receipt.order, money_receipt], method: :delete, data: {confirm: 'Are you sure?'} %></td>
+  <td><%= link_to_if (money_receipt.state != "已确认"), t('confirm'), confirm_order_money_receipt_path(order_id: money_receipt.order, id: money_receipt), data: {confirm: '是否确认?'} %></td>
+  <td><%= link_to_if (money_receipt.state == "未确认"), t('deny'), deny_order_money_receipt_path(order_id: money_receipt.order, id: money_receipt), data: {confirm: '是否确认?'} %></td>
+  <td><%= link_to t('destroy'), [money_receipt.order, money_receipt], method: :delete, data: {confirm: '是否确认?'} %></td>
 </tr>
+<%= render 'money_receipts/modal', :money_receipt => money_receipt %>

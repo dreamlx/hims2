@@ -25,7 +25,7 @@ en:
     # tooltip for the link to switch to show all records
     show_all_records_tooltip: Show all records
     # Warning message shown when the user wants to switch to all-records mode
-    all_queries_warning: Are you sure you want to display all records?
+    all_queries_warning: 是否确认 you want to display all records?
     # link to paginated view
     switch_back_to_paginated_mode_label: back to paginated view
     # tooltip for the link to paginated view
@@ -34,7 +34,7 @@ en:
     date_string_tooltip: Click to delete
     saved_query_panel_title: Saved Queries
     save_query_button_label: Save the state of filters
-    saved_query_deletion_confirmation: Are you sure?
+    saved_query_deletion_confirmation: 是否确认?
     saved_query_deletion_link_title: Delete query
     saved_query_link_title: Load query
     validates_uniqueness_error: A query with this name already exists
