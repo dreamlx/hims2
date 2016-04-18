@@ -1,63 +1,67 @@
 <div class="row-fluid">
-  <div class="col-md-6">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">子基金页面介绍</h3>
-      </div>
-      <%= simple_form_for(@product, html: { class: 'form-horizontal' },
-            wrapper: :horizontal_form,
-            wrapper_mappings: {
-            check_boxes: :horizontal_radio_and_checkboxes,
-            radio_buttons: :horizontal_radio_and_checkboxes,
-            file: :horizontal_file_input,
-            boolean: :horizontal_boolean}) do |f| %>
-      <div class="panel-body">
-        <%= f.input :fund_id, collection: Fund.all %>
-        <%= f.input :name %>
-        <%= f.input :desc %>
-        <%= f.input :title1 %>
-        <%= f.input :content1 %>
-        <%= f.input :title2 %>
-        <%= f.input :content2 %>
-        <%= f.input :title3 %>
-        <%= f.input :content3 %>
-        <%= f.input :progress_bar, hint: "From 0 to 100" %>
-        <%= f.input :label %>
-      </div>
-    </div>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">收益情况</h3>
-      </div>
-      <div class="panel-body">
-        <%= f.input :rate %>
+  <%= simple_form_for(@product, html: { class: 'form-horizontal' },
+        wrapper: :horizontal_form,
+        wrapper_mappings: {
+        check_boxes: :horizontal_radio_and_checkboxes,
+        radio_buttons: :horizontal_radio_and_checkboxes,
+        file: :horizontal_file_input,
+        boolean: :horizontal_boolean}) do |f| %>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">子基金页面介绍</h3>
+        </div>
+        <div class="panel-body">
+          <%= f.input :fund_id, collection: Fund.all %>
+          <%= f.input :name %>
+          <%= f.input :desc %>
+          <%= f.input :title1 %>
+          <%= f.input :content1 %>
+          <%= f.input :title2 %>
+          <%= f.input :content2 %>
+          <%= f.input :title3 %>
+          <%= f.input :content3 %>
+          <%= f.input :progress_bar, hint: "From 0 to 100" %>
+          <%= f.input :label %>
+        </div>
       </div>
     </div>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">我的预约-预约情况</h3>
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">收益情况</h3>
+        </div>
+        <div class="panel-body">
+          <%= f.input :rate %>
+        </div>
       </div>
-      <div class="panel-body">
-        <%= f.input :condition %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">我的预约-预约情况</h3>
+        </div>
+        <div class="panel-body">
+          <%= f.input :condition %>
+        </div>
       </div>
-    </div>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">基金公告（起息后可见）</h3>
-      </div>
-      <div class="panel-body">
-        <%= f.input :title4 %>
-        <%= f.input :content4 %>
-        <%= f.input :title5 %>
-        <%= f.input :content5 %>
-        <%= f.input :title6 %>
-        <%= f.input :content6 %>
-        <%= f.input :title7 %>
-        <%= f.input :content7 %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">基金公告（起息后可见）</h3>
+        </div>
+        <div class="panel-body">
+          <%= f.input :title4 %>
+          <%= f.input :content4 %>
+          <%= f.input :title5 %>
+          <%= f.input :content5 %>
+          <%= f.input :title6 %>
+          <%= f.input :content6 %>
+          <%= f.input :title7 %>
+          <%= f.input :content7 %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">产品详情</h3>
@@ -88,22 +92,21 @@
         <%= f.input :instruction %>
         <label class="col-sm-offset-3 col-sm-9">
           <%= f.check_box :remove_instruction %>
-          Remove instruction
+          移除说明文档
         </label>
         <%= link_to @product.agreement_identifier, @product.agreement.url, class: "col-sm-offset-3 col-sm-9" if @product.agreement? %>
         <%= f.input :agreement %>
         <label class="col-sm-offset-3 col-sm-9">
           <%= f.check_box :remove_agreement %>
-          Remove agreement
+          移除认购协议
         </label>
       </div>
-    </div>
-  </div>
-  <div class="well col-md-12 text-center">
-    <!-- <p class="text-center"> -->
+      <p class="text-center">
         <%= f.button :submit, class: "btn btn-danger" %>
         <%= link_to t(:back), :back, class: "btn btn-default" %>
-    <!-- </p> -->
+      </p>
+    </div>
   </div>
+
 <% end %>
 </div>

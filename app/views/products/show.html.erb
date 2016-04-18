@@ -1,178 +1,182 @@
-<div class="col-md-6">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= t('product_detail') %></h3>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= t('product_detail') %></h3>
+        </div>
+        <div class="panel-body">
+          <dl class="dl-horizontal">
+            <dt><%= Product.human_attribute_name('fund_id') %></dt>
+            <dd><%= @product.fund.name if @product.fund %></dd>
+
+            <dt><%= Product.human_attribute_name('name') %></dt>
+            <dd><%= @product.name %></dd>
+
+            <dt><%= Product.human_attribute_name('desc') %></dt>
+            <dd><%= @product.desc %></dd>
+
+            <dt><%= @product.title1 %></dt>
+            <dd><%= @product.content1 %></dd>
+
+            <dt><%= @product.title2 %></dt>
+            <dd><%= @product.content2 %></dd>
+
+            <dt><%= @product.title3 %></dt>
+            <dd><%= @product.content3 %></dd>
+
+            <dt><%= Product.human_attribute_name('progress_bar') %></dt>
+            <dd><%= @product.progress_bar %></dd>
+          </dl>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-      <dl class="dl-horizontal">
-        <dt><%= Product.human_attribute_name('fund_id') %></dt>
-        <dd><%= @product.fund.name if @product.fund %></dd>
-
-        <dt><%= Product.human_attribute_name('name') %></dt>
-        <dd><%= @product.name %></dd>
-
-        <dt><%= Product.human_attribute_name('desc') %></dt>
-        <dd><%= @product.desc %></dd>
-
-        <dt><%= @product.title1 %></dt>
-        <dd><%= @product.content1 %></dd>
-
-        <dt><%= @product.title2 %></dt>
-        <dd><%= @product.content2 %></dd>
-
-        <dt><%= @product.title3 %></dt>
-        <dd><%= @product.content3 %></dd>
-
-        <dt><%= Product.human_attribute_name('progress_bar') %></dt>
-        <dd><%= @product.progress_bar %></dd>
-      </dl>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= t('rois') %></h3>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped">
-        <tbody>
-          <%= render @product.rois %>
-        </tbody>
-      </table>
-      <%= simple_form_for([@product, @product.rois.build], html: { class: 'form-horizontal' }, 
-          wrapper: :horizontal_form,
-          wrapper_mappings: {
-          check_boxes: :horizontal_radio_and_checkboxes,
-          radio_buttons: :horizontal_radio_and_checkboxes,
-          file: :horizontal_file_input,
-          boolean: :horizontal_boolean}) do |f| %>
-        <%= f.input :range %>
-        <%= f.input :profit %>
-        <%= f.button :submit %>
-      <% end %>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= t('attaches') %></h3>
-    </div>
-    <div class="panel-body">
-      <table class="table table-striped">
-        <tbody>
-          <%= render @product.attaches %>
-        </tbody>
-      </table>
-      <%= simple_form_for([@product, @product.attaches.build], html: { class: 'form-horizontal' }, 
-          wrapper: :horizontal_form,
-          wrapper_mappings: {
-          check_boxes: :horizontal_radio_and_checkboxes,
-          radio_buttons: :horizontal_radio_and_checkboxes,
-          file: :horizontal_file_input,
-          boolean: :horizontal_boolean}) do |f| %>
-        <%= f.input :category, collection:  ["基金公告","投资报告"] %>
-        <%= f.input :title %>
-        <%= f.input :attach %>
-        <%= f.button :submit %>
-      <% end %>
-    </div>
-  </div>
-</div>
-<div class="col-md-6">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= t('product_detail') %></h3>
-    </div>
-    <div class="panel-body">
-      <dl class="dl-horizontal">
-        <dt><%= Product.human_attribute_name('abbr') %></dt>
-        <dd><%= @product.abbr %></dd>
-
-        <dt><%= Product.human_attribute_name('currency') %></dt>
-        <dd><%= @product.currency %></dd>
-
-        <dt><%= Product.human_attribute_name('amount') %></dt>
-        <dd><%= @product.amount %></dd>
-
-        <dt><%= Product.human_attribute_name('period') %></dt>
-        <dd><%= @product.period %></dd>
-
-        <dt><%= Product.human_attribute_name('paid') %></dt>
-        <dd><%= @product.paid %></dd>
-
-        <dt><%= Product.human_attribute_name('sales_period') %></dt>
-        <dd><%= @product.sales_period %></dd>
-
-        <dt><%= Product.human_attribute_name('block_period') %></dt>
-        <dd><%= @product.block_period %></dd>
-
-        <dt><%= Product.human_attribute_name('redeem') %></dt>
-        <dd><%= @product.redeem %></dd>
-
-        <dt><%= Product.human_attribute_name('entity') %></dt>
-        <dd><%= @product.entity %></dd>
-
-        <dt><%= Product.human_attribute_name('adviser') %></dt>
-        <dd><%= @product.adviser %></dd>
-
-        <dt><%= Product.human_attribute_name('trustee') %></dt>
-        <dd><%= @product.trustee %></dd>
-
-        <dt><%= Product.human_attribute_name('reg_organ') %></dt>
-        <dd><%= @product.reg_organ %></dd>
-
-        <dt><%= Product.human_attribute_name('website') %></dt>
-        <dd><%= @product.website %></dd>
-
-        <dt><%= Product.human_attribute_name('agency') %></dt>
-        <dd><%= @product.agency %></dd>
-
-        <dt><%= Product.human_attribute_name('regulatory_filing') %></dt>
-        <dd><%= @product.regulatory_filing %></dd>
-
-        <dt><%= Product.human_attribute_name('legal_consultant') %></dt>
-        <dd><%= @product.legal_consultant %></dd>
-
-        <dt><%= Product.human_attribute_name('audit') %></dt>
-        <dd><%= @product.audit %></dd>
-
-        <dt><%= Product.human_attribute_name('rate') %></dt>
-        <dd><%= simple_format(@product.rate) %></dd>
-
-        <dt><%= Product.human_attribute_name('account') %></dt>
-        <dd><%= @product.account %></dd>
-
-        <dt><%= Product.human_attribute_name('progress') %></dt>
-        <dd><%= @product.progress %></dd>
-
-        <dt><%= Product.human_attribute_name('direction') %></dt>
-        <dd><%= @product.direction %></dd>
-
-        <dt><%= Product.human_attribute_name('risk_control') %></dt>
-        <dd><%= @product.risk_control %></dd>
-
-        <dt><%= Product.human_attribute_name('instruction') %></dt>
-        <dd><%= link_to @product.instruction_identifier, @product.instruction.url if @product.instruction.url %></dd>
-
-        <dt><%= Product.human_attribute_name('agreement') %></dt>
-        <dd><%= link_to @product.agreement_identifier, @product.agreement.url if @product.agreement.url %></dd>
-
-        <dt><%= Product.human_attribute_name('condition') %></dt>
-        <dd><%= simple_format(@product.condition) %></dd>
-
-        <dt><%= @product.title4 %></dt>
-        <dd><%= @product.content4 %></dd>
-
-        <dt><%= @product.title5 %></dt>
-        <dd><%= @product.content5 %></dd>
-
-        <dt><%= @product.title6 %></dt>
-        <dd><%= @product.content6 %></dd>
-
-        <dt><%= @product.title7 %></dt>
-        <dd><%= @product.content7 %></dd>
-      </dl>
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= t('rois') %></h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              <%= render @product.rois %>
+            </tbody>
+          </table>
+          <%= simple_form_for([@product, @product.rois.build], html: { class: 'form-horizontal' },
+              wrapper: :horizontal_form,
+              wrapper_mappings: {
+              check_boxes: :horizontal_radio_and_checkboxes,
+              radio_buttons: :horizontal_radio_and_checkboxes,
+              file: :horizontal_file_input,
+              boolean: :horizontal_boolean}) do |f| %>
+            <%= f.input :range %>
+            <%= f.input :profit %>
+            <%= f.button :submit %>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= t('attaches') %></h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              <%= render @product.attaches %>
+            </tbody>
+          </table>
+          <%= simple_form_for([@product, @product.attaches.build], html: { class: 'form-horizontal' },
+              wrapper: :horizontal_form,
+              wrapper_mappings: {
+              check_boxes: :horizontal_radio_and_checkboxes,
+              radio_buttons: :horizontal_radio_and_checkboxes,
+              file: :horizontal_file_input,
+              boolean: :horizontal_boolean}) do |f| %>
+            <%= f.input :category, collection:  ["基金公告","投资报告"] %>
+            <%= f.input :title %>
+            <%= f.input :attach %>
+            <%= f.button :submit %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div class="col-md-12">
-  <%= link_to t(:back), :back %>
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= t('product_detail') %></h3>
+      </div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt><%= Product.human_attribute_name('abbr') %></dt>
+          <dd><%= @product.abbr %></dd>
+
+          <dt><%= Product.human_attribute_name('currency') %></dt>
+          <dd><%= @product.currency %></dd>
+
+          <dt><%= Product.human_attribute_name('amount') %></dt>
+          <dd><%= @product.amount %></dd>
+
+          <dt><%= Product.human_attribute_name('period') %></dt>
+          <dd><%= @product.period %></dd>
+
+          <dt><%= Product.human_attribute_name('paid') %></dt>
+          <dd><%= @product.paid %></dd>
+
+          <dt><%= Product.human_attribute_name('sales_period') %></dt>
+          <dd><%= @product.sales_period %></dd>
+
+          <dt><%= Product.human_attribute_name('block_period') %></dt>
+          <dd><%= @product.block_period %></dd>
+
+          <dt><%= Product.human_attribute_name('redeem') %></dt>
+          <dd><%= @product.redeem %></dd>
+
+          <dt><%= Product.human_attribute_name('entity') %></dt>
+          <dd><%= @product.entity %></dd>
+
+          <dt><%= Product.human_attribute_name('adviser') %></dt>
+          <dd><%= @product.adviser %></dd>
+
+          <dt><%= Product.human_attribute_name('trustee') %></dt>
+          <dd><%= @product.trustee %></dd>
+
+          <dt><%= Product.human_attribute_name('reg_organ') %></dt>
+          <dd><%= @product.reg_organ %></dd>
+
+          <dt><%= Product.human_attribute_name('website') %></dt>
+          <dd><%= @product.website %></dd>
+
+          <dt><%= Product.human_attribute_name('agency') %></dt>
+          <dd><%= @product.agency %></dd>
+
+          <dt><%= Product.human_attribute_name('regulatory_filing') %></dt>
+          <dd><%= @product.regulatory_filing %></dd>
+
+          <dt><%= Product.human_attribute_name('legal_consultant') %></dt>
+          <dd><%= @product.legal_consultant %></dd>
+
+          <dt><%= Product.human_attribute_name('audit') %></dt>
+          <dd><%= @product.audit %></dd>
+
+          <dt><%= Product.human_attribute_name('rate') %></dt>
+          <dd><%= simple_format(@product.rate) %></dd>
+
+          <dt><%= Product.human_attribute_name('account') %></dt>
+          <dd><%= @product.account %></dd>
+
+          <dt><%= Product.human_attribute_name('progress') %></dt>
+          <dd><%= @product.progress %></dd>
+
+          <dt><%= Product.human_attribute_name('direction') %></dt>
+          <dd><%= @product.direction %></dd>
+
+          <dt><%= Product.human_attribute_name('risk_control') %></dt>
+          <dd><%= @product.risk_control %></dd>
+
+          <dt><%= Product.human_attribute_name('instruction') %></dt>
+          <dd><%= link_to @product.instruction_identifier, @product.instruction.url if @product.instruction.url %></dd>
+
+          <dt><%= Product.human_attribute_name('agreement') %></dt>
+          <dd><%= link_to @product.agreement_identifier, @product.agreement.url if @product.agreement.url %></dd>
+
+          <dt><%= Product.human_attribute_name('condition') %></dt>
+          <dd><%= simple_format(@product.condition) %></dd>
+
+          <dt><%= @product.title4 %></dt>
+          <dd><%= @product.content4 %></dd>
+
+          <dt><%= @product.title5 %></dt>
+          <dd><%= @product.content5 %></dd>
+
+          <dt><%= @product.title6 %></dt>
+          <dd><%= @product.content6 %></dd>
+
+          <dt><%= @product.title7 %></dt>
+          <dd><%= @product.content7 %></dd>
+        </dl>
+      </div>
+      <p class="text-center"><%= link_to t(:back), :back, class: "btn btn-default" %></p>
+    </div>
+  </div>
 </div>

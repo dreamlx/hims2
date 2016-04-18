@@ -8,7 +8,7 @@
     order.investable.name if order.investable
   end
 
-  g.column :name => '投资者类型', :attribute => 'investable_type', filter_type: :auto do |order|
+  g.column :name => '投资者类型', :attribute => 'investable_type', custom_filter: :auto do |order|
     if order.investable_type == "Individual"
       "个人"
     elsif order.investable_type == "Institution"
@@ -33,12 +33,15 @@
   g.column :name => '合同邮寄地址', :attribute => 'mail_address', filter: false
 
   g.column :name => '其他', :attribute => 'other', filter: false do |order|
-    link_to image_tag(order.other.thumb), "#", data: {toggle: "modal", target: "#Modal#{order.id}"}
+    buffer_other = link_to image_tag(order.other.thumb), "#", data: {toggle: "modal", target: "#Modal#{order.id}"}
+    buffer_other += ' '
+    buffer_other += render 'orders/modal', :order => order, :path => order.other
+    raw buffer_other
   end
 
   g.column :name => '备注', :attribute => 'remark', filter: false
 
-  g.column :name => '状态', :attribute => 'state', filter_type: :auto
+  g.column :name => '状态', :attribute => 'state', custom_filter: :auto
 
   g.column :name => '预约日期', :attribute => 'booking_date', filter: false do |order|
     order.booking_date.to_date if order.booking_date
@@ -64,7 +67,4 @@
     raw buffer
   end
 
-  g.column :name => '', html: {style: ''}, :attribute => 'id', filter: false do |order|
-    render 'orders/modal', :order => order, :path => order.other
-  end
 end -%>

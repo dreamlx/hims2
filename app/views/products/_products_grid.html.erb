@@ -8,7 +8,9 @@
     product.fund.name if product.fund
   end
 
-  g.column :name => '产品名称', :attribute => 'name', filter_type: :string
+  g.column :name => '产品名称', :attribute => 'name', filter_type: :string do |product|
+    link_to product.name, product_path(product)
+  end
 
   g.column :name => '描述', :attribute => 'desc', filter: false
 
