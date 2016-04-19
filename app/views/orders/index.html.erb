@@ -1,3 +1,4 @@
+<%= form_for '#', url: {action: "muti_status_update"} do %>
 <div class="row-fluid">
   <div class="col-md-12">
     <div class="panel panel-primary">
@@ -14,7 +15,16 @@
 <div class="row-fluid">
   <div class="col-md-6">
     <%= link_to t(:new_order), new_order_path, class: "btn btn-danger" %>
+    <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">批量变更 <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+      <li><%= link_to "报单", "#", :onclick=>"$('form').append('<input type=\"hidden\" name=\"setting\" value=\"fill\" />'); $('form').submit()" %></li>
+      <li><%= link_to "起息", "#", :onclick=>"$('form').append('<input type=\"hidden\" name=\"setting\" value=\"value\" />'); $('form').submit()" %></li>
+      <li><%= link_to "关闭", "#", :onclick=>"$('form').append('<input type=\"hidden\" name=\"setting\" value=\"close\" />'); $('form').submit()" %></li>
+    </ul>
+    </div>
     <%= link_to '导出', orders_path(format: :xlsx), class: "btn btn-default" %>
     <%= link_to '汇款列表', money_receipts_path(format: :xlsx), class: "btn btn-default" %>
   </div>
 </div>
+<% end %>

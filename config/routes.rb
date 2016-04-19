@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get :deny, on: :member
   end
   resources :orders do
+    post :muti_status_update, on: :collection
     resources :money_receipts, only: [:create, :destroy] do
       get :confirm, on: :member
       get :deny, on: :member

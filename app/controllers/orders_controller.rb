@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   load_and_authorize_resource
-  
+
   def index
     @orders = Order.order(created_at: :desc)
     @orders_grid = initialize_grid(Order)
@@ -9,6 +9,25 @@ class OrdersController < ApplicationController
       header_string = 'attachment; filename=orders' + DateTime.now.to_s(:number) + ".xlsx"
       format.xlsx{  response.headers['Content-Disposition'] = header_string}
     end
+  end
+
+  def muti_status_update
+    if params[:grid][:selected]
+      # byebug
+      @orders = Order.find(params[:grid][:selected])
+        @orders.each do |o|
+          case params[:setting]
+          when "value"
+            o.value
+          when "fill"
+            o.fill
+          when "close"
+            o.close
+          end
+        end
+    end
+    # render 'muti_status_update'
+    redirect_to orders_url
   end
 
   def new

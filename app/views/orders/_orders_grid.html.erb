@@ -4,6 +4,8 @@
 	  "没有记录"
 	end
 
+  g.action_column html_check_box: true
+
   g.column :name => '投资者', :attribute => 'id', filter: false do |order|
     order.investable.name if order.investable
   end
