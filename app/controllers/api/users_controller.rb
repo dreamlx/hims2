@@ -9,7 +9,12 @@ class Api::UsersController < Api::BaseController
       return api_error(status: 422)
     end
 
-    @user = User.new(open_id: params[:user][:open_id], cell: params[:user][:cell])
+    @user = User.find_by(cell: params[:user][:cell])
+    if @user
+      @user.update_attribute(:open_id, params[:user][:open_id])
+    else
+      @user = User.new(open_id: params[:user][:open_id], cell: params[:user][:cell])
+    end
     if @user.save
       render 'show', status: 201
     else
@@ -35,7 +40,7 @@ class Api::UsersController < Api::BaseController
     else
       return api_error(status: 422)
     end
-  ensure 
+  ensure
     clean_tempfile
   end
 
@@ -85,7 +90,7 @@ class Api::UsersController < Api::BaseController
   private
     def user_params
       params.require(:user).permit(
-        :name, :email, :id_type, :nickname, 
+        :name, :email, :id_type, :nickname,
         :gender, :address, :card_type, :card_no, :remark)
     end
 end
