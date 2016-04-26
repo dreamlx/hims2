@@ -28,7 +28,9 @@
     order.user.name if order.user
   end
 
-  g.column :name => '预约金额', :attribute => 'amount', filter: false
+  g.column :name => '预约金额', :attribute => 'amount', filter: false do |order|
+    number_with_delimiter(order.amount) if order.amount
+  end
 
   g.column :name => '预计资金到位时间', :attribute => 'due_date', filter: false
 

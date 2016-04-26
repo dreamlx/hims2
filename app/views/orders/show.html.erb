@@ -15,7 +15,7 @@
         <dd><%= @order.user.name %></dd>
 
         <dt><%= Order.human_attribute_name('amount') %></dt>
-        <dd><%= @order.amount %></dd>
+        <dd><%= number_with_delimiter(@order.amount) %></dd>
 
         <dt><%= Order.human_attribute_name('due_date') %></dt>
         <dd><%= @order.due_date %></dd>
@@ -66,12 +66,12 @@
           <tr>
             <td colspan="6"></td>
             <td>已确认汇款金额</td>
-            <td><%= @order.money_receipts.where(state: '已确认').sum(:amount) %></td>
+            <td><%= number_with_delimiter(@order.money_receipts.where(state: '已确认').sum(:amount)) %></td>
           </tr>
           <tr>
             <td colspan="6"></td>
             <td>总汇款金额</td>
-            <td><%= @order.money_receipts.sum(:amount) %></td>
+            <td><%= number_with_delimiter(@order.money_receipts.sum(:amount)) %></td>
           </tr>
         </tbody>
       </table>

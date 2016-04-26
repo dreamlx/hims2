@@ -1,6 +1,6 @@
 <tr>
-  <td><%= best_in_place money_receipt, :amount %></td>
-  <td><%= best_in_place money_receipt, :bank_charge %></td>
+  <td><%= best_in_place money_receipt, :amount, display_with: lambda { |m| number_with_delimiter(m) } %></td>
+  <td><%= best_in_place money_receipt, :bank_charge, display_with: lambda { |m| number_with_delimiter(m) } %></td>
   <td><%= best_in_place money_receipt, :date %></td>
   <td><%= link_to image_tag(money_receipt.attach.thumb), "#", data: {toggle: "modal", target: "#money_receiptModal#{money_receipt.id}"} %></td>
   <td><%= money_receipt.state %></td>
