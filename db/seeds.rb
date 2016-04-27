@@ -244,7 +244,7 @@ Individual.find_by(name:'YAO JINGJIE').update_attribute(:user_id, User.find_by(n
 Individual.find_by(name:'YE HANGJUN').update_attribute(:user_id, User.find_by(name: '蒲丽琼').id) if User.find_by(name: '蒲丽琼')
 Individual.find_by(name:'YIN TONG').update_attribute(:user_id, User.find_by(name: '李栋').id) if User.find_by(name: '李栋')
 Individual.find_by(name:'YU PEILIANG').update_attribute(:user_id, User.find_by(name: '史靖').id) if User.find_by(name: '史靖')
-Individual.find_by(name:'YUAN XIAOLONG').update_attribute(:user_id, User.find_by(name: 'Derek Cai').id) if User.find_by(name: 'Derek Cai')
+# Individual.find_by(name:'YUAN XIAOLONG').update_attribute(:user_id, User.find_by(name: 'Derek Cai').id) if User.find_by(name: 'Derek Cai')
 Individual.find_by(name:'ZHANG SHU').update_attribute(:user_id, User.find_by(name: '陈学燕').id) if User.find_by(name: '陈学燕')
 Individual.find_by(name:'ZHAO SARAH QING QING').update_attribute(:user_id, User.find_by(name: '高宏').id) if User.find_by(name: '高宏')
 Individual.find_by(name:'ZHAO XINWEN').update_attribute(:user_id, User.find_by(name: '唐赟').id) if User.find_by(name: '唐赟')
