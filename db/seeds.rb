@@ -364,7 +364,6 @@ Order.all.each do |o|
   end
 end
 
-<<<<<<< HEAD
 Order.find_or_create_by(investable_id:Individual.find_by_id_no('KJ0053514').id,user_id:User.find_by_name('高宏').id,product_id:Product.find_by_name('禾晖稳健量化1号基金第一期').id,amount:1000000.00,due_date:'2015/11/5',state:'已起息',booking_date:'2015/11/5',investable_type:'Individual').save!(validate:false)
 Order.find_or_create_by(investable_id:Individual.find_by_id_no('M6141985').id,user_id:User.find_by_name('高宏').id,product_id:Product.find_by_name('禾晖稳健量化1号基金第一期').id,amount:700000.00,due_date:'2015/11/9',state:'已起息',booking_date:'2015/11/9',investable_type:'Individual').save!(validate:false)
 Order.find_or_create_by(investable_id:Individual.find_by_id_no('412723197605090014').id,user_id:User.find_by_name('蒲丽琼').id,product_id:Product.find_by_name('禾晖稳健量化1号基金第一期').id,amount:159993.50,due_date:'2015/11/11',state:'已起息',booking_date:'2015/11/11',investable_type:'Individual').save!(validate:false)
@@ -1088,7 +1087,6 @@ Order.find_or_create_by(investable_id:Individual.find_by_id_no('3101061985071228
 Order.find_or_create_by(investable_id:Individual.find_by_id_no('460100197707274922').id,user_id:User.find_by_name('李龙').id,product_id:Product.find_by_name('禾晖*稳健量化1号基金第六期').id,amount:125000.00,due_date:'2016/4/28',state:'已起息',booking_date:'2016/4/28',investable_type:'Individual').save!(validate:false)
 Order.find_or_create_by(investable_id:Individual.find_by_id_no('310102198109083661').id,user_id:User.find_by_name('田锴').id,product_id:Product.find_by_name('禾晖*稳健量化1号基金第六期').id,amount:80000.00,due_date:'2016/4/28',state:'已起息',booking_date:'2016/4/28',investable_type:'Individual').save!(validate:false)
 Order.find_or_create_by(investable_id:Individual.find_by_id_no('120104197907206016').id,user_id:User.find_by_name('田锴').id,product_id:Product.find_by_name('禾晖*稳健量化1号基金第六期').id,amount:50000.00,due_date:'2016/4/29',state:'已起息',booking_date:'2016/4/29',investable_type:'Individual').save!(validate:false)
->>>>>>> origin/master
 #Order.find_or_create_by(investable_id:Individual.find_by_id_no('310110193712013243').id,user_id:User.find_by_name('胡伟忠').id,product_id:Product.find_by_name('弥敦城三期AML(Z)').id,amount:1000000.00,due_date:'2016/1/12',state:'已起息',booking_date:'2016/1/12',investable_type:'Individual').save!(validate:false)
 #Order.find_or_create_by(investable_id:Individual.find_by_id_no('310109198301071542').id,user_id:User.find_by_name('徐旭俊').id,product_id:Product.find_by_name('弥敦城三期AML(Z)').id,amount:1000000.00,due_date:'2016/1/12',state:'已起息',booking_date:'2016/1/12',investable_type:'Individual').save!(validate:false)
 #Order.find_or_create_by(investable_id:Individual.find_by_id_no('31010919540518242X').id,user_id:User.find_by_name('胡伟忠').id,product_id:Product.find_by_name('弥敦城三期AML(Z)').id,amount:2000000.00,due_date:'2016/1/12',state:'已起息',booking_date:'2016/1/12',investable_type:'Individual').save!(validate:false)
