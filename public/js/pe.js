@@ -784,41 +784,60 @@ window.check = {
 
                 var reader = new FileReader();
                 reader.onload=function(e){
-                    $('body').append("<canvas style='display:none'></canvas>")
-                    var canvas = document.querySelector('canvas'),
-                    ctx = canvas.getContext('2d'),
-                    img = new Image();
-                    img.onload = function() { 
-                        var square = 960; 
-                        var context = canvas.getContext('2d'); 
-                        var imageWidth; var imageHeight; 
-                        var offsetX = 0; var offsetY = 0; 
-                        if (this.width > this.height) { 
-                            imageHeight = Math.round(square * this.height / this.width); 
-                            imageWidth = square;  
-                            //offsetY = Math.round((square - imageHeight) / 2);  
-                            
-                        } else { 
-                            imageWidth = Math.round(square * this.width / this.height); 
-                            imageHeight = square; 
-                            //offsetX = Math.round((square - imageWidth) / 2); 
+                    ImageOrientationFix({
+                        image: reader.result,
+                        imageType:"base64",
+                        onFix:function(base64_str){
+                            input.attr('data-code',base64_str);
+                            var imga = $("<img />").attr('src',base64_str);
+                            label.empty().append(imga);
+                            $('body').find('canvas').remove();
                         }
-                        canvas.width = imageWidth; 
-                        canvas.height = imageHeight; 
-                        context.clearRect(0, 0, imageWidth, imageHeight); 
-                        context.drawImage(this,0, 0, imageWidth, imageHeight); 
-                        var base64 = canvas.toDataURL('image/jpeg',0.5); 
-
-                        input.attr('data-code',base64);
-                        var imga = $("<img />").attr('src',base64);
-                        label.empty().append(imga);
-                        $('body').find('canvas').remove();
-                    }; 
-                    img.src = reader.result;
-                };
-                if(f){
-                   reader.readAsDataURL(f); 
+                    });
                 }
+
+                if(f){
+                   reader.readAsDataURL(f);
+                }
+
+                // var reader = new FileReader();
+                // reader.onload=function(e){
+                //     $('body').append("<canvas style='display:none'></canvas>")
+                //     var canvas = document.querySelector('canvas'),
+                //     ctx = canvas.getContext('2d'),
+                //     img = new Image();
+                //     img.onload = function() {
+                //         var square = 960;
+                //         var context = canvas.getContext('2d');
+                //         var imageWidth; var imageHeight;
+                //         var offsetX = 0; var offsetY = 0;
+                //         if (this.width > this.height) {
+                //             imageHeight = Math.round(square * this.height / this.width);
+                //             imageWidth = square;
+                //             //offsetY = Math.round((square - imageHeight) / 2);
+                //         } else {
+                //             imageWidth = Math.round(square * this.width / this.height);
+                //             imageHeight = square;
+                //             //offsetX = Math.round((square - imageWidth) / 2);
+                //         }
+                //         canvas.width = imageWidth;
+                //         canvas.height = imageHeight;
+                //         context.clearRect(0, 0, imageWidth, imageHeight);
+                //         context.drawImage(this, 0, 0, imageWidth, imageHeight);
+
+
+                //         var base64 = canvas.toDataURL('image/jpeg',0.5);
+
+                //         input.attr('data-code',base64);
+                //         var imga = $("<img />").attr('src',base64);
+                //         label.empty().append(imga);
+                //         $('body').find('canvas').remove();
+                //     };
+                //     img.src = reader.result;
+                // };
+                // if(f){
+                //    reader.readAsDataURL(f);
+                // }
             }
         });
         $('#inputRemarkP,\
@@ -1091,7 +1110,8 @@ window.submit = {
                 if(data.individual && data.individual.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.customercreatpersonalsuccess);
                     setTimeout(function(){
-                        getInfo.turncustomerdetail('individual',data.individual.id);
+                        window.history.back();
+                        //getInfo.turncustomerdetail('individual',data.individual.id);
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.customercreatpersonalfail);
@@ -1191,7 +1211,8 @@ window.submit = {
                 if(data.institution && data.institution.id>0){
                     check.error.alertsuccess(btn,check.error.errorInfo.customercreatorganizalsuccess);
                     setTimeout(function(){
-                        getInfo.turncustomerdetail('institution',data.institution.id);
+                        window.history.back();
+                        //getInfo.turncustomerdetail('institution',data.institution.id);
                     },3000);
                 }else{
                     check.error.alertfail(btn,"error",check.error.errorInfo.customercreatorganizalfail);
