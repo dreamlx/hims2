@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="./js/pe.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			//var store = getInfo.checkstorage();
+			var store = getInfo.checkstorage();
 			if(!store || !store.name || !store.email){
 				check.error.alertfail($(".main"),"error",check.error.errorInfo.personfirst);
 				setTimeout(function(){
