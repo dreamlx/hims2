@@ -788,10 +788,37 @@ window.check = {
                         image: reader.result,
                         imageType:"base64",
                         onFix:function(base64_str){
-                            input.attr('data-code',base64_str);
-                            var imga = $("<img />").attr('src',base64_str);
-                            label.empty().append(imga);
-                            $('body').find('canvas').remove();
+                            $('body').append("<canvas style='display:none'></canvas>")
+                            var canvas = document.querySelector('canvas'),
+                                ctx = canvas.getContext('2d'),
+                                img = new Image();
+                            img.onload = function() {
+                                var square = 600;
+                                var context = canvas.getContext('2d');
+                                var imageWidth; var imageHeight;
+                                var offsetX = 0; var offsetY = 0;
+                                if (this.width > this.height) {
+                                    imageHeight = Math.round(square * this.height / this.width);
+                                    imageWidth = square;
+                                    //offsetY = Math.round((square - imageHeight) / 2);
+                                } else {
+                                    imageWidth = Math.round(square * this.width / this.height);
+                                    imageHeight = square;
+                                    //offsetX = Math.round((square - imageWidth) / 2);
+                                }
+                                canvas.width = imageWidth;
+                                canvas.height = imageHeight;
+                                context.clearRect(0, 0, imageWidth, imageHeight);
+                                context.drawImage(this, 0, 0, imageWidth, imageHeight);
+
+                                var base64 = canvas.toDataURL('image/jpeg',0.5);
+
+                                input.attr('data-code',base64);
+                                var imga = $("<img />").attr('src',base64);
+                                label.empty().append(imga);
+                                $('body').find('canvas').remove();
+                            };
+                            img.src = base64_str;
                         }
                     });
                 }
