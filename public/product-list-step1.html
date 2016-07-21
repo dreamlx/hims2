@@ -32,25 +32,27 @@
 				window.location.reload(true);
 			}else{
 				_.each(fundlist,function(fund,key){
-					var item = $("#template .product").clone();
-					item.attr("data-fid",fund.id);
-					item.find(".p-title").text(fund.name||"暂无信息");
-					item.find(".p-intro").text(fund.desc||"暂无信息");
-					if(fund.label){
-						item.find(".p-label.red-label").text(fund.label).removeClass('hide');
+					if(fund.progress_bar != 100){
+						var item = $("#template .product").clone();
+						item.attr("data-fid",fund.id);
+						item.find(".p-title").text(fund.name||"暂无信息");
+						item.find(".p-intro").text(fund.desc||"暂无信息");
+						if(fund.label){
+							item.find(".p-label.red-label").text(fund.label).removeClass('hide');
+						}
+						if(fund.currency){
+							item.find(".p-label.green-label").text(fund.currency).removeClass('hide');
+						}
+						item.find(".p-info .p-f1 .p-p:eq(0) span:eq(0)").text((fund.title1||"暂无信息")+"：");
+						item.find(".p-info .p-f1 .p-p:eq(0) .p-t").text(fund.content1||"暂无信息");
+						item.find(".p-info .p-f1 .p-p:eq(1) span:eq(0)").text((fund.title2||"暂无信息")+"：");
+						item.find(".p-info .p-f1 .p-p:eq(1) .p-t").text(fund.content2||"暂无信息");
+						item.find(".p-info .p-f2 .p-p:eq(0) span:eq(0)").text((fund.title3||"暂无信息")+"：");
+						item.find(".p-info .p-f2 .p-p:eq(0) .p-t").text(fund.content3||"暂无信息");
+						item.find(".p-range .p-percent").text((fund.progress_bar||0)+"%");
+						item.find(".p-range .range").attr("data-width",fund.progress_bar||0);
+						$("#product-list").append(item);
 					}
-					if(fund.currency){
-						item.find(".p-label.green-label").text(fund.currency).removeClass('hide');
-					}
-					item.find(".p-info .p-f1 .p-p:eq(0) span:eq(0)").text((fund.title1||"暂无信息")+"：");
-					item.find(".p-info .p-f1 .p-p:eq(0) .p-t").text(fund.content1||"暂无信息");
-					item.find(".p-info .p-f1 .p-p:eq(1) span:eq(0)").text((fund.title2||"暂无信息")+"：");
-					item.find(".p-info .p-f1 .p-p:eq(1) .p-t").text(fund.content2||"暂无信息");
-					item.find(".p-info .p-f2 .p-p:eq(0) span:eq(0)").text((fund.title3||"暂无信息")+"：");
-					item.find(".p-info .p-f2 .p-p:eq(0) .p-t").text(fund.content3||"暂无信息");
-					item.find(".p-range .p-percent").text((fund.progress_bar||0)+"%");
-					item.find(".p-range .range").attr("data-width",fund.progress_bar||0);
-					$("#product-list").append(item);
 				});
 				_.each($("#product-list .product .p-range .range"),function(range,key){
 					$(range).width($(range).attr("data-width")+"%");
