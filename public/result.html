@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 移动端申明 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>风险测试结果</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<style type="text/css" media="screen">
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font: 16px/1.5 "weiruanyahei";
+    letter-spacing: 1px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+p {
+    font-size: 16px;
+    text-indent: 1.5em;
+    line-height: 2em;
+}
+
+h2 {
+    font-size: 18px;
+    text-indent: 1.5em;
+    line-height: 2em;
+    font-weight: bolder;
+}
+
+@media(min-height:600px) {
+    h1 {
+        margin-top: 50px;
+    }
+}
+
+@media(min-height:700px) {
+    h1 {
+        margin-top: 50px;
+    }
+    h2 {
+        margin: 30px 0;
+    }
+    p {
+        margin: 20px 0;
+    }
+}
+</style>
+
+<body>
+    <div class="container" id="result">
+        <h1>投资者风险评估结果确认书</h1>
+        <div>
+            <p>根据您所选择的问题答案，您对投资风险的整体承受程度及您的风险偏好总得分为：<strong>{{scroe}}</strong>分。</p>
+            <p>根据投资者风险承受能力评估评分表的评价,您的风险承受能力为：<strong>{{typeUser}}</strong> ，适合您的基金产品评级为：<strong>{{typeProduct}}</strong>。</p>
+            <h2>声明：本机构已如实填写《私募基金投资者风险问卷调查》，并了解了自己的风险承受类型和适合购买的产品类型。</h2>
+        </div>
+        <a href="#" class="btn btn-info btn-block" style="margin-top:20px;font-weight: bolder;">我已确认</a>
+    </div>
+    <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/result.js"></script>
+</body>
+
+</html>
