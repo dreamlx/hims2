@@ -86,6 +86,14 @@ class Api::UsersController < Api::BaseController
     end
   end
 
+  def risk_evaluation
+    if params[:form]
+      # byebug
+      Rails.logger.debug "sheet #{params[:entry][:serial_number]}"
+      Rails.logger.debug "sheet #{params[:entry][:field_1]}"
+    end
+    render json: {}, status: 200
+  end
 
   private
     def user_params
