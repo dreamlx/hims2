@@ -134,7 +134,7 @@ jQuery.cookie = function(name, value, options) {
             this._setFallback(key, value, onceOnly || false);
             return this;
         },
-        
+
         'delete': function(key){
             return this.remove(key);
         },
@@ -427,7 +427,7 @@ window.check = {
                 check.error.alert(input,check.error.errorInfo.idnotype);
                 return false;
             }
-        } 
+        }
         return true;
     },
     string:function(input){
@@ -487,7 +487,7 @@ window.check = {
             if( date<0){
                 check.error.alert(input,check.error.errorInfo.datetype);
                 return false;
-            }  
+            }
         }
         return true;
     },
@@ -1290,7 +1290,7 @@ window.submit = {
                         if(back){
                             window.history.back();
                         }else{
-                            window.location.reload(true); 
+                            window.location.reload(true);
                         }
                     },3000);
                 }else{
@@ -1419,7 +1419,7 @@ window.submit = {
         var states = true;
         check.error.hideall(btn);
         check.unbind.btn(btn,"click");
-        
+
         $.ajax({
             url:getInfo.getUrl.fullurl('api/orders/'+oid),
             type:'PATCH',
@@ -1492,7 +1492,7 @@ window.submit = {
                 error:function(data){
                     states=false;
                 }
-            }); 
+            });
         }
         if(states==true){
             loading.end();
@@ -2120,7 +2120,7 @@ window.submit = {
                     submit.moneyDeleteSubmit(t);
                 },100);
             });
-        }   
+        }
     },
     load:function(){
         this.bind.sendRegeistCodeBind();
@@ -2621,7 +2621,7 @@ window.getInfo = {
         return result;
     },
     getUrl:{
-        host:"http://58.96.173.224/",
+        host:"http://47.90.14.12/",
         fullurl:function(url){
             return getInfo.getUrl.host+url;
         }
